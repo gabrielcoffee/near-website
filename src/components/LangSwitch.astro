@@ -1,0 +1,157 @@
+---
+/**
+ * Language switch. The closed pill and the open panel are the same surface:
+ * a background layer behind the button grows into the dropdown (and shrinks
+ * back), so the button "becomes" the menu instead of a menu popping up next to it.
+ */
+import { LOCALES, type Locale } from "../config";
+import { localePath } from "../i18n";
+import type { Dictionary } from "../i18n/en";
+
+interface Props {
+  locale: Locale;
+  path: string;
+  dict: Dictionary;
+  align?: "left" | "right";
+  drop?: "down" | "up"; // which way the panel opens
+}
+
+const { locale, path, dict, align = "right", drop = "down" } = Astro.props;
+const current = LOCALES.find((l) => l.code === locale) ?? LOCALES[0];
+---
+
+<div class:list={["lang relative h-9", align === "right" ? "lang-right" : "lang-left", drop === "up" ? "lang-up" : "lang-down"]} data-lang>
+  <span class="lang-bg" aria-hidden="true"></span>
+
+  <button
+    type="button"
+    class="lang-toggle relative z-10 flex h-9 items-center gap-1.5 rounded-pill pr-2.5 pl-3 text-sm font-medium"
+    data-lang-toggle
+    aria-haspopup="listbox"
+    aria-expanded="false"
+    aria-label={dict.lang.label}
+  >
+    <span class="lang-flag" aria-hidden="true">{current.flag}</span>
+    <span class="uppercase text-xs font-semibold tracking-wide">{locale}</span>
+    <svg class="lang-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M6 9l6 6 6-6"></path>
+    </svg>
+  </button>
+
+  <ul
+    class:list={[
+      "lang-menu absolute z-10 w-44 p-1.5",
+      align === "right" ? "right-0" : "left-0",
+      drop === "up" ? "bottom-full pb-1" : "top-full pt-1",
+    ]}
+    role="listbox"
+    data-lang-menu
+    hidden
+  >
+    {
+      LOCALES.map((l) => (
+        <li>
+          <a
+            href={localePath(l.code, path)}
+            hreflang={l.code}
+            lang={l.code}
+            role="option"
+            aria-selected={l.code === locale}
+            data-lang-option={l.code}
+            class:list={[
+              "flex items-center gap-2.5 rounded-xl px-2.5 py-2 text-sm transition-colors",
+              l.code === locale ? "bg-accent-soft text-accent font-medium" : "text-ink hover:bg-paper",
+            ]}
+          >
+            <span class="lang-flag" aria-hidden="true">{l.flag}</span>
+            <span class="flex-1">{l.name}</span>
+            <span class="text-[10px] uppercase tracking-wider opacity-60">{l.code}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .lang {
+    --lang-open-w: 11rem; /* matches w-44 on the list */
+    --lang-open-h: 0px; /* set by lang.ts from the list height */
+  }
+  .lang-flag {
+    font-size: 1.05rem;
+    line-height: 1;
+  }
+
+  /* The surface. Closed: same box as the button, transparent. Open: panel. */
+  .lang-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 18px;
+    background: transparent;
+    border: 1px solid transparent;
+    box-shadow: 0 16px 40px -16px rgb(0 0 0 / 0);
+    transition:
+      width 0.28s var(--ease-soft),
+      height 0.28s var(--ease-soft),
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.28s ease;
+  }
+  .lang-right .lang-bg { right: 0; }
+  .lang-left .lang-bg { left: 0; }
+  .lang-down .lang-bg { top: 0; }
+  .lang-up .lang-bg { bottom: 0; }
+
+  .lang:hover .lang-bg,
+  .lang-toggle:focus-visible ~ .lang-bg {
+    background: var(--btn-ghost-hover-bg);
+  }
+  .lang.is-open .lang-bg {
+    width: var(--lang-open-w);
+    height: var(--lang-open-h);
+    background: var(--color-surface);
+    border-color: var(--color-line);
+    box-shadow: 0 16px 40px -16px rgb(0 0 0 / 0.3);
+  }
+
+  .lang-toggle {
+    color: var(--color-ink);
+    transition: color 0.2s ease;
+  }
+  .lang-chevron {
+    transition: transform 0.28s var(--ease-soft);
+  }
+  .lang.is-open .lang-chevron,
+  .lang-up .lang-chevron {
+    transform: rotate(180deg);
+  }
+  .lang-up.is-open .lang-chevron {
+    transform: none;
+  }
+
+  .lang-menu {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  .lang-up .lang-menu {
+    transform: translateY(4px);
+    transition:
+      opacity 0.18s ease,
+      transform 0.24s var(--ease-soft);
+  }
+  .lang.is-open .lang-menu {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.06s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lang-bg,
+    .lang-chevron,
+    .lang-menu {
+      transition: none;
+    }
+  }
+</style>

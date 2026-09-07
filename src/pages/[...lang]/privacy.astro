@@ -1,0 +1,36 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getDict, localeStaticPaths } from "../../i18n";
+import { CONTACT_EMAIL, type Locale } from "../../config";
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+
+const { locale } = Astro.props as { locale: Locale };
+const dict = getDict(locale);
+const p = dict.privacy;
+---
+
+<Base locale={locale} dict={dict} path="/privacy/" title={`${p.title} — near`} description={p.intro}>
+  <section class="container-x pb-10 pt-36 md:pt-44">
+    <div class="max-w-2xl" data-reveal-group>
+      <h1 class="h-section" data-reveal>{p.title}</h1>
+      <p class="lede mt-4" data-reveal>{p.intro}</p>
+
+      {
+        p.sections.map((s) => (
+          <div class="mt-10" data-reveal>
+            <h2 class="text-xl font-medium tracking-tight">{s.title}</h2>
+            <p class="mt-2 text-muted">
+              {s.body}{" "}
+              {s.title === p.sections[p.sections.length - 1].title && (
+                <a class="link" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+              )}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</Base>

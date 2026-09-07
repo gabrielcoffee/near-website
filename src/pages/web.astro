@@ -1,0 +1,523 @@
+---
+// Dev gallery (/web): live preview of the site, then every component with all its variants and states,
+// style presets, fine-tune sliders, ideas, and copyable CSS. Hero block doubles as the character editor.
+import "@fontsource-variable/outfit";
+import "../styles/global.css";
+import { getDict } from "../i18n";
+import BoilDefs from "../components/BoilDefs.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Button from "../components/Button.astro";
+import Drawing from "../components/Drawing.astro";
+import LangSwitch from "../components/LangSwitch.astro";
+import BeliefItem from "../components/BeliefItem.astro";
+import BeliefRow from "../components/BeliefRow.astro";
+import Step from "../components/Step.astro";
+import PhoneMock from "../components/PhoneMock.astro";
+import Hero from "../components/Hero.astro";
+import Cta from "../components/Cta.astro";
+import GallerySection, { type Tweak, type Preset } from "../components/dev/GallerySection.astro";
+
+const dict = getDict("en");
+const drawings = Object.keys(import.meta.glob("../assets/drawings/*.png"))
+  .map((p) => p.split("/").pop()!.replace(".png", ""))
+  .sort();
+
+const nav = [
+  ["preview", "Live preview"],
+  ["header", "Header"],
+  ["button", "Button"],
+  ["heading", "Section heading"],
+  ["link", "Link"],
+  ["lang", "Language switch"],
+  ["drawing", "Drawing"],
+  ["item", "Belief item"],
+  ["card", "Card"],
+  ["row", "Belief row"],
+  ["step", "Step"],
+  ["phone", "Phone"],
+  ["cta", "CTA"],
+  ["footer", "Footer"],
+  ["hero", "Hero + characters"],
+];
+
+/* ---------------- Header ---------------- */
+const headerTweaks: Tweak[] = [
+  { var: "--header-bg", label: "Background", min: 0, max: 1, step: 0.05 },
+  { var: "--header-blur", label: "Blur", min: 0, max: 30, step: 1, unit: "px" },
+  { var: "--header-radius", label: "Radius", min: 0, max: 40, step: 1, unit: "px" },
+];
+const headerPresets: Preset[] = [
+  { name: "Glass", desc: "Translucent + blur (current)", values: { "--header-bg": "0.7", "--header-blur": "12px", "--header-radius": "24px" } },
+  { name: "Solid", desc: "Plain white, no blur", values: { "--header-bg": "1", "--header-blur": "0px", "--header-radius": "24px" } },
+  { name: "Pill", desc: "Fully rounded ends", values: { "--header-bg": "0.7", "--header-blur": "12px", "--header-radius": "999px" } },
+  { name: "Sharp", desc: "Tighter corners", values: { "--header-bg": "0.85", "--header-blur": "8px", "--header-radius": "12px" } },
+];
+
+/* ---------------- Button ---------------- */
+const buttonTweaks: Tweak[] = [
+  { var: "--btn-primary-hover-bg", label: "Hover bg", kind: "color" },
+  { var: "--btn-primary-hover-color", label: "Hover text", kind: "color" },
+  { var: "--btn-secondary-hover-bg", label: "Secondary hover bg", kind: "color" },
+  { var: "--btn-ghost-hover-bg", label: "Ghost hover bg", kind: "color" },
+  { var: "--btn-ghost-hover-color", label: "Ghost hover text", kind: "color" },
+  { var: "--btn-active-scale", label: "Press scale", min: 0.8, max: 1, step: 0.005 },
+  { var: "--btn-speed", label: "Speed", min: 0.05, max: 0.8, step: 0.01, unit: "s" },
+  { var: "--color-accent", label: "Accent color", kind: "color" },
+  { var: "--color-ink", label: "Ink color", kind: "color" },
+];
+const buttonPresets: Preset[] = [
+  { name: "Lighten", desc: "Black → dark grey (current)", values: { "--btn-primary-hover-bg": "#333333", "--btn-primary-hover-color": "#ffffff" } },
+  { name: "Accent fill", desc: "Turns orange on hover", values: { "--btn-primary-hover-bg": "#ff6a2b", "--btn-primary-hover-color": "#ffffff" } },
+  { name: "Pure black", desc: "Barely there", values: { "--btn-primary-hover-bg": "#000000", "--btn-primary-hover-color": "#ffffff" } },
+  { name: "Orange text", desc: "Stays black, label turns orange", values: { "--btn-primary-hover-bg": "#111111", "--btn-primary-hover-color": "#ff6a2b" } },
+];
+const buttonIdeas = [
+  "Arrow icon slides in from the right on hover, label shifts left.",
+  "Loading state: label fades, small spinner replaces it.",
+  "Two-tone: orange label on black; whole button turns orange on hover.",
+];
+
+/* ---------------- Link ---------------- */
+const linkTweaks: Tweak[] = [
+  { var: "--link-thickness", label: "Underline", min: 0, max: 6, step: 0.5, unit: "px" },
+  { var: "--link-speed", label: "Speed", min: 0.05, max: 0.8, step: 0.01, unit: "s" },
+  { var: "--link-hover-color", label: "Hover color", kind: "color" },
+];
+const linkPresets: Preset[] = [
+  { name: "Sweep", desc: "Thin orange line draws in (current)", values: { "--link-thickness": "2px", "--link-speed": "0.22s", "--link-hover-color": "#111111" } },
+  { name: "Marker", desc: "Thick highlighter line", values: { "--link-thickness": "6px", "--link-speed": "0.25s", "--link-hover-color": "#111111" } },
+  { name: "Color only", desc: "No line, text turns orange", values: { "--link-thickness": "0px", "--link-speed": "0.2s", "--link-hover-color": "#ff6a2b" } },
+];
+
+/* ---------------- Drawing ---------------- */
+const drawingTweaks: Tweak[] = [
+  { var: "boil-idle", label: "Wobble idle", min: 0, max: 12, step: 0.5, kind: "boil-idle" },
+  { var: "boil-hot", label: "Wobble hover", min: 0, max: 20, step: 0.5, kind: "boil-hot" },
+  { var: "--boil-interval", label: "Wobble speed", min: 40, max: 400, step: 10, unit: "ms" },
+  { var: "--drawing-hot-scale", label: "Hover scale", min: 1, max: 1.3, step: 0.01 },
+  { var: "--drawing-tilt", label: "Hover tilt", min: 0, max: 20, step: 0.5, unit: "deg" },
+  { var: "--drawing-speed", label: "Hover speed", min: 0.05, max: 1, step: 0.01, unit: "s" },
+  { var: "--drawing-bounce", label: "Click bounce", min: 0.2, max: 1.5, step: 0.05, unit: "s" },
+];
+const drawingPresets: Preset[] = [
+  { name: "Lively", desc: "Current wobble", values: { "boil-idle": "3.5", "boil-hot": "7", "--boil-interval": "110ms" } },
+  { name: "Calm", desc: "Barely moving, slower frames", values: { "boil-idle": "2", "boil-hot": "4", "--boil-interval": "170ms" } },
+  { name: "Wild", desc: "Strong, fast, cartoon boil", values: { "boil-idle": "6", "boil-hot": "12", "--boil-interval": "80ms" } },
+  { name: "Static", desc: "No wobble at all", values: { "boil-idle": "0", "boil-hot": "0", "--boil-interval": "110ms" } },
+];
+const drawingIdeas = [
+  "Idle micro-bounce every few seconds so they feel alive between hovers.",
+  "Eyes follow the cursor (needs a second layer per drawing for pupils).",
+  "Poke reaction: a click briefly swaps to a surprised version of the same character.",
+];
+
+/* ---------------- Card ---------------- */
+const cardTweaks: Tweak[] = [
+  { var: "--card-lift", label: "Hover lift", min: 0, max: 16, step: 0.5, unit: "px" },
+  { var: "--card-shadow", label: "Hover shadow", min: 0, max: 0.6, step: 0.02 },
+  { var: "--card-hover-bg", label: "Hover bg", kind: "color" },
+  { var: "--card-hover-border", label: "Hover border", kind: "color" },
+  { var: "--card-speed", label: "Speed", min: 0.05, max: 1, step: 0.01, unit: "s" },
+  { var: "--radius-card", label: "Radius", min: 0, max: 40, step: 1, unit: "px" },
+];
+const cardPresets: Preset[] = [
+  { name: "Lift", desc: "Rises with soft shadow (current)", values: { "--card-lift": "4px", "--card-shadow": "0.25", "--card-hover-bg": "#ffffff", "--card-hover-border": "#dddddd" } },
+  { name: "Tint", desc: "Fills with pale orange", values: { "--card-lift": "2px", "--card-shadow": "0.1", "--card-hover-bg": "#fff1ea", "--card-hover-border": "#ffd5c2" } },
+  { name: "Outline", desc: "No lift, black border", values: { "--card-lift": "0px", "--card-shadow": "0", "--card-hover-bg": "#ffffff", "--card-hover-border": "#111111" } },
+  { name: "Float", desc: "Big lift, deep shadow", values: { "--card-lift": "10px", "--card-shadow": "0.4", "--card-hover-bg": "#ffffff", "--card-hover-border": "#e8e8e6" } },
+];
+const cardIdeas = [
+  "Card tilts toward the cursor (subtle 3D).",
+  "Faint paper-grain texture on the surface.",
+];
+
+/* ---------------- Reveal (row block) ---------------- */
+const revealTweaks: Tweak[] = [
+  { var: "--reveal-distance", label: "Slide distance", min: 0, max: 60, step: 1, unit: "px" },
+  { var: "--reveal-speed", label: "Speed", min: 0.1, max: 1.5, step: 0.05, unit: "s" },
+  { var: "--reveal-stagger", label: "Stagger", min: 0, max: 250, step: 5, unit: "ms" },
+  { var: "--pop-from", label: "Pop from scale", min: 0, max: 1, step: 0.05 },
+  { var: "--pop-speed", label: "Pop speed", min: 0.1, max: 1.5, step: 0.05, unit: "s" },
+];
+const revealPresets: Preset[] = [
+  { name: "Soft", desc: "Current reveal", values: { "--reveal-distance": "16px", "--reveal-speed": "0.6s", "--reveal-stagger": "70ms", "--pop-from": "0.4", "--pop-speed": "0.8s" } },
+  { name: "Snappy", desc: "Short, quick, tight stagger", values: { "--reveal-distance": "10px", "--reveal-speed": "0.35s", "--reveal-stagger": "40ms", "--pop-from": "0.6", "--pop-speed": "0.5s" } },
+  { name: "Dramatic", desc: "Long slide, big pop", values: { "--reveal-distance": "40px", "--reveal-speed": "0.9s", "--reveal-stagger": "120ms", "--pop-from": "0.2", "--pop-speed": "1.1s" } },
+  { name: "Off", desc: "Everything appears instantly", values: { "--reveal-distance": "0px", "--reveal-speed": "0.01s", "--reveal-stagger": "0ms", "--pop-from": "1", "--pop-speed": "0.01s" } },
+];
+const revealIdeas = ["Section titles rise word by word through a mask, like the hero title.", "Cards pop in a wave from left to right instead of top to bottom."];
+
+/* ---------------- Intro (hero block) ---------------- */
+const introTweaks: Tweak[] = [
+  { var: "--t-title", label: "Title at", min: 0, max: 1.5, step: 0.05, unit: "s" },
+  { var: "--t-tag", label: "Tagline at", min: 0, max: 2, step: 0.05, unit: "s" },
+  { var: "--t-launch", label: "Characters at", min: 0, max: 2.5, step: 0.05, unit: "s" },
+  { var: "--t-header", label: "Header at", min: 0, max: 3, step: 0.05, unit: "s" },
+  { var: "--t-hint", label: "Hint at", min: 0, max: 3.5, step: 0.05, unit: "s" },
+  { var: "--intro-title-speed", label: "Title speed", min: 0.2, max: 1.5, step: 0.05, unit: "s" },
+  { var: "--intro-fly-speed", label: "Fly speed", min: 0.2, max: 1.5, step: 0.05, unit: "s" },
+  { var: "--intro-header-speed", label: "Header speed", min: 0.2, max: 1.5, step: 0.05, unit: "s" },
+];
+const introPresets: Preset[] = [
+  { name: "Default", desc: "Current timing", values: { "--t-title": "0.1s", "--t-tag": "0.32s", "--t-launch": "0.5s", "--t-header": "0.95s", "--t-hint": "1.25s", "--intro-title-speed": "0.7s", "--intro-fly-speed": "0.75s", "--intro-header-speed": "0.55s" } },
+  { name: "Quick", desc: "Everything under a second", values: { "--t-title": "0.05s", "--t-tag": "0.2s", "--t-launch": "0.3s", "--t-header": "0.6s", "--t-hint": "0.8s", "--intro-title-speed": "0.5s", "--intro-fly-speed": "0.55s", "--intro-header-speed": "0.4s" } },
+  { name: "Cinematic", desc: "Slower, more separated beats", values: { "--t-title": "0.2s", "--t-tag": "0.7s", "--t-launch": "1.1s", "--t-header": "1.9s", "--t-hint": "2.3s", "--intro-title-speed": "0.9s", "--intro-fly-speed": "1s", "--intro-header-speed": "0.7s" } },
+];
+const heroIdeas = [
+  "After the intro, characters slowly drift up and down (idle float).",
+  "Characters step away from the cursor when it gets close.",
+  "Tagline types itself instead of sweeping up.",
+];
+---
+
+<!doctype html>
+<html lang="en" data-boil="0">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>near — components</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="font-sans pb-[340px]">
+    <BoilDefs />
+
+    <div class="mx-auto max-w-[1440px] px-5 md:px-8 lg:grid lg:grid-cols-[190px_1fr] lg:gap-12">
+      <aside class="hidden lg:block">
+        <nav class="sticky top-8 pt-16 text-sm" aria-label="Components">
+          <p class="eyebrow mb-3">near / components</p>
+          <ul class="space-y-1">
+            {nav.map(([id, label]) => (
+              <li><a href={`#${id}`} class="side-link">{label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="min-w-0">
+        <div class="pb-8 pt-16">
+          <h1 class="h-section">Components</h1>
+          <p class="lede mt-3 max-w-xl">Every piece of the site, with all its states. Pick a style, fine-tune, copy the CSS. The hero block is also the character editor.</p>
+        </div>
+
+        <!-- Live preview -->
+        <section id="preview" class="block scroll-mt-8">
+          <header class="mb-4 flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 class="text-xl font-medium tracking-tight">Live preview</h2>
+              <p class="mt-0.5 text-sm text-muted">The real home page. Style changes below apply here too (not character moves).</p>
+            </div>
+            <div class="flex gap-2">
+              <button type="button" class="btn btn-secondary btn-sm" data-preview-size="desktop" aria-pressed="true">Desktop</button>
+              <button type="button" class="btn btn-secondary btn-sm" data-preview-size="mobile" aria-pressed="false">Mobile</button>
+              <button type="button" class="btn btn-ghost btn-sm" data-preview-reload>Replay</button>
+            </div>
+          </header>
+          <div class="preview-frame" data-preview-frame="desktop">
+            <iframe src="/" title="Near home page" data-preview loading="lazy"></iframe>
+          </div>
+        </section>
+
+        <GallerySection id="header" title="Header" file="src/components/Header.astro" note="Floating, translucent. Gains a shadow after scrolling." tweaks={headerTweaks} presets={headerPresets} ideas={["Hides on scroll down, returns on scroll up.", "Current section highlighted in the nav.", "Shrinks a little once scrolled."]}>
+          <Header locale="en" path="/" dict={dict} position="static" />
+        </GallerySection>
+
+        <GallerySection id="button" title="Button" file="src/components/Button.astro" note="Variants × sizes, plus every state." tweaks={buttonTweaks} presets={buttonPresets} ideas={buttonIdeas}>
+          <div class="matrix" style="grid-template-columns: 90px repeat(3, max-content)">
+            <span></span><span class="cell-label">Primary</span><span class="cell-label">Secondary</span><span class="cell-label">Ghost</span>
+            <span class="cell-label">Small</span><Button href="#" size="sm">Get the app</Button><Button href="#" size="sm" variant="secondary">Get the app</Button><Button href="#" size="sm" variant="ghost">Get the app</Button>
+            <span class="cell-label">Default</span><Button href="#">Get the app</Button><Button href="#" variant="secondary">Get the app</Button><Button href="#" variant="ghost">Get the app</Button>
+            <span class="cell-label">Large</span><Button href="#" size="lg">Get the app</Button><Button href="#" size="lg" variant="secondary">Get the app</Button><Button href="#" size="lg" variant="ghost">Get the app</Button>
+            <span class="cell-label">Hover</span><Button href="#" class="is-hover">Get the app</Button><Button href="#" variant="secondary" class="is-hover">Get the app</Button><Button href="#" variant="ghost" class="is-hover">Get the app</Button>
+            <span class="cell-label">Pressed</span><Button href="#" class="is-active">Get the app</Button><Button href="#" variant="secondary" class="is-active">Get the app</Button><Button href="#" variant="ghost" class="is-active">Get the app</Button>
+            <span class="cell-label">Disabled</span><Button disabled>Coming soon</Button><span></span><span></span>
+          </div>
+        </GallerySection>
+
+        <GallerySection id="heading" title="Section heading" file="src/styles/global.css" note=".eyebrow + .h-section + .lede — top of every section.">
+          <div class="max-w-xl">
+            <p class="eyebrow">eyebrow</p>
+            <h2 class="h-section mt-2">Small app. Real people.</h2>
+            <p class="lede mt-4">Lede paragraph under the title.</p>
+          </div>
+        </GallerySection>
+
+        <GallerySection id="link" title="Link" file="src/styles/global.css" note=".nav-link — header + footer nav (pill background). .link — inline links (underline)." tweaks={linkTweaks} presets={linkPresets} ideas={["Small ↗ arrow that nudges on hover for external links."]}>
+          <div class="matrix" style="grid-template-columns: 90px max-content max-content">
+            <span></span><span class="cell-label">Default</span><span class="cell-label">Hover</span>
+            <span class="cell-label">Nav</span><a href="#" class="nav-link text-[15px]">How it works</a><a href="#" class="nav-link is-hover text-[15px]">how it works</a>
+            <span class="cell-label">Inline</span><a href="#" class="link">how it works</a><a href="#" class="link is-hover">how it works</a>
+          </div>
+        </GallerySection>
+
+        <GallerySection id="lang" title="Language switch" file="src/components/LangSwitch.astro" note="Click to open. Remembers the choice.">
+          <LangSwitch locale="en" path="/" dict={dict} align="left" />
+        </GallerySection>
+
+        <GallerySection id="drawing" title="Drawing" file="src/components/Drawing.astro" note="The wobble and hover feel apply to every drawing on the site." tweaks={drawingTweaks} presets={drawingPresets} ideas={drawingIdeas}>
+          <div class="flex flex-wrap items-end gap-10">
+            <div>
+              <p class="cell-label mb-3">Idle</p>
+              <div class="flex h-[190px] w-[190px] items-end justify-center">
+                {drawings.map((name, i) => <div data-drawing-slot={name} hidden={i !== 0}><Drawing name={name} size={170} class="w-[150px]" /></div>)}
+              </div>
+            </div>
+            <div>
+              <p class="cell-label mb-3">Hover</p>
+              <div class="force-hot flex h-[190px] w-[190px] items-end justify-center">
+                {drawings.map((name, i) => <div data-drawing-slot={name} hidden={i !== 0}><Drawing name={name} size={170} class="w-[150px]" /></div>)}
+              </div>
+            </div>
+            <div class="self-center">
+              <p class="cell-label mb-2">File</p>
+              <select class="btn btn-secondary btn-sm cursor-pointer appearance-none pr-8" data-drawing-select aria-label="Drawing">
+                {drawings.map((name) => <option value={name}>{name}</option>)}
+              </select>
+              <p class="mt-2 text-xs text-muted">Click any drawing for the bounce.</p>
+            </div>
+          </div>
+        </GallerySection>
+
+        <GallerySection id="item" title="Belief item" file="src/components/BeliefItem.astro" note="The four 'no' items: drawing left, title + body right. No card, no border.">
+          <div class="flex flex-col gap-16">
+            <BeliefItem drawing="ew" title="No algorithm, no ads, no AI slop" body="Your feed is your friends, newest first. Nobody paid to be there, and nothing in it was generated." />
+            <BeliefItem drawing="old" title="No endless scroll" body="TikTok is built to never end. Near's feed ends when your friends stop posting. Then go outside." />
+          </div>
+        </GallerySection>
+
+        <GallerySection id="card" title="Card" file="src/styles/global.css" note="The .card surface, now only used by the CTA block." tweaks={cardTweaks} presets={cardPresets} ideas={cardIdeas}>
+          <div class="grid gap-8 md:grid-cols-2">
+            <div><p class="cell-label mb-3">Default</p><div class="card p-8"><p class="text-xl font-medium tracking-tight">Card</p><p class="mt-1.5 text-muted">Rounded surface with a thin border.</p></div></div>
+            <div><p class="cell-label mb-3">Hover</p><div class="card is-hover p-8"><p class="text-xl font-medium tracking-tight">Card</p><p class="mt-1.5 text-muted">Lifted with a soft shadow.</p></div></div>
+          </div>
+        </GallerySection>
+
+        <GallerySection id="row" title="Belief row" file="src/components/BeliefRow.astro" note="Also holds the scroll-reveal settings for the whole site (reload the preview to see them)." tweaks={revealTweaks} presets={revealPresets} ideas={revealIdeas}>
+          <BeliefRow drawing="toohappy" title="Friends only in person" body="No search, no requests, no strangers. If you're not in the same room, you can't be friends on Near." />
+        </GallerySection>
+
+        <GallerySection id="step" title="Step" file="src/components/Step.astro" note="Inactive and active.">
+          <ol class="flex flex-col gap-2">
+            <Step index={0} title="Meet in person" body="You can only add someone standing next to you." class="lg:min-h-0! py-4!" />
+            <Step index={1} title="Your grid" body="Everyone you've actually met, in one grid." class="is-active lg:min-h-0! py-4!" />
+          </ol>
+        </GallerySection>
+
+        <GallerySection id="phone" title="Phone" file="src/components/PhoneScreens.astro" note="The four screens, built in HTML. Swap for real screenshots later.">
+          <div class="grid gap-10 sm:grid-cols-2 xl:grid-cols-4">
+            {[0, 1, 2, 3].map((i) => <PhoneMock active={i} />)}
+          </div>
+        </GallerySection>
+
+        <GallerySection id="cta" title="CTA" file="src/components/Cta.astro" bleed>
+          <Cta dict={dict} />
+        </GallerySection>
+
+        <GallerySection id="footer" title="Footer" file="src/components/Footer.astro" bleed>
+          <Footer locale="en" path="/" dict={dict} />
+        </GallerySection>
+
+        <GallerySection
+          id="hero"
+          title="Hero + characters"
+          file="src/components/Hero.astro"
+          note="Exactly as the top of the site, header included. Click a character: drag to move, corner handle or panel to resize, rotate, remove. Output in the panel."
+          tweaks={introTweaks}
+          presets={introPresets}
+          ideas={heroIdeas}
+          bleed
+        >
+          <button slot="tools" type="button" class="btn btn-primary btn-sm" data-replay-intro>Replay intro</button>
+          <div class="relative overflow-hidden">
+            <Header locale="en" path="/" dict={dict} position="absolute" />
+            <Hero dict={dict} />
+          </div>
+        </GallerySection>
+      </main>
+    </div>
+
+    <!-- Fixed panel: character editor + outputs -->
+    <div class="fixed bottom-4 right-4 z-[60] w-[min(600px,calc(100vw-2rem))] rounded-card border border-line bg-surface p-3 shadow-[0_24px_60px_-24px_rgb(0_0_0/0.35)]">
+      <div class="mb-2 flex items-center justify-between gap-3">
+        <div class="flex gap-1 rounded-pill bg-paper p-1" role="tablist" aria-label="Output">
+          <button type="button" class="pos-tab" role="tab" aria-selected="true" data-pos-tab="code">Hero code</button>
+          <button type="button" class="pos-tab" role="tab" aria-selected="false" data-pos-tab="prompt">Hero prompt</button>
+          <button type="button" class="pos-tab" role="tab" aria-selected="false" data-pos-tab="css">All CSS</button>
+        </div>
+        <div class="flex gap-2">
+          <button type="button" class="btn btn-ghost btn-sm" data-pos-reset>Reset all</button>
+          <button type="button" class="btn btn-ghost btn-sm" data-pos-toggle>Show</button>
+          <button type="button" class="btn btn-primary btn-sm" data-pos-copy>Copy</button>
+        </div>
+      </div>
+
+      <div data-pos-body hidden>
+        <div class="char-editor mb-2 rounded-xl border border-line bg-paper p-3" data-char-editor hidden>
+          <div class="mb-2 flex items-center justify-between">
+            <span class="text-sm"><span class="text-muted">Editing</span> <b data-char-name></b></span>
+            <button type="button" class="btn btn-secondary btn-sm" data-char-remove>Remove</button>
+          </div>
+          <label class="char-row">
+            <span>Width</span>
+            <input type="range" min="40" max="400" step="1" data-char-width />
+            <input type="number" min="40" max="400" step="1" data-char-width-num />
+            <span class="unit">px</span>
+          </label>
+          <label class="char-row">
+            <span>Rotate</span>
+            <input type="range" min="-180" max="180" step="1" data-char-rotate />
+            <input type="number" min="-180" max="180" step="1" data-char-rotate-num />
+            <span class="unit">°</span>
+          </label>
+        </div>
+
+        <textarea class="pos-out font-mono text-[11px]" readonly spellcheck="false" data-pos-output="code"></textarea>
+        <textarea class="pos-out text-[12px]" readonly spellcheck="false" hidden data-pos-output="prompt"></textarea>
+        <textarea class="pos-out font-mono text-[11px]" readonly spellcheck="false" hidden data-pos-output="css"></textarea>
+      </div>
+    </div>
+
+    <style is:global>
+      .side-link {
+        display: block;
+        padding: 5px 10px;
+        border-radius: 8px;
+        color: var(--color-muted);
+        transition: background-color 0.15s ease, color 0.15s ease;
+      }
+      .side-link:hover { background: var(--color-surface); color: var(--color-ink); }
+      .preview-frame {
+        height: 660px;
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+        border: 1px solid var(--color-line);
+        border-radius: 20px;
+        background: #ececea;
+      }
+      .preview-frame iframe {
+        border: 0;
+        background: #fff;
+        transform-origin: top center;
+        flex: none;
+      }
+      .preview-frame[data-preview-frame="desktop"] iframe { width: 1440px; height: 940px; transform: scale(0.7); }
+      .preview-frame[data-preview-frame="mobile"] iframe { width: 390px; height: 844px; transform: scale(0.78); margin-top: 0; border-radius: 40px; box-shadow: 0 0 0 10px #111; margin-top: 12px; }
+      .edge.is-selected {
+        outline: 2px dashed var(--color-accent);
+        outline-offset: 8px;
+        border-radius: 12px;
+      }
+      .edge-handle {
+        position: absolute;
+        right: -14px;
+        bottom: -14px;
+        width: 16px;
+        height: 16px;
+        border-radius: 4px;
+        background: var(--color-accent);
+        border: 2px solid #fff;
+        box-shadow: 0 2px 6px rgb(0 0 0 / 0.25);
+        cursor: nwse-resize;
+        z-index: 6;
+      }
+      .pos-out {
+        height: 150px;
+        width: 100%;
+        resize: vertical;
+        border-radius: 12px;
+        border: 1px solid var(--color-line);
+        background: var(--color-paper);
+        padding: 12px;
+        line-height: 1.5;
+        color: var(--color-ink);
+      }
+      .char-row {
+        display: grid;
+        grid-template-columns: 56px 1fr 72px 20px;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+        margin-top: 6px;
+      }
+      .char-row > span:first-child { color: var(--color-muted); }
+      .char-row .unit { color: var(--color-muted); font-size: 12px; }
+      .char-row input[type="range"] { width: 100%; accent-color: var(--color-accent); }
+      .char-row input[type="number"] {
+        width: 100%;
+        height: 28px;
+        padding: 0 8px;
+        border: 1px solid var(--color-line);
+        border-radius: 8px;
+        background: #fff;
+        font-variant-numeric: tabular-nums;
+      }
+      .pos-tab {
+        padding: 4px 12px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--color-muted);
+        transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s var(--ease-spring);
+      }
+      .pos-tab:hover { color: var(--color-ink); }
+      .pos-tab:active { transform: scale(0.96); }
+      .pos-tab[aria-selected="true"] {
+        background: var(--color-surface);
+        color: var(--color-ink);
+        box-shadow: 0 1px 3px rgb(0 0 0 / 0.08);
+      }
+      [data-preview-size][aria-pressed="true"] { border-color: var(--color-ink); }
+    </style>
+
+    <script>
+      import { LANG_STORAGE_KEY } from "../config";
+      import { initBoil } from "../scripts/boil";
+      import { initHeader } from "../scripts/header";
+      import { initLangSwitch } from "../scripts/lang";
+      import { playIntro } from "../scripts/intro";
+      import { initPositionTool } from "../scripts/dev/positions";
+      import { initTweaks } from "../scripts/dev/tweaks";
+
+      initBoil();
+      initHeader();
+      initLangSwitch(LANG_STORAGE_KEY);
+      initPositionTool();
+      initTweaks();
+
+      // Drawing picker (both idle and hover slots)
+      const select = document.querySelector<HTMLSelectElement>("[data-drawing-select]");
+      select?.addEventListener("change", () => {
+        document.querySelectorAll<HTMLElement>("[data-drawing-slot]").forEach((s) => {
+          s.hidden = s.dataset.drawingSlot !== select.value;
+        });
+      });
+
+      // Replay intro on the hero stage
+      document.querySelector<HTMLButtonElement>("[data-replay-intro]")?.addEventListener("click", () => playIntro());
+
+      // Live preview: size + reload
+      const frame = document.querySelector<HTMLElement>("[data-preview-frame]");
+      const iframe = document.querySelector<HTMLIFrameElement>("[data-preview]");
+      document.querySelectorAll<HTMLButtonElement>("[data-preview-size]").forEach((b) => {
+        b.addEventListener("click", () => {
+          if (frame) frame.dataset.previewFrame = b.dataset.previewSize || "desktop";
+          document.querySelectorAll<HTMLButtonElement>("[data-preview-size]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+        });
+      });
+      document.querySelector<HTMLButtonElement>("[data-preview-reload]")?.addEventListener("click", () => {
+        if (iframe) iframe.src = iframe.src;
+      });
+
+      // Panel hide/show
+      const toggle = document.querySelector<HTMLButtonElement>("[data-pos-toggle]");
+      const body = document.querySelector<HTMLElement>("[data-pos-body]");
+      toggle?.addEventListener("click", () => {
+        if (!body) return;
+        body.hidden = !body.hidden;
+        toggle.textContent = body.hidden ? "Show" : "Hide";
+      });
+    </script>
+  </body>
+</html>

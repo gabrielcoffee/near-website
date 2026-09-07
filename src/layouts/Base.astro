@@ -1,0 +1,85 @@
+---
+import "@fontsource-variable/outfit";
+import "../styles/global.css";
+import { DEFAULT_LOCALE, LANG_STORAGE_KEY, LOCALES, type Locale } from "../config";
+import { localePath } from "../i18n";
+import type { Dictionary } from "../i18n/en";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BoilDefs from "../components/BoilDefs.astro";
+
+interface Props {
+  locale: Locale;
+  dict: Dictionary;
+  path: string; // locale-less path, e.g. "/" or "/privacy/"
+  title?: string;
+  description?: string;
+}
+
+const { locale, dict, path, title = dict.meta.title, description = dict.meta.description } = Astro.props;
+const site = Astro.site ?? new URL("http://localhost:4321");
+const canonical = new URL(localePath(locale, path), site).toString();
+const nonDefault = LOCALES.filter((l) => l.code !== DEFAULT_LOCALE).map((l) => l.code);
+const isDefaultLocale = locale === DEFAULT_LOCALE;
+---
+
+<!doctype html>
+<html lang={locale} data-boil="0">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#fafafa" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    {LOCALES.map((l) => <link rel="alternate" hreflang={l.code} href={new URL(localePath(l.code, path), site).toString()} />)}
+    <link rel="alternate" hreflang="x-default" href={new URL(localePath(DEFAULT_LOCALE, path), site).toString()} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={locale} />
+    <meta name="twitter:card" content="summary" />
+
+    <script is:inline define:vars={{ intro: path === "/" }}>
+      document.documentElement.classList.add("js");
+      if (intro) document.documentElement.classList.add("intro");
+    </script>
+    {
+      isDefaultLocale && (
+        <script is:inline define:vars={{ key: LANG_STORAGE_KEY, others: nonDefault, path }}>
+          // First visit: jump to the browser's language. Later visits: honour the saved choice.
+          try {
+            var saved = localStorage.getItem(key);
+            var target = null;
+            if (!saved) {
+              var langs = (navigator.languages || [navigator.language || ""]).map(function (l) {
+                return String(l).slice(0, 2).toLowerCase();
+              });
+              target = langs.find(function (l) { return others.indexOf(l) !== -1; }) || null;
+              localStorage.setItem(key, target || "en");
+            } else if (others.indexOf(saved) !== -1) {
+              target = saved;
+            }
+            if (target) location.replace("/" + target + path + location.hash);
+          } catch (e) {}
+        </script>
+      )
+    }
+  </head>
+  <body class="font-sans">
+    <BoilDefs />
+
+    <Header locale={locale} path={path} dict={dict} />
+    <main>
+      <slot />
+    </main>
+    <Footer locale={locale} path={path} dict={dict} />
+
+    <script>
+      import "../scripts/main";
+    </script>
+  </body>
+</html>

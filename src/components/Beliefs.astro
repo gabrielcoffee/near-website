@@ -1,0 +1,40 @@
+---
+import type { Dictionary } from "../i18n/en";
+import BeliefItem from "./BeliefItem.astro";
+import Drawing from "./Drawing.astro";
+
+interface Props {
+  dict: Dictionary;
+}
+const { dict } = Astro.props;
+
+// Order matches dict.believe.items
+const itemDrawings = ["ew", "confused", "old", "fomo"];
+const upgradeDrawing = "toohappy";
+---
+
+<section id="what-we-believe" class="section relative scroll-mt-[-4rem] md:scroll-mt-[-7rem]">
+  <div class="container-x">
+    <div class="max-w-2xl" data-reveal-group>
+      <p class="eyebrow" data-reveal>{dict.believe.eyebrow}</p>
+      <h2 class="h-section mt-2" data-reveal>{dict.believe.title}</h2>
+      {dict.believe.paragraphs.map((t) => <p class="lede mt-4" data-reveal>{t}</p>)}
+    </div>
+
+    <p class="eyebrow mt-14 md:mt-20" data-reveal>{dict.believe.downgrades}</p>
+
+    <div class="mt-8 flex flex-col gap-20 md:mt-10 md:gap-28">
+      {dict.believe.items.map((c, i) => <BeliefItem drawing={itemDrawings[i]} title={c.title} body={c.body} />)}
+    </div>
+
+    <p class="eyebrow mt-20 md:mt-28" data-reveal>{dict.believe.upgrades}</p>
+
+    <div class="mt-8 md:mt-10">
+      <BeliefItem drawing={upgradeDrawing} title={dict.believe.upgrade.title} body={dict.believe.upgrade.body} />
+    </div>
+  </div>
+
+  <div class="pointer-events-none absolute right-0 top-[8%] hidden xl:block" aria-hidden="true" data-reveal="pop">
+    <Drawing name="random" size={110} class="w-[110px] pointer-events-auto" />
+  </div>
+</section>

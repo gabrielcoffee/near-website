@@ -1,0 +1,35 @@
+---
+import { CONTACT_EMAIL, type Locale } from "../config";
+import { localePath } from "../i18n";
+import type { Dictionary } from "../i18n/en";
+import Drawing from "./Drawing.astro";
+import LangSwitch from "./LangSwitch.astro";
+
+interface Props {
+  locale: Locale;
+  path: string;
+  dict: Dictionary;
+}
+
+const { locale, path, dict } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="container-x relative pb-10 pt-16">
+  <div class="flex flex-col gap-8 border-t border-line pt-10 md:flex-row md:items-end md:justify-between">
+    <div class="flex items-end gap-5">
+      <div data-reveal="pop"><Drawing name="tinyhappy" size={72} class="w-16 shrink-0" /></div>
+      <div>
+        <a href={localePath(locale, "/")} class="inline-flex items-center gap-1.5 text-lg font-medium tracking-tight"><span class="inline-block size-[0.7em] rounded-full bg-accent" aria-hidden="true"></span>Near</a>
+        <p class="text-sm text-muted">{dict.footer.tagline}</p>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-x-1 gap-y-3 text-sm">
+      <a href={localePath(locale, "/privacy/")} class="nav-link">{dict.footer.privacy}</a>
+      <a href={`mailto:${CONTACT_EMAIL}`} class="nav-link">{dict.footer.contact}</a>
+      <LangSwitch locale={locale} path={path} dict={dict} align="left" drop="up" />
+      <span class="px-3 text-muted">© {year} Near</span>
+    </div>
+  </div>
+</footer>

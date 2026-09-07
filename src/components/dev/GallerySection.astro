@@ -1,0 +1,216 @@
+---
+// One component block on /web: canvas (all variants/states) → style presets → controls → ideas → copy.
+export interface Tweak {
+  var: string; // CSS variable, e.g. "--btn-primary-hover-bg" (or "boil-idle" / "boil-hot")
+  label: string;
+  min?: number;
+  max?: number;
+  step?: number;
+  unit?: string; // "px" | "s" | "ms" | "deg" | ""
+  kind?: "css" | "color" | "boil-idle" | "boil-hot";
+}
+export interface Preset {
+  name: string;
+  desc: string;
+  values: Record<string, string>; // var → value (with unit), or "boil-idle"/"boil-hot" → number string
+}
+
+interface Props {
+  id: string;
+  title: string;
+  file?: string;
+  note?: string;
+  bleed?: boolean; // canvas without padding (page sections)
+  tweaks?: Tweak[];
+  presets?: Preset[];
+  ideas?: string[];
+}
+const { id, title, file, note, bleed = false, tweaks = [], presets = [], ideas = [] } = Astro.props;
+const vars = tweaks.map((t) => t.var).join(",");
+---
+
+<section id={id} class="block scroll-mt-8" data-block={id} data-block-vars={vars}>
+  <header class="mb-4 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+    <div>
+      <h2 class="text-xl font-medium tracking-tight">{title}</h2>
+      {note && <p class="mt-0.5 text-sm text-muted">{note}</p>}
+    </div>
+    <div class="flex items-center gap-3">
+      <slot name="tools" />
+      {file && <code class="text-xs text-muted">{file}</code>}
+    </div>
+  </header>
+
+  <div class:list={["canvas", bleed ? "canvas-bleed" : "canvas-pad"]}>
+    <slot />
+  </div>
+
+  {
+    presets.length > 0 && (
+      <div class="mt-5">
+        <p class="label">Styles</p>
+        <div class="mt-2 flex flex-wrap gap-2">
+          {presets.map((p, i) => (
+            <button type="button" class="preset" data-preset={JSON.stringify(p.values)} data-preset-group={id} aria-pressed={i === 0 ? "true" : "false"}>
+              <b>{p.name}</b>
+              <span>{p.desc}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  {
+    tweaks.length > 0 && (
+      <div class="mt-5">
+        <p class="label">Fine-tune</p>
+        <div class="tweaks mt-2 grid gap-x-8 gap-y-2.5 sm:grid-cols-2 xl:grid-cols-3">
+          {tweaks.map((t) => (
+            <label class="tweak">
+              <span class="tweak-label">{t.label}</span>
+              {t.kind === "color" ? (
+                <input type="color" data-tweak={t.var} data-kind="color" data-label={t.label} />
+              ) : (
+                <input
+                  type="range"
+                  min={t.min ?? 0}
+                  max={t.max ?? 1}
+                  step={t.step ?? 0.01}
+                  data-tweak={t.var}
+                  data-kind={t.kind ?? "css"}
+                  data-unit={t.unit ?? ""}
+                  data-label={t.label}
+                />
+              )}
+              <span class="tweak-value" data-tweak-value />
+            </label>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  {
+    (ideas.length > 0 || tweaks.length > 0) && (
+      <div class="mt-5 flex flex-wrap items-start justify-between gap-6">
+        {ideas.length > 0 && (
+          <div class="max-w-xl">
+            <p class="label">Ideas (say the word and I build it)</p>
+            <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-muted">
+              {ideas.map((i) => <li>{i}</li>)}
+            </ul>
+          </div>
+        )}
+        {tweaks.length > 0 && (
+          <div class="flex items-center gap-2">
+            <button type="button" class="btn btn-ghost btn-sm" data-block-reset>Reset block</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-block-copy>Copy this block's CSS</button>
+          </div>
+        )}
+      </div>
+    )
+  }
+</section>
+
+<style is:global>
+  .block {
+    padding: 40px 0;
+    border-top: 1px solid var(--color-line);
+  }
+  .block:first-of-type {
+    border-top: 0;
+  }
+  .label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .canvas {
+    position: relative;
+    border: 1px solid var(--color-line);
+    border-radius: 20px;
+    background-color: #fff;
+    background-image: radial-gradient(#e6e6e4 1px, transparent 1px);
+    background-size: 18px 18px;
+    overflow: hidden;
+  }
+  .canvas-pad {
+    padding: 32px;
+  }
+  .canvas-bleed {
+    padding: 0;
+  }
+  .matrix {
+    display: grid;
+    gap: 20px 28px;
+    align-items: center;
+  }
+  .matrix .cell-label {
+    font-size: 11px;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .preset {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    padding: 10px 14px;
+    border-radius: 14px;
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+    text-align: left;
+    transition: border-color 0.2s ease, transform 0.2s var(--ease-spring), box-shadow 0.2s ease;
+  }
+  .preset b {
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .preset span {
+    font-size: 12px;
+    color: var(--color-muted);
+  }
+  .preset:hover {
+    border-color: var(--color-ink);
+    transform: translateY(-1px);
+  }
+  .preset:active {
+    transform: scale(0.98);
+  }
+  .preset[aria-pressed="true"] {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 1px var(--color-accent);
+  }
+  .tweak {
+    display: grid;
+    grid-template-columns: 110px 1fr 64px;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+  }
+  .tweak-label {
+    color: var(--color-muted);
+  }
+  .tweak input[type="range"] {
+    width: 100%;
+    accent-color: var(--color-accent);
+  }
+  .tweak input[type="color"] {
+    width: 44px;
+    height: 26px;
+    padding: 0;
+    border: 1px solid var(--color-line);
+    border-radius: 8px;
+    background: none;
+    cursor: pointer;
+  }
+  .tweak-value {
+    font-variant-numeric: tabular-nums;
+    color: var(--color-ink);
+    text-align: right;
+  }
+</style>

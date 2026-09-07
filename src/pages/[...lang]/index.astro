@@ -1,0 +1,25 @@
+---
+import Base from "../../layouts/Base.astro";
+import Hero from "../../components/Hero.astro";
+import HowItWorks from "../../components/HowItWorks.astro";
+import Roadmap from "../../components/Roadmap.astro";
+import Beliefs from "../../components/Beliefs.astro";
+import Cta from "../../components/Cta.astro";
+import { getDict, localeStaticPaths } from "../../i18n";
+import type { Locale } from "../../config";
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+
+const { locale } = Astro.props as { locale: Locale };
+const dict = getDict(locale);
+---
+
+<Base locale={locale} dict={dict} path="/">
+  <Hero dict={dict} />
+  <HowItWorks dict={dict} />
+  <Roadmap dict={dict} />
+  <Beliefs dict={dict} />
+  <Cta dict={dict} />
+</Base>

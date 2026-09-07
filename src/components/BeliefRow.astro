@@ -1,0 +1,22 @@
+---
+// Two-column row (only used in the /web gallery now): big drawing on one side, title + body on the other. `flip` swaps sides on md+.
+import Drawing from "./Drawing.astro";
+
+interface Props {
+  drawing: string;
+  title: string;
+  body: string;
+  flip?: boolean;
+}
+const { drawing, title, body, flip = false } = Astro.props;
+---
+
+<div class="grid items-center gap-8 md:grid-cols-2 md:gap-16" data-reveal-group>
+  <div class:list={["flex justify-center", flip && "md:order-2"]} data-reveal="pop">
+    <Drawing name={drawing} size={240} class="w-[170px] md:w-[220px] lg:w-[240px]" />
+  </div>
+  <div class="max-w-md" data-reveal>
+    <h3 class="text-2xl font-medium tracking-tight md:text-3xl">{title}</h3>
+    <p class="lede mt-3">{body}</p>
+  </div>
+</div>

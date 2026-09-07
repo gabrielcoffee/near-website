@@ -1,0 +1,68 @@
+---
+import type { Dictionary } from "../i18n/en";
+import PhoneMock from "./PhoneMock.astro";
+import Drawing from "./Drawing.astro";
+import Step from "./Step.astro";
+
+interface Props {
+  dict: Dictionary;
+}
+const { dict } = Astro.props;
+---
+
+<section id="how-it-works" class="section relative scroll-mt-[-4rem] md:scroll-mt-[-7rem]">
+  <div class="container-x">
+    <div class="mb-12 max-w-xl md:mb-20" data-reveal-group>
+      <p class="eyebrow" data-reveal>{dict.how.eyebrow}</p>
+      <h2 class="h-section mt-2" data-reveal>{dict.how.title}</h2>
+    </div>
+
+    <div class="grid gap-10 lg:grid-cols-2 lg:gap-24">
+      <div class="phone-sticky sticky top-0 z-10 self-start pt-[84px] lg:top-28 lg:pt-0" data-reveal>
+        <div class="phone-stage origin-top scale-[0.72] sm:scale-[0.85] lg:scale-100">
+          <PhoneMock />
+        </div>
+      </div>
+
+      <ol class="steps flex flex-col">
+        {dict.how.steps.map((s, i) => <Step index={i} title={s.title} body={s.body} />)}
+      </ol>
+    </div>
+  </div>
+
+  <div class="pointer-events-none absolute -left-4 top-[30%] hidden xl:block" aria-hidden="true" data-reveal="pop">
+    <Drawing name="hearing" size={140} class="w-[140px] pointer-events-auto" />
+  </div>
+</section>
+
+<style>
+  /* Phone is 250px wide below lg (height = 250 * 19.4 / 9 ≈ 539px). Scaled visually, so reserve the scaled height. */
+  .phone-stage {
+    height: calc(539px * 0.72);
+  }
+  @media (min-width: 640px) {
+    .phone-stage { height: calc(539px * 0.85); }
+  }
+  @media (min-width: 1024px) {
+    .phone-stage { height: auto; }
+  }
+  /* Below lg the phone is pinned at the top; text scrolls underneath an opaque, softly faded stage. */
+  .phone-sticky {
+    background: var(--color-paper);
+    padding-bottom: 12px;
+  }
+  .phone-sticky::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -28px;
+    height: 28px;
+    background: linear-gradient(var(--color-paper), transparent);
+    pointer-events: none;
+  }
+  @media (min-width: 1024px) {
+    .phone-sticky { background: transparent; padding-bottom: 0; }
+    .phone-sticky::after { display: none; }
+  }
+</style>

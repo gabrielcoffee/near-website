@@ -1,0 +1,151 @@
+---
+// "Coming next": three upcoming features. Left: their app screens stacked like photos, tap to flip.
+// Right: title + body of the feature in front. roadmap.ts drives the order.
+import type { Dictionary } from "../i18n/en";
+import RoadmapScreens from "./RoadmapScreens.astro";
+
+interface Props {
+  dict: Dictionary;
+}
+const { dict } = Astro.props;
+const features = dict.next.features;
+---
+
+<section id="coming-next" class="section relative scroll-mt-[-4rem] md:scroll-mt-[-7rem]" data-roadmap>
+  <div class="container-x">
+    <div class="max-w-xl" data-reveal-group>
+      <p class="eyebrow" data-reveal>{dict.next.eyebrow}</p>
+      <h2 class="h-section mt-2" data-reveal>{dict.next.title}</h2>
+      <p class="lede mt-4" data-reveal>{dict.next.intro}</p>
+    </div>
+
+    <div class="mt-12 grid items-center gap-12 md:mt-16 lg:grid-cols-2 lg:gap-16">
+      <!-- Stack -->
+      <div class="flex justify-center lg:justify-end" data-reveal>
+        <div class="stack-pad">
+          <div class="stack" data-stack tabindex="0" role="button" aria-label={dict.next.next}>
+            <RoadmapScreens />
+          </div>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="lg:max-w-md" data-reveal>
+        <div class="features">
+          {features.map((f, i) => (
+            <div class="feature" data-feature aria-hidden={i === 0 ? "false" : "true"}>
+              <span class="feature-num">{String(i + 1).padStart(2, "0")}</span>
+              <h3 class="mt-3 text-2xl font-medium tracking-tight md:text-3xl">{f.title}</h3>
+              <p class="lede mt-3">{f.body}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-8 flex items-center gap-2">
+          <button type="button" class="ctrl" data-prev aria-label={dict.next.prev}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
+          <button type="button" class="ctrl" data-next aria-label={dict.next.next}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </button>
+          <span class="ml-2 text-sm tabular-nums text-muted" data-counter aria-live="polite">1 / {features.length}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Room for the tilted cards behind the front one. */
+  .stack-pad {
+    padding: 12px 28px 28px;
+  }
+  .stack {
+    position: relative;
+    width: 250px;
+    aspect-ratio: 9 / 17;
+    cursor: pointer;
+    outline-offset: 10px;
+    border-radius: 30px;
+  }
+  @media (min-width: 768px) {
+    .stack { width: 290px; }
+  }
+
+  .stack :global(.rs-card) {
+    position: absolute;
+    inset: 0;
+    border-radius: 30px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--color-line);
+    box-shadow: 0 24px 50px -28px rgb(0 0 0 / 0.45);
+    transform-origin: 50% 60%;
+    transition:
+      transform 0.5s var(--ease-spring),
+      opacity 0.3s ease;
+    will-change: transform;
+  }
+  .stack :global(.rs-card[data-pos="0"]) { transform: none; }
+  .stack :global(.rs-card[data-pos="1"]) { transform: translate(-16px, 10px) rotate(-5deg) scale(0.96); }
+  .stack :global(.rs-card[data-pos="2"]) { transform: translate(16px, 18px) rotate(5deg) scale(0.92); }
+  /* Lift out of the pile before dropping to a new position. */
+  .stack :global(.rs-card.is-flying) {
+    transform: translate(-58%, -5%) rotate(-14deg) scale(0.9);
+    transition: transform 0.3s var(--ease-soft);
+  }
+
+  .features {
+    display: grid;
+  }
+  .feature {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transform: translateY(8px);
+    pointer-events: none;
+    transition:
+      opacity 0.35s ease,
+      transform 0.45s var(--ease-soft);
+  }
+  .feature.is-active {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+  .feature-num {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  .ctrl {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+    color: var(--color-ink);
+    transition:
+      background-color var(--btn-speed) ease,
+      border-color var(--btn-speed) ease,
+      transform 0.08s ease;
+  }
+  .ctrl:hover {
+    background: var(--btn-secondary-hover-bg);
+    border-color: var(--btn-secondary-hover-bg);
+  }
+  .ctrl:active {
+    transform: scale(var(--btn-active-scale));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stack :global(.rs-card),
+    .feature {
+      transition: none;
+    }
+  }
+</style>

@@ -1,0 +1,43 @@
+---
+// One hand-drawn character. `size` = max rendered width in px (drives srcset); `class` sets layout width.
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+const all = import.meta.glob<{ default: ImageMetadata }>("../assets/drawings/*.png", { eager: true });
+
+interface Props {
+  name: string;
+  size: number;
+  class?: string;
+  alt?: string;
+  eager?: boolean;
+  depth?: number;
+  style?: string;
+}
+
+const { name, size, class: cls = "", alt = "", eager = false, depth, style } = Astro.props;
+const mod = all[`../assets/drawings/${name}.png`];
+if (!mod) throw new Error(`Unknown drawing "${name}"`);
+const img = mod.default;
+---
+
+<div
+  class:list={["drawing", cls]}
+  style={style}
+  data-depth={depth}
+  data-drawing={name}
+  aria-hidden={alt ? undefined : "true"}
+>
+  <Image
+    src={img}
+    alt={alt}
+    width={size}
+    widths={[size, size * 2]}
+    sizes={`${size}px`}
+    format="webp"
+    quality={82}
+    loading={eager ? "eager" : "lazy"}
+    decoding="async"
+    draggable="false"
+  />
+</div>

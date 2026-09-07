@@ -1,0 +1,41 @@
+---
+// CSS-only iPhone frame. Screens live in PhoneScreens.astro; `data-active` on the frame picks one.
+import PhoneScreens from "./PhoneScreens.astro";
+
+interface Props {
+  active?: number; // initial screen; the step observer changes it on the page
+}
+const { active = 0 } = Astro.props;
+---
+
+<div class="phone relative mx-auto w-[250px] lg:w-[280px]" data-phone data-active={active}>
+  <div class="phone-body relative aspect-[9/19.4] w-full rounded-[46px] bg-ink p-[9px] shadow-[0_30px_60px_-30px_rgb(0_0_0/0.5)]">
+    <div class="phone-screen-wrap relative h-full w-full overflow-hidden rounded-[38px] bg-white">
+      <div class="absolute left-1/2 top-2.5 z-20 h-[24px] w-[84px] -translate-x-1/2 rounded-full bg-ink"></div>
+      <PhoneScreens />
+    </div>
+  </div>
+  <span class="absolute -left-[3px] top-[110px] h-8 w-[3px] rounded-l bg-ink/80" aria-hidden="true"></span>
+  <span class="absolute -left-[3px] top-[150px] h-12 w-[3px] rounded-l bg-ink/80" aria-hidden="true"></span>
+  <span class="absolute -right-[3px] top-[130px] h-16 w-[3px] rounded-r bg-ink/80" aria-hidden="true"></span>
+</div>
+
+<style is:global>
+  .phone .screen {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: scale(0.985);
+    transition:
+      opacity 0.45s var(--ease-soft),
+      transform 0.55s var(--ease-soft);
+    pointer-events: none;
+  }
+  .phone[data-active="0"] .screen[data-screen="0"],
+  .phone[data-active="1"] .screen[data-screen="1"],
+  .phone[data-active="2"] .screen[data-screen="2"],
+  .phone[data-active="3"] .screen[data-screen="3"] {
+    opacity: 1;
+    transform: none;
+  }
+</style>

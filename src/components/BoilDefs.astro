@@ -1,0 +1,23 @@
+---
+// SVG displacement filters for the line-boil wobble. s = subtle (idle), h = hot (hover). 4 frames each.
+---
+
+<!-- Line-boil filters: s = subtle (idle), h = hot (hover). 4 frames each. -->
+<svg class="absolute h-0 w-0" aria-hidden="true" focusable="false">
+  <defs>
+    {
+      [0, 1, 2, 3].map((n) => (
+        <>
+          <filter id={`boil-s-${n}`} x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed={String(11 + n * 7)} result="n" />
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="3.5" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+          <filter id={`boil-h-${n}`} x="-12%" y="-12%" width="124%" height="124%" color-interpolation-filters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="2" seed={String(31 + n * 7)} result="n" />
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+        </>
+      ))
+    }
+  </defs>
+</svg>

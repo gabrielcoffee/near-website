@@ -1,0 +1,389 @@
+@import "tailwindcss";
+
+/* ---------- Design tokens (edit here, used everywhere) ---------- */
+@theme {
+  --font-sans: "Outfit Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --color-paper: #fafafa;
+  --color-surface: #ffffff;
+  --color-ink: #111111;
+  --color-muted: #6b6b6b;
+  --color-line: #e8e8e6;
+  --color-accent: #ff6a2b;
+  --color-accent-soft: #fff1ea;
+
+  --radius-card: 24px;
+  --radius-pill: 999px;
+
+  --ease-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ---------- Tweakables (motion + feel; /web has sliders for these) ---------- */
+:root {
+  --btn-active-scale: 0.97;
+  --btn-speed: 0.2s;
+  --btn-primary-hover-bg: #333333;
+  --btn-primary-hover-color: #ffffff;
+  --btn-secondary-hover-bg: #f2f2f0;
+  --btn-ghost-hover-bg: #f2f2f0;
+  --btn-ghost-hover-color: #111111;
+
+  --nav-hover-bg: #f0f0ee;
+
+  --link-thickness: 2px;
+  --link-speed: 0.22s;
+  --link-hover-color: #111111;
+
+  --card-lift: 4px;
+  --card-shadow: 0.25;
+  --card-speed: 0.35s;
+  --card-hover-bg: #ffffff;
+  --card-hover-border: #dddddd;
+
+  --drawing-hot-scale: 1.05;
+  --drawing-tilt: 4deg;
+  --drawing-speed: 0.35s;
+  --drawing-bounce: 0.55s;
+  --boil-interval: 110ms;
+
+  --header-bg: 0.7;
+  --header-blur: 12px;
+  --header-radius: 24px;
+
+  --reveal-distance: 16px;
+  --reveal-speed: 0.6s;
+  --reveal-stagger: 70ms;
+  --pop-from: 0.4;
+  --pop-speed: 0.8s;
+}
+
+/* ---------- Base ---------- */
+html {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--color-paper);
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: white;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* ---------- Buttons ----------
+   Hover never moves or grows a button: only background + text color change. */
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-pill font-medium select-none whitespace-nowrap;
+  transition:
+    background-color var(--btn-speed) ease,
+    color var(--btn-speed) ease,
+    border-color var(--btn-speed) ease,
+    transform 0.08s ease;
+}
+.btn:active,
+.btn.is-active {
+  transform: scale(var(--btn-active-scale));
+}
+.btn-md {
+  @apply h-11 px-5 text-[15px];
+}
+.btn-sm {
+  @apply h-9 px-4 text-sm;
+}
+.btn-lg {
+  @apply h-13 px-7 text-base;
+}
+.btn-primary {
+  @apply bg-ink text-white;
+}
+.btn-primary:hover,
+.btn-primary.is-hover {
+  background: var(--btn-primary-hover-bg);
+  color: var(--btn-primary-hover-color);
+}
+.btn-secondary {
+  @apply bg-surface text-ink border border-line;
+}
+.btn-secondary:hover,
+.btn-secondary.is-hover {
+  background: var(--btn-secondary-hover-bg);
+  border-color: var(--btn-secondary-hover-bg);
+}
+.btn-ghost {
+  @apply bg-transparent text-ink;
+}
+.btn-ghost:hover,
+.btn-ghost.is-hover {
+  background: var(--btn-ghost-hover-bg);
+  color: var(--btn-ghost-hover-color);
+}
+.btn[aria-disabled="true"] {
+  @apply cursor-default bg-line text-muted;
+}
+.btn[aria-disabled="true"]:hover,
+.btn[aria-disabled="true"]:active {
+  transform: none;
+  background: var(--color-line);
+}
+
+/* ---------- Nav links (header): quiet pill background on hover ---------- */
+.nav-link {
+  @apply inline-flex items-center rounded-pill px-3 py-1.5 text-ink;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+.nav-link:hover,
+.nav-link.is-hover,
+.nav-link[aria-current="true"] {
+  background: var(--nav-hover-bg);
+  color: var(--color-ink);
+}
+
+/* ---------- Links with underline draw-in ---------- */
+.link {
+  @apply relative inline-block text-ink;
+  background-image: linear-gradient(var(--color-accent), var(--color-accent));
+  background-repeat: no-repeat;
+  background-size: 0% var(--link-thickness);
+  background-position: 0 100%;
+  padding-bottom: 2px;
+  transition:
+    background-size var(--link-speed) var(--ease-soft),
+    color 0.2s ease;
+}
+.link:hover,
+.link.is-hover,
+.link[aria-current="true"] {
+  background-size: 100% var(--link-thickness);
+  color: var(--link-hover-color);
+}
+.link:active {
+  color: var(--color-accent);
+}
+
+/* ---------- Cards ---------- */
+.card {
+  @apply rounded-card bg-surface border border-line;
+  transition:
+    transform var(--card-speed) var(--ease-soft),
+    box-shadow var(--card-speed) var(--ease-soft),
+    border-color 0.2s ease;
+}
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(calc(-1 * var(--card-lift)));
+    box-shadow: 0 20px 40px -24px rgb(0 0 0 / var(--card-shadow));
+    border-color: var(--card-hover-border);
+    background: var(--card-hover-bg);
+  }
+}
+.card.is-hover {
+  transform: translateY(calc(-1 * var(--card-lift)));
+  box-shadow: 0 20px 40px -24px rgb(0 0 0 / var(--card-shadow));
+  border-color: var(--card-hover-border);
+  background: var(--card-hover-bg);
+}
+.card:active,
+.card.is-active {
+  transform: translateY(0) scale(0.99);
+  transition-duration: 0.1s;
+}
+
+/* ---------- Drawings + line boil ---------- */
+.drawing {
+  @apply inline-block select-none;
+  -webkit-user-drag: none;
+}
+.drawing img {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  transition: transform var(--drawing-speed) var(--ease-spring);
+  transform-origin: 50% 90%;
+}
+.drawing.is-hot img {
+  transform: rotate(calc(var(--tilt-k, 1) * var(--drawing-tilt))) scale(var(--drawing-hot-scale));
+}
+.drawing.is-bouncing img {
+  animation: squash var(--drawing-bounce) var(--ease-spring);
+}
+@keyframes squash {
+  0% { transform: scale(1, 1); }
+  30% { transform: scale(1.15, 0.85); }
+  55% { transform: scale(0.92, 1.1); }
+  75% { transform: scale(1.04, 0.97); }
+  100% { transform: scale(1, 1); }
+}
+
+/* Frame is set on <html> by boil.ts; CSS picks the filter. Only in-view drawings pay. */
+html[data-boil="0"] .drawing.in-view { filter: url(#boil-s-0); }
+html[data-boil="1"] .drawing.in-view { filter: url(#boil-s-1); }
+html[data-boil="2"] .drawing.in-view { filter: url(#boil-s-2); }
+html[data-boil="3"] .drawing.in-view { filter: url(#boil-s-3); }
+html[data-boil="0"] .drawing.in-view.is-hot { filter: url(#boil-h-0); }
+html[data-boil="1"] .drawing.in-view.is-hot { filter: url(#boil-h-1); }
+html[data-boil="2"] .drawing.in-view.is-hot { filter: url(#boil-h-2); }
+html[data-boil="3"] .drawing.in-view.is-hot { filter: url(#boil-h-3); }
+
+/* ---------- Scroll reveal ---------- */
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(var(--reveal-distance));
+  transition:
+    opacity var(--reveal-speed) var(--ease-soft),
+    transform var(--reveal-speed) var(--ease-soft);
+  transition-delay: calc(var(--i, 0) * var(--reveal-stagger));
+}
+html.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Reduced motion: everything static, nothing hidden ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html[data-boil] .drawing.in-view { filter: none !important; }
+  html.js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .drawing img,
+  .btn,
+  .card {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ---------- Misc helpers ---------- */
+.eyebrow {
+  @apply text-sm font-medium tracking-wide text-accent;
+}
+.h-section {
+  @apply text-3xl md:text-4xl font-medium tracking-tight text-balance;
+}
+.lede {
+  @apply text-base md:text-lg text-muted text-pretty;
+}
+.container-x {
+  @apply mx-auto w-full max-w-6xl px-5 md:px-8;
+}
+.section {
+  @apply py-24 md:py-36;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Card hover also heats the drawing inside it */
+@media (hover: hover) {
+  .card:hover .drawing img, .card.is-hover .drawing img { transform: rotate(calc(var(--tilt-k, 1) * var(--drawing-tilt))) scale(var(--drawing-hot-scale)); }
+  html[data-boil="0"] .card:hover .drawing.in-view { filter: url(#boil-h-0); }
+  html[data-boil="1"] .card:hover .drawing.in-view { filter: url(#boil-h-1); }
+  html[data-boil="2"] .card:hover .drawing.in-view { filter: url(#boil-h-2); }
+  html[data-boil="3"] .card:hover .drawing.in-view { filter: url(#boil-h-3); }
+}
+
+/* ---------- Pop reveal (drawings inside sections) ---------- */
+html.js [data-reveal="pop"] {
+  transform: scale(var(--pop-from));
+  transition:
+    opacity 0.45s ease,
+    transform var(--pop-speed) var(--ease-spring);
+  transition-delay: calc(var(--i, 0) * var(--reveal-stagger) + 120ms);
+}
+
+/* ---------- Intro (home only; `intro` class set in Base.astro, `intro-go` by intro.ts) ---------- */
+:root {
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-title: 0.1s;
+  --t-tag: 0.32s;
+  --t-launch: 0.5s;   /* characters leave the title */
+  --t-header: 0.95s;
+  --t-hint: 1.25s;
+  --intro-title-speed: 0.7s;
+  --intro-fly-speed: 0.75s;
+  --intro-header-speed: 0.55s;
+}
+
+/* text swipe-up mask (always present; only animates during the intro) */
+.swipe {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+.swipe-inner {
+  display: inline-block;
+}
+
+/* start states */
+html.intro .hero-title .swipe-inner,
+html.intro .hero-tag .swipe-inner { transform: translateY(115%); }
+html.intro .edge { opacity: 0; transform: translate(var(--fx, 0px), var(--fy, 0px)) scale(0.2); }
+html.intro .site-header-wrap { opacity: 0; transform: translateY(-40px); }
+html.intro .scroll-hint { opacity: 0; }
+
+/* end states + timing */
+html.intro.intro-go .hero-title .swipe-inner {
+  transform: none;
+  transition: transform var(--intro-title-speed) var(--ease-out-expo) var(--t-title);
+}
+html.intro.intro-go .hero-tag .swipe-inner {
+  transform: none;
+  transition: transform calc(var(--intro-title-speed) * 0.85) var(--ease-out-expo) var(--t-tag);
+}
+html.intro.intro-go .edge {
+  opacity: 1;
+  transform: none;
+  transition:
+    transform var(--intro-fly-speed) var(--ease-out-expo) calc(var(--t-launch) + var(--d, 0ms)),
+    opacity 0.2s ease calc(var(--t-launch) + var(--d, 0ms));
+}
+html.intro.intro-go .site-header-wrap {
+  opacity: 1;
+  transform: none;
+  transition: transform var(--intro-header-speed) var(--ease-out-expo) var(--t-header), opacity 0.3s ease var(--t-header);
+}
+html.intro.intro-go .scroll-hint {
+  opacity: 1;
+  transition: opacity 0.5s ease var(--t-hint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.intro .hero-title .swipe-inner, html.intro .hero-tag .swipe-inner, html.intro .edge,
+  html.intro .site-header-wrap, html.intro .scroll-hint { opacity: 1; transform: none; transition: none; }
+  html.js [data-reveal="pop"] { transform: none; transition: none; }
+}
+
+/* /web only: force the hover look on a drawing inside .force-hot */
+.force-hot .drawing img { transform: rotate(calc(var(--tilt-k, 1) * var(--drawing-tilt))) scale(var(--drawing-hot-scale)); }
+html[data-boil="0"] .force-hot .drawing.in-view { filter: url(#boil-h-0); }
+html[data-boil="1"] .force-hot .drawing.in-view { filter: url(#boil-h-1); }
+html[data-boil="2"] .force-hot .drawing.in-view { filter: url(#boil-h-2); }
+html[data-boil="3"] .force-hot .drawing.in-view { filter: url(#boil-h-3); }

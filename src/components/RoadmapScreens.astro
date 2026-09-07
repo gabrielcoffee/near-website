@@ -1,0 +1,214 @@
+---
+// Mock screens for the three upcoming features (Plans, Together posts, Recaps). Same visual
+// language as PhoneScreens. Each card carries data-card; Roadmap.astro + roadmap.ts stack them.
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+const people = import.meta.glob<{ default: ImageMetadata }>("../assets/people/*.jpg", { eager: true });
+const photos = import.meta.glob<{ default: ImageMetadata }>("../assets/photos/*.jpg", { eager: true });
+const pic = (f: string) => people[`../assets/people/${f}.jpg`].default;
+const photo = (f: string) => photos[`../assets/photos/${f}.jpg`].default;
+
+const invited = [
+  { n: "Gabriel", p: "p3", s: "in" },
+  { n: "Kai", p: "p2", s: "in" },
+  { n: "Maya", p: "p11", s: "in" },
+  { n: "Noah", p: "p12", s: "out" },
+  { n: "Inês", p: "p13", s: "" },
+];
+const seen = [
+  { n: "Sofia", p: "p1", c: 6 },
+  { n: "Kai", p: "p2", c: 4 },
+  { n: "Maya", p: "p11", c: 3 },
+];
+const weeks = [3, 5, 2, 4];
+---
+
+<!-- 1 · Plans: an invite from Sofia, who's in, answer at the bottom -->
+<div class="rs-card" data-card data-pos="0">
+  <div class="rs">
+    <div class="status"><span>9:41</span><span class="flex gap-1"><i class="sig"></i><i class="bat"></i></span></div>
+    <div class="nav sub">
+      <span class="back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>Plans</span>
+      <span class="title center">Plan</span>
+    </div>
+    <div class="body">
+      <div class="from">
+        <div class="ava"><Image src={pic("p1")} alt="" width={80} height={80} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></div>
+        <div class="who"><b>Sofia</b><span>invited you · 2 h ago</span></div>
+      </div>
+      <h4 class="plan-title">Friday drinks</h4>
+      <div class="rows">
+        <div class="row"><span class="ico">📍</span><div><b>Café Lisboa</b><span>Rua da Rosa 12</span></div></div>
+        <div class="row"><span class="ico">🕖</span><div><b>Friday, 19:00</b><span>in 2 days</span></div></div>
+      </div>
+      <p class="note">“first round on me, bring nothing”</p>
+      <div class="invited">
+        <span class="label">3 in · 1 out</span>
+        <div class="faces">
+          {invited.map((p) => (
+            <div class:list={["face", p.s]}>
+              <Image src={pic(p.p)} alt="" width={64} height={64} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" />
+              {p.s === "in" && <i>✓</i>}
+              {p.s === "out" && <i>✕</i>}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+    <div class="answer">
+      <span class="btn-in">I'm in</span>
+      <span class="btn-out">Can't</span>
+    </div>
+  </div>
+</div>
+
+<!-- 2 · Together posts: one photo, two names, both phones were there -->
+<div class="rs-card" data-card data-pos="1">
+  <div class="rs">
+    <div class="status"><span>9:41</span><span class="flex gap-1"><i class="sig"></i><i class="bat"></i></span></div>
+    <div class="nav"><span class="title">Feed</span></div>
+    <div class="body feed">
+      <article class="post">
+        <div class="post-head">
+          <div class="duo">
+            <div class="ava"><Image src={pic("p3")} alt="" width={80} height={80} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></div>
+            <div class="ava"><Image src={pic("p1")} alt="" width={80} height={80} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></div>
+          </div>
+          <div class="who"><b>Gabriel &amp; Sofia</b><span>posted together · Sintra</span></div>
+        </div>
+        <div class="photo">
+          <Image src={photo("s6")} alt="" width={320} height={320} format="webp" quality={72} loading="lazy" decoding="async" draggable="false" />
+          <span class="badge"><i></i>both phones were here</span>
+        </div>
+        <p>we made it to the top. eventually.</p>
+        <span class="meta">4 comments</span>
+      </article>
+      <article class="post dim">
+        <div class="post-head">
+          <div class="ava"><Image src={pic("p2")} alt="" width={80} height={80} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></div>
+          <div class="who"><b>Kai</b><span>1 day ago</span></div>
+        </div>
+        <div class="photo short">
+          <Image src={photo("s4")} alt="" width={320} height={180} format="webp" quality={72} loading="lazy" decoding="async" draggable="false" />
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+<!-- 3 · Recaps: September in numbers -->
+<div class="rs-card" data-card data-pos="2">
+  <div class="rs">
+    <div class="status"><span>9:41</span><span class="flex gap-1"><i class="sig"></i><i class="bat"></i></span></div>
+    <div class="nav sub">
+      <span class="back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>Profile</span>
+      <span class="title center">September</span>
+    </div>
+    <div class="body recap">
+      <div class="big">
+        <span class="num">9</span>
+        <span class="cap">friends seen in person</span>
+      </div>
+      <div class="stats">
+        <div><b>14</b><span>days together</span></div>
+        <div><b>4</b><span>plans</span></div>
+        <div><b>3</b><span>cities</span></div>
+      </div>
+      <div class="bars">
+        {weeks.map((w, i) => <div class="bar"><i style={`height:${w * 18}%`}></i><span>w{i + 1}</span></div>)}
+      </div>
+      <span class="label">Most seen</span>
+      <div class="seen">
+        {seen.map((p) => (
+          <div class="seen-row">
+            <div class="ava"><Image src={pic(p.p)} alt="" width={64} height={64} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></div>
+            <b>{p.n}</b>
+            <span>{p.c}×</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="answer one"><span class="btn-in">Your year so far</span></div>
+  </div>
+</div>
+
+<style>
+  .rs { position: absolute; inset: 0; font-family: var(--font-sans); color: #1a1a1a; background: #fff; --ios-blue: #007aff; --surface: #f4f4f5; --muted: #6b6b70; }
+  .status { display: flex; justify-content: space-between; padding: 14px 22px 0; font-size: 11px; font-weight: 600; }
+  .status .sig, .status .bat { display: inline-block; height: 8px; border-radius: 2px; background: #1a1a1a; }
+  .status .sig { width: 12px; }
+  .status .bat { width: 18px; opacity: 0.9; }
+  .nav { position: relative; display: flex; align-items: center; justify-content: space-between; padding: 14px 12px 4px; }
+  .nav .title { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
+  .nav.sub { justify-content: center; }
+  .nav .back { position: absolute; left: 10px; display: inline-flex; align-items: center; gap: 1px; font-size: 11px; color: var(--ios-blue); }
+  .nav .back svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .nav .title.center { font-size: 12px; }
+
+  .body { position: absolute; inset: 66px 0 0; padding: 6px 12px; overflow: hidden; }
+  .ava { width: 23px; height: 23px; border-radius: 999px; overflow: hidden; flex: none; }
+  .ava img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .who { display: flex; flex-direction: column; min-width: 0; }
+  .who b { font-size: 10.5px; font-weight: 600; line-height: 1.15; }
+  .who span { font-size: 8px; color: var(--muted); }
+  .label { display: block; font-size: 8px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+
+  /* plan */
+  .from { display: flex; align-items: center; gap: 6px; }
+  .plan-title { margin-top: 10px; font-size: 19px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; }
+  .rows { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+  .row { display: flex; align-items: center; gap: 7px; padding: 7px 8px; border-radius: 9px; background: var(--surface); }
+  .row .ico { font-size: 12px; }
+  .row b { display: block; font-size: 10.5px; font-weight: 600; line-height: 1.15; }
+  .row span { font-size: 8px; color: var(--muted); }
+  .note { margin-top: 10px; font-size: 10.5px; line-height: 1.3; color: #1a1a1a; }
+  .invited { margin-top: 12px; }
+  .faces { display: flex; gap: 6px; margin-top: 5px; }
+  .face { position: relative; width: 30px; height: 30px; border-radius: 9px; overflow: visible; }
+  .face img { width: 100%; height: 100%; object-fit: cover; border-radius: 9px; display: block; }
+  .face i { position: absolute; right: -4px; bottom: -4px; width: 13px; height: 13px; border-radius: 999px; display: grid; place-items: center; font-style: normal; font-size: 8px; font-weight: 700; color: #fff; border: 1.5px solid #fff; }
+  .face.in i { background: var(--color-accent); }
+  .face.out i { background: #a5a5aa; }
+  .face:not(.in):not(.out) img { opacity: 0.45; }
+  .answer { position: absolute; left: 0; right: 0; bottom: 0; display: flex; gap: 6px; padding: 8px 12px 16px; background: linear-gradient(transparent, #fff 30%); }
+  .answer span { flex: 1; text-align: center; padding: 9px 0; border-radius: 999px; font-size: 10.5px; font-weight: 600; }
+  .btn-in { background: #1a1a1a; color: #fff; }
+  .btn-out { background: var(--surface); color: #1a1a1a; }
+  .answer.one .btn-in { background: var(--surface); color: #1a1a1a; }
+
+  /* together */
+  .body.feed { padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .post { display: flex; flex-direction: column; }
+  .post.dim { opacity: 0.55; }
+  .post-head { display: flex; align-items: center; gap: 6px; padding: 6px 10px 5px; }
+  .duo { display: flex; flex: none; }
+  .duo .ava { border: 1.5px solid #fff; }
+  .duo .ava + .ava { margin-left: -8px; }
+  .photo { position: relative; width: 100%; aspect-ratio: 1; background: var(--surface); overflow: hidden; }
+  .photo.short { aspect-ratio: 16 / 9; }
+  .photo > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .badge { position: absolute; left: 8px; bottom: 8px; display: inline-flex; align-items: center; gap: 4px; padding: 3px 7px 3px 5px; border-radius: 999px; background: rgb(255 255 255 / 0.9); font-size: 7.5px; font-weight: 600; color: #1a1a1a; }
+  .badge i { width: 7px; height: 7px; border-radius: 999px; background: var(--color-accent); }
+  .post p { padding: 5px 10px 0; font-size: 10.5px; line-height: 1.25; }
+  .post .meta { padding: 2px 10px 6px; font-size: 8px; color: var(--muted); }
+
+  /* recap */
+  .body.recap { padding: 8px 14px; }
+  .big { display: flex; flex-direction: column; }
+  .big .num { font-size: 64px; font-weight: 600; letter-spacing: -0.04em; line-height: 0.95; color: var(--color-accent); }
+  .big .cap { margin-top: 4px; font-size: 11px; font-weight: 500; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 12px; }
+  .stats div { padding: 7px 8px; border-radius: 9px; background: var(--surface); display: flex; flex-direction: column; }
+  .stats b { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; line-height: 1; }
+  .stats span { margin-top: 3px; font-size: 7.5px; color: var(--muted); }
+  .bars { display: flex; gap: 8px; align-items: flex-end; height: 44px; margin: 12px 0 10px; }
+  .bar { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+  .bar i { display: block; width: 100%; border-radius: 4px 4px 2px 2px; background: #1a1a1a; }
+  .bar span { margin-top: 3px; font-size: 7px; color: var(--muted); }
+  .seen { display: flex; flex-direction: column; gap: 5px; margin-top: 5px; }
+  .seen-row { display: flex; align-items: center; gap: 6px; }
+  .seen-row .ava { width: 19px; height: 19px; }
+  .seen-row b { flex: 1; font-size: 10px; font-weight: 600; }
+  .seen-row span { font-size: 9px; color: var(--muted); }
+</style>

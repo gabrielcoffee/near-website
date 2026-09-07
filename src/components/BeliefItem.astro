@@ -1,0 +1,23 @@
+---
+// One "bad part we took out": drawing on the left, big title + body on the right. No card, no border.
+// Stacks on mobile (drawing above text), becomes a row on md+.
+import Drawing from "./Drawing.astro";
+
+interface Props {
+  drawing: string;
+  title: string;
+  body: string;
+  class?: string;
+}
+const { drawing, title, body, class: cls = "" } = Astro.props;
+---
+
+<div class:list={["flex flex-col gap-6 md:flex-row md:items-center md:gap-12", cls]} data-reveal-group>
+  <div class="flex shrink-0 justify-start md:w-[220px] md:justify-center" data-reveal="pop">
+    <Drawing name={drawing} size={220} class="w-[150px] md:w-[200px] lg:w-[220px]" />
+  </div>
+  <div class="max-w-xl" data-reveal>
+    <h3 class="text-3xl font-medium tracking-tight text-balance md:text-4xl">{title}</h3>
+    <p class="lede mt-3">{body}</p>
+  </div>
+</div>
