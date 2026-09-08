@@ -47,8 +47,8 @@
   --drawing-bounce: 0.55s;
   --boil-interval: 110ms;
 
-  --header-bg: 0.7;
-  --header-blur: 12px;
+  --header-bg: 0.5;
+  --header-blur: 18px;
   --header-radius: 24px;
 
   --reveal-distance: 16px;
@@ -367,8 +367,8 @@ html.js [data-reveal="pop"] {
 .swipe {
   display: block;
   overflow: hidden;
-  padding-bottom: 0.12em;
-  margin-bottom: -0.12em;
+  padding: 0 0.3em 0.12em;
+  margin: 0 -0.3em -0.12em;
 }
 .swipe-inner {
   display: inline-block;
