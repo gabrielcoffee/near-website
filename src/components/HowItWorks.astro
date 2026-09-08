@@ -45,23 +45,26 @@ const { dict } = Astro.props;
   @media (min-width: 1024px) {
     .phone-stage { height: auto; }
   }
-  /* Below lg the phone is pinned at the top; text scrolls underneath an opaque, softly faded stage. */
+  /* Below lg the phone is pinned at the top and the steps scroll underneath it. The stage stays
+     see-through: a frosted layer (blurred backdrop + light paper tint) sits behind the phone and
+     fades out at its bottom edge, so the text is still there, just soft. */
   .phone-sticky {
-    background: var(--color-paper);
     padding-bottom: 12px;
   }
-  .phone-sticky::after {
+  .phone-sticky::before {
     content: "";
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -28px;
-    height: 28px;
-    background: linear-gradient(var(--color-paper), transparent);
+    inset: 0 -1.25rem -36px;
+    z-index: -1;
+    background: color-mix(in srgb, var(--color-paper) 55%, transparent);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 64px), transparent);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 64px), transparent);
     pointer-events: none;
   }
   @media (min-width: 1024px) {
-    .phone-sticky { background: transparent; padding-bottom: 0; }
-    .phone-sticky::after { display: none; }
+    .phone-sticky { padding-bottom: 0; }
+    .phone-sticky::before { display: none; }
   }
 </style>

@@ -10,16 +10,17 @@ const { dict } = Astro.props;
 ---
 
 <section class="relative flex min-h-svh items-center justify-center overflow-hidden pt-24 pb-16" data-parallax-root>
-  <!-- Edge characters. Positions are % of the hero; tweak freely. -->
+  <!-- Edge characters. Desktop positions are % of the hero (classes, tweak freely / dev positions tool).
+       Below md every character gets a hand-placed mobile spot in the <style> block, keyed by data-edge. -->
   <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-    <div class="edge left-[24.5%] top-[18.1%] hidden md:block" data-depth="0.6"><Drawing name="happy" size={150} class="w-[110px] lg:w-[150px]" eager /></div>
-    <div class="edge right-[42.7%] top-[58.4%]" data-depth="0.8"><Drawing name="wohoo" size={130} class="w-[72px] md:w-[100px] lg:w-[130px]" eager /></div>
-    <div class="edge left-[22.3%] top-[55.3%] hidden lg:block" data-depth="1"><Drawing name="cool" size={171} class="w-[171px]" eager /></div>
-    <div class="edge right-[24.5%] top-[17.8%] hidden lg:block" data-depth="0.5"><Drawing name="friends" size={170} class="w-[170px]" eager /></div>
-    <div class="edge left-[78.6%] bottom-[41.5%]" data-depth="0.9"><Drawing name="shoes" size={95} class="w-[52px] md:w-[69px] lg:w-[95px]" eager /></div>
-    <div class="edge right-[80.7%] bottom-[47.6%] hidden md:block" data-depth="0.7"><Drawing name="nose" size={110} class="w-[80px] lg:w-[110px]" eager /></div>
-    <div class="edge left-[44.5%] top-[13.3%] hidden lg:block" data-depth="1.1"><Drawing name="tinyhappy" size={85} class="w-[85px]" eager /></div>
-    <div class="edge left-[66.7%] top-[50.6%]" data-depth="0.4"><Drawing name="back" size={104} class="w-[68px] md:w-[88px] lg:w-[104px]" eager /></div>
+    <div class="edge left-[24.5%] top-[18.1%]" data-edge="happy" data-depth="0.6"><Drawing name="happy" size={150} class="w-[110px] lg:w-[150px]" eager /></div>
+    <div class="edge right-[42.7%] top-[58.4%]" data-edge="wohoo" data-depth="0.8"><Drawing name="wohoo" size={130} class="w-[72px] md:w-[100px] lg:w-[130px]" eager /></div>
+    <div class="edge left-[22.3%] top-[55.3%] md:max-lg:hidden" data-edge="cool" data-depth="1"><Drawing name="cool" size={171} class="w-[171px]" eager /></div>
+    <div class="edge right-[24.5%] top-[17.8%] md:max-lg:hidden" data-edge="friends" data-depth="0.5"><Drawing name="friends" size={170} class="w-[170px]" eager /></div>
+    <div class="edge left-[78.6%] bottom-[41.5%]" data-edge="shoes" data-depth="0.9"><Drawing name="shoes" size={95} class="w-[52px] md:w-[69px] lg:w-[95px]" eager /></div>
+    <div class="edge right-[80.7%] bottom-[47.6%]" data-edge="nose" data-depth="0.7"><Drawing name="nose" size={110} class="w-[80px] lg:w-[110px]" eager /></div>
+    <div class="edge left-[44.5%] top-[13.3%] md:max-lg:hidden" data-edge="tinyhappy" data-depth="1.1"><Drawing name="tinyhappy" size={85} class="w-[85px]" eager /></div>
+    <div class="edge left-[66.7%] top-[50.6%]" data-edge="back" data-depth="0.4"><Drawing name="back" size={104} class="w-[68px] md:w-[88px] lg:w-[104px]" eager /></div>
   </div>
 
   <!-- pointer-events-none so edge characters under this full-width box stay hoverable/draggable -->
@@ -67,5 +68,19 @@ const { dict } = Astro.props;
   @media (prefers-reduced-motion: reduce) {
     .scroll-hint { animation: none; }
     .edge { transition: none; }
+  }
+
+  /* Mobile: all eight characters, ringed around the title (title sits ~40% down, tagline ~46%). */
+  @media (max-width: 767.98px) {
+    .edge { inset: auto; }
+    .edge :global(.drawing) { width: var(--w); }
+    .edge[data-edge="happy"]     { --w: 78px; left: 7%;   top: 15%; }
+    .edge[data-edge="tinyhappy"] { --w: 50px; left: 46%;  top: 12%; }
+    .edge[data-edge="friends"]   { --w: 92px; right: 7%;  top: 16%; }
+    .edge[data-edge="cool"]      { --w: 74px; left: 3%;   top: 37%; }
+    .edge[data-edge="wohoo"]     { --w: 66px; right: 4%;  top: 39%; }
+    .edge[data-edge="nose"]      { --w: 62px; left: 14%;  top: 62%; }
+    .edge[data-edge="shoes"]     { --w: 42px; left: 49%;  top: 67%; }
+    .edge[data-edge="back"]      { --w: 60px; right: 13%; top: 58%; }
   }
 </style>
