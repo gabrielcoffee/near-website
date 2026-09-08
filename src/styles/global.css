@@ -94,6 +94,11 @@ body {
     border-color var(--btn-speed) ease,
     transform 0.08s ease;
 }
+/* Hover state lands instantly; only the way out fades. */
+.btn:hover,
+.btn.is-hover {
+  transition-duration: 0s, 0s, 0s, 0.08s;
+}
 .btn:active,
 .btn.is-active {
   transform: scale(var(--btn-active-scale));
@@ -197,6 +202,7 @@ body {
 .link[aria-current="true"] {
   background-size: 100% var(--link-thickness);
   color: var(--link-hover-color);
+  transition-duration: 0s;
 }
 .link:active {
   color: var(--color-accent);

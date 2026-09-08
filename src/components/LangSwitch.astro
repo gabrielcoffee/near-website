@@ -59,8 +59,8 @@ const current = LOCALES.find((l) => l.code === locale) ?? LOCALES[0];
             aria-selected={l.code === locale}
             data-lang-option={l.code}
             class:list={[
-              "flex items-center gap-2.5 rounded-xl px-2.5 py-2 text-sm transition-colors",
-              l.code === locale ? "bg-accent-soft text-accent font-medium" : "text-ink hover:bg-paper",
+              "lang-option flex items-center gap-2.5 rounded-xl px-2.5 py-2 text-sm",
+              l.code === locale ? "bg-accent-soft text-accent font-medium" : "text-ink",
             ]}
           >
             <span class="lang-flag" aria-hidden="true">{l.flag}</span>
@@ -107,6 +107,7 @@ const current = LOCALES.find((l) => l.code === locale) ?? LOCALES[0];
   .lang:hover .lang-bg,
   .lang-toggle:focus-visible ~ .lang-bg {
     background: var(--btn-ghost-hover-bg);
+    transition-duration: 0.28s, 0.28s, 0s, 0s, 0.28s; /* hover bg instant in, fades out */
   }
   .lang.is-open .lang-bg {
     width: var(--lang-open-w);
@@ -116,6 +117,13 @@ const current = LOCALES.find((l) => l.code === locale) ?? LOCALES[0];
     box-shadow: 0 16px 40px -16px rgb(0 0 0 / 0.3);
   }
 
+  .lang-option {
+    transition: background-color 0.2s ease;
+  }
+  .lang-option:not([aria-selected="true"]):hover {
+    background: var(--color-paper);
+    transition-duration: 0s;
+  }
   .lang-toggle {
     color: var(--color-ink);
     transition: color 0.2s ease;
