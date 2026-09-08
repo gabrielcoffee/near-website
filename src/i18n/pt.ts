@@ -2,13 +2,14 @@ import type { Dictionary } from "./en";
 
 const pt: Dictionary = {
   meta: {
-    title: "near — amigos que você vê de verdade",
+    title: "Near — amigos que você vê de verdade",
     description:
       "Near é uma rede social para os amigos que você vê de verdade. Só dá pra adicionar alguém pessoalmente. Sem anúncios, sem algoritmo, sem curtidas.",
   },
   nav: {
     how: "Como funciona",
     believe: "No que acreditamos",
+    next: "Em breve",
     cta: "Baixar o app",
   },
   hero: {
@@ -17,7 +18,6 @@ const pt: Dictionary = {
     scroll: "rolar",
   },
   how: {
-    eyebrow: "como funciona",
     title: "App pequeno. Gente de verdade.",
     steps: [
       {
@@ -39,7 +39,6 @@ const pt: Dictionary = {
     ],
   },
   next: {
-    eyebrow: "em breve",
     title: "O que estamos construindo.",
     intro: "Três coisas a caminho. Toque nas telas pra passar.",
     prev: "Anterior",
@@ -51,25 +50,17 @@ const pt: Dictionary = {
     ],
   },
   believe: {
-    eyebrow: "no que acreditamos",
     title: "Instagram, só que pior.",
     paragraphs: [
-      "Toda rede social grande é feita pra te manter dentro dela. Anúncios precisam dos seus olhos, algoritmos precisam do seu tempo, curtidas precisam da sua ansiedade. Funciona. Esse é o problema.",
-      "O Near é feito ao contrário. É pequeno de propósito: só quem você encontrou de verdade, só o que essas pessoas postam de verdade, só na ordem em que aconteceu. Nada pra otimizar, nada pra correr atrás. O app acaba quando seus amigos acabam.",
-      "A gente acredita que tecnologia deve dar mais força à amizade da vida real, não substituir ela. Presença é a moeda. Sua rede não cresce procurando, cresce aparecendo. Se isso parece um Instagram pior, ótimo. É isso mesmo.",
+      "Todo app social grande é feito pra te manter lá dentro. Anúncio precisa dos seus olhos, algoritmo precisa do seu tempo, curtida precisa da sua ansiedade. Funciona. Esse é o problema.",
+      "O Near é pequeno de propósito. Só gente que você encontrou, só o que essa gente posta, na ordem em que aconteceu. Acaba quando seus amigos acabam. Se parece um Instagram pior, ótimo. É isso mesmo.",
     ],
     downgrades: "Downgrades:",
     items: [
       { title: "Sem algoritmo, sem anúncios, sem lixo de IA", body: "Seu feed são seus amigos, do mais novo pro mais antigo. Ninguém pagou pra estar ali, e nada foi gerado por máquina." },
-      { title: "Sem vida perfeita", body: "O Instagram é o melhor dia de todo mundo, com filtro. O Near é uma terça-feira. Sem influencers, sem estranhos pra se comparar." },
       { title: "Sem rolagem infinita", body: "O TikTok foi feito pra nunca acabar. O feed do Near acaba quando seus amigos param de postar. Aí vai lá fora." },
       { title: "Sem FOMO", body: "Você só vê quem você vê de verdade. Se não está no Near, você provavelmente estava lá." },
     ],
-    upgrades: "Upgrades:",
-    upgrade: {
-      title: "Seus amigos de verdade.",
-      body: "Um feed com vinte pessoas que você ama, em vez de duas mil que você não conhece.",
-    },
   },
   cta: {
     title: "Vai ver seus amigos.",

@@ -2,13 +2,14 @@ import type { Dictionary } from "./en";
 
 const fr: Dictionary = {
   meta: {
-    title: "near — les amis que tu vois vraiment",
+    title: "Near — les amis que tu vois vraiment",
     description:
       "Near est un réseau social pour les amis que tu vois vraiment. On n'ajoute quelqu'un qu'en personne. Sans pub, sans algorithme, sans likes.",
   },
   nav: {
     how: "Comment ça marche",
     believe: "Ce qu'on croit",
+    next: "Bientôt",
     cta: "Télécharger l'app",
   },
   hero: {
@@ -17,7 +18,6 @@ const fr: Dictionary = {
     scroll: "défiler",
   },
   how: {
-    eyebrow: "comment ça marche",
     title: "Petite app. Vraies personnes.",
     steps: [
       {
@@ -39,7 +39,6 @@ const fr: Dictionary = {
     ],
   },
   next: {
-    eyebrow: "bientôt",
     title: "Ce qu'on construit.",
     intro: "Trois choses en route. Touche les écrans pour les faire défiler.",
     prev: "Précédent",
@@ -51,25 +50,17 @@ const fr: Dictionary = {
     ],
   },
   believe: {
-    eyebrow: "ce qu'on croit",
     title: "Instagram, en pire.",
     paragraphs: [
-      "Chaque grand réseau social est conçu pour te garder dedans. La pub a besoin de tes yeux, les algorithmes de ton temps, les likes de ton anxiété. Ça marche. C'est ça le problème.",
-      "Near est construit dans l'autre sens. Petit exprès : seulement les gens que tu as vraiment rencontrés, seulement ce qu'ils publient vraiment, seulement dans l'ordre où ça s'est passé. Rien à optimiser, rien à courir après. L'appli s'arrête quand tes amis s'arrêtent.",
-      "On pense que la technologie doit donner plus de force à l'amitié réelle, pas la remplacer. La présence est la monnaie. Ton réseau ne grandit pas en cherchant, il grandit en étant là. Si ça ressemble à un Instagram en pire, tant mieux. C'en est un.",
+      "Toute grande app sociale est faite pour te garder dedans. La pub veut tes yeux, l'algorithme ton temps, les likes ton anxiété. Ça marche. C'est ça le problème.",
+      "Near est petite exprès. Seulement les gens que tu as rencontrés, seulement ce qu'ils publient, dans l'ordre où c'est arrivé. Ça se termine quand tes amis se taisent. Si ça ressemble à un Instagram en pire, tant mieux. C'en est un.",
     ],
     downgrades: "Régressions :",
     items: [
       { title: "Sans algorithme, sans pub, sans bouillie d'IA", body: "Ton fil, c'est tes amis, du plus récent au plus ancien. Personne n'a payé pour y être, et rien n'a été généré." },
-      { title: "Sans vie parfaite", body: "Instagram, c'est le meilleur jour de tout le monde, avec filtre. Near, c'est un mardi. Pas d'influenceurs, pas d'inconnus à qui te comparer." },
       { title: "Sans scroll infini", body: "TikTok est fait pour ne jamais s'arrêter. Le fil de Near s'arrête quand tes amis arrêtent de publier. Ensuite, va dehors." },
       { title: "Sans FOMO", body: "Tu ne vois que les gens que tu vois vraiment. Si ce n'est pas sur Near, tu y étais sûrement." },
     ],
-    upgrades: "Améliorations :",
-    upgrade: {
-      title: "Tes vrais amis.",
-      body: "Un fil de vingt personnes que tu aimes, au lieu de deux mille que tu ne connais pas.",
-    },
   },
   cta: {
     title: "Va voir tes amis.",

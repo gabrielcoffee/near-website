@@ -9,28 +9,18 @@ interface Props {
 const { dict } = Astro.props;
 
 // Order matches dict.believe.items
-const itemDrawings = ["ew", "confused", "old", "fomo"];
-const upgradeDrawing = "toohappy";
+const itemDrawings = ["ew", "old", "fomo"];
 ---
 
 <section id="what-we-believe" class="section relative scroll-mt-[-4rem] md:scroll-mt-[-7rem]">
   <div class="container-x">
     <div class="max-w-2xl" data-reveal-group>
-      <p class="eyebrow" data-reveal>{dict.believe.eyebrow}</p>
-      <h2 class="h-section mt-2" data-reveal>{dict.believe.title}</h2>
+      <h2 class="h-section" data-reveal>{dict.believe.title}</h2>
       {dict.believe.paragraphs.map((t) => <p class="lede mt-4" data-reveal>{t}</p>)}
     </div>
 
-    <p class="eyebrow mt-14 md:mt-20" data-reveal>{dict.believe.downgrades}</p>
-
-    <div class="mt-8 flex flex-col gap-20 md:mt-10 md:gap-28">
+    <div class="mt-16 flex flex-col gap-20 md:mt-24 md:gap-28">
       {dict.believe.items.map((c, i) => <BeliefItem drawing={itemDrawings[i]} title={c.title} body={c.body} />)}
-    </div>
-
-    <p class="eyebrow mt-20 md:mt-28" data-reveal>{dict.believe.upgrades}</p>
-
-    <div class="mt-8 md:mt-10">
-      <BeliefItem drawing={upgradeDrawing} title={dict.believe.upgrade.title} body={dict.believe.upgrade.body} />
     </div>
   </div>
 
