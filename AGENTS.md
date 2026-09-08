@@ -8,7 +8,7 @@ Single landing page (Astro 7, Tailwind v4, static, 6 languages) for Near, an iOS
 
 - Decide, don't ask. He wants a built first version, then iterates on what he sees. Ask at most one or two questions that need his taste.
 - Several Claude sessions often work on this repo at the same time. Before editing a shared file (`src/i18n/*`, `Header`, `Beliefs`, `global.css`), check `git status` and the file's mtime. If it changed minutes ago, re-read it and merge; never regex-rewrite a whole block.
-- Commit only when asked. Deploy (Vercel, `vercel --prod`) only when asked. Live site: https://near-website-lemon.vercel.app
+- Commit only when asked. Push only when asked: Vercel is git-linked (since 2026-09-08), so every push to `main` deploys production. Never run `vercel --prod` from the working tree. Live site: https://near-website-lemon.vercel.app
 - Report with screenshots (desktop 1280 and mobile 390). Build must pass before you say done.
 
 ## Checklists (the things that get forgotten)

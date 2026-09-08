@@ -287,20 +287,41 @@ body {
 .drawing {
   @apply inline-block select-none;
   -webkit-user-drag: none;
+  perspective: 600px; /* depth for the flip reactions */
 }
+/* `--flip` is the persistent upside-down state; it composes with the hover tilt below. */
 .drawing img {
   display: block;
   width: 100%;
   height: auto;
   pointer-events: none;
+  transform: var(--flip, rotateX(0));
   transition: transform var(--drawing-speed) var(--ease-spring);
   transform-origin: 50% 90%;
 }
 .drawing.is-hot img {
-  transform: rotate(calc(var(--tilt-k, 1) * var(--drawing-tilt))) scale(var(--drawing-hot-scale));
+  transform: var(--flip, rotateX(0)) rotate(calc(var(--tilt-k, 1) * var(--drawing-tilt))) scale(var(--drawing-hot-scale));
 }
-.drawing.is-bouncing img {
+
+/* Click reactions. Which one a character gets is fixed per file in boil.ts (`data-react`).
+   bounce / flip / spin play once; upside-down toggles and stays until the next click.
+   The spring easing lands a full turn in its first third and wobbles for the rest, so the
+   two rotations get 1.5x the bounce time to stay readable. */
+.drawing.is-reacting[data-react="bounce"] img {
   animation: squash var(--drawing-bounce) var(--ease-spring);
+}
+.drawing.is-reacting[data-react="flip"] img {
+  animation: flip calc(var(--drawing-bounce) * 1.5) var(--ease-spring);
+}
+.drawing.is-reacting[data-react="spin"] img {
+  animation: spin calc(var(--drawing-bounce) * 1.5) var(--ease-spring);
+  transform-origin: 50% 55%;
+}
+.drawing[data-react="upside-down"] img {
+  transform-origin: 50% 50%; /* pivot at the feet would swing the flipped image out of its box */
+}
+.drawing.is-upside-down {
+  --flip: rotateX(180deg);
 }
 @keyframes squash {
   0% { transform: scale(1, 1); }
@@ -308,6 +329,14 @@ body {
   55% { transform: scale(0.92, 1.1); }
   75% { transform: scale(1.04, 0.97); }
   100% { transform: scale(1, 1); }
+}
+@keyframes flip {
+  from { transform: rotateY(0); }
+  to { transform: rotateY(360deg); }
+}
+@keyframes spin {
+  from { transform: rotate(0); }
+  to { transform: rotate(360deg); }
 }
 
 /* Frame is set on <html> by boil.ts; CSS picks the filter. Only in-view drawings pay. */
@@ -461,7 +490,7 @@ html.intro.intro-go .scroll-hint {
 }
 
 /* /web only: force the hover look on a drawing inside .force-hot */
-.force-hot .drawing img { transform: rotate(calc(var(--tilt-k, 1) * var(--drawing-tilt))) scale(var(--drawing-hot-scale)); }
+.force-hot .drawing img { transform: var(--flip, rotateX(0)) rotate(calc(var(--tilt-k, 1) * var(--drawing-tilt))) scale(var(--drawing-hot-scale)); }
 html[data-boil="0"] .force-hot .drawing.in-view { filter: url(#boil-h-0); }
 html[data-boil="1"] .force-hot .drawing.in-view { filter: url(#boil-h-1); }
 html[data-boil="2"] .force-hot .drawing.in-view { filter: url(#boil-h-2); }

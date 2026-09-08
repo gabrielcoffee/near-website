@@ -3,7 +3,7 @@
 const POS_CLASS = /^(left|right|top|bottom)-\[/;
 const WIDTH_CLASS = /^((?:sm|md|lg|xl|2xl):)?w-\[(\d+(?:\.\d+)?)px\]$/;
 const ROTATE_CLASS = /^(-?)rotate-\[(\d+(?:\.\d+)?)deg\]$/;
-const STATE_CLASSES = new Set(["drawing", "in-view", "is-hot", "is-bouncing"]);
+const STATE_CLASSES = new Set(["drawing", "in-view", "is-hot", "is-reacting", "is-upside-down"]);
 const HERO_FILE = "src/components/Hero.astro";
 const MIN_W = 40;
 const MAX_W = 400;
