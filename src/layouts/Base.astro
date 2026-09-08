@@ -19,6 +19,7 @@ interface Props {
 const { locale, dict, path, title = dict.meta.title, description = dict.meta.description } = Astro.props;
 const site = Astro.site ?? new URL("http://localhost:4321");
 const canonical = new URL(localePath(locale, path), site).toString();
+const ogImage = new URL("/og.png", site).toString();
 const nonDefault = LOCALES.filter((l) => l.code !== DEFAULT_LOCALE).map((l) => l.code);
 const isDefaultLocale = locale === DEFAULT_LOCALE;
 ---
@@ -41,7 +42,13 @@ const isDefaultLocale = locale === DEFAULT_LOCALE;
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={locale} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content="Near" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
 
     <script is:inline define:vars={{ intro: path === "/" }}>
       document.documentElement.classList.add("js");
