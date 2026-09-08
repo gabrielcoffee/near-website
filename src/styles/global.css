@@ -152,6 +152,32 @@ body {
 .nav-link[aria-current="true"] {
   background: var(--nav-hover-bg);
   color: var(--color-ink);
+  transition-duration: 0s;
+}
+
+/* ---------- Wordmark (logo): orange dot + Near. Header, hero, footer all use this. ---------- */
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  color: var(--color-ink);
+}
+.wordmark-dot {
+  flex: none;
+  width: 0.7em;
+  height: 0.7em;
+  border-radius: 999px;
+  background: var(--color-accent);
+  transition: transform 0.3s var(--ease-spring);
+}
+.wordmark:hover .wordmark-dot {
+  transform: scale(1.25);
+}
+.wordmark:active .wordmark-dot {
+  transform: scale(0.9);
 }
 
 /* ---------- Links with underline draw-in ---------- */

@@ -4,6 +4,7 @@ import { localePath } from "../i18n";
 import type { Dictionary } from "../i18n/en";
 import Button from "./Button.astro";
 import LangSwitch from "./LangSwitch.astro";
+import Wordmark from "./Wordmark.astro";
 
 interface Props {
   locale: Locale;
@@ -31,9 +32,7 @@ const ctaHref = APP_STORE_URL || anchor("get-the-app");
     class="site-header mx-auto flex max-w-5xl items-center justify-between gap-3 border border-line/80 px-3 py-2 md:px-4"
     data-header
   >
-    <a href={home} class="wordmark flex items-center gap-2 px-2 text-xl font-medium tracking-tight" aria-label="Near">
-      <span class="dot" aria-hidden="true"></span>Near
-    </a>
+    <Wordmark href={home} class="px-2 text-xl" ariaLabel="Near" />
 
     <nav class="hidden items-center gap-7 md:flex" aria-label="Main">
       <a href={anchor("how-it-works")} class="nav-link text-[15px]">{dict.nav.how}</a>
@@ -60,20 +59,5 @@ const ctaHref = APP_STORE_URL || anchor("get-the-app");
   .site-header.is-scrolled {
     background-color: rgb(255 255 255 / min(1, calc(var(--header-bg) + 0.15)));
     box-shadow: 0 12px 32px -20px rgb(0 0 0 / 0.35);
-  }
-  /* Dot sits before the name, a touch smaller than the cap height. */
-  .wordmark .dot {
-    display: inline-block;
-    width: 0.7em;
-    height: 0.7em;
-    border-radius: 999px;
-    background: var(--color-accent);
-    transition: transform 0.3s var(--ease-spring);
-  }
-  .wordmark:hover .dot {
-    transform: scale(1.35);
-  }
-  .wordmark:active .dot {
-    transform: scale(0.85);
   }
 </style>

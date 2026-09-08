@@ -1,4 +1,5 @@
 ---
+import Wordmark from "./Wordmark.astro";
 import type { Dictionary } from "../i18n/en";
 import Drawing from "./Drawing.astro";
 
@@ -24,7 +25,7 @@ const { dict } = Astro.props;
   <!-- pointer-events-none so edge characters under this full-width box stay hoverable/draggable -->
   <div class="container-x pointer-events-none relative flex flex-col items-center pb-[18vh] text-center">
     <h1 class="hero-title swipe pointer-events-auto text-4xl font-medium tracking-tight md:text-5xl">
-      <span class="swipe-inner inline-flex items-center gap-[0.4em]"><span class="hero-dot" aria-hidden="true"></span>{dict.hero.title}</span>
+      <span class="swipe-inner"><Wordmark text={dict.hero.title} /></span>
     </h1>
     <p class="hero-tag swipe pointer-events-auto mt-3 max-w-xs text-lg text-muted md:text-xl">
       <span class="swipe-inner">{dict.hero.tagline}</span>
@@ -45,18 +46,6 @@ const { dict } = Astro.props;
 </section>
 
 <style>
-  /* Same logo as the header wordmark: orange dot, a touch under cap height. */
-  .hero-dot {
-    display: inline-block;
-    width: 0.7em;
-    height: 0.7em;
-    border-radius: 999px;
-    background: var(--color-accent);
-    transition: transform 0.3s var(--ease-spring);
-  }
-  .hero-title:hover .hero-dot {
-    transform: scale(1.35);
-  }
   .edge {
     position: absolute;
     pointer-events: auto;

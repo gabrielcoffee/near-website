@@ -1,0 +1,24 @@
+---
+/** The logo: orange dot + "Near". One source of truth for header, hero and footer. Styles in global.css (.wordmark). */
+interface Props {
+  href?: string;
+  text?: string;
+  class?: string;
+  ariaLabel?: string;
+}
+const { href, text = "Near", class: cls = "", ariaLabel } = Astro.props;
+---
+
+{
+  href ? (
+    <a href={href} class:list={["wordmark", cls]} aria-label={ariaLabel}>
+      <span class="wordmark-dot" aria-hidden="true" />
+      {text}
+    </a>
+  ) : (
+    <span class:list={["wordmark", cls]}>
+      <span class="wordmark-dot" aria-hidden="true" />
+      {text}
+    </span>
+  )
+}

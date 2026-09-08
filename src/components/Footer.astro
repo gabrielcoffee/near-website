@@ -4,6 +4,7 @@ import { localePath } from "../i18n";
 import type { Dictionary } from "../i18n/en";
 import Drawing from "./Drawing.astro";
 import LangSwitch from "./LangSwitch.astro";
+import Wordmark from "./Wordmark.astro";
 
 interface Props {
   locale: Locale;
@@ -20,7 +21,7 @@ const year = new Date().getFullYear();
     <div class="flex items-end gap-5">
       <div data-reveal="pop"><Drawing name="tinyhappy" size={72} class="w-16 shrink-0" /></div>
       <div>
-        <a href={localePath(locale, "/")} class="inline-flex items-center gap-1.5 text-lg font-medium tracking-tight"><span class="inline-block size-[0.7em] rounded-full bg-accent" aria-hidden="true"></span>Near</a>
+        <Wordmark href={localePath(locale, "/")} class="text-lg" />
         <p class="text-sm text-muted">{dict.footer.tagline}</p>
       </div>
     </div>
