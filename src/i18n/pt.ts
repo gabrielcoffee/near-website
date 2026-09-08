@@ -18,7 +18,6 @@ const pt: Dictionary = {
     scroll: "rolar",
   },
   how: {
-    title: "App pequeno. Gente de verdade.",
     steps: [
       {
         title: "Encontre pessoalmente",
@@ -39,7 +38,6 @@ const pt: Dictionary = {
     ],
   },
   next: {
-    title: "O que estamos construindo.",
     intro: "Três coisas a caminho. Toque nas telas pra passar.",
     prev: "Anterior",
     next: "Próximo",
@@ -50,7 +48,6 @@ const pt: Dictionary = {
     ],
   },
   believe: {
-    title: "Instagram, só que pior.",
     paragraphs: [
       "Todo app social grande é feito pra te manter lá dentro. Anúncio precisa dos seus olhos, algoritmo precisa do seu tempo, curtida precisa da sua ansiedade. Funciona. Esse é o problema.",
       "O Near é pequeno de propósito. Só gente que você encontrou, só o que essa gente posta, na ordem em que aconteceu. Acaba quando seus amigos acabam. Se parece um Instagram pior, ótimo. É isso mesmo.",
@@ -63,10 +60,20 @@ const pt: Dictionary = {
     ],
   },
   cta: {
-    title: "Vai ver seus amigos.",
+    title: "Vá ver seus amigos.",
     body: "O Near é feito para iPhone.",
     button: "Baixar na App Store",
     soon: "Em breve na App Store",
+    waitlist: {
+      label: "E-mail",
+      placeholder: "seu@email.com",
+      button: "Entrar na lista",
+      sending: "Enviando…",
+      done: "Você está na lista. A gente te avisa uma vez só.",
+      already: "Você já está na lista.",
+      invalid: "Esse e-mail não parece certo.",
+      error: "Não deu. Tenta de novo daqui a pouco.",
+    },
   },
   footer: {
     tagline: "Amigos que você vê de verdade.",

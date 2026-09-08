@@ -145,6 +145,56 @@ body {
   background: var(--color-line);
 }
 
+/* ---------- Fields (waitlist input) ----------
+   Same pill and height as .btn-lg, so the row reads as one control. */
+.field {
+  @apply h-13 w-full rounded-pill border bg-surface px-5 text-base text-ink;
+  border-color: var(--color-line);
+  transition:
+    border-color var(--btn-speed) ease,
+    background-color var(--btn-speed) ease;
+}
+.field::placeholder {
+  color: var(--color-muted);
+}
+.field:hover {
+  border-color: #d8d8d4;
+  transition-duration: 0s;
+}
+.field:focus {
+  outline: none;
+  border-color: var(--color-ink);
+  transition-duration: 0s;
+}
+.field[aria-invalid="true"] {
+  border-color: var(--color-accent);
+}
+.field:disabled {
+  @apply text-muted;
+  background: var(--color-paper);
+}
+
+/* Waitlist status line: quiet by default, accent when something needs a look. */
+.waitlist-status[data-state="error"],
+.waitlist-status[data-state="invalid"] {
+  color: var(--color-accent);
+}
+.waitlist-status[data-state="done"],
+.waitlist-status[data-state="already"] {
+  color: var(--color-ink);
+}
+/* Reserve the row's height so the card doesn't jump when the form collapses. */
+.waitlist {
+  @apply flex flex-col justify-center;
+  min-height: 5.25rem;
+}
+.waitlist[data-state="done"] .waitlist-row {
+  display: none;
+}
+.waitlist[data-state="done"] .waitlist-status {
+  @apply mt-0 text-center text-base text-ink;
+}
+
 /* ---------- Nav links (header): quiet pill background on hover ---------- */
 .nav-link {
   @apply inline-flex items-center rounded-pill px-3 py-1.5 text-ink;
@@ -230,11 +280,8 @@ body {
   border-color: var(--card-hover-border);
   background: var(--card-hover-bg);
 }
-.card:active,
-.card.is-active {
-  transform: translateY(0) scale(0.99);
-  transition-duration: 0.1s;
-}
+/* No press state: the card is a surface, not a control. Clicking the button
+   inside it used to drop the hover lift and read as a flicker. */
 
 /* ---------- Drawings + line boil ---------- */
 .drawing {

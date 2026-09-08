@@ -1,0 +1,49 @@
+---
+import { SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL, type Locale } from "../config";
+import type { Dictionary } from "../i18n/en";
+
+interface Props {
+  dict: Dictionary;
+  locale?: Locale;
+  class?: string;
+}
+const { dict, locale = "en", class: cls = "" } = Astro.props;
+const t = dict.cta.waitlist;
+---
+
+<form
+  class:list={["waitlist mx-auto w-full max-w-md text-left", cls]}
+  novalidate
+  data-waitlist
+  data-endpoint={`${SUPABASE_URL}/rest/v1/waitlist`}
+  data-key={SUPABASE_PUBLISHABLE_KEY}
+  data-locale={locale}
+  data-msg-sending={t.sending}
+  data-msg-done={t.done}
+  data-msg-already={t.already}
+  data-msg-invalid={t.invalid}
+  data-msg-error={t.error}
+>
+  <div class="waitlist-row flex flex-col gap-2 sm:flex-row">
+    <label class="sr-only" for="waitlist-email">{t.label}</label>
+    <input
+      id="waitlist-email"
+      class="field w-full sm:flex-1"
+      type="email"
+      name="email"
+      inputmode="email"
+      autocomplete="email"
+      spellcheck="false"
+      maxlength="254"
+      placeholder={t.placeholder}
+      required
+      data-waitlist-input
+    />
+    {/* Bots fill every field they find; people never see this one. */}
+    <input class="sr-only" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" data-waitlist-trap />
+    <button class="btn btn-primary btn-lg shrink-0" type="submit" data-waitlist-submit data-label={t.button}>
+      {t.button}
+    </button>
+  </div>
+  <p class="waitlist-status mt-3 min-h-5 text-center text-sm text-muted sm:text-left" role="status" aria-live="polite" data-waitlist-status></p>
+</form>

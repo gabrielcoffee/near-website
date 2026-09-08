@@ -29,15 +29,18 @@ const ctaHref = APP_STORE_URL || anchor("get-the-app");
   ]}
 >
   <header
-    class="site-header mx-auto flex max-w-5xl items-center justify-between gap-3 border border-line/80 px-3 py-2 md:px-4"
+    class="site-header relative mx-auto flex max-w-5xl items-center justify-between gap-3 border border-line/80 px-3 py-2 md:px-4"
     data-header
   >
     <Wordmark href={home} class="px-2 text-xl" ariaLabel="Near" />
 
-    <nav class="hidden items-center gap-7 md:flex" aria-label="Main">
+    <nav
+      class="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-7 md:flex"
+      aria-label="Main"
+    >
       <a href={anchor("how-it-works")} class="nav-link text-[15px]">{dict.nav.how}</a>
-      <a href={anchor("what-we-believe")} class="nav-link text-[15px]">{dict.nav.believe}</a>
       <a href={anchor("coming-next")} class="nav-link text-[15px]">{dict.nav.next}</a>
+      <a href={anchor("what-we-believe")} class="nav-link text-[15px]">{dict.nav.believe}</a>
     </nav>
 
     <div class="flex items-center gap-1.5">

@@ -16,15 +16,15 @@ Single landing page (Astro 7, Tailwind v4, static, 6 languages) for Near, an iOS
 **New section**
 1. Component in `src/components/`, rendered from `src/pages/[...lang]/index.astro` in page order.
 2. `<section id="…" class="section relative scroll-mt-[-4rem] md:scroll-mt-[-7rem]">` (see Anchors below).
-3. Header nav: link in `Header.astro` via `anchor("id")` **and** a `nav.*` label in all six dictionaries.
-4. Eyebrow + `.h-section` + `.lede` at the top, `data-reveal` on text, `data-reveal="pop"` on drawings.
+3. Header nav: link in `Header.astro` via `anchor("id")` **and** a `nav.*` label in all six dictionaries. Nav links must sit in page order — that has been wrong before.
+4. `.h-section` + `.lede` at the top, `data-reveal` on text, `data-reveal="pop"` on drawings. The `.h-section` renders `dict.nav.*`, not a title of its own.
 5. Any new client behaviour: module in `src/scripts/`, registered in `src/scripts/main.ts`.
 6. Optional: a `GallerySection` in `src/pages/web.astro` (dev gallery, also deployed at `/web/`).
 
 **Copy change**
 - Every string lives in `src/i18n/{en,pt,es,fr,de,it}.ts`. `Dictionary` is the type of `en.ts`, so a shape change must land in all six or the build fails.
 - Tone: short, slightly playful, second person. pt is Brazilian (você), es is Spain (tú/vosotros), fr/de/it informal (tu/du/tu).
-- Eyebrows and section labels lowercase ("coming next"); header nav capitalized ("Coming next"); section titles are statements with a period ("Small app. Real people.").
+- A section is named once, in `nav.*`, and the heading and the header link both read it ("Coming next"). Don't give a section its own `title` string — the two drifted apart when they were separate. The CTA card keeps its own statement title ("Go see your friends.").
 
 **New drawing**
 - Drop the PNG in `drawings-src/`, run `node scripts/normalize-drawings.mjs`, use `<Drawing name="file" size={…} class="w-[…px]" />`.
@@ -37,6 +37,8 @@ Single landing page (Astro 7, Tailwind v4, static, 6 languages) for Near, an iOS
 
 - Light mode only. Outfit font. Orange accent `--color-accent`, black primary buttons. Tokens live in `@theme` in `src/styles/global.css`; use them, don't hardcode colors.
 - Hover states change background or color only. Never an underline that draws in, never movement on buttons. He called the old underline "AI looking".
+- The CTA `.card` lifts on hover and has no press state: pressing a button inside it used to drop the lift and read as a flicker. Don't add `.card:active` back.
+- Header nav is absolutely centred on the header, so the width of the lang switch + CTA never pushes it off centre.
 - Buttons are normal UI; drawings are decoration, never controls. No custom cursor, no sound. Hero characters stay put: no pointer parallax (removed 2026-09-08, don't bring it back). Smooth scroll stays barely there (Lenis, `lerp 0.2`).
 - Hero title is deliberately small. Header is a floating translucent pill.
 - Sections are borderless rows (`BeliefItem`), not card grids. `.card` is only used by the CTA.
@@ -62,6 +64,15 @@ Screenshots: elements with `data-reveal` are invisible until scrolled into view 
 - Astro dev HMR sometimes serves stale scoped CSS; restart with `astro dev stop && astro dev --background`.
 - `src/pages/web.astro` imports most components with literal props; deleting or renaming a component breaks it.
 
+## Waitlist
+
+While `APP_STORE_URL` is empty the CTA card shows an email form instead of the store button, with the "coming soon" line kept underneath. Set `APP_STORE_URL` and the form is replaced by the real download button — no other change needed.
+
+- Storage: Supabase project `near` (`mrejurldemanuvbrfutf`), table `public.waitlist`, migration in `supabase/migrations/`.
+- The browser posts straight to PostgREST with the publishable key in `src/config.ts`. That key is public on purpose: the table has an insert-only RLS policy for `anon`, so it can add a row and can never read one back. Read the list in the dashboard (or with the service key), never from the site.
+- Duplicates hit a unique index on `lower(email)` and come back as 409 — the form says "you're already on the list" rather than erroring.
+- A hidden `company` honeypot field silently drops bot submissions.
+
 ## Open items
 
-- App Store URL empty in `src/config.ts` (CTA shows "coming soon"). Domain placeholder `https://near.app` in `astro.config.mjs`. No OG image. Waitlist email capture not built (needs a Supabase table).
+- App Store URL empty in `src/config.ts` (CTA shows the waitlist form + "coming soon"). Domain placeholder `https://near.app` in `astro.config.mjs`. No OG image. Nothing emails the waitlist yet — the rows just sit in Supabase.

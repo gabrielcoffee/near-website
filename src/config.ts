@@ -3,6 +3,14 @@
 /** App Store link. Leave empty until the app is live: CTAs switch to "coming soon". */
 export const APP_STORE_URL = "";
 
+/** Waitlist storage (Supabase). Both values are public by design: the table has
+ *  an insert-only RLS policy, so this key can add a row and never read one back. */
+export const SUPABASE_URL = "https://mrejurldemanuvbrfutf.supabase.co";
+export const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_E88qKnR67tpEybIpnSqVLw_nlt1UfMg";
+
+/** Waitlist form shows only while the app is not live and the keys above are set. */
+export const WAITLIST_ENABLED = Boolean(SUPABASE_URL && SUPABASE_PUBLISHABLE_KEY);
+
 /** Contact address shown in the footer. */
 export const CONTACT_EMAIL = "hello@near.app";
 

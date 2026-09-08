@@ -7,6 +7,7 @@ import { initIntro } from "./intro";
 import { initLangSwitch } from "./lang";
 import { initPhone } from "./phone";
 import { initRoadmap } from "./roadmap";
+import { initWaitlist } from "./waitlist";
 
 initHeader();
 initReveal();
@@ -14,5 +15,6 @@ initBoil();
 initIntro(() => {});
 initPhone();
 initRoadmap();
+initWaitlist();
 initLangSwitch(LANG_STORAGE_KEY);
 initSmoothScroll(SMOOTH_SCROLL);

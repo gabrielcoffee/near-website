@@ -18,7 +18,6 @@ const fr: Dictionary = {
     scroll: "défiler",
   },
   how: {
-    title: "Petite app. Vraies personnes.",
     steps: [
       {
         title: "Rencontrez-vous en vrai",
@@ -39,7 +38,6 @@ const fr: Dictionary = {
     ],
   },
   next: {
-    title: "Ce qu'on construit.",
     intro: "Trois choses en route. Touche les écrans pour les faire défiler.",
     prev: "Précédent",
     next: "Suivant",
@@ -50,7 +48,6 @@ const fr: Dictionary = {
     ],
   },
   believe: {
-    title: "Instagram, en pire.",
     paragraphs: [
       "Toute grande app sociale est faite pour te garder dedans. La pub veut tes yeux, l'algorithme ton temps, les likes ton anxiété. Ça marche. C'est ça le problème.",
       "Near est petite exprès. Seulement les gens que tu as rencontrés, seulement ce qu'ils publient, dans l'ordre où c'est arrivé. Ça se termine quand tes amis se taisent. Si ça ressemble à un Instagram en pire, tant mieux. C'en est un.",
@@ -67,6 +64,16 @@ const fr: Dictionary = {
     body: "Near est conçu pour iPhone.",
     button: "Télécharger sur l'App Store",
     soon: "Bientôt sur l'App Store",
+    waitlist: {
+      label: "E-mail",
+      placeholder: "ton@email.com",
+      button: "Rejoindre la liste",
+      sending: "Envoi…",
+      done: "Tu es sur la liste. On t'écrira une seule fois.",
+      already: "Tu es déjà sur la liste.",
+      invalid: "Cet e-mail a l'air faux.",
+      error: "Ça n'a pas marché. Réessaie dans un instant.",
+    },
   },
   footer: {
     tagline: "Les amis que tu vois vraiment.",

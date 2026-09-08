@@ -16,7 +16,6 @@ const en = {
     scroll: "scroll",
   },
   how: {
-    title: "Small app. Real people.",
     steps: [
       {
         title: "Meet in person",
@@ -37,7 +36,6 @@ const en = {
     ],
   },
   next: {
-    title: "What we're building.",
     intro: "Three things on the way. Tap the screens to flip through.",
     prev: "Previous",
     next: "Next",
@@ -48,7 +46,6 @@ const en = {
     ],
   },
   believe: {
-    title: "Instagram, but worse.",
     paragraphs: [
       "Every big social app is built to keep you inside it. Ads need your eyes, algorithms need your time, likes need your anxiety. It works. That's the problem.",
       "Near is small on purpose. Only people you've met, only what they post, in the order it happened. It's done when your friends are done. If that sounds like a worse Instagram, good. It is.",
@@ -65,6 +62,16 @@ const en = {
     body: "Near is made for iPhone.",
     button: "Download on the App Store",
     soon: "Coming soon to the App Store",
+    waitlist: {
+      label: "Email address",
+      placeholder: "your@email.com",
+      button: "Join the waitlist",
+      sending: "Sending…",
+      done: "You're on the list. We'll email you once.",
+      already: "You're already on the list.",
+      invalid: "That email doesn't look right.",
+      error: "Didn't work. Try again in a moment.",
+    },
   },
   footer: {
     tagline: "Friends you actually see.",
