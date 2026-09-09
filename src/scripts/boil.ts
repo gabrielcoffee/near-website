@@ -1,6 +1,22 @@
 // Line boil: cycles the SVG displacement filter frame on <html>; CSS applies it to in-view drawings.
 const FRAMES = [0, 2, 1, 3];
 const INTERVAL_MS = 110;
+const MIN_INTERVAL_MS = 60; // a frame every 60ms is already frantic; never go below this
+
+/**
+ * Read `--boil-interval` as milliseconds.
+ *
+ * Careful: the value has to be parsed WITH its unit. The build minifies `110ms` to `.11s`, so a
+ * plain parseFloat gives 0.11 and the wobble runs at ~200 frames a second (this bug shipped once).
+ * Anything unparseable falls back to the default, and the result is floored at MIN_INTERVAL_MS.
+ */
+function readMs(raw: string): number {
+  const m = /^\s*([\d.]+)\s*(ms|s)?\s*$/.exec(raw);
+  if (!m) return INTERVAL_MS;
+  const n = parseFloat(m[1]);
+  if (!isFinite(n) || n <= 0) return INTERVAL_MS;
+  return Math.max(MIN_INTERVAL_MS, m[2] === "s" ? n * 1000 : n);
+}
 
 export function initBoil() {
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -27,7 +43,7 @@ export function initBoil() {
   const html = document.documentElement;
   let i = 0;
   html.dataset.boil = "0";
-  const interval = () => parseFloat(getComputedStyle(html).getPropertyValue("--boil-interval")) || INTERVAL_MS;
+  const interval = () => readMs(getComputedStyle(html).getPropertyValue("--boil-interval"));
   const tick = () => {
     if (!document.hidden && inView > 0) {
       i = (i + 1) % FRAMES.length;
@@ -72,7 +88,11 @@ function wireInteractions(el: HTMLElement) {
   const reaction = REACTIONS[el.dataset.drawing ?? ""] ?? "bounce";
   el.dataset.react = reaction;
 
-  el.addEventListener("pointerenter", () => el.classList.add("is-hot"));
+  // Hover look is for real pointers only. On a touch screen `pointerenter` fires on tap and no
+  // `pointerleave` ever follows, so the character would stay stuck in its hover state.
+  el.addEventListener("pointerenter", (e) => {
+    if (e.pointerType === "mouse") el.classList.add("is-hot");
+  });
   el.addEventListener("pointerleave", () => el.classList.remove("is-hot"));
   el.addEventListener("pointerdown", () => {
     if (reaction === "upside-down") {

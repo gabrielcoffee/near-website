@@ -17,13 +17,13 @@ export function initTweaks() {
   // ---- reading / applying ----
   const boilSel = (kind: string) => `[id^="boil-${kind === "boil-idle" ? "s" : "h"}-"] feDisplacementMap`;
 
-  const readCurrent = (name: string, kind: string): string => {
+  const readCurrent = (name: string, kind: string, unit = ""): string => {
     if (kind === "boil-idle" || kind === "boil-hot") {
       return document.querySelector(boilSel(kind))?.getAttribute("scale") ?? "0";
     }
     const raw = getComputedStyle(root).getPropertyValue(name).trim();
     if (kind === "color") return raw.startsWith("#") ? raw : toHex(raw);
-    return String(parseFloat(raw) || 0);
+    return String(inUnit(raw, unit));
   };
 
   const docs = (): Document[] => {
@@ -67,7 +67,7 @@ export function initTweaks() {
     const input = inputs.find((i) => i.dataset.tweak === name);
     if (input) {
       const kind = input.dataset.kind ?? "css";
-      input.value = kind === "color" ? valueWithUnit : String(parseFloat(valueWithUnit));
+      input.value = kind === "color" ? valueWithUnit : String(inUnit(valueWithUnit, input.dataset.unit ?? ""));
       applyInput(input);
     } else {
       applyValue(name, "css", valueWithUnit);
@@ -103,7 +103,7 @@ export function initTweaks() {
     const name = input.dataset.tweak!;
     const kind = input.dataset.kind ?? "css";
     const unit = kind === "boil-idle" || kind === "boil-hot" || kind === "color" ? "" : input.dataset.unit ?? "";
-    input.value = readCurrent(name, kind);
+    input.value = readCurrent(name, kind, unit);
     defaults.set(name, input.value + unit);
     showValue(input);
     input.addEventListener("input", () => applyInput(input));
@@ -147,6 +147,22 @@ export function initTweaks() {
   });
 
   renderCss();
+}
+
+/**
+ * A CSS value as a plain number in the slider's own unit. The build rewrites time values
+ * (`110ms` becomes `.11s`), so a bare parseFloat would put 0.11 on a slider that reads in ms.
+ */
+function inUnit(raw: string, unit: string): number {
+  const m = /^\s*(-?[\d.]+)\s*([a-z%]*)\s*$/i.exec(raw);
+  if (!m) return 0;
+  const n = parseFloat(m[1]);
+  if (!isFinite(n)) return 0;
+  const from = m[2].toLowerCase();
+  if (from === unit) return n;
+  if (from === "s" && unit === "ms") return n * 1000;
+  if (from === "ms" && unit === "s") return n / 1000;
+  return n;
 }
 
 function toHex(rgb: string): string {

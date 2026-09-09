@@ -377,6 +377,19 @@ html.js [data-reveal].is-visible {
     transition: none !important;
     animation: none !important;
   }
+  /* A tap reaction is short and asked for by the person tapping, so it still plays. Only the
+     ambient stuff above (the boil, reveals, hover drift) is what "reduce motion" turns off.
+     Without this a phone with Reduce Motion on gets a completely dead set of characters. */
+  .drawing.is-reacting img {
+    animation-duration: var(--drawing-bounce) !important;
+    animation-name: squash !important;
+  }
+  .drawing.is-reacting[data-react="flip"] img { animation-name: flip !important; }
+  .drawing.is-reacting[data-react="spin"] img { animation-name: spin !important; }
+  .drawing.is-upside-down img,
+  .drawing[data-react="upside-down"] img {
+    transition: transform 0.2s ease !important;
+  }
 }
 
 /* ---------- Misc helpers ---------- */
