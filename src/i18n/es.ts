@@ -20,59 +20,59 @@ const es: Dictionary = {
   how: {
     steps: [
       {
-        title: "Conoceos en persona",
-        body: "Solo puedes añadir a alguien que está a tu lado. Los dos tocáis, en menos de 30 segundos. Ese es todo el apretón de manos.",
+        title: "Solo en persona",
+        body: "Solo puedes añadir a quien tienes al lado. ¿Te has encontrado con un amigo? Os añadís desde la app, ahí mismo.",
       },
       {
         title: "Tu cuadrícula",
-        body: "Todas las personas que has conocido de verdad, en una sola cuadrícula. Muévelas como quieras. Esa es toda tu red.",
+        body: "Toda la gente que has visto en persona, en una sola cuadrícula. Ordénala como quieras. Esa es toda tu red.",
       },
       {
         title: "Un feed que se acaba",
-        body: "Fotos y palabras de tus amigos, lo más nuevo primero. Sin ranking, sin “sugerencias para ti”.",
+        body: "Fotos y textos de tus amigos, de lo más nuevo a lo más antiguo. Sin ranking, sin “sugerencias para ti”.",
       },
       {
         title: "Palabras, no corazones",
-        body: "No hay likes. Si algo te importa, lo dices.",
+        body: "No hay likes. Si algo te importa, dilo.",
       },
     ],
   },
   next: {
-    intro: "Tres cosas en camino. Toca las pantallas para pasar.",
+    intro: "Tres novedades en camino. Toca las pantallas para pasarlas.",
     prev: "Anterior",
     next: "Siguiente",
     features: [
-      { title: "Planes", body: "Elige un sitio, elige a los amigos, envíalo. Todos reciben una notificación y responden: voy o no voy. Sin grupo, sin encuesta, sin cuarenta mensajes para encontrar un viernes." },
-      { title: "Posts juntos", body: "Cuando los móviles de dos amigos están en la misma sala, podéis publicar juntos. Una foto, los dos nombres. Prueba de que estuviste ahí de verdad." },
-      { title: "Resúmenes", body: "Al final de cada mes, y de cada año: a quién viste, cuántas veces, dónde. No es tiempo de pantalla. Es tiempo real." },
+      { title: "Planes", body: "Elige un sitio, elige a los amigos, envíalo. Todos reciben un aviso y contestan: voy o no voy. Sin grupo de WhatsApp, sin encuestas, sin cuarenta mensajes para cuadrar un viernes." },
+      { title: "Posts juntos", body: "Cuando dos amigos están en el mismo sitio, podéis publicar juntos. Una foto, con el nombre de los dos. La prueba de que estabais allí de verdad." },
+      { title: "Resúmenes", body: "Al final de cada mes, y de cada año: a quién has visto, cuántas veces, dónde. No es tiempo de pantalla. Es tiempo de verdad." },
     ],
   },
   believe: {
     paragraphs: [
-      "Toda app social grande está hecha para retenerte dentro. Los anuncios necesitan tus ojos, el algoritmo tu tiempo, los likes tu ansiedad. Funciona. Ese es el problema.",
-      "Near es pequeña a propósito. Solo gente que has conocido, solo lo que publican, en el orden en que pasó. Se acaba cuando se acaban tus amigos. Si suena a un Instagram peor, bien. Lo es.",
+      "Toda gran red social está hecha para que no salgas de ella. Los anuncios quieren tus ojos, el algoritmo tu tiempo, los likes tu ansiedad. Y funciona. Ese es el problema.",
+      "Near es pequeña a propósito. Solo gente que has visto en persona, solo lo que publica, en el orden en que pasó. Cuando tus amigos dejan de publicar, se acabó. Si te suena a un Instagram peor, bien. Lo es.",
     ],
-    downgrades: "Desmejoras:",
+    downgrades: "Lo que le hemos quitado:",
     items: [
-      { title: "Sin algoritmo, sin anuncios, sin basura de IA", body: "Tu feed son tus amigos, lo más nuevo primero. Nadie pagó por estar ahí, y nada fue generado por una máquina." },
-      { title: "Sin scroll infinito", body: "TikTok está hecho para no acabar nunca. El feed de Near se acaba cuando tus amigos dejan de publicar. Luego, sal a la calle." },
-      { title: "Sin FOMO", body: "Solo ves a la gente que ves de verdad. Si no está en Near, seguramente estabas ahí." },
+      { title: "Sin algoritmo, sin anuncios, sin basura de IA", body: "Tu feed son tus amigos, de lo más nuevo a lo más antiguo. Nadie ha pagado por salir ahí, y nada lo ha generado una IA." },
+      { title: "Sin scroll infinito", body: "TikTok está hecho para no acabar nunca. El feed de Near se acaba cuando tus amigos dejan de publicar. Y entonces, a la calle." },
+      { title: "Sin FOMO", body: "Solo ves a la gente que ves de verdad. Si algo no sale en Near, lo más seguro es que estuvieras allí." },
     ],
   },
   cta: {
-    title: "Ve a ver a tus amigos.",
-    body: "Near está hecho para iPhone.",
+    title: "Sal a ver a tus amigos.",
+    body: "Near está hecha para iPhone.",
     button: "Descargar en el App Store",
     soon: "Muy pronto en el App Store",
     waitlist: {
-      label: "Correo",
+      label: "Correo electrónico",
       placeholder: "tu@email.com",
       button: "Apuntarme a la lista",
       sending: "Enviando…",
-      done: "Ya estás en la lista. Te escribimos una sola vez.",
+      done: "Ya estás en la lista. Te escribiremos una sola vez.",
       already: "Ya estabas en la lista.",
       invalid: "Ese correo no parece correcto.",
-      error: "No ha salido. Inténtalo dentro de un momento.",
+      error: "Algo ha fallado. Vuelve a intentarlo en un rato.",
     },
   },
   footer: {
@@ -85,10 +85,10 @@ const es: Dictionary = {
   },
   privacy: {
     title: "Privacidad",
-    intro: "Esta página tendrá la política de privacidad de Near. Versión corta: tus datos son tuyos, no los vendemos y no mostramos anuncios.",
+    intro: "Aquí irá la política de privacidad de Near. Versión corta: tus datos son tuyos, no los vendemos y no mostramos anuncios.",
     sections: [
-      { title: "Qué recogemos", body: "Tu nombre, foto, favoritos, publicaciones, comentarios y mensajes. Tu ubicación solo cuando la adjuntas a una publicación." },
-      { title: "Qué no hacemos", body: "No vendemos tus datos, no mostramos anuncios y no entregamos tu contenido a un algoritmo." },
+      { title: "Qué recogemos", body: "Tu nombre, foto, favoritos, publicaciones, comentarios y mensajes. Tu ubicación solo cuando la añades a una publicación." },
+      { title: "Qué no hacemos", body: "No vendemos tus datos, no mostramos anuncios y no le damos tu contenido a ningún algoritmo." },
       { title: "Contacto", body: "¿Dudas? Escríbenos." },
     ],
   },

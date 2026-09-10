@@ -2,7 +2,7 @@
 
 # Near website
 
-Single landing page (Astro 7, Tailwind v4, static, 6 languages) for Near, an iOS social app where friends can only be added in person. The app spec is `specs.md`; the app itself lives in `~/projects/near`. `README.md` says where files live. This file is for the things you would otherwise miss.
+Single landing page (Astro 7, Tailwind v4, static, 7 languages) for Near, an iOS social app where friends can only be added in person. The app spec is `specs.md`; the app itself lives in `~/projects/near`. `README.md` says where files live. This file is for the things you would otherwise miss.
 
 ## Working with Gabriel
 
@@ -16,14 +16,16 @@ Single landing page (Astro 7, Tailwind v4, static, 6 languages) for Near, an iOS
 **New section**
 1. Component in `src/components/`, rendered from `src/pages/[...lang]/index.astro` in page order.
 2. `<section id="…" class="section relative scroll-mt-[-4rem] md:scroll-mt-[-7rem]">` (see Anchors below).
-3. Header nav: link in `Header.astro` via `anchor("id")` **and** a `nav.*` label in all six dictionaries. Nav links must sit in page order — that has been wrong before.
+3. Header nav: link in `Header.astro` via `anchor("id")` **and** a `nav.*` label in all seven dictionaries. Nav links must sit in page order — that has been wrong before.
 4. `.h-section` + `.lede` at the top, `data-reveal` on text, `data-reveal="pop"` on drawings. The `.h-section` renders `dict.nav.*`, not a title of its own.
 5. Any new client behaviour: module in `src/scripts/`, registered in `src/scripts/main.ts`.
 6. Optional: a `GallerySection` in `src/pages/web.astro` (dev gallery, also deployed at `/web/`).
 
 **Copy change**
-- Every string lives in `src/i18n/{en,pt,es,fr,de,it}.ts`. `Dictionary` is the type of `en.ts`, so a shape change must land in all six or the build fails.
-- Tone: short, slightly playful, second person. pt is Brazilian (você), es is Spain (tú/vosotros), fr/de/it informal (tu/du/tu).
+- Every string lives in `src/i18n/{en,pt,es,fr,de,it,ru}.ts`. `Dictionary` is the type of `en.ts`, so a shape change must land in all seven or the build fails.
+- Tone: short, slightly playful, second person. pt is Brazilian (você), es is Spain (tú/vosotros), fr/de/it/ru informal (tu/du/tu/ты). ru avoids gendered past tense ("ты видел/видела") so it reads right for everyone.
+- Localize, don't translate: each language uses what a native speaker would actually say ("Ran into a friend?" for "Encontrou um amigo?"). Natural, not slangy. Never describe a mechanic the reader can't picture ("tap within 30 seconds").
+- Outfit has no Cyrillic, so `--font-sans` falls back to Onest for Russian glyphs. A new non-Latin language needs a fallback font the same way.
 - A section is named once, in `nav.*`, and the heading and the header link both read it ("Coming next"). Don't give a section its own `title` string — the two drifted apart when they were separate. The CTA card keeps its own statement title ("Go see your friends.").
 
 **New drawing**
@@ -51,7 +53,7 @@ One source of header clearance: `html { scroll-padding-top: 6rem }`. Sections pu
 ## Verification
 
 ```bash
-npm run build                 # must print "13 page(s) built"
+npm run build                 # must print "15 page(s) built"
 npx astro preview             # serves dist on :4321 (a parallel session may already hold the port)
 ```
 

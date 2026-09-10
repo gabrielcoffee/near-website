@@ -10,7 +10,7 @@ export default defineConfig({
   trailingSlash: "always",
   i18n: {
     defaultLocale: "en",
-    locales: ["en", "pt", "es", "fr", "de", "it"],
+    locales: ["en", "pt", "es", "fr", "de", "it", "ru"],
     routing: { prefixDefaultLocale: false },
   },
   vite: {

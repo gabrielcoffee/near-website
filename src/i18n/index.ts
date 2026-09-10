@@ -5,8 +5,9 @@ import es from "./es";
 import fr from "./fr";
 import de from "./de";
 import it from "./it";
+import ru from "./ru";
 
-const dictionaries: Record<Locale, Dictionary> = { en, pt, es, fr, de, it };
+const dictionaries: Record<Locale, Dictionary> = { en, pt, es, fr, de, it, ru };
 
 export function getDict(locale: Locale): Dictionary {
   return dictionaries[locale] ?? en;

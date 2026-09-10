@@ -1,5 +1,7 @@
 ---
 import "@fontsource-variable/outfit";
+// Outfit has no Cyrillic; Onest fills in those glyphs (its files load only when Cyrillic is on the page).
+import "@fontsource-variable/onest";
 import "../styles/global.css";
 import { DEFAULT_LOCALE, LANG_STORAGE_KEY, LOCALES, type Locale } from "../config";
 import { localePath } from "../i18n";

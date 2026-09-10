@@ -19,7 +19,7 @@ const en = {
     steps: [
       {
         title: "Meet in person",
-        body: "You can only add someone standing next to you. Both of you tap, within 30 seconds. That's the whole handshake.",
+        body: "You can only add someone who's right next to you. Ran into a friend? You add each other in the app, right there.",
       },
       {
         title: "Your grid",

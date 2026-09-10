@@ -2,7 +2,7 @@
 
 /* ---------- Design tokens (edit here, used everywhere) ---------- */
 @theme {
-  --font-sans: "Outfit Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-sans: "Outfit Variable", "Onest Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
 
   --color-paper: #fafafa;
   --color-surface: #ffffff;
