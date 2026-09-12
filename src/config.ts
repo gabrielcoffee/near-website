@@ -11,8 +11,10 @@ export const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_E88qKnR67tpEybIpnSqVLw_n
 /** Waitlist form shows only while the app is not live and the keys above are set. */
 export const WAITLIST_ENABLED = Boolean(SUPABASE_URL && SUPABASE_PUBLISHABLE_KEY);
 
-/** Contact address shown in the footer. */
-export const CONTACT_EMAIL = "hello@near.app";
+/** Contact address shown in the footer and the privacy page.
+ *  Delivered by Porkbun email forwarding on nearapp.social — if the MX records
+ *  ever disappear, mail to this address bounces silently at the sender. */
+export const CONTACT_EMAIL = "hello@nearapp.social";
 
 /** Barely-there smooth scrolling (Lenis). Set false to use native scroll. */
 export const SMOOTH_SCROLL = true;

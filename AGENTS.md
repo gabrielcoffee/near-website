@@ -8,7 +8,7 @@ Single landing page (Astro 7, Tailwind v4, static, 7 languages) for Near, an iOS
 
 - Decide, don't ask. He wants a built first version, then iterates on what he sees. Ask at most one or two questions that need his taste.
 - Several Claude sessions often work on this repo at the same time. Before editing a shared file (`src/i18n/*`, `Header`, `Beliefs`, `global.css`), check `git status` and the file's mtime. If it changed minutes ago, re-read it and merge; never regex-rewrite a whole block.
-- Commit only when asked. Push only when asked: Vercel is git-linked (since 2026-09-08), so every push to `main` deploys production. Never run `vercel --prod` from the working tree. Live site: https://near-website-lemon.vercel.app
+- Commit only when asked. Push only when asked: Vercel is git-linked (since 2026-09-08), so every push to `main` deploys production. Never run `vercel --prod` from the working tree. Live site: https://nearapp.social (Porkbun domain, Vercel-served; the `*.vercel.app` URL still works but is not the canonical one).
 - Report with screenshots (desktop 1280 and mobile 390). Build must pass before you say done.
 
 ## Checklists (the things that get forgotten)
@@ -77,4 +77,10 @@ While `APP_STORE_URL` is empty the CTA card shows an email form instead of the s
 
 ## Open items
 
-- App Store URL empty in `src/config.ts` (CTA shows the waitlist form + "coming soon"). Domain placeholder `https://near.app` in `astro.config.mjs`. No OG image. Nothing emails the waitlist yet — the rows just sit in Supabase.
+- App Store URL empty in `src/config.ts` (CTA shows the waitlist form + "coming soon"). Nothing emails the waitlist yet — the rows just sit in Supabase.
+- No `/terms/` page, but the iOS app's Settings links to `https://nearapp.social/terms/` (`AppLinks.swift`) and it 404s. Write the page or hide that row before App Store review.
+- The `hello@nearapp.social` mailbox trial expires 2026-09-23 (see below).
+
+## Contact address (was dead once)
+
+`CONTACT_EMAIL` in `src/config.ts` is shown in the footer and on the privacy page. A domain having a website does not give it mail: until 2026-09-12 the address was `hello@near.app`, a placeholder on a domain someone else owns with no MX record, so every mail sent to it hard-bounced and the sender saw a dead address. Before changing the address to a new domain, check `dig MX <domain>` returns something. Today it is `hello@nearapp.social`: a real Porkbun-hosted mailbox (not a forward), which also forwards a copy to `nearapp.social@gmail.com`. **It is on a free trial that expires 2026-09-23** — renewal is $3/month billed yearly. If it lapses, mail silently bounces again. The same address is the app's feedback address in `~/projects/near/Near/App/AppLinks.swift`, so both break together.

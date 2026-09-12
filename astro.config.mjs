@@ -4,8 +4,8 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  // TODO: swap for the real domain once bought (used for hreflang + OG urls)
-  site: "https://near-website-lemon.vercel.app",
+  // Real domain (used for canonical, hreflang + OG urls). Registered at Porkbun, served by Vercel.
+  site: "https://nearapp.social",
   output: "static",
   trailingSlash: "always",
   i18n: {
