@@ -10,9 +10,9 @@ export function getStaticPaths() {
 
 const { locale } = Astro.props as { locale: Locale };
 const dict = getDict(locale);
-const p = dict.privacy;
+const t = dict.terms;
 ---
 
-<Base locale={locale} dict={dict} path="/privacy/" title={`${p.title} — near`} description={p.intro}>
-  <Legal locale={locale} dict={dict} title={p.title} intro={p.intro} sections={p.sections} contact={p.contact} />
+<Base locale={locale} dict={dict} path="/terms/" title={`${t.title} — near`} description={t.intro}>
+  <Legal locale={locale} dict={dict} title={t.title} intro={t.intro} sections={t.sections} contact={t.contact} />
 </Base>

@@ -412,3 +412,12 @@ enabled = true
 # declarative_schema_path = "./database"
 # JSON string passed through to pg-delta SQL formatting.
 # format_options = "{\"keywordCase\":\"upper\",\"indent\":2,\"maxWidth\":80,\"commaStyle\":\"trailing\"}"
+
+[functions.waitlist-welcome]
+# The caller is Postgres, not a signed-in user: the function checks its own shared bearer
+# token (WAITLIST_WEBHOOK_SECRET) instead of a Supabase JWT.
+verify_jwt = false
+
+[functions.contact-notify]
+# Same as waitlist-welcome: called by a database trigger, checks CONTACT_WEBHOOK_SECRET itself.
+verify_jwt = false

@@ -1,0 +1,46 @@
+---
+/* Shared layout for /privacy/ and /terms/: title, date, intro, sections with optional bullets, contact line. */
+import { CONTACT_EMAIL, LEGAL_UPDATED, type Locale } from "../config";
+import type { Dictionary, LegalSection } from "../i18n/en";
+
+interface Props {
+  locale: Locale;
+  dict: Dictionary;
+  title: string;
+  intro: string;
+  sections: LegalSection[];
+  contact: { title: string; body: string };
+}
+const { locale, dict, title, intro, sections, contact } = Astro.props;
+const DATE_LOCALE: Record<Locale, string> = { en: "en-US", pt: "pt-BR", es: "es-ES", fr: "fr-FR", de: "de-DE", it: "it-IT", ru: "ru-RU" };
+const updated = new Date(`${LEGAL_UPDATED}T12:00:00Z`).toLocaleDateString(DATE_LOCALE[locale], { year: "numeric", month: "long", day: "numeric" });
+---
+
+<section class="container-x pb-10 pt-36 md:pt-44">
+  <div class="max-w-2xl">
+    <h1 class="h-section" data-reveal>{title}</h1>
+    <p class="mt-3 text-sm text-muted" data-reveal>{dict.legal.updated} <time datetime={LEGAL_UPDATED}>{updated}</time></p>
+    <p class="lede mt-6" data-reveal>{intro}</p>
+
+    {
+      sections.map((s) => (
+        <div class="mt-10" data-reveal>
+          <h2 class="text-xl font-medium tracking-tight">{s.title}</h2>
+          <p class="mt-2 text-muted text-pretty">{s.body}</p>
+          {s.items && (
+            <ul class="legal-list mt-3 flex flex-col gap-1.5 text-muted">
+              {s.items.map((item) => <li>{item}</li>)}
+            </ul>
+          )}
+        </div>
+      ))
+    }
+
+    <div class="mt-10" data-reveal>
+      <h2 class="text-xl font-medium tracking-tight">{contact.title}</h2>
+      <p class="mt-2 text-muted">
+        {contact.body} <a class="link" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+      </p>
+    </div>
+  </div>
+</section>

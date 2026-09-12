@@ -9,7 +9,9 @@ Single landing page (Astro 7, Tailwind v4, static, 7 languages) for Near, an iOS
 - Decide, don't ask. He wants a built first version, then iterates on what he sees. Ask at most one or two questions that need his taste.
 - Several Claude sessions often work on this repo at the same time. Before editing a shared file (`src/i18n/*`, `Header`, `Beliefs`, `global.css`), check `git status` and the file's mtime. If it changed minutes ago, re-read it and merge; never regex-rewrite a whole block.
 - Commit only when asked. Push only when asked: Vercel is git-linked (since 2026-09-08), so every push to `main` deploys production. Never run `vercel --prod` from the working tree. Live site: https://nearapp.social (Porkbun domain, Vercel-served; the `*.vercel.app` URL still works but is not the canonical one).
-- Report with screenshots (desktop 1280 and mobile 390). Build must pass before you say done.
+- **No screenshots, ever.** Gabriel opens the preview himself; screenshot loops waste tokens. Build must pass before you say done.
+- Hand easy, well-specified chunks (mechanical edits, lookups, translations of fixed strings) to a cheaper subagent (`model: "sonnet"`); keep taste and judgment calls in the main session.
+- Docs live here in `AGENTS.md` (loaded through `CLAUDE.md`'s `@AGENTS.md`). Don't start new `.md` notes; the only planned extra is the design system doc, later.
 
 ## Checklists (the things that get forgotten)
 
@@ -53,11 +55,13 @@ One source of header clearance: `html { scroll-padding-top: 6rem }`. Sections pu
 ## Verification
 
 ```bash
-npm run build                 # must print "15 page(s) built"
-npx astro preview             # serves dist on :4321 (a parallel session may already hold the port)
+npm run build                 # must print "29 page(s) built"
+# Never start a server on :4321 — Gabriel runs `npm run dev` there himself (Astro 7 dev is a background
+# daemon: `npx astro dev status|stop`). A preview on that port once shadowed his dev server on :4322 and he
+# edited for an hour seeing no change. If you need a server, use another port and stop it when done.
 ```
 
-Screenshots: elements with `data-reveal` are invisible until scrolled into view and the hero waits for the intro. Before capturing, add `is-visible` to every `[data-reveal]` and `intro-go` to `<html>`. Machine-specific playwright setup is in `CLAUDE.local.md`.
+Don't screenshot. If you must inspect the DOM headlessly, elements with `data-reveal` are invisible until scrolled into view and the hero waits for the intro (`is-visible` on `[data-reveal]`, `intro-go` on `<html>`).
 
 ## Gotchas
 
@@ -78,8 +82,33 @@ While `APP_STORE_URL` is empty the CTA card shows an email form instead of the s
 ## Open items
 
 - App Store URL empty in `src/config.ts` (CTA shows the waitlist form + "coming soon"). Nothing emails the waitlist yet — the rows just sit in Supabase.
-- No `/terms/` page, but the iOS app's Settings links to `https://nearapp.social/terms/` (`AppLinks.swift`) and it 404s. Write the page or hide that row before App Store review.
+- `/terms/` exists now (2026-09-12); the iOS app's Settings row that links to it no longer 404s.
+- Contact form (`contact_messages` table, `contact-notify` function) is written but not deployed: migration not pushed, function not deployed, Vault secrets not set. Until then the form fails with a 404 from PostgREST and shows the error line.
 - The `hello@nearapp.social` mailbox trial expires 2026-09-23 (see below).
+
+## Waitlist welcome email
+
+A trigger on `public.waitlist` calls the `waitlist-welcome` Edge Function, which sends a welcome mail through Resend in the signup's own language (`supabase/functions/waitlist-welcome/emails.ts`, all seven, `ru` free of gendered past tense like the site).
+
+- The insert path is deliberately untouched: the browser still posts to PostgREST and the trigger hands off to `pg_net`, which queues and returns. A dead provider loses the mail, never the signup.
+- Auth is a shared bearer token, not a Supabase JWT, because the caller is Postgres — hence `verify_jwt = false` for this function in `config.toml`.
+- Nothing secret is committed. The function URL and token live in Vault (`waitlist_welcome_url`, `waitlist_welcome_token`); the trigger no-ops until both exist, so a fresh branch database sends nothing.
+- Function secrets: `RESEND_API_KEY`, `WAITLIST_WEBHOOK_SECRET`, optionally `WAITLIST_FROM` / `WAITLIST_REPLY_TO`. Set with `supabase secrets set`.
+- The CTA confirmation line says "check your inbox" rather than "we'll email you once", because the welcome mail made the old promise false. The launch mail is still the only other one planned — the welcome email says so.
+- Resend free tier is 3,000/month but only **100/day**: a big traffic spike drops the overflow. The provider call is one `fetch` in `index.ts`, so swapping to SES or Brevo is a one-function change.
+
+## Contact page (`/contact/`)
+
+Two columns: copy + email on the left, form on the right (`ContactForm.astro`, `src/scripts/contact.ts`). Fields: name, email, phone (iPhone / Android / other), why Near (four fixed keys: `scroll`, `ads`, `curious`, `data`), message. Keys are stored, labels are localized, so don't rename a key without a migration.
+
+- Same shape as the waitlist: browser posts to PostgREST (`public.contact_messages`, insert-only RLS for `anon`), a trigger hands the row to `pg_net`, the `contact-notify` Edge Function mails it to `hello@nearapp.social` via Resend with `reply_to` set to the sender. Vault secrets: `contact_notify_url`, `contact_notify_token`. Function secrets: `RESEND_API_KEY`, `CONTACT_WEBHOOK_SECRET`, optionally `CONTACT_FROM` / `CONTACT_TO`.
+- Deploy: `supabase db push`, `supabase functions deploy contact-notify`, `supabase secrets set …`, then the two `vault.create_secret` calls at the bottom of the migration.
+- Honeypot `company` field, same as the waitlist. No rate limit beyond the check constraints (message ≤ 2000 chars).
+- The footer "Contact" link goes to this page, not to `mailto:`. The email is still shown on the page for people who prefer their own mail app.
+
+## Legal pages (`/privacy/`, `/terms/`)
+
+Both render `Legal.astro` from `dict.privacy` / `dict.terms` (title, intro, sections with optional bullet `items`, contact line). `LEGAL_UPDATED` in `src/config.ts` is the "last updated" date shown on both; bump it when either page's copy changes. The copy states facts from the app: Apple sign-in only, ephemeral nearby code over local network (10 min rotation, 15 min TTL), no location for discovery, four iOS permissions, Supabase / Apple / Resend as the only third parties, no analytics SDK anywhere, Settings → Delete Account cascades everything. If the app changes any of that, change the page. Age floor is 13 (Gabriel's call to revisit). No legal entity or jurisdiction is named.
 
 ## Contact address (was dead once)
 

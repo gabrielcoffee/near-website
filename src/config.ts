@@ -16,6 +16,9 @@ export const WAITLIST_ENABLED = Boolean(SUPABASE_URL && SUPABASE_PUBLISHABLE_KEY
  *  ever disappear, mail to this address bounces silently at the sender. */
 export const CONTACT_EMAIL = "hello@nearapp.social";
 
+/** Date shown at the top of /privacy/ and /terms/. Bump it whenever either page changes. */
+export const LEGAL_UPDATED = "2026-09-12";
+
 /** Barely-there smooth scrolling (Lenis). Set false to use native scroll. */
 export const SMOOTH_SCROLL = true;
 

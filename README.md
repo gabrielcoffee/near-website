@@ -16,9 +16,9 @@ npm run preview
 - `src/config.ts` — App Store URL, Supabase waitlist keys, contact email, locales, smooth-scroll switch.
 - `src/styles/global.css` — design tokens (`@theme`), buttons, cards, drawing boil, reveal.
 - `src/i18n/*.ts` — one dictionary per language. Add a language: copy `en.ts`, add it to `LOCALES` in `config.ts` and `astro.config.mjs`, register it in `src/i18n/index.ts`.
-- `src/components/` — page sections (`Hero`, `HowItWorks`, `Beliefs`, `Cta`) and UI (`Header`, `Footer`, `Button`, `Waitlist`, `Drawing`, `LangSwitch`, `PhoneMock`, `PhoneScreens`).
-- `src/scripts/` — tiny vanilla modules: `boil` (wobble), `reveal`, `header`, `phone`, `roadmap`, `lang`, `smooth`, `waitlist`.
-- `supabase/migrations/` — the `waitlist` table. See Waitlist in `AGENTS.md`.
+- `src/components/` — page sections (`Hero`, `HowItWorks`, `Beliefs`, `Cta`) and UI (`Header`, `Footer`, `Button`, `Waitlist`, `ContactForm`, `Legal`, `Drawing`, `LangSwitch`, `PhoneMock`, `PhoneScreens`).
+- `src/scripts/` — tiny vanilla modules: `boil` (wobble), `reveal`, `header`, `phone`, `roadmap`, `lang`, `smooth`, `waitlist`, `contact`.
+- `supabase/migrations/` — the `waitlist` and `contact_messages` tables. `supabase/functions/` — the mail-sending Edge Functions. See Waitlist and Contact page in `AGENTS.md`.
 - `drawings-src/` — original PNG drawings. `src/assets/drawings/` — normalized versions used by the site.
 
 ## Drawings

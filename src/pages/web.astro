@@ -80,14 +80,10 @@ const buttonIdeas = [
 
 /* ---------------- Link ---------------- */
 const linkTweaks: Tweak[] = [
-  { var: "--link-thickness", label: "Underline", min: 0, max: 6, step: 0.5, unit: "px" },
-  { var: "--link-speed", label: "Speed", min: 0.05, max: 0.8, step: 0.01, unit: "s" },
-  { var: "--link-hover-color", label: "Hover color", kind: "color" },
+  { var: "--link-speed", label: "Fade out", min: 0.05, max: 0.8, step: 0.01, unit: "s" },
 ];
 const linkPresets: Preset[] = [
-  { name: "Sweep", desc: "Thin orange line draws in (current)", values: { "--link-thickness": "2px", "--link-speed": "0.22s", "--link-hover-color": "#111111" } },
-  { name: "Marker", desc: "Thick highlighter line", values: { "--link-thickness": "6px", "--link-speed": "0.25s", "--link-hover-color": "#111111" } },
-  { name: "Color only", desc: "No line, text turns orange", values: { "--link-thickness": "0px", "--link-speed": "0.2s", "--link-hover-color": "#ff6a2b" } },
+  { name: "Color only", desc: "Text and its thin underline turn orange (current)", values: { "--link-speed": "0.22s" } },
 ];
 
 /* ---------------- Drawing ---------------- */

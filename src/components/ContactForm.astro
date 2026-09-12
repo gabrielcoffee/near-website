@@ -1,0 +1,135 @@
+---
+import { SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL, type Locale } from "../config";
+import type { Dictionary } from "../i18n/en";
+
+interface Props {
+  dict: Dictionary;
+  locale?: Locale;
+  class?: string;
+}
+const { dict, locale = "en", class: cls = "" } = Astro.props;
+const t = dict.contact.form;
+/* Inline stroke icons (24-box, Lucide style) so no icon library ships with the page. Apple is the only filled one. */
+const ICONS: Record<string, string> = {
+  ios: '<path fill="currentColor" stroke="none" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/>',
+  android: '<path d="M5 15a7 7 0 0 1 14 0"/><path d="M5 15h14"/><path d="m7 5 1.5 3"/><path d="m17 5-1.5 3"/><path d="M9.5 12h.01"/><path d="M14.5 12h.01"/><path d="M6 15v4a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-4"/>',
+  other: '<rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/>',
+  scroll: '<path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z"/>',
+  ads: '<path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>',
+  curious: '<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>',
+  data: '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>',
+};
+const phones = [
+  { key: "ios", label: t.phones.ios },
+  { key: "android", label: t.phones.android },
+  { key: "other", label: t.phones.other },
+];
+---
+
+<form
+  class:list={["contact w-full", cls]}
+  novalidate
+  data-contact
+  data-endpoint={`${SUPABASE_URL}/rest/v1/contact_messages`}
+  data-key={SUPABASE_PUBLISHABLE_KEY}
+  data-locale={locale}
+  data-msg-sending={t.sending}
+  data-msg-done={t.done}
+  data-msg-invalid={t.invalid}
+  data-msg-invalid-email={t.invalidEmail}
+  data-msg-error={t.error}
+>
+  <div class="contact-fields flex flex-col gap-6">
+    <div class="grid gap-6 sm:grid-cols-2">
+      <div class="flex flex-col gap-2">
+        <label class="field-label" for="contact-name">{t.name}</label>
+        <input
+          id="contact-name"
+          class="field"
+          type="text"
+          name="name"
+          autocomplete="name"
+          maxlength="80"
+          placeholder={t.namePlaceholder}
+          required
+          data-contact-input="name"
+        />
+      </div>
+      <div class="flex flex-col gap-2">
+        <label class="field-label" for="contact-email">{t.email}</label>
+        <input
+          id="contact-email"
+          class="field"
+          type="email"
+          name="email"
+          inputmode="email"
+          autocomplete="email"
+          spellcheck="false"
+          maxlength="254"
+          placeholder={t.emailPlaceholder}
+          required
+          data-contact-input="email"
+        />
+      </div>
+    </div>
+
+    <fieldset class="flex flex-col gap-2" data-contact-choice="platform">
+      <legend class="field-label mb-2">{t.phone}</legend>
+      <div class="grid grid-cols-3 auto-rows-fr gap-2">
+        {
+          phones.map((p) => (
+            <label class="choice">
+              <input class="sr-only" type="radio" name="platform" value={p.key} />
+              <span class="choice-pill">
+                <svg class="choice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={ICONS[p.key]} />
+                {p.label}
+              </span>
+            </label>
+          ))
+        }
+      </div>
+    </fieldset>
+
+    <fieldset class="flex flex-col gap-2" data-contact-choice="reason">
+      <legend class="field-label mb-2">{t.reason}</legend>
+      <div class="grid grid-cols-2 auto-rows-fr gap-2">
+        {
+          t.reasons.map((r) => (
+            <label class="choice">
+              <input class="sr-only" type="radio" name="reason" value={r.key} />
+              <span class="choice-pill">
+                <svg class="choice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={ICONS[r.key]} />
+                {r.label}
+              </span>
+            </label>
+          ))
+        }
+      </div>
+    </fieldset>
+
+    <div class="flex flex-col gap-2">
+      <label class="field-label" for="contact-message">{t.message}</label>
+      <textarea
+        id="contact-message"
+        class="field field-area"
+        name="message"
+        rows="5"
+        maxlength="2000"
+        placeholder={t.messagePlaceholder}
+        required
+        data-contact-input="message"></textarea>
+    </div>
+
+    {/* Bots fill every field they find; people never see this one. */}
+    <input class="sr-only" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" data-contact-trap />
+
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
+      <button class="btn btn-primary btn-lg self-start" type="submit" data-contact-submit data-label={t.button}>
+        {t.button}
+      </button>
+      <p class="contact-status min-h-5 text-sm text-muted" role="status" aria-live="polite" data-contact-status></p>
+    </div>
+  </div>
+
+  <p class="contact-done hidden text-xl font-medium tracking-tight text-ink md:text-2xl" role="status" aria-live="polite" data-contact-done></p>
+</form>

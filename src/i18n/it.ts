@@ -69,7 +69,7 @@ const it: Dictionary = {
       placeholder: "nome@email.it",
       button: "Mettimi in lista",
       sending: "Invio…",
-      done: "Sei in lista. Ti scriviamo una volta sola.",
+      done: "Sei in lista. Controlla la posta.",
       already: "Sei già in lista.",
       invalid: "Questa email non sembra valida.",
       error: "Non ha funzionato. Riprova tra poco.",
@@ -78,19 +78,132 @@ const it: Dictionary = {
   footer: {
     tagline: "Gli amici che vedi davvero.",
     privacy: "Privacy",
+    terms: "Termini",
     contact: "Contatti",
   },
   lang: {
     label: "Lingua",
   },
+  contact: {
+    title: "Siamo tutt'orecchi!",
+    body: "Scrivici da qui. L'app è ancora in sviluppo, e le idee nuove sono benvenute!",
+    form: {
+      name: "Nome",
+      namePlaceholder: "Il tuo nome",
+      email: "Email",
+      emailPlaceholder: "tua@email.com",
+      phone: "Il tuo telefono",
+      phones: { ios: "iPhone", android: "Android", other: "Altro" },
+      reason: "Cosa ti porta su Near?",
+      reasons: [
+        { key: "scroll", label: "Smettere di perdere ore a scrollare" },
+        { key: "ads", label: "Sfuggire alla valanga di pubblicità" },
+        { key: "curious", label: "Solo curiosità" },
+        { key: "data", label: "Tenere i miei dati per me" },
+      ],
+      message: "Messaggio",
+      messagePlaceholder: "Cosa vuoi raccontarci?",
+      button: "Invia",
+      sending: "Invio…",
+      done: "Inviato. Ti rispondiamo presto.",
+      invalid: "Compila tutto così possiamo risponderti.",
+      invalidEmail: "Questa email non sembra giusta.",
+      error: "Non ha funzionato. Riprova tra un attimo.",
+    },
+  },
+  legal: {
+    updated: "Ultimo aggiornamento",
+  },
   privacy: {
     title: "Privacy",
-    intro: "Qui ci sarà l'informativa sulla privacy di Near. In breve: i tuoi dati sono tuoi, non li vendiamo e non mostriamo pubblicità.",
+    intro: "Versione breve: Near conserva solo quello che serve per mostrare ai tuoi amici quello che pubblichi. Non vendiamo niente, non mettiamo pubblicità e non c'è nessuna analitica né tracciamento, né nell'app né su questo sito.",
     sections: [
-      { title: "Cosa raccogliamo", body: "Nome, foto, preferiti, post, commenti e messaggi. La posizione solo quando la aggiungi a un post." },
-      { title: "Cosa non facciamo", body: "Non vendiamo i tuoi dati, non mostriamo pubblicità e non diamo i tuoi contenuti in pasto a un algoritmo." },
-      { title: "Contatti", body: "Domande? Scrivici." },
+      {
+        title: "Cosa conserviamo",
+        body: "Quando accedi con Apple riceviamo da Apple un ID utente, più il tuo nome e la tua email se scegli di condividerli. Dopo, solo quello che aggiungi tu:",
+        items: [
+          "Il tuo nome, la foto profilo e i preferiti.",
+          "I tuoi post: foto, didascalie e, se lo lasci, il posto in cui sono state scattate.",
+          "I tuoi commenti e i tuoi messaggi con gli amici.",
+          "Chi sono i tuoi amici e quando vi siete aggiunti.",
+        ],
+      },
+      {
+        title: "Come funziona il “vicino”",
+        body: "Near non usa la tua posizione per trovare gli amici. Con l'app aperta, il tuo telefono condivide un codice casuale con i telefoni nella stessa stanza tramite la rete locale. Il codice cambia ogni dieci minuti, scade dopo quindici e non viene mai conservato oltre. Chi ti sta accanto vede il tuo nome e la tua foto. Chi è più lontano non vede niente.",
+      },
+      {
+        title: "I permessi e a cosa servono",
+        body: "iOS te li chiederà. Ognuno fa esattamente una cosa:",
+        items: [
+          "Rete locale: trovare l'amico che hai accanto.",
+          "Fotocamera e foto: immagini per i tuoi post.",
+          "Posizione, solo mentre usi l'app: dare un nome al posto di un post. Puoi modificarlo o toglierlo prima di pubblicare. Near non ti segue mai in background.",
+        ],
+      },
+      {
+        title: "Chi vede cosa",
+        body: "I tuoi post, commenti e messaggi li vedono solo i tuoi amici. Non c'è un profilo pubblico, né una ricerca, né una pagina esplora. Il tuo nome e la tua foto profilo sono l'unica cosa che uno sconosciuto può vedere, e solo mentre siete nella stessa stanza con l'app aperta.",
+      },
+      {
+        title: "Dove stanno",
+        body: "I tuoi dati stanno su Supabase, un fornitore di hosting, e arrivano ai tuoi amici tramite lui. Apple gestisce l'accesso. Le email di questo sito partono tramite Resend. Nessuno di loro può usare i tuoi dati per altro, e nessun altro li riceve. Non vendiamo dati, non mettiamo pubblicità e non usiamo nessun SDK di analitica o tracciamento.",
+      },
+      {
+        title: "Cancellare tutto",
+        body: "Impostazioni → Elimina account cancella il tuo account, le tue foto, i post, i commenti e i messaggi, subito e per sempre. Niente di tuo resta sui telefoni dei tuoi amici né sul nostro. Se preferisci, scrivici e lo facciamo noi.",
+      },
+      {
+        title: "Questo sito",
+        body: "La lista d'attesa conserva la tua email e la tua lingua per scriverti una volta quando Near esce, più un breve benvenuto. Il modulo di contatto conserva quello che hai scritto per poterti rispondere. Il sito non usa cookie né analitiche. Ricorda la tua lingua nel tuo browser, niente di più.",
+      },
+      {
+        title: "I tuoi diritti",
+        body: "Puoi vedere, cambiare e cancellare tutto quello che Near ha su di te dall'app, quando vuoi. Se vuoi una copia dei tuoi dati, o pensi che conserviamo qualcosa che non dovremmo, scrivici. Risponde una persona. Near è per chi ha almeno 13 anni, e non conserviamo consapevolmente dati di chi è più giovane.",
+      },
+      {
+        title: "Modifiche",
+        body: "Se questa pagina cambia, la data in alto cambia con lei. Tutto quello che conta te lo diciamo nell'app.",
+      },
     ],
+    contact: { title: "Domande", body: "Scrivici:" },
+  },
+  terms: {
+    title: "Termini",
+    intro: "Regole semplici per usare Near. Brevi, perché non c'è molto: sii una persona vera, sii per bene con i tuoi amici, e l'app è tua.",
+    sections: [
+      {
+        title: "Chi può usare Near",
+        body: "Devi avere almeno 13 anni e accedere con il tuo ID Apple. Un account a persona. Near è per le persone, non per bot o aziende.",
+      },
+      {
+        title: "I tuoi contenuti",
+        body: "Quello che pubblichi è tuo. Pubblicandolo lasci che Near lo conservi e lo mostri ai tuoi amici, che è tutto il punto. Non pubblicare quello che non hai il diritto di condividere, e ricorda che i tuoi amici possono fare screenshot, come ovunque.",
+      },
+      {
+        title: "Le regole",
+        body: "Near resta bello perché è piccolo. Aiutaci a tenerlo così:",
+        items: [
+          "Niente molestie, minacce o odio.",
+          "Niente immagini intime di nessuno senza il suo consenso, e niente di illegale.",
+          "Non fingere di essere qualcun altro.",
+          "Non provare a fingere di essere vicino, automatizzare l'app, estrarne i dati o entrarci di nascosto.",
+        ],
+      },
+      {
+        title: "Se qualcuno rompe le regole",
+        body: "Se un account rompe queste regole possiamo rimuovere contenuti, sospendere l'account o eliminarlo. Puoi andartene quando vuoi: Impostazioni → Elimina account, e tutto se ne va con te.",
+      },
+      {
+        title: "Il servizio",
+        body: "Near è nuovo e lo fa una squadra piccola. Cambierà, a volte si romperà e un giorno potrebbe chiudere. Faremo del nostro meglio per avvisarti di qualsiasi cosa grossa. È fornito così com'è, senza garanzia, e la nostra responsabilità è limitata fin dove la legge lo permette. Dove la legge ti dà diritti che questi termini non possono toglierti, valgono quei diritti.",
+      },
+      {
+        title: "Modifiche",
+        body: "Se questi termini cambiano, la data in alto cambia con loro. Se continui a usare Near dopo, valgono quelli nuovi.",
+      },
+    ],
+    contact: { title: "Domande", body: "Scrivici:" },
   },
 };
 

@@ -31,9 +31,7 @@
 
   --nav-hover-bg: #f0f0ee;
 
-  --link-thickness: 2px;
   --link-speed: 0.22s;
-  --link-hover-color: #111111;
 
   --card-lift: 4px;
   --card-shadow: 0.25;
@@ -174,6 +172,67 @@ body {
   background: var(--color-paper);
 }
 
+/* Contact form: labels, textarea, pill choices, status. */
+.field-label {
+  @apply text-sm font-medium text-ink;
+}
+.field-area {
+  @apply h-auto min-h-36 rounded-card py-4 leading-relaxed;
+  resize: none;
+}
+.choice {
+  @apply flex cursor-pointer items-stretch;
+}
+.choice-pill {
+  @apply flex min-h-11 w-full items-center gap-2.5 rounded-xl border border-line bg-surface px-4 py-2 text-[15px] leading-snug text-ink select-none;
+  transition:
+    background-color var(--btn-speed) ease,
+    color var(--btn-speed) ease,
+    border-color var(--btn-speed) ease;
+}
+.choice:hover .choice-pill {
+  background: var(--btn-secondary-hover-bg);
+  border-color: var(--btn-secondary-hover-bg);
+  transition-duration: 0s;
+}
+.choice input:checked + .choice-pill {
+  @apply bg-ink text-white;
+  border-color: var(--color-ink);
+  transition-duration: 0s;
+}
+.choice input:focus-visible + .choice-pill {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+.choice input:disabled + .choice-pill {
+  @apply text-muted;
+  background: var(--color-paper);
+  cursor: default;
+}
+.choice input:disabled:checked + .choice-pill {
+  @apply bg-ink text-white;
+}
+.choice-icon {
+  @apply size-[18px] shrink-0;
+  color: var(--color-muted);
+}
+.choice input:checked + .choice-pill .choice-icon {
+  color: inherit;
+}
+fieldset[aria-invalid="true"] .choice-pill {
+  border-color: var(--color-accent);
+}
+.contact-status[data-state="error"],
+.contact-status[data-state="invalid"] {
+  color: var(--color-accent);
+}
+.contact[data-state="done"] .contact-fields {
+  display: none;
+}
+.contact[data-state="done"] .contact-done {
+  display: block;
+}
+
 /* Waitlist status line: quiet by default, accent when something needs a look. */
 .waitlist-status[data-state="error"],
 .waitlist-status[data-state="invalid"] {
@@ -235,27 +294,26 @@ body {
   transform: scale(0.9);
 }
 
-/* ---------- Links with underline draw-in ---------- */
+/* ---------- Inline links: color only, no underline that draws in ---------- */
 .link {
-  @apply relative inline-block text-ink;
-  background-image: linear-gradient(var(--color-accent), var(--color-accent));
-  background-repeat: no-repeat;
-  background-size: 0% var(--link-thickness);
-  background-position: 0 100%;
-  padding-bottom: 2px;
+  @apply inline text-ink;
+  text-decoration: underline;
+  text-decoration-color: var(--color-line);
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1.5px;
   transition:
-    background-size var(--link-speed) var(--ease-soft),
-    color 0.2s ease;
+    color var(--link-speed) ease,
+    text-decoration-color var(--link-speed) ease;
 }
 .link:hover,
 .link.is-hover,
 .link[aria-current="true"] {
-  background-size: 100% var(--link-thickness);
-  color: var(--link-hover-color);
+  color: var(--color-accent);
+  text-decoration-color: var(--color-accent);
   transition-duration: 0s;
 }
 .link:active {
-  color: var(--color-accent);
+  color: var(--color-ink);
 }
 
 /* ---------- Cards ---------- */
@@ -402,8 +460,26 @@ html.js [data-reveal].is-visible {
 .lede {
   @apply text-base md:text-lg text-muted text-pretty;
 }
+/* Legal pages: quiet bullets with an orange dot, no browser disc. */
+.legal-list li {
+  position: relative;
+  padding-left: 1.1rem;
+}
+.legal-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--color-accent);
+}
+/* Left/right edges match the header pill's outer edges exactly: same max-width, same
+   side padding (px-5 mobile, px-6 md+). Don't drift these away from Header.astro's
+   .site-header-wrap padding + .site-header max-w-5xl. */
 .container-x {
-  @apply mx-auto w-full max-w-6xl px-5 md:px-8;
+  @apply mx-auto w-full max-w-5xl px-5 md:px-6;
 }
 .section {
   @apply py-24 md:py-36;

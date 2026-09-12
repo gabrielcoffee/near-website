@@ -1,5 +1,5 @@
 ---
-import { CONTACT_EMAIL, type Locale } from "../config";
+import type { Locale } from "../config";
 import { localePath } from "../i18n";
 import type { Dictionary } from "../i18n/en";
 import Drawing from "./Drawing.astro";
@@ -16,19 +16,23 @@ const { locale, path, dict } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
-<footer class="container-x relative pb-10 pt-16">
-  <div class="flex flex-col gap-8 border-t border-line pt-10 md:flex-row md:items-end md:justify-between">
-    <div class="flex items-end gap-5">
-      <div data-reveal="pop"><Drawing name="tinyhappy" size={72} class="w-16 shrink-0" /></div>
+<footer class="container-x relative pb-10 pt-14 md:pb-12 md:pt-14">
+  <div class="flex flex-col gap-12 border-t border-line pt-10 md:flex-row md:items-center md:justify-between md:gap-6 md:pt-12">
+    {/* Brand on the left, links on the right, the character exactly between them and centred on both. */}
+    <div class="flex items-center justify-between gap-6 md:justify-start">
       <div>
         <Wordmark href={localePath(locale, "/")} class="text-lg" />
-        <p class="text-sm text-muted">{dict.footer.tagline}</p>
+        <p class="mt-1 text-sm text-muted">{dict.footer.tagline}</p>
       </div>
+      <div class="md:hidden" data-reveal="pop"><Drawing name="happy" size={72} class="w-16 mr-4 shrink-0" /></div>
     </div>
 
-    <div class="-mx-3 flex flex-wrap items-center gap-x-1 gap-y-3 text-sm md:mx-0">
+    <div class="hidden md:block" data-reveal="pop"><Drawing name="happy" size={64} class="w-16 shrink-0" /></div>
+
+    <div class="-mx-3 flex flex-wrap items-center gap-x-1 gap-y-3 text-sm md:mx-0 md:justify-end">
       <a href={localePath(locale, "/privacy/")} class="nav-link">{dict.footer.privacy}</a>
-      <a href={`mailto:${CONTACT_EMAIL}`} class="nav-link">{dict.footer.contact}</a>
+      <a href={localePath(locale, "/terms/")} class="nav-link">{dict.footer.terms}</a>
+      <a href={localePath(locale, "/contact/")} class="nav-link">{dict.footer.contact}</a>
       <LangSwitch locale={locale} path={path} dict={dict} align="left" drop="up" />
       <span class="px-3 text-muted">© {year} Near</span>
     </div>
