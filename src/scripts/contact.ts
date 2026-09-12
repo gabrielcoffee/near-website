@@ -15,7 +15,7 @@ const BALL = 52; // px, same as .btn-lg height
 const TIMING = {
   ball: 600, // pill → ball
   pause: 250, // ball sits before it lifts
-  glide: 615, // ball → middle of the screen (800 / 1.3)
+  glide: 800, // ball → middle of the screen
   hold: 500, // dots pulse after it parks, even if the request was instant
 };
 /** `?demo` on the URL: button always enabled, nothing is sent. For tuning the animation. */
