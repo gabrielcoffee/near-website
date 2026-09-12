@@ -40,7 +40,7 @@ const phones = [
   data-msg-error={t.error}
 >
   <div class="contact-fields flex flex-col gap-6">
-    <div class="grid gap-6 sm:grid-cols-2">
+    <div class="grid gap-6 sm:grid-cols-2" data-reveal>
       <div class="flex flex-col gap-2">
         <label class="field-label" for="contact-name">{t.name}</label>
         <input
@@ -73,7 +73,7 @@ const phones = [
       </div>
     </div>
 
-    <fieldset class="flex flex-col gap-2" data-contact-choice="platform">
+    <fieldset class="flex flex-col gap-2" data-contact-choice="platform" data-reveal>
       <legend class="field-label mb-2">{t.phone}</legend>
       <div class="grid grid-cols-3 auto-rows-fr gap-2">
         {
@@ -90,7 +90,7 @@ const phones = [
       </div>
     </fieldset>
 
-    <fieldset class="flex flex-col gap-2" data-contact-choice="reason">
+    <fieldset class="flex flex-col gap-2" data-contact-choice="reason" data-reveal>
       <legend class="field-label mb-2">{t.reason}</legend>
       <div class="grid grid-cols-2 auto-rows-fr gap-2">
         {
@@ -107,7 +107,7 @@ const phones = [
       </div>
     </fieldset>
 
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2" data-reveal>
       <label class="field-label" for="contact-message">{t.message}</label>
       <textarea
         id="contact-message"
@@ -123,13 +123,16 @@ const phones = [
     {/* Bots fill every field they find; people never see this one. */}
     <input class="sr-only" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" data-contact-trap />
 
-    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
-      <button class="btn btn-primary btn-lg self-start" type="submit" data-contact-submit data-label={t.button}>
-        {t.button}
-      </button>
-      <p class="contact-status min-h-5 text-sm text-muted" role="status" aria-live="polite" data-contact-status></p>
-    </div>
   </div>
 
-  <p class="contact-done hidden text-xl font-medium tracking-tight text-ink md:text-2xl" role="status" aria-live="polite" data-contact-done></p>
+  {/* Outside .contact-fields on purpose: the fields fade on send, the button turns into the ball. */}
+  <div class="mt-6 flex flex-col gap-3" data-reveal>
+    <button class="btn btn-primary btn-lg contact-send" type="submit" disabled data-contact-submit>
+      <span class="contact-send-label">{t.button}</span>
+      <span class="contact-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+    <p class="contact-status min-h-5 text-center text-sm text-muted" role="status" aria-live="polite" data-contact-status></p>
+  </div>
+
+  <p class="contact-done h-section" role="status" aria-live="polite" data-contact-done></p>
 </form>

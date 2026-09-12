@@ -105,7 +105,7 @@ const pt: Dictionary = {
       messagePlaceholder: "O que quer nos contar?",
       button: "Enviar",
       sending: "Enviando…",
-      done: "Enviado. A gente responde logo.",
+      done: "Mensagem enviada.",
       invalid: "Preenche tudo pra gente conseguir responder.",
       invalidEmail: "Esse e-mail não parece certo.",
       error: "Não deu certo. Tenta de novo daqui a pouco.",

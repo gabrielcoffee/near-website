@@ -17,7 +17,7 @@ const c = dict.contact;
 <Base locale={locale} dict={dict} path="/contact/" title={`${c.title} — near`} description={c.body}>
   <section class="container-x pb-10 pt-36 md:pt-44">
     <div class="grid gap-14 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-16 lg:gap-24">
-      <div class="md:sticky md:top-32 md:self-start" data-reveal-group>
+      <div data-reveal-group>
         <div data-reveal="pop"><Drawing name="ear" size={120} class="w-[88px] md:w-[104px]" /></div>
         <h1 class="h-section mt-6" data-reveal>{c.title}</h1>
         <p class="lede mt-4" data-reveal>{c.body}</p>
@@ -26,7 +26,8 @@ const c = dict.contact;
         </p>
       </div>
 
-      <div data-reveal>
+      {/* Rows inside the form carry data-reveal, so they stagger in like the column on the left. */}
+      <div data-reveal-group>
         <ContactForm dict={dict} locale={locale} />
       </div>
     </div>

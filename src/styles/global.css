@@ -85,7 +85,7 @@ body {
 /* ---------- Buttons ----------
    Hover never moves or grows a button: only background + text color change. */
 .btn {
-  @apply inline-flex items-center justify-center gap-2 rounded-pill font-medium select-none whitespace-nowrap;
+  @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-pill font-medium select-none whitespace-nowrap;
   transition:
     background-color var(--btn-speed) ease,
     color var(--btn-speed) ease,
@@ -100,6 +100,18 @@ body {
 .btn:active,
 .btn.is-active {
   transform: scale(var(--btn-active-scale));
+}
+/* Disabled: greyed, no hover, no press. */
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: default;
+}
+.btn:disabled:active {
+  transform: none;
+}
+.btn-primary:disabled:hover {
+  background: var(--color-ink);
 }
 .btn-md {
   @apply h-11 px-5 text-[15px];
@@ -226,11 +238,159 @@ fieldset[aria-invalid="true"] .choice-pill {
 .contact-status[data-state="invalid"] {
   color: var(--color-accent);
 }
-.contact[data-state="done"] .contact-fields {
-  display: none;
+
+/* ---- Send choreography: button → ball → glides to the middle of the screen → dissolves into the
+   "sent" line. The fields never leave the layout (only fade), so the form keeps its height and
+   the footer stays put. Timings are mirrored in src/scripts/contact.ts. */
+.contact {
+  position: relative;
 }
-.contact[data-state="done"] .contact-done {
+.contact-fields {
+  transition: opacity 0.3s ease;
+}
+.contact.is-sending .contact-fields,
+.contact.is-done .contact-fields {
+  opacity: 0;
+  pointer-events: none;
+}
+.contact.is-done .contact-fields {
+  visibility: hidden;
+}
+.contact-send {
+  display: flex;
+  width: 100%;
+  margin-inline: auto;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  will-change: transform, width;
+  /* One ease-out for both moves: fast off the mark, easing in to a stop. No overshoot, nothing
+     bounces: the ball is not something the user is pulling on. */
+  --ease-blurp: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Durations come from src/scripts/contact.ts (TIMING), which sets --t-ball / --t-glide on the form. */
+  transition:
+    width var(--t-ball, 0.45s) var(--ease-blurp),
+    transform var(--t-glide, 0.7s) var(--ease-blurp),
+    opacity 0.3s ease,
+    background-color var(--btn-speed) ease,
+    color var(--btn-speed) ease;
+}
+/* The disabled look (.btn:disabled → 0.45) must not bleed into the ball: it is busy, not off.
+   And the pointer is still over the button when it collapses, so .btn:hover's instant
+   transition-duration (0s) would kill the width and glide transitions: restore them here. */
+.contact.is-sending .contact-send:disabled,
+.contact.is-sending .contact-send:hover {
+  opacity: 1;
+  background: var(--color-ink);
+  padding-inline: 0; /* the pill's side padding is 56px, more than the ball: drop it so the ball is really 52px */
+  transition-duration: var(--t-ball, 0.45s), var(--t-glide, 0.7s), 0s, var(--btn-speed), var(--btn-speed);
+}
+.contact-send-label {
+  transition: opacity 0.12s ease;
+}
+.contact.is-sending .contact-send-label,
+.contact.is-done .contact-send-label {
+  opacity: 0;
+}
+/* Loader: three dots breathing in turn, iMessage style, inside the ball. */
+.contact-dots {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.contact-dots i {
   display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.35;
+  transform: scale(0.8);
+}
+.contact.is-sending .contact-dots {
+  opacity: 1;
+  transition-delay: var(--t-dots, 0.25s);
+}
+.contact.is-sending .contact-dots i {
+  animation: contact-dot 1.2s ease-in-out infinite;
+}
+.contact.is-sending .contact-dots i:nth-child(2) {
+  animation-delay: 0.16s;
+}
+.contact.is-sending .contact-dots i:nth-child(3) {
+  animation-delay: 0.32s;
+}
+@keyframes contact-dot {
+  0%,
+  55%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+  25% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+/* Done: the ball swells and dissolves (transform set inline by the script), then leaves the page. */
+.contact.is-done .contact-send,
+.contact.is-done .contact-send:disabled,
+.contact.is-done .contact-send:hover {
+  opacity: 0;
+  background: var(--color-ink);
+  transition:
+    transform 0.45s var(--ease-soft),
+    opacity 0.35s ease 0.05s;
+}
+.contact.is-done .contact-dots {
+  opacity: 0;
+  transition-duration: 0.15s;
+}
+.contact.is-gone .contact-send {
+  visibility: hidden;
+}
+/* "Sent" line: appears where the ball dissolved. */
+.contact-done {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--done-top, 0);
+  text-align: center;
+  opacity: 0;
+  filter: blur(8px);
+  transform: scale(0.94);
+  pointer-events: none;
+  transition:
+    opacity 0.4s ease-out 0.15s,
+    filter 0.4s ease-out 0.15s,
+    transform 0.7s var(--ease-spring) 0.15s;
+}
+.contact.is-done .contact-done {
+  opacity: 1;
+  filter: blur(0);
+  transform: none;
+  pointer-events: auto;
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact-send,
+  .contact-done,
+  .contact-fields,
+  .contact-dots {
+    transition-duration: 0.01s;
+    transition-delay: 0s;
+  }
+  .contact.is-sending .contact-dots i {
+    animation-duration: 2s;
+  }
+  .contact-done {
+    filter: none;
+    transform: none;
+  }
 }
 
 /* Waitlist status line: quiet by default, accent when something needs a look. */
@@ -475,9 +635,10 @@ html.js [data-reveal].is-visible {
   border-radius: 999px;
   background: var(--color-accent);
 }
-/* Left/right edges match the header pill's outer edges exactly: same max-width, same
-   side padding (px-5 mobile, px-6 md+). Don't drift these away from Header.astro's
-   .site-header-wrap padding + .site-header max-w-5xl. */
+/* Left/right edges match the header pill's outer edges exactly: .site-header-wrap in
+   Header.astro is this same box (mx-auto max-w-5xl px-5 md:px-6) and the pill fills it.
+   Don't drift the two apart, and don't put a max-width on the pill itself: that made
+   it 24px wider than the content on each side at desktop widths. */
 .container-x {
   @apply mx-auto w-full max-w-5xl px-5 md:px-6;
 }

@@ -105,7 +105,7 @@ const fr: Dictionary = {
       messagePlaceholder: "Qu'est-ce que tu veux nous dire ?",
       button: "Envoyer",
       sending: "Envoi…",
-      done: "Envoyé. On te répond vite.",
+      done: "Message envoyé.",
       invalid: "Remplis tout pour qu'on puisse te répondre.",
       invalidEmail: "Cet e-mail n'a pas l'air correct.",
       error: "Ça n'a pas marché. Réessaie dans un instant.",

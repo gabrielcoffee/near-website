@@ -72,7 +72,7 @@ const isDefaultLocale = locale === DEFAULT_LOCALE;
             } else if (others.indexOf(saved) !== -1) {
               target = saved;
             }
-            if (target) location.replace("/" + target + path + location.hash);
+            if (target) location.replace("/" + target + path + location.search + location.hash);
           } catch (e) {}
         </script>
       )

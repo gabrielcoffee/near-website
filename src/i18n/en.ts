@@ -105,7 +105,7 @@ const en = {
       messagePlaceholder: "What do you want to tell us?",
       button: "Send",
       sending: "Sending…",
-      done: "Sent. We'll write back soon.",
+      done: "Message sent.",
       invalid: "Fill in everything so we can reply.",
       invalidEmail: "That email doesn't look right.",
       error: "Didn't work. Try again in a moment.",

@@ -105,7 +105,7 @@ const it: Dictionary = {
       messagePlaceholder: "Cosa vuoi raccontarci?",
       button: "Invia",
       sending: "Invio…",
-      done: "Inviato. Ti rispondiamo presto.",
+      done: "Messaggio inviato.",
       invalid: "Compila tutto così possiamo risponderti.",
       invalidEmail: "Questa email non sembra giusta.",
       error: "Non ha funzionato. Riprova tra un attimo.",
