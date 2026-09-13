@@ -28,9 +28,11 @@ export function initLangSwitch(storageKey: string) {
       e.stopPropagation();
       root.classList.contains("is-open") ? close() : open();
     });
-    document.addEventListener("click", (e) => {
+    // Anything that takes attention elsewhere closes the menu: a press outside it or a scroll.
+    document.addEventListener("pointerdown", (e) => {
       if (!root.contains(e.target as Node)) close();
     });
+    window.addEventListener("scroll", close, { passive: true });
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") close();
     });
