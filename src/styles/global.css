@@ -11,6 +11,9 @@
   --color-line: #e8e8e6;
   --color-accent: #ff6a2b;
   --color-accent-soft: #fff1ea;
+  /* Logo mark only (matches the app icon): the two circles, and their overlap (= multiply). */
+  --color-mark: #ff9300;
+  --color-mark-overlap: #ff5500;
 
   --radius-card: 24px;
   --radius-pill: 999px;
@@ -429,7 +432,7 @@ fieldset[aria-invalid="true"] .choice-pill {
   transition-duration: 0s;
 }
 
-/* ---------- Wordmark (logo): orange dot + Near. Header, hero, footer all use this. ---------- */
+/* ---------- Wordmark (logo): two orange circles + Near. Header, hero, footer all use this. ---------- */
 .wordmark {
   display: inline-flex;
   align-items: center;
@@ -439,19 +442,24 @@ fieldset[aria-invalid="true"] .choice-pill {
   line-height: 1;
   color: var(--color-ink);
 }
-.wordmark-dot {
+.wordmark-mark {
   flex: none;
-  width: 0.7em;
-  height: 0.7em;
-  border-radius: 999px;
-  background: var(--color-accent);
+  width: 0.85em;
+  height: 0.85em;
+  overflow: visible;
   transition: transform 0.3s var(--ease-spring);
 }
-.wordmark:hover .wordmark-dot {
-  transform: scale(1.25);
+.wordmark-mark .mark-circle {
+  fill: var(--color-mark);
 }
-.wordmark:active .wordmark-dot {
-  transform: scale(0.9);
+.wordmark-mark .mark-overlap {
+  fill: var(--color-mark-overlap);
+}
+.wordmark:hover .wordmark-mark {
+  transform: scale(1.15);
+}
+.wordmark:active .wordmark-mark {
+  transform: scale(0.92);
 }
 
 /* ---------- Inline links: color only, no underline that draws in ---------- */

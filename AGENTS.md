@@ -81,10 +81,10 @@ While `APP_STORE_URL` is empty the CTA card shows an email form instead of the s
 
 ## Open items
 
-- App Store URL empty in `src/config.ts` (CTA shows the waitlist form + "coming soon"). Nothing emails the waitlist yet — the rows just sit in Supabase.
+- App Store URL empty in `src/config.ts` (CTA shows the waitlist form + "coming soon"). Signups get the welcome mail; the launch mail is still to be written.
 - `/terms/` exists now (2026-09-12); the iOS app's Settings row that links to it no longer 404s.
 - Contact form (`contact_messages` table, `contact-notify` function) is written but not deployed: migration not pushed, function not deployed, Vault secrets not set. Until then the form fails with a 404 from PostgREST and shows the error line.
-- The `hello@nearapp.social` mailbox trial expires 2026-09-23 (see below).
+- Welcome mail is live (2026-09-17): Resend domain verified, `waitlist-welcome` + `waitlist-unsubscribe` deployed, secrets and Vault set. The 57 people who signed up before it existed have not all been mailed yet; the one-off sender lives in the session scratchpad, not the repo.
 
 ## Waitlist welcome email
 
@@ -93,7 +93,10 @@ A trigger on `public.waitlist` calls the `waitlist-welcome` Edge Function, which
 - The insert path is deliberately untouched: the browser still posts to PostgREST and the trigger hands off to `pg_net`, which queues and returns. A dead provider loses the mail, never the signup.
 - Auth is a shared bearer token, not a Supabase JWT, because the caller is Postgres — hence `verify_jwt = false` for this function in `config.toml`.
 - Nothing secret is committed. The function URL and token live in Vault (`waitlist_welcome_url`, `waitlist_welcome_token`); the trigger no-ops until both exist, so a fresh branch database sends nothing.
-- Function secrets: `RESEND_API_KEY`, `WAITLIST_WEBHOOK_SECRET`, optionally `WAITLIST_FROM` / `WAITLIST_REPLY_TO`. Set with `supabase secrets set`.
+- Function secrets: `RESEND_API_KEY`, `WAITLIST_WEBHOOK_SECRET`, optionally `WAITLIST_FROM` / `WAITLIST_REPLY_TO` / `WAITLIST_UNSUBSCRIBE_URL`. Set with `supabase secrets set`.
+- The mail is a first-person note signed by Gabriel (`emails.ts`: subject, heading, body, two footer labels per language), wrapped by `render.ts` into a white card with the app icon and wordmark linking to the site, then `nearapp.social · @gabrielfp101 · unsubscribe`. Sender is `"Gabriel (Near App)" <hello@…>`, quoted because unquoted parentheses are an RFC comment and some clients showed the bare address.
+- Unsubscribe is a signed link (`_shared/waitlist-token.ts`, HMAC over the email with `WAITLIST_WEBHOOK_SECRET`) to the `waitlist-unsubscribe` function, which deletes the row with the service role and shows a one-line page in the reader's language. `List-Unsubscribe` headers make Gmail's own button work too.
+- The icon in the mail is `near-icon-128.png` in the public `brand` storage bucket (mail clients drop data: URIs). Rendered from `~/Desktop/NearIcon.icon` without the Liquid Glass; re-render there if the icon changes.
 - The CTA confirmation line says "check your inbox" rather than "we'll email you once", because the welcome mail made the old promise false. The launch mail is still the only other one planned — the welcome email says so.
 - Resend free tier is 3,000/month but only **100/day**: a big traffic spike drops the overflow. The provider call is one `fetch` in `index.ts`, so swapping to SES or Brevo is a one-function change.
 
@@ -112,4 +115,4 @@ Both render `Legal.astro` from `dict.privacy` / `dict.terms` (title, intro, sect
 
 ## Contact address (was dead once)
 
-`CONTACT_EMAIL` in `src/config.ts` is shown in the footer and on the privacy page. A domain having a website does not give it mail: until 2026-09-12 the address was `hello@near.app`, a placeholder on a domain someone else owns with no MX record, so every mail sent to it hard-bounced and the sender saw a dead address. Before changing the address to a new domain, check `dig MX <domain>` returns something. Today it is `hello@nearapp.social`: a real Porkbun-hosted mailbox (not a forward), which also forwards a copy to `nearapp.social@gmail.com`. **It is on a free trial that expires 2026-09-23** — renewal is $3/month billed yearly. If it lapses, mail silently bounces again. The same address is the app's feedback address in `~/projects/near/Near/App/AppLinks.swift`, so both break together.
+`CONTACT_EMAIL` in `src/config.ts` is shown in the footer and on the privacy page. A domain having a website does not give it mail: until 2026-09-12 the address was `hello@near.app`, a placeholder on a domain someone else owns with no MX record, so every mail sent to it hard-bounced and the sender saw a dead address. Before changing the address to a new domain, check `dig MX <domain>` returns something. Today it is `hello@nearapp.social`: Porkbun's free email forwarding (MX `fwd1/fwd2.porkbun.com`, SPF `include:_spf.porkbun.com`) delivering to `nearapp.social@gmail.com`. There is no mailbox, so nothing expires, but replies from Gmail go out as the Gmail address unless "Send mail as" is set up with Resend SMTP (`smtp.resend.com:465`, user `resend`, password = API key) once the domain is verified there. The same address is the app's feedback address in `~/projects/near/Near/App/AppLinks.swift`, so both break together.

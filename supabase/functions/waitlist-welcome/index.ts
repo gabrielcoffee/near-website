@@ -10,11 +10,19 @@
  */
 
 import { emailFor } from "./emails.ts";
+import { renderHtml } from "./render.ts";
+import { unsubscribeUrl } from "../_shared/waitlist-token.ts";
 
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
 
-/** "Near <hello@nearapp.social>" — the domain must be verified in Resend or it 403s. */
-const FROM = Deno.env.get("WAITLIST_FROM") ?? "Near <hello@nearapp.social>";
+/**
+ * The display name is quoted on purpose: unquoted parentheses are RFC 5322 comments, and some
+ * clients dropped the name and showed the bare address. The domain must be verified in Resend.
+ */
+const FROM = Deno.env.get("WAITLIST_FROM") ?? '"Gabriel (Near App)" <hello@nearapp.social>';
+/** Public GET endpoint of the waitlist-unsubscribe function; the link in the footer is signed. */
+const UNSUBSCRIBE_BASE = Deno.env.get("WAITLIST_UNSUBSCRIBE_URL") ??
+  "https://mrejurldemanuvbrfutf.supabase.co/functions/v1/waitlist-unsubscribe";
 const REPLY_TO = Deno.env.get("WAITLIST_REPLY_TO") ?? "hello@nearapp.social";
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 const WEBHOOK_SECRET = Deno.env.get("WAITLIST_WEBHOOK_SECRET");
@@ -23,41 +31,6 @@ interface WebhookPayload {
   type?: string;
   table?: string;
   record?: { email?: string; locale?: string | null } | null;
-}
-
-function escapeHtml(value: string): string {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;");
-}
-
-/** Plain markup on purpose: mail clients are not browsers, and this has to survive all of them. */
-function renderHtml(email: ReturnType<typeof emailFor>): string {
-  const paragraphs = email.lines
-    .map((line) => `<p style="margin:0 0 16px">${escapeHtml(line)}</p>`)
-    .join("");
-
-  return `<!doctype html>
-<html>
-  <body style="margin:0;background:#fafafa">
-    <div style="max-width:520px;margin:0 auto;padding:40px 24px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:16px;line-height:1.55;color:#1a1a1a">
-      <p style="margin:0 0 28px;font-size:20px;font-weight:600">
-        <span style="color:#ff5c1a">&#9679;</span> Near
-      </p>
-      <p style="margin:0 0 20px;font-size:22px;font-weight:600">${escapeHtml(email.heading)}</p>
-      ${paragraphs}
-      <p style="margin:32px 0 0;padding-top:20px;border-top:1px solid #e6e6e6;font-size:13px;color:#6b6b6b">
-        ${escapeHtml(email.footer)}
-      </p>
-    </div>
-  </body>
-</html>`;
-}
-
-function renderText(email: ReturnType<typeof emailFor>): string {
-  return [email.heading, "", ...email.lines, "", "—", email.footer].join("\n");
 }
 
 Deno.serve(async (req) => {
@@ -88,7 +61,9 @@ Deno.serve(async (req) => {
     return new Response("No email in payload", { status: 400 });
   }
 
-  const email = emailFor(payload.record?.locale);
+  const locale = payload.record?.locale ?? "en";
+  const email = emailFor(locale);
+  const unsubscribe = await unsubscribeUrl(UNSUBSCRIBE_BASE, WEBHOOK_SECRET, address, locale);
 
   const res = await fetch(RESEND_ENDPOINT, {
     method: "POST",
@@ -101,8 +76,12 @@ Deno.serve(async (req) => {
       to: [address],
       reply_to: REPLY_TO,
       subject: email.subject,
-      html: renderHtml(email),
-      text: renderText(email),
+      html: renderHtml(email, unsubscribe),
+      text: `${email.body}\n\n${email.unsubscribe}: ${unsubscribe}`,
+      headers: {
+        "List-Unsubscribe": `<${unsubscribe}>`,
+        "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+      },
     }),
   });
 

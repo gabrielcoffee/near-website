@@ -421,3 +421,7 @@ verify_jwt = false
 [functions.contact-notify]
 # Same as waitlist-welcome: called by a database trigger, checks CONTACT_WEBHOOK_SECRET itself.
 verify_jwt = false
+
+[functions.waitlist-unsubscribe]
+# Public link from the welcome email; the query string carries its own HMAC (see _shared/waitlist-token.ts).
+verify_jwt = false

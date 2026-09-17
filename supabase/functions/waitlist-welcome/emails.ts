@@ -1,91 +1,127 @@
 /**
  * The welcome email, in the same seven languages as the site.
- * Tone matches src/i18n/*: short, second person, slightly playful.
- * `ru` avoids gendered past tense, exactly like the site copy does.
+ *
+ * Written in the first person and signed by Gabriel: it should read like a short note from the one
+ * person building the app, not a marketing blast. `body` is the plain-text version verbatim;
+ * `render.ts` wraps the same text in the HTML card (icon, wordmark, `heading` in Outfit). No
+ * unsubscribe footer: the list is opt-in and "reply" covers it. `ru` avoids gendered past tense
+ * for the reader, exactly like the site copy does.
  */
 
 export type Locale = "en" | "pt" | "es" | "fr" | "de" | "it" | "ru";
 
 export interface Email {
   subject: string;
+  /** Large line at the top of the HTML version; the text version has no heading. */
   heading: string;
-  lines: string[];
-  /** Sits under a rule at the bottom, smaller and muted. */
-  footer: string;
+  /** Full body, paragraphs separated by blank lines, signature included. */
+  body: string;
+  /** Footer link label. */
+  unsubscribe: string;
+  /** What the unsubscribe page says once the row is gone. */
+  unsubscribed: string;
 }
 
 export const DEFAULT_LOCALE: Locale = "en";
 
 const EMAILS: Record<Locale, Email> = {
   en: {
-    subject: "You're on the Near list",
+    subject: "you're on the Near list",
     heading: "You're on the list.",
-    lines: [
-      "Near is a social app where friends can only be added in person. No algorithm, no ads, nothing generated.",
-      "It isn't out yet. We'll write exactly once more, the day it's on the App Store. That's the whole plan.",
-      "Questions, ideas, complaints? Just reply to this email — it reaches a person.",
-    ],
-    footer: "Don't want the launch email? Reply with \"remove\" and you're off the list.",
+    body: `Hey! Gabriel here, I'm the one building Near.
+
+Just letting you know I got your email and you're on the list. The app isn't out yet, still finishing it. The day it's on the App Store I'll send you a note here.
+
+Until then, if you want to ask anything or just say hi, reply to this email, it comes straight to me.
+
+Talk soon,
+Gabriel`,
+    unsubscribe: "Unsubscribe",
+    unsubscribed: "Done, you're off the list."
   },
   pt: {
-    subject: "Você está na lista do Near",
-    heading: "Você está na lista.",
-    lines: [
-      "O Near é um app social onde amigos só podem ser adicionados pessoalmente. Sem algoritmo, sem anúncios, nada gerado por IA.",
-      "Ainda não lançou. A gente escreve mais uma vez só, no dia que estiver na App Store. É esse o plano inteiro.",
-      "Dúvida, ideia, reclamação? Só responder esse e-mail — chega numa pessoa.",
-    ],
-    footer: "Não quer o e-mail do lançamento? Responde \"sair\" que a gente te tira da lista.",
+    subject: "você entrou na lista do Near",
+    heading: "Você entrou na lista.",
+    body: `Oi! Aqui é o Gabriel, sou eu que tô fazendo o Near.
+
+Só passando pra dizer que recebi seu e-mail e você tá na lista. O app ainda não saiu, ainda tô terminando. No dia que estiver na App Store eu te aviso por aqui.
+
+Enquanto isso, se quiser perguntar alguma coisa ou só dar um oi, responde esse e-mail que cai direto comigo.
+
+Até logo,
+Gabriel`,
+    unsubscribe: "Sair da lista",
+    unsubscribed: "Pronto, você saiu da lista."
   },
   es: {
-    subject: "Estás en la lista de Near",
-    heading: "Estás en la lista.",
-    lines: [
-      "Near es una app social donde los amigos solo se añaden en persona. Sin algoritmo, sin anuncios, nada generado por IA.",
-      "Todavía no ha salido. Te escribimos una vez más, el día que esté en la App Store. Ese es todo el plan.",
-      "¿Dudas, ideas, quejas? Responde a este correo — lo lee una persona.",
-    ],
-    footer: "¿No quieres el correo del lanzamiento? Responde \"baja\" y te quitamos de la lista.",
+    subject: "estás en la lista de Near",
+    heading: "Ya estás en la lista.",
+    body: `¡Hola! Soy Gabriel, el que está haciendo Near.
+
+Solo para decirte que recibí tu correo y ya estás en la lista. La app todavía no ha salido, la estoy terminando. El día que esté en la App Store te aviso por aquí.
+
+Mientras tanto, si quieres preguntar algo o solo saludar, responde a este correo, me llega directo a mí.
+
+Hasta pronto,
+Gabriel`,
+    unsubscribe: "Darme de baja",
+    unsubscribed: "Listo, ya no estás en la lista."
   },
   fr: {
-    subject: "Tu es sur la liste Near",
+    subject: "tu es sur la liste Near",
     heading: "Tu es sur la liste.",
-    lines: [
-      "Near est une app sociale où on n'ajoute ses amis qu'en personne. Pas d'algorithme, pas de pub, rien de généré.",
-      "Ce n'est pas encore sorti. On t'écrira une seule fois de plus, le jour où c'est sur l'App Store. C'est tout le programme.",
-      "Une question, une idée, une critique ? Réponds à cet e-mail — il arrive chez quelqu'un.",
-    ],
-    footer: "Pas envie de l'e-mail de lancement ? Réponds « stop » et on te retire de la liste.",
+    body: `Salut ! C'est Gabriel, c'est moi qui fais Near.
+
+Juste pour te dire que j'ai bien reçu ton e-mail et que tu es sur la liste. L'app n'est pas encore sortie, je suis en train de la finir. Le jour où elle est sur l'App Store, je te préviens ici.
+
+En attendant, si tu veux demander quelque chose ou juste dire bonjour, réponds à cet e-mail, ça arrive directement chez moi.
+
+À bientôt,
+Gabriel`,
+    unsubscribe: "Se désinscrire",
+    unsubscribed: "C'est fait, tu n'es plus sur la liste."
   },
   de: {
-    subject: "Du bist auf der Near-Liste",
-    heading: "Du bist auf der Liste.",
-    lines: [
-      "Near ist eine Social App, in der man Freunde nur persönlich hinzufügen kann. Kein Algorithmus, keine Werbung, nichts Generiertes.",
-      "Es ist noch nicht draußen. Wir schreiben genau einmal wieder, an dem Tag, an dem es im App Store ist. Mehr ist nicht geplant.",
-      "Fragen, Ideen, Beschwerden? Antworte einfach auf diese Mail — da sitzt ein Mensch.",
-    ],
-    footer: "Keine Lust auf die Launch-Mail? Antworte mit „raus“ und du bist von der Liste.",
+    subject: "du bist auf der Near-Liste",
+    heading: "Du stehst auf der Liste.",
+    body: `Hey! Hier ist Gabriel, ich bin der, der Near baut.
+
+Nur kurz: deine Mail ist angekommen und du stehst auf der Liste. Die App ist noch nicht draußen, ich bin noch am Fertigmachen. An dem Tag, an dem sie im App Store ist, sag ich dir hier Bescheid.
+
+Bis dahin: wenn du was fragen oder einfach nur hallo sagen willst, antworte einfach auf diese Mail, das landet direkt bei mir.
+
+Bis bald,
+Gabriel`,
+    unsubscribe: "Abmelden",
+    unsubscribed: "Erledigt, du bist von der Liste."
   },
   it: {
-    subject: "Sei nella lista di Near",
+    subject: "sei nella lista di Near",
     heading: "Sei nella lista.",
-    lines: [
-      "Near è un'app social dove gli amici si aggiungono solo di persona. Niente algoritmo, niente pubblicità, niente generato dall'IA.",
-      "Non è ancora uscita. Ti scriviamo una volta sola ancora, il giorno in cui sarà sull'App Store. Il piano è tutto qui.",
-      "Domande, idee, lamentele? Rispondi a questa mail — la legge una persona.",
-    ],
-    footer: "Non vuoi la mail del lancio? Rispondi \"basta\" e ti togliamo dalla lista.",
+    body: `Ciao! Sono Gabriel, quello che sta facendo Near.
+
+Solo per dirti che ho ricevuto la tua mail e sei nella lista. L'app non è ancora uscita, la sto finendo. Il giorno che sarà sull'App Store ti avviso qui.
+
+Nel frattempo, se vuoi chiedere qualcosa o anche solo salutare, rispondi a questa mail, arriva direttamente a me.
+
+A presto,
+Gabriel`,
+    unsubscribe: "Cancellati",
+    unsubscribed: "Fatto, non sei più nella lista."
   },
   ru: {
-    subject: "Ты в списке Near",
+    subject: "ты в списке Near",
     heading: "Ты в списке.",
-    lines: [
-      "Near — социальное приложение, где друзей можно добавить только лично. Без алгоритма, без рекламы, без сгенерированного контента.",
-      "Оно ещё не вышло. Мы напишем ровно один раз — в день, когда оно появится в App Store. Это весь план.",
-      "Вопросы, идеи, претензии? Просто ответь на это письмо — его читает человек.",
-    ],
-    footer: "Не нужно письмо о запуске? Ответь «удалить», и мы уберём тебя из списка.",
+    body: `Привет! Это Габриэл, я делаю Near.
+
+Просто хочу сказать, что твоё письмо дошло и ты в списке. Приложение ещё не вышло, я его доделываю. В день, когда оно появится в App Store, напишу тебе сюда.
+
+А пока, если хочешь что-то спросить или просто поздороваться, ответь на это письмо, оно придёт прямо мне.
+
+До скорого,
+Габриэл`,
+    unsubscribe: "Отписаться",
+    unsubscribed: "Готово, ты больше не в списке."
   },
 };
 
