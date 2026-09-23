@@ -120,12 +120,13 @@ const es: Dictionary = {
     sections: [
       {
         title: "Qué guardamos",
-        body: "Cuando entras con Apple recibimos un ID de usuario de Apple, y tu nombre y correo si decides compartirlos. Después, solo lo que añades tú:",
+        body: "Cuando entras con Apple o Google recibimos un ID de usuario suyo, y tu nombre y correo si decides compartirlos. Después, solo lo que añades tú:",
         items: [
-          "Tu nombre, foto de perfil y favoritos.",
+          "Tu nombre, tu foto de perfil, y el cumpleaños y la bio corta si los rellenas.",
           "Tus publicaciones: fotos, textos y, si lo dejas puesto, el sitio donde se hicieron.",
-          "Tus comentarios y tus mensajes con amigos.",
-          "Quiénes son tus amigos y cuándo os añadisteis.",
+          "Tus comentarios en las publicaciones de tus amigos.",
+          "Quiénes son tus amigos y cuándo os añadisteis, y a quién has bloqueado.",
+          "Los reportes que nos envías sobre una publicación, un comentario o una persona.",
         ],
       },
       {
@@ -143,15 +144,15 @@ const es: Dictionary = {
       },
       {
         title: "Quién ve qué",
-        body: "Tus publicaciones, comentarios y mensajes solo los ven tus amigos. No hay perfil público, ni buscador, ni página de explorar. Tu nombre y tu foto de perfil son lo único que puede ver un desconocido, y solo mientras estáis los dos en la misma sala con la app abierta.",
+        body: "Tus publicaciones y comentarios solo los ven tus amigos. No hay perfil público, ni buscador, ni página de explorar. Tu nombre y tu foto de perfil son lo único que puede ver un desconocido, y solo mientras estáis los dos en la misma sala con la app abierta. Bloquea a alguien y ninguno de los dos vuelve a ver al otro.",
       },
       {
         title: "Dónde está",
-        body: "Tus datos se guardan en Supabase, un proveedor de alojamiento, y llegan a tus amigos a través de él. Apple gestiona el inicio de sesión. Los correos de esta web salen por Resend. Ninguno puede usar tus datos para otra cosa, y nadie más los recibe. No vendemos datos, no ponemos anuncios y no usamos ningún SDK de analítica ni rastreo.",
+        body: "Tus datos se guardan en Supabase, un proveedor de alojamiento, y llegan a tus amigos a través de él. Apple o Google gestionan el inicio de sesión. Los correos de esta web salen por Resend. Ninguno puede usar tus datos para otra cosa, y nadie más los recibe. No vendemos datos, no ponemos anuncios y no usamos ningún SDK de analítica ni rastreo.",
       },
       {
         title: "Borrarlo todo",
-        body: "Ajustes → Eliminar cuenta borra tu cuenta, tus fotos, publicaciones, comentarios y mensajes, al momento y para siempre. Nada tuyo se queda en los móviles de tus amigos ni en el nuestro. Si lo prefieres, escríbenos y lo hacemos por ti.",
+        body: "Ajustes → Eliminar cuenta borra tu cuenta, tus fotos, publicaciones y comentarios, al momento y para siempre. Nada tuyo se queda en los móviles de tus amigos ni en el nuestro. Si lo prefieres, escríbenos y lo hacemos por ti.",
       },
       {
         title: "Esta web",
@@ -174,7 +175,7 @@ const es: Dictionary = {
     sections: [
       {
         title: "Quién puede usar Near",
-        body: "Tienes que tener 13 años o más y entrar con tu propio ID de Apple. Una cuenta por persona. Near es para personas, no para bots ni empresas.",
+        body: "Tienes que tener 13 años o más y entrar con tu propia cuenta de Apple o Google. Una cuenta por persona. Near es para personas, no para bots ni empresas.",
       },
       {
         title: "Tu contenido",
@@ -191,8 +192,12 @@ const es: Dictionary = {
         ],
       },
       {
+        title: "Reportes y bloqueos",
+        body: "Cada publicación, comentario y perfil tiene una opción para reportar, y puedes bloquear a cualquiera desde su perfil: dejaréis de ser amigos y ninguno de los dos volverá a ver al otro. Leemos cada reporte en menos de 24 horas. No hay tolerancia con el contenido abusivo ni con la gente abusiva: eliminamos lo que rompe estas reglas y, cuando hace falta, la cuenta detrás.",
+      },
+      {
         title: "Si alguien se salta las reglas",
-        body: "Si una cuenta se salta estas reglas podemos quitar contenido, suspender la cuenta o eliminarla. Puedes irte cuando quieras: Ajustes → Eliminar cuenta, y todo se va contigo.",
+        body: "Si una cuenta se salta estas reglas podemos quitar contenido, suspender la cuenta o eliminarla, sin aviso cuando el contenido es ilegal o hace daño a alguien. Puedes irte cuando quieras: Ajustes → Eliminar cuenta, y todo se va contigo.",
       },
       {
         title: "El servicio",

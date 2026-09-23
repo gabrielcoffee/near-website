@@ -120,12 +120,13 @@ const fr: Dictionary = {
     sections: [
       {
         title: "Ce qu'on garde",
-        body: "Quand tu te connectes avec Apple, on reçoit un identifiant d'utilisateur d'Apple, plus ton nom et ton e-mail si tu choisis de les partager. Ensuite, seulement ce que tu ajoutes toi-même :",
+        body: "Quand tu te connectes avec Apple ou Google, on reçoit un identifiant d'utilisateur de leur part, plus ton nom et ton e-mail si tu choisis de les partager. Ensuite, seulement ce que tu ajoutes toi-même :",
         items: [
-          "Ton nom, ta photo de profil et tes favoris.",
+          "Ton nom d'affichage, ta photo de profil, et ta date de naissance et ta courte bio si tu les renseignes.",
           "Tes publications : photos, légendes et, si tu le laisses, le lieu où elles ont été prises.",
-          "Tes commentaires et tes messages avec tes amis.",
-          "Qui sont tes amis et quand vous vous êtes ajoutés.",
+          "Tes commentaires sur les publications de tes amis.",
+          "Qui sont tes amis et quand vous vous êtes ajoutés, et qui tu as bloqué.",
+          "Les signalements que tu nous envoies à propos d'une publication, d'un commentaire ou d'une personne.",
         ],
       },
       {
@@ -143,15 +144,15 @@ const fr: Dictionary = {
       },
       {
         title: "Qui voit quoi",
-        body: "Tes publications, commentaires et messages ne sont visibles que par tes amis. Pas de profil public, pas de recherche, pas de page explorer. Ton nom et ta photo de profil sont la seule chose qu'un inconnu peut voir, et seulement quand vous êtes tous les deux dans la même pièce avec l'appli ouverte.",
+        body: "Tes publications et commentaires ne sont visibles que par tes amis. Pas de profil public, pas de recherche, pas de page explorer. Ton nom et ta photo de profil sont la seule chose qu'un inconnu peut voir, et seulement quand vous êtes tous les deux dans la même pièce avec l'appli ouverte. Bloque quelqu'un et aucun de vous deux ne reverra l'autre.",
       },
       {
         title: "Où ça vit",
-        body: "Tes données sont stockées chez Supabase, un hébergeur, et arrivent à tes amis par lui. Apple gère la connexion. Les e-mails de ce site partent via Resend. Aucun d'eux n'a le droit d'utiliser tes données pour autre chose, et personne d'autre ne les reçoit. On ne vend pas de données, on n'affiche pas de pub et on n'utilise aucun SDK de statistiques ou de pistage.",
+        body: "Tes données sont stockées chez Supabase, un hébergeur, et arrivent à tes amis par lui. Apple ou Google gère la connexion. Les e-mails de ce site partent via Resend. Aucun d'eux n'a le droit d'utiliser tes données pour autre chose, et personne d'autre ne les reçoit. On ne vend pas de données, on n'affiche pas de pub et on n'utilise aucun SDK de statistiques ou de pistage.",
       },
       {
         title: "Tout supprimer",
-        body: "Réglages → Supprimer le compte efface ton compte, tes photos, publications, commentaires et messages, tout de suite et pour de bon. Rien de toi ne reste sur les téléphones de tes amis ni sur le nôtre. Si tu préfères, écris-nous et on le fait pour toi.",
+        body: "Réglages → Supprimer le compte efface ton compte, tes photos, publications et commentaires, tout de suite et pour de bon. Rien de toi ne reste sur les téléphones de tes amis ni sur le nôtre. Si tu préfères, écris-nous et on le fait pour toi.",
       },
       {
         title: "Ce site",
@@ -174,7 +175,7 @@ const fr: Dictionary = {
     sections: [
       {
         title: "Qui peut utiliser Near",
-        body: "Il faut avoir 13 ans ou plus et te connecter avec ton propre identifiant Apple. Un compte par personne. Near est fait pour des gens, pas pour des bots ni des entreprises.",
+        body: "Il faut avoir 13 ans ou plus et te connecter avec ton propre compte Apple ou Google. Un compte par personne. Near est fait pour des gens, pas pour des bots ni des entreprises.",
       },
       {
         title: "Ton contenu",
@@ -191,8 +192,12 @@ const fr: Dictionary = {
         ],
       },
       {
+        title: "Signalements et blocage",
+        body: "Chaque publication, commentaire et profil a une option Signaler, et tu peux bloquer n'importe qui depuis son profil : vous ne serez plus amis et aucun de vous deux ne reverra l'autre. On lit chaque signalement en moins de 24 heures. Il n'y a aucune tolérance pour les contenus ou les comportements abusifs : on supprime ce qui enfreint ces règles et, si besoin, le compte derrière.",
+      },
+      {
         title: "Si quelqu'un enfreint les règles",
-        body: "Si un compte enfreint ces règles, on peut retirer du contenu, suspendre le compte ou le supprimer. Tu peux partir quand tu veux : Réglages → Supprimer le compte, et tout part avec toi.",
+        body: "Si un compte enfreint ces règles, on peut retirer du contenu, suspendre le compte ou le supprimer, sans préavis quand le contenu est illégal ou fait du mal à quelqu'un. Tu peux partir quand tu veux : Réglages → Supprimer le compte, et tout part avec toi.",
       },
       {
         title: "Le service",

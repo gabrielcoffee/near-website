@@ -120,12 +120,13 @@ const de: Dictionary = {
     sections: [
       {
         title: "Was wir speichern",
-        body: "Wenn du dich mit Apple anmeldest, bekommen wir von Apple eine Nutzer-ID, dazu deinen Namen und deine E-Mail, falls du sie teilst. Danach nur, was du selbst hinzufügst:",
+        body: "Wenn du dich mit Apple oder Google anmeldest, bekommen wir von ihnen eine Nutzer-ID, dazu deinen Namen und deine E-Mail, falls du sie teilst. Danach nur, was du selbst hinzufügst:",
         items: [
-          "Deinen Namen, dein Profilfoto und deine Favoriten.",
+          "Deinen Anzeigenamen, dein Profilfoto, und dein Geburtsdatum und deine kurze Bio, falls du sie ausfüllst.",
           "Deine Posts: Fotos, Texte und, wenn du es dranlässt, den Ort, an dem sie entstanden sind.",
-          "Deine Kommentare und deine Nachrichten mit Freunden.",
-          "Wer deine Freunde sind und wann ihr euch hinzugefügt habt.",
+          "Deine Kommentare zu den Posts deiner Freunde.",
+          "Wer deine Freunde sind und wann ihr euch hinzugefügt habt, und wen du blockiert hast.",
+          "Meldungen, die du uns zu einem Post, einem Kommentar oder einer Person schickst.",
         ],
       },
       {
@@ -143,15 +144,15 @@ const de: Dictionary = {
       },
       {
         title: "Wer was sieht",
-        body: "Deine Posts, Kommentare und Nachrichten sehen nur deine Freunde. Es gibt kein öffentliches Profil, keine Suche und keine Entdecken-Seite. Dein Name und dein Profilfoto sind das Einzige, was ein Fremder sehen kann, und nur, solange ihr beide im selben Raum seid und die App offen habt.",
+        body: "Deine Posts und Kommentare sehen nur deine Freunde. Es gibt kein öffentliches Profil, keine Suche und keine Entdecken-Seite. Dein Name und dein Profilfoto sind das Einzige, was ein Fremder sehen kann, und nur, solange ihr beide im selben Raum seid und die App offen habt. Blockierst du jemanden, seht ihr euch beide nie wieder.",
       },
       {
         title: "Wo es liegt",
-        body: "Deine Daten liegen bei Supabase, einem Hosting-Anbieter, und kommen über ihn zu deinen Freunden. Apple übernimmt die Anmeldung. E-Mails von dieser Seite gehen über Resend raus. Keiner von ihnen darf deine Daten für etwas anderes nutzen, und sonst bekommt sie niemand. Wir verkaufen keine Daten, zeigen keine Werbung und nutzen kein Analytics- oder Tracking-SDK.",
+        body: "Deine Daten liegen bei Supabase, einem Hosting-Anbieter, und kommen über ihn zu deinen Freunden. Apple oder Google übernimmt die Anmeldung. E-Mails von dieser Seite gehen über Resend raus. Keiner von ihnen darf deine Daten für etwas anderes nutzen, und sonst bekommt sie niemand. Wir verkaufen keine Daten, zeigen keine Werbung und nutzen kein Analytics- oder Tracking-SDK.",
       },
       {
         title: "Alles löschen",
-        body: "Einstellungen → Account löschen entfernt deinen Account, deine Fotos, Posts, Kommentare und Nachrichten, sofort und endgültig. Nichts von dir bleibt auf den Handys deiner Freunde oder bei uns. Wenn dir das lieber ist, schreib uns, und wir erledigen es für dich.",
+        body: "Einstellungen → Account löschen entfernt deinen Account, deine Fotos, Posts und Kommentare, sofort und endgültig. Nichts von dir bleibt auf den Handys deiner Freunde oder bei uns. Wenn dir das lieber ist, schreib uns, und wir erledigen es für dich.",
       },
       {
         title: "Diese Website",
@@ -174,7 +175,7 @@ const de: Dictionary = {
     sections: [
       {
         title: "Wer Near nutzen darf",
-        body: "Du musst mindestens 13 sein und dich mit deiner eigenen Apple-ID anmelden. Ein Account pro Person. Near ist für Menschen, nicht für Bots oder Firmen.",
+        body: "Du musst mindestens 13 sein und dich mit deinem eigenen Apple- oder Google-Account anmelden. Ein Account pro Person. Near ist für Menschen, nicht für Bots oder Firmen.",
       },
       {
         title: "Deine Inhalte",
@@ -191,8 +192,12 @@ const de: Dictionary = {
         ],
       },
       {
+        title: "Melden und Blockieren",
+        body: "Jeder Post, Kommentar und jedes Profil hat eine Melden-Option, und du kannst jeden über sein Profil blockieren: ihr seid dann keine Freunde mehr und keiner von euch sieht den anderen je wieder. Wir lesen jede Meldung innerhalb von 24 Stunden. Es gibt keine Toleranz für missbräuchliche Inhalte oder missbräuchliches Verhalten: wir entfernen, was gegen diese Regeln verstößt, und wenn nötig den Account dahinter.",
+      },
+      {
         title: "Wenn jemand die Regeln bricht",
-        body: "Bricht ein Account diese Regeln, können wir Inhalte entfernen, den Account sperren oder löschen. Du kannst jederzeit gehen: Einstellungen → Account löschen, und alles geht mit dir.",
+        body: "Bricht ein Account diese Regeln, können wir Inhalte entfernen, den Account sperren oder löschen, ohne Vorwarnung, wenn der Inhalt illegal ist oder jemandem schadet. Du kannst jederzeit gehen: Einstellungen → Account löschen, und alles geht mit dir.",
       },
       {
         title: "Der Dienst",

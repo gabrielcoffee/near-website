@@ -120,12 +120,13 @@ const en = {
     sections: [
       {
         title: "What we store",
-        body: "When you sign in with Apple we get a user ID from Apple, plus your name and email if you choose to share them. After that, only what you add yourself:",
+        body: "When you sign in with Apple or Google we get a user ID from them, plus your name and email if you choose to share them. After that, only what you add yourself:",
         items: [
-          "Your display name, profile photo and favorites.",
+          "Your display name, profile photo, and the birthday and short bio if you fill them in.",
           "Your posts: photos, captions and, if you keep it on, the place they were taken.",
-          "Your comments and your messages with friends.",
-          "Who your friends are and when you added each other.",
+          "Your comments on your friends' posts.",
+          "Who your friends are and when you added each other, and anyone you've blocked.",
+          "Reports you send us about a post, a comment or a person.",
         ],
       },
       {
@@ -143,15 +144,15 @@ const en = {
       },
       {
         title: "Who sees what",
-        body: "Your posts, comments and messages are visible to your friends only. There is no public profile, no search and no explore page. Your name and profile photo are the only things a stranger can see, and only while you're both in the same room with the app open.",
+        body: "Your posts and comments are visible to your friends only. There is no public profile, no search and no explore page. Your name and profile photo are the only things a stranger can see, and only while you're both in the same room with the app open. Block someone and neither of you sees the other again.",
       },
       {
         title: "Where it lives",
-        body: "Your data is stored with Supabase, a hosting provider, and reaches your friends through them. Apple handles sign-in. Emails from this site go out through Resend. None of them may use your data for anything else, and nobody else gets it. We don't sell data, don't show ads, and don't run any analytics or tracking SDK.",
+        body: "Your data is stored with Supabase, a hosting provider, and reaches your friends through them. Apple or Google handles sign-in. Emails from this site go out through Resend. None of them may use your data for anything else, and nobody else gets it. We don't sell data, don't show ads, and don't run any analytics or tracking SDK.",
       },
       {
         title: "Deleting everything",
-        body: "Settings → Delete Account removes your account, your photos, posts, comments and messages, immediately and for good. Nothing of yours stays on your friends' phones or ours. If you'd rather, write to us and we'll do it for you.",
+        body: "Settings → Delete Account removes your account, your photos, posts and comments, immediately and for good. Nothing of yours stays on your friends' phones or ours. If you'd rather, write to us and we'll do it for you.",
       },
       {
         title: "This website",
@@ -174,7 +175,7 @@ const en = {
     sections: [
       {
         title: "Who can use Near",
-        body: "You need to be 13 or older and sign in with your own Apple ID. One account per person. Near is for people, not bots or businesses.",
+        body: "You need to be 13 or older and sign in with your own Apple or Google account. One account per person. Near is for people, not bots or businesses.",
       },
       {
         title: "Your content",
@@ -191,8 +192,12 @@ const en = {
         ],
       },
       {
+        title: "Reporting and blocking",
+        body: "Every post, comment and profile has a Report option, and you can block anyone from their profile: you'll be removed as friends and neither of you will see the other again. We read every report within 24 hours. There is no tolerance for abusive content or abusive people: we remove what breaks these rules and, when needed, the account behind it.",
+      },
+      {
         title: "Enforcement",
-        body: "If an account breaks these rules we can remove content, suspend the account or delete it. You can leave any time: Settings → Delete Account, and everything goes with you.",
+        body: "If an account breaks these rules we can remove content, suspend the account or delete it, without notice when the content is illegal or hurts someone. You can leave any time: Settings → Delete Account, and everything goes with you.",
       },
       {
         title: "The service",
