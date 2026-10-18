@@ -41,9 +41,9 @@ const pt: Dictionary = {
   also: {
     intro: "Toque nas telas pra ver a próxima.",
     features: [
-      { title: "Stories", body: "Você escolhe por quanto tempo fica, de 1 a 48 horas. E quem pode ver." },
+      { title: "Stories", body: "Fotos e vídeos pros seus amigos, que somem depois de 24 horas. Você vê exatamente quem viu." },
       { title: "Mensagens", body: "Responda um story e a conversa começa ali. Com o Near Spark." },
-      { title: "Qualidade total", body: "Fotos e vídeos ficam como você gravou. Pra todo mundo." },
+      { title: "Nítido pra todo mundo", body: "Sem limite de 1080 px e sem perda de qualidade em posts que poucos veem. Cada post fica do jeito que você gravou." },
     ],
   },
   plus: {
@@ -51,21 +51,24 @@ const pt: Dictionary = {
     free: "Grátis",
     features: [
       { title: "Converse com quem você já encontrou.", body: "Mensagens só entre amigos." },
-      { title: "Mais nítido que o Instagram.", body: "Fotos em 4032 px, quase 4 vezes o Instagram. Vídeos a 60 fps." },
-      { title: "Seus stories não somem.", body: "Tudo que você postou fica num arquivo só seu." },
-      { title: "Um ícone só seu.", body: "Ícones alternativos desenhados à mão." },
+      { title: "Mais nítido que o Instagram.", body: "Fotos em 4032 px, quase 4 vezes o Instagram. Vídeos a 60 fps, de até 3 minutos." },
+      { title: "Seus stories não somem.", body: "Ficam num arquivo privado, e os melhores podem ser fixados no seu perfil." },
+      { title: "Diga em voz alta.", body: "Comentários de voz nos posts dos seus amigos. Todo mundo pode ouvir; postar um é com o Near Spark." },
     ],
-    labels: { instagram: "Instagram · 1080 px", near: "Near Spark · 4032 px", video: "1080p · 60 fps", highlights: "Destaques", archive: "Arquivo", reply: "Respondeu seu story", voice: "Voice comment", you: "Você" },
+    labels: { instagram: "Instagram · 1080 px", near: "Near Spark · 4032 px", video: "1080p · 60 fps · 3 min", highlights: "Destaques", archive: "Arquivo", reply: "Respondeu seu story", voice: "Comentário de voz", you: "Você" },
     plans: { title: "Planos", monthly: "Mensal", yearly: "Anual", perMonth: "/ mês", perYear: "/ ano", equals: "{price} por mês", save: "Economize {pct}", trial: "Primeira semana grátis, nos dois.", soon: "Em breve na App Store." },
     more: {
       title: "E o resto",
       rows: [
-      { label: "Responder posts e stories", free: false, plus: true },
+      { label: "Mensagens", free: "Ler", plus: true },
+      { label: "Comentários de voz", free: "Ouvir", plus: true },
       { label: "Fotos", free: "2048 px", plus: "4032 px" },
-      { label: "Vídeo", free: "30 fps", plus: "60 fps" },
+      { label: "Vídeo", free: "30 fps · 1 min", plus: "60 fps · 3 min" },
+      { label: "Arquivo de stories e Destaques", free: false, plus: true },
+      { label: "Arquivo de posts", free: true, plus: true },
       { label: "Amigos, feed e stories", free: true, plus: true },
       { label: "Sem anúncios, nunca", free: true, plus: true },
-      { label: "A mesma qualidade pra todo mundo", free: true, plus: true },
+      { label: "Sem perda de qualidade em posts que poucos veem", free: true, plus: true },
       ] as PlusRow[],
     },
   },

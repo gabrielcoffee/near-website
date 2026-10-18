@@ -41,9 +41,9 @@ const fr: Dictionary = {
   also: {
     intro: "Touche les écrans pour les faire défiler.",
     features: [
-      { title: "Stories", body: "Tu choisis combien de temps elle reste, de 1 à 48 heures. Et qui la voit." },
+      { title: "Stories", body: "Des photos et des vidéos pour tes amis, qui disparaissent au bout de 24 heures. Tu vois exactement qui a regardé." },
       { title: "Messages", body: "Réponds à une story et la conversation commence là. Avec Near Spark." },
-      { title: "Qualité maximale", body: "Photos et vidéos restent comme tu les as faites. Pour tout le monde." },
+      { title: "Net pour tout le monde", body: "Pas de limite à 1080 px, et pas de perte de qualité sur les posts que peu de gens voient. Chaque post reste tel que tu l'as pris." },
     ],
   },
   plus: {
@@ -51,21 +51,24 @@ const fr: Dictionary = {
     free: "Gratuit",
     features: [
       { title: "Parle à ceux que tu as vraiment rencontrés.", body: "Des messages entre amis seulement." },
-      { title: "Plus net qu'Instagram.", body: "Des photos en 4032 px, presque 4 fois Instagram. Des vidéos à 60 fps." },
-      { title: "Tes stories ne disparaissent pas.", body: "Tout ce que tu as publié reste dans une archive rien qu'à toi." },
-      { title: "Une icône à toi.", body: "Des icônes alternatives dessinées à la main." },
+      { title: "Plus net qu'Instagram.", body: "Des photos en 4032 px, presque 4 fois Instagram. Des vidéos à 60 fps, jusqu'à 3 minutes." },
+      { title: "Tes stories ne disparaissent pas.", body: "Elles restent dans une archive privée, et les meilleures peuvent être épinglées sur ton profil." },
+      { title: "Dis-le à voix haute.", body: "Des commentaires vocaux sur les posts de tes amis. Tout le monde peut les écouter ; en publier un, c'est avec Near Spark." },
     ],
-    labels: { instagram: "Instagram · 1080 px", near: "Near Spark · 4032 px", video: "1080p · 60 fps", highlights: "À la une", archive: "Archive", reply: "A répondu à ta story", voice: "Voice comment", you: "Toi" },
+    labels: { instagram: "Instagram · 1080 px", near: "Near Spark · 4032 px", video: "1080p · 60 fps · 3 min", highlights: "À la une", archive: "Archive", reply: "A répondu à ta story", voice: "Commentaire vocal", you: "Toi" },
     plans: { title: "Formules", monthly: "Mensuelle", yearly: "Annuelle", perMonth: "/ mois", perYear: "/ an", equals: "{price} par mois", save: "Économise {pct}", trial: "Première semaine gratuite, dans les deux cas.", soon: "Bientôt sur l'App Store." },
     more: {
       title: "Et le reste",
       rows: [
-      { label: "Réponses aux posts et aux stories", free: false, plus: true },
+      { label: "Messages", free: "Lecture", plus: true },
+      { label: "Commentaires vocaux", free: "Écoute", plus: true },
       { label: "Photos", free: "2048 px", plus: "4032 px" },
-      { label: "Vidéo", free: "30 fps", plus: "60 fps" },
+      { label: "Vidéo", free: "30 fps · 1 min", plus: "60 fps · 3 min" },
+      { label: "Archive des stories et À la une", free: false, plus: true },
+      { label: "Archive des posts", free: true, plus: true },
       { label: "Amis, fil et stories", free: true, plus: true },
       { label: "Jamais de pub", free: true, plus: true },
-      { label: "La même qualité pour tout le monde", free: true, plus: true },
+      { label: "Pas de perte de qualité sur les posts que peu de gens voient", free: true, plus: true },
       ] as PlusRow[],
     },
   },
@@ -141,6 +144,10 @@ const fr: Dictionary = {
     intro: "Version courte : Near ne garde que ce qu'il faut pour montrer à tes amis ce que tu publies. On ne vend rien, on n'affiche pas de pub, et il n'y a ni statistiques ni pistage, ni dans l'appli ni sur ce site.",
     sections: [
       {
+        title: "Qui est responsable de tes données",
+        body: "Near, l'appli iPhone et ce site, est gérée par {entity}, qui décide de ce qu'il advient de tes données personnelles. Pour tout ce qui touche à la vie privée, y compris tes droits, écris à l'adresse en bas de cette page. C'est une vraie personne qui répond.",
+      },
+      {
         title: "Ce qu'on garde",
         body: "Tu te connectes avec Apple, Google ou ton e-mail et un mot de passe, et tu peux en relier plusieurs à ton compte dans les Réglages. D'Apple ou Google, on reçoit un identifiant d'utilisateur, plus ton nom et ton e-mail si tu choisis de les partager ; avec un e-mail, on garde ton adresse et une forme chiffrée de ton mot de passe, jamais le mot de passe lui-même. Ensuite, seulement ce que tu ajoutes toi-même :",
         items: [
@@ -209,6 +216,10 @@ const fr: Dictionary = {
     title: "Conditions",
     intro: "Des règles simples pour utiliser Near. Courtes, parce qu'il n'y a pas grand-chose : sois une vraie personne, sois correct avec tes amis, et l'appli est à toi.",
     sections: [
+      {
+        title: "Qui est derrière Near",
+        body: "Near est une appli iPhone créée et gérée par {entity}. Dans ces conditions, « Near » et « nous » désignent celle ou celui qui gère le service ; « toi » désigne la personne qui l'utilise. Pour tout ce qui concerne ces conditions, écris à l'adresse en bas de cette page.",
+      },
       {
         title: "Qui peut utiliser Near",
         body: "Il faut avoir 13 ans ou plus et te connecter avec ton propre compte Apple ou Google ou ton propre e-mail. Un compte par personne. Near est fait pour des gens, pas pour des bots ni des entreprises.",
