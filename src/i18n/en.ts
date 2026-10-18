@@ -45,9 +45,9 @@ const en = {
   also: {
     intro: "Tap the screens to flip through.",
     features: [
-      { title: "Stories", body: "Pick how long it lasts, 1 to 48 hours. Pick who sees it." },
+      { title: "Stories", body: "Photos and videos for your friends, gone after 24 hours. You see exactly who watched." },
       { title: "Messages", body: "Reply to a story and the chat starts right there. With Near Spark." },
-      { title: "Full quality", body: "Photos and videos look like you shot them. For everyone." },
+      { title: "Sharp for everyone", body: "No 1080 px cap, and no quality drop on posts few people see. Every post looks the way you shot it." },
     ],
   },
   plus: {

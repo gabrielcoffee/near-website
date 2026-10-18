@@ -1,5 +1,5 @@
 ---
-// Mock screens for "Also in Near": Stories (how long + who sees it), Messages (a reply to a story) and
+// Mock screens for "Also in Near": Stories (your story, and exactly who saw it), Messages (a reply to a story) and
 // Video (a clip that actually plays: slow pan, moving progress bar). Same visual language as the How it works phone:
 // each card is an `.rs-card` with data-card; FeatureStack.astro + roadmap.ts stack them.
 // People and photos are the Unsplash set in src/assets (licensed for commercial use).
@@ -11,45 +11,38 @@ const photos = import.meta.glob<{ default: ImageMetadata }>("../assets/photos/*.
 const pic = (f: string) => people[`../assets/people/${f}.jpg`].default;
 const photo = (f: string) => photos[`../assets/photos/${f}.jpg`].default;
 
-const lasts = ["1h", "6h", "24h", "48h"];
-// Who can see the story: the last friend is left out.
-const audience = [
-  { p: "p1", on: true },
-  { p: "p2", on: true },
-  { p: "p11", on: true },
-  { p: "p13", on: true },
-  { p: "p12", on: false },
+// Your story, opened by you: "Seen by" lists the friends who watched, newest first.
+const viewers = [
+  { p: "p1", n: "Sofia", t: "2 min" },
+  { p: "p2", n: "Kai", t: "15 min" },
+  { p: "p11", n: "Maya", t: "1 h" },
+  { p: "p12", n: "Noah", t: "1 h" },
 ];
 ---
 
-<!-- 1 · Stories: pick how long it lasts and who sees it -->
+<!-- 1 · Stories: your own story, 24 hours, and the friends who saw it -->
 <div class="rs-card" data-card data-pos="0">
-  <div class="rs">
-    <div class="status"><span>9:41</span><span class="flex gap-1"><i class="sig"></i><i class="bat"></i></span></div>
-    <div class="nav sub">
-      <span class="back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>Back</span>
-      <span class="title center">New story</span>
+  <div class="rs story-view">
+    <Image src={photo("s2")} alt="" width={320} height={560} format="webp" quality={72} loading="lazy" decoding="async" draggable="false" class="bg" />
+    <div class="status light"><span>9:41</span><span class="flex gap-1"><i class="sig"></i><i class="bat"></i></span></div>
+    <div class="bars"><i class="done"></i><i class="now"></i><i></i></div>
+    <div class="author">
+      <div class="ava"><Image src={pic("p3")} alt="" width={80} height={80} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></div>
+      <div class="who"><b>Your story</b><span>2 h</span></div>
     </div>
-    <div class="body compose">
-      <div class="preview">
-        <Image src={photo("s2")} alt="" width={320} height={200} format="webp" quality={72} loading="lazy" decoding="async" draggable="false" />
-      </div>
-      <span class="label">Lasts</span>
-      <div class="chips">
-        {lasts.map((t) => <span class:list={["chip", t === "24h" && "on"]}>{t}</span>)}
-      </div>
-      <span class="label">Who can see it</span>
-      <div class="faces">
-        {audience.map((a) => (
-          <div class:list={["face", a.on ? "in" : "off"]}>
-            <Image src={pic(a.p)} alt="" width={72} height={72} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" />
-            {a.on && <i>✓</i>}
-          </div>
+    <div class="seen">
+      <span class="grabber"></span>
+      <b class="seen-title">Seen by {viewers.length}</b>
+      <ul>
+        {viewers.map((v) => (
+          <li>
+            <div class="ava"><Image src={pic(v.p)} alt="" width={80} height={80} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></div>
+            <b>{v.n}</b>
+            <span>{v.t}</span>
+          </li>
         ))}
-      </div>
-      <span class="hint">4 of 5 friends</span>
+      </ul>
     </div>
-    <div class="answer one"><span class="btn-in">Share</span></div>
   </div>
 </div>
 
@@ -89,7 +82,7 @@ const audience = [
       <article class="post">
         <div class="post-head">
           <div class="ava"><Image src={pic("p2")} alt="" width={80} height={80} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></div>
-          <div class="who"><b>Kai</b><span>Ericeira · 1 h ago</span></div>
+          <div class="who"><b>Kai</b><span>Ericeira</span></div>
         </div>
         <div class="video">
           <Image src={photo("s4")} alt="" width={320} height={320} format="webp" quality={72} loading="lazy" decoding="async" draggable="false" />
@@ -97,13 +90,14 @@ const audience = [
           <span class="sound"><svg viewBox="0 0 24 24"><path d="M4 10v4h3l4 4V6L7 10H4zM15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg></span>
           <span class="progress"><i></i></span>
         </div>
-        <p>first wave of the season. cold.</p>
+        <p><b>Kai</b> first wave of the season. cold.</p>
         <span class="meta">2 comments</span>
+        <span class="time">1 h ago</span>
       </article>
       <article class="post dim">
         <div class="post-head">
           <div class="ava"><Image src={pic("p11")} alt="" width={80} height={80} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></div>
-          <div class="who"><b>Maya</b><span>3 h ago</span></div>
+          <div class="who"><b>Maya</b><span>Big Sur</span></div>
         </div>
         <div class="photo short">
           <Image src={photo("s5")} alt="" width={320} height={180} format="webp" quality={72} loading="lazy" decoding="async" draggable="false" />
@@ -124,7 +118,6 @@ const audience = [
   .nav.sub { justify-content: center; }
   .nav .back { position: absolute; left: 10px; display: inline-flex; align-items: center; gap: 1px; font-size: 11px; color: var(--ios-blue); }
   .nav .back svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-  .nav .title.center { font-size: 12px; }
 
   .body { position: absolute; inset: 66px 0 0; padding: 6px 12px; overflow: hidden; }
   .ava { width: 23px; height: 23px; border-radius: 999px; overflow: hidden; flex: none; }
@@ -132,23 +125,25 @@ const audience = [
   .who { display: flex; flex-direction: column; min-width: 0; }
   .who b { font-size: 10.5px; font-weight: 600; line-height: 1.15; }
   .who span { font-size: 8px; color: var(--muted); }
-  .label { display: block; margin-top: 14px; font-size: 8px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
 
-  /* stories */
-  .preview { width: 100%; aspect-ratio: 16 / 10; border-radius: 14px; overflow: hidden; background: var(--surface); }
-  .preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .chips { display: flex; gap: 6px; margin-top: 6px; }
-  .chip { flex: 1; text-align: center; padding: 8px 0; border-radius: 999px; background: var(--surface); font-size: 12px; font-weight: 600; }
-  .chip.on { background: #1a1a1a; color: #fff; }
-  .faces { display: flex; gap: 8px; margin-top: 8px; }
-  .face { position: relative; width: 36px; height: 36px; border-radius: 999px; }
-  .face img { width: 100%; height: 100%; object-fit: cover; border-radius: 999px; display: block; }
-  .face.off img { opacity: 0.35; filter: grayscale(1); }
-  .face i { position: absolute; right: -3px; bottom: -3px; width: 14px; height: 14px; border-radius: 999px; display: grid; place-items: center; font-style: normal; font-size: 8px; font-weight: 700; color: #fff; background: var(--color-accent); border: 1.5px solid #fff; }
-  .hint { display: block; margin-top: 7px; font-size: 10px; color: var(--muted); }
-  .answer { position: absolute; left: 0; right: 0; bottom: 0; display: flex; gap: 6px; padding: 8px 12px 16px; background: linear-gradient(transparent, #fff 30%); }
-  .answer span { flex: 1; text-align: center; padding: 10px 0; border-radius: 999px; font-size: 12px; font-weight: 600; }
-  .btn-in { background: #1a1a1a; color: #fff; }
+  /* stories: full-bleed photo, progress bars, your name, the Seen by sheet */
+  .story-view { background: #1a1a1a; }
+  .story-view .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .status.light { position: relative; color: #fff; }
+  .status.light .sig, .status.light .bat { background: #fff; }
+  .bars { position: relative; display: flex; gap: 3px; padding: 10px 10px 0; }
+  .bars i { flex: 1; height: 2px; border-radius: 1px; background: rgb(255 255 255 / 0.4); }
+  .bars i.done { background: #fff; }
+  .bars i.now { background: linear-gradient(90deg, #fff 55%, rgb(255 255 255 / 0.4) 55%); }
+  .author { position: relative; display: flex; align-items: center; gap: 6px; padding: 8px 10px; color: #fff; }
+  .author .who span { color: rgb(255 255 255 / 0.8); }
+  .seen { position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; padding: 6px 12px 16px; border-radius: 18px 18px 0 0; background: #fff; box-shadow: 0 -8px 24px -12px rgb(0 0 0 / 0.35); }
+  .seen .grabber { align-self: center; width: 26px; height: 3px; border-radius: 999px; background: #d1d1d6; }
+  .seen-title { align-self: center; margin: 7px 0 8px; font-size: 11px; font-weight: 600; }
+  .seen ul { display: flex; flex-direction: column; gap: 7px; }
+  .seen li { display: flex; align-items: center; gap: 7px; }
+  .seen li b { flex: 1; font-size: 10.5px; font-weight: 600; }
+  .seen li span { font-size: 8.5px; color: var(--muted); }
 
   /* messages */
   .peer { display: flex; flex-direction: column; align-items: center; gap: 2px; }
@@ -181,7 +176,9 @@ const audience = [
   .progress { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgb(255 255 255 / 0.35); }
   .progress i { display: block; width: 100%; height: 100%; background: #fff; transform-origin: left; transform: scaleX(0.4); }
   .post p { padding: 5px 10px 0; font-size: 10.5px; line-height: 1.25; }
-  .post .meta { padding: 2px 10px 6px; font-size: 8px; color: var(--muted); }
+  .post p b { font-weight: 600; }
+  .post .meta { padding: 2px 10px 0; font-size: 8px; color: var(--muted); }
+  .post .time { padding: 1px 10px 6px; font-size: 7.5px; color: var(--muted); }
 
   /* The clip plays only on the screen in front: a slow push-in and a progress bar that fills. */
   @keyframes push { from { transform: scale(1) translate(0, 0); } to { transform: scale(1.14) translate(-3%, -2%); } }
