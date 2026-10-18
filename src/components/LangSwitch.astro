@@ -25,14 +25,14 @@ const current = LOCALES.find((l) => l.code === locale) ?? LOCALES[0];
 
   <button
     type="button"
-    class="lang-toggle relative z-10 flex h-9 items-center gap-1.5 rounded-pill pr-2.5 pl-3 text-sm font-medium"
+    class="lang-toggle relative z-10 flex h-9 items-center gap-1.5 rounded-pill pr-2.5 pl-3 text-small font-medium"
     data-lang-toggle
     aria-haspopup="listbox"
     aria-expanded="false"
     aria-label={dict.lang.label}
   >
     <span class="lang-flag" aria-hidden="true">{current.flag}</span>
-    <span class="uppercase text-xs font-semibold tracking-wide">{locale}</span>
+    <span class="uppercase text-small font-semibold tracking-wide">{locale}</span>
     <svg class="lang-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M6 9l6 6 6-6"></path>
     </svg>
@@ -59,13 +59,12 @@ const current = LOCALES.find((l) => l.code === locale) ?? LOCALES[0];
             aria-selected={l.code === locale}
             data-lang-option={l.code}
             class:list={[
-              "lang-option flex items-center gap-2.5 rounded-xl px-2.5 py-2 text-sm",
+              "lang-option flex items-center gap-2.5 rounded-xl px-2.5 py-2 text-small",
               l.code === locale ? "bg-accent-soft text-accent font-medium" : "text-ink",
             ]}
           >
             <span class="lang-flag" aria-hidden="true">{l.flag}</span>
             <span class="flex-1">{l.name}</span>
-            <span class="text-[10px] uppercase tracking-wider opacity-60">{l.code}</span>
           </a>
         </li>
       ))
@@ -79,7 +78,6 @@ const current = LOCALES.find((l) => l.code === locale) ?? LOCALES[0];
     --lang-open-h: 0px; /* set by lang.ts from the list height */
   }
   .lang-flag {
-    font-size: 1.05rem;
     line-height: 1;
   }
 

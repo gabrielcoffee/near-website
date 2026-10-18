@@ -1,7 +1,8 @@
 ---
-// Fake app screens, redrawn 2026-09-07 from the real iOS app (UIKit, iOS 26 glass bars).
-// Reference: Home = 3-col rounded-square photo grid, Nearby row above it; Feed = edge-to-edge
-// photo post with "1/5" counter + square page dots; Post = post + comments + composer.
+// Fake app screens, redrawn 2026-10-13 from the real iOS app (simulator, sample data, light mode).
+// The app has three tabs now (Feed, Messages, Profile); there is no friends grid any more.
+// 0 = "Look who's around" (adding someone next to you), 1 = Messages (your friends, one list),
+// 2 = Feed (logo bar, story rail, edge-to-edge post), 3 = the comments sheet over the feed.
 // People and post photos are Unsplash portraits/landscapes (Unsplash license: free for commercial use).
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
@@ -19,247 +20,258 @@ const photo = (file: string) => {
   return mod.default;
 };
 
-type Person = { n: string; p: string };
-const me: Person = { n: "Gabriel", p: "p3" };
-const friends: Person[] = [
-  { n: "Sofia", p: "p1" },
-  { n: "Kai", p: "p2" },
-  { n: "Maya", p: "p11" },
-  { n: "Noah", p: "p12" },
-  { n: "Lucas", p: "p8" },
-  { n: "Leo", p: "p15" },
-  { n: "Inês", p: "p13" },
-  { n: "Amara", p: "p14" },
-];
-const nearby: Person[] = [
-  { n: "Ana", p: "p4" },
+const me = "p3";
+// Nearby, not friends yet. Ana has tapped you (accent frame).
+const nearby = [
   { n: "Tom", p: "p5" },
+  { n: "Ana", p: "p4" },
+  { n: "Zoe", p: "p6" },
 ];
-const grid = [me, ...friends];
+// Messages: the friends list. `plus` = the small spark after a Near Spark name, `unread` = bold line + accent dot.
+const chats = [
+  { n: "Sofia", p: "p1", last: "Running late, 5 min", time: "12:05", unread: false, plus: false },
+  { n: "Kai", p: "p2", last: "Photo", time: "12:04", unread: true, plus: true },
+  { n: "Maya", p: "p11", last: "Replied to your story", time: "11:25", unread: true, plus: false },
+  { n: "Noah", p: "p12", last: "Saturday again? I'm in.", time: "10:50", unread: false, plus: false },
+  { n: "Inês", p: "p13", last: "Sticker", time: "Yesterday", unread: false, plus: true },
+  { n: "Lucas", p: "p8", last: "Video", time: "Sat", unread: false, plus: false },
+  { n: "Amara", p: "p14", last: "Added in person, Sep 19", time: "Fri", unread: false, plus: false },
+  { n: "Leo", p: "p15", last: "haha yes", time: "Thu", unread: false, plus: false },
+  { n: "Clara", p: "p9", last: "See you there!", time: "Wed", unread: false, plus: true },
+  { n: "Rui", p: "p10", last: "Voice message", time: "Mon", unread: false, plus: false },
+];
+// The story rail on the Feed: your own tile, then friends with a new story (accent ring).
+const rail = [
+  { n: "Your story", p: me, own: true, tilt: -7 },
+  { n: "Maya", p: "p11", own: false, tilt: 0 },
+  { n: "Sofia", p: "p1", own: false, tilt: 6 },
+  { n: "Kai", p: "p2", own: false, tilt: -4 },
+];
+const comments = [
+  { n: "Kai", p: "p2", t: "That light is unreal, where is this?", plus: true },
+  { n: "Sofia", p: "p1", t: "Okay but who took it, the framing is perfect" },
+  { n: "Noah", p: "p12", t: "Saturday again? I'm in." },
+  { n: "Inês", p: "p13", t: "Bring the film camera this time", plus: true },
+];
 ---
 
-<!-- 0 · Meet in person: Nearby tiles above the grid, Ana has tapped you (accent frame, pulse) -->
-<div class="screen" data-screen="0">
+<!-- 0 · Meet in person: the discovery space, three people around you, Ana has tapped -->
+<div class="screen discover" data-screen="0">
   <div class="status"><span>9:41</span><span class="flex gap-1"><i class="sig"></i><i class="bat"></i></span></div>
-  <div class="nav">
-    <span class="title">Home</span>
-    <span class="pill">
-      <svg viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 3.5V17H6.5A2.5 2.5 0 0 1 4 14.5z"/></svg>
-      <svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15zM10 20a2 2 0 0 0 4 0"/></svg>
-      <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-    </span>
-  </div>
-  <div class="home">
-    <div class="nearby">
+  <div class="around">
+    <span class="around-label">Look who's around</span>
+    <div class="around-row">
       {nearby.map((p, i) => (
-        <div class:list={["cell", i === 0 ? "incoming" : "idle"]}>
-          <div class="tile">
-            <Image src={pic(p.p)} alt="" width={128} height={128} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" />
+        <div class:list={["peer", i === 1 && "tapped"]}>
+          <div class="peer-tile">
+            <span class="peer-ava"><Image src={pic(p.p)} alt="" width={96} height={96} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></span>
           </div>
-          <span class="name" style={i === 0 ? "color:var(--color-accent)" : ""}>{i === 0 ? `${p.n} · tapped` : p.n}</span>
-        </div>
-      ))}
-    </div>
-    <div class="grid3">
-      {grid.slice(0, 6).map((p) => (
-        <div class="cell">
-          <div class="tile">
-            <Image src={pic(p.p)} alt="" width={128} height={128} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" />
-          </div>
-          <span class="name">{p.n}</span>
+          <span class="peer-name">{p.n}</span>
         </div>
       ))}
     </div>
   </div>
-  <div class="tabbar">
-    <span class="tab on"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 5l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1z"/></svg>Home</span>
-    <span class="tab"><svg viewBox="0 0 24 24"><path d="M9 7h11M9 12h11M9 17h11"/><circle cx="4.5" cy="7" r="1" fill="currentColor"/><circle cx="4.5" cy="12" r="1" fill="currentColor"/><circle cx="4.5" cy="17" r="1" fill="currentColor"/></svg>Feed</span>
-    <span class="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="10" r="3"/><path d="M6.5 18.5c1.2-2.3 3.1-3.5 5.5-3.5s4.3 1.2 5.5 3.5"/></svg>Profile</span>
-  </div>
+  <span class="close" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 7l10 10M17 7 7 17" /></svg></span>
 </div>
 
-<!-- 1 · Your grid: 3×3, one tile mid-drag -->
+<!-- 1 · Your friends: the Messages tab is the friends list -->
 <div class="screen" data-screen="1">
   <div class="status"><span>9:41</span><span class="flex gap-1"><i class="sig"></i><i class="bat"></i></span></div>
-  <div class="nav">
-    <span class="title">Home</span>
-    <span class="pill">
-      <svg viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 3.5V17H6.5A2.5 2.5 0 0 1 4 14.5z"/></svg>
-      <svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15zM10 20a2 2 0 0 0 4 0"/></svg>
-      <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-    </span>
-  </div>
-  <div class="home">
-    <div class="grid3">
-      {grid.map((p, i) => (
-        <div class:list={["cell", i === 4 && "dragging"]}>
-          <div class="tile">
-            <Image src={pic(p.p)} alt="" width={128} height={128} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" />
-          </div>
-          <span class="name">{p.n}</span>
+  <div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6" /><path d="m16 16 4 4" /></svg>Search friends</div>
+  <ul class="chats">
+    {chats.map((c) => (
+      <li class="chat">
+        <span class="ava md"><Image src={pic(c.p)} alt="" width={80} height={80} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></span>
+        <div class="chat-text">
+          <b>{c.n}{c.plus && <i class="badge" aria-hidden="true"></i>}</b>
+          <span class:list={[c.unread && "unread"]}>{c.last}</span>
         </div>
-      ))}
-    </div>
-  </div>
+        <div class="chat-meta">
+          <span>{c.time}</span>
+          {c.unread && <i class="dot"></i>}
+        </div>
+      </li>
+    ))}
+  </ul>
+  <span class="add-friend"><svg viewBox="0 0 24 24"><circle cx="10" cy="8" r="3.5" /><path d="M3.5 19c.9-3.3 3.4-5 6.5-5s5.6 1.7 6.5 5M18.5 9v6M15.5 12h6" /></svg>Add New Friend</span>
   <div class="tabbar">
-    <span class="tab on"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 5l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1z"/></svg>Home</span>
-    <span class="tab"><svg viewBox="0 0 24 24"><path d="M9 7h11M9 12h11M9 17h11"/><circle cx="4.5" cy="7" r="1" fill="currentColor"/><circle cx="4.5" cy="12" r="1" fill="currentColor"/><circle cx="4.5" cy="17" r="1" fill="currentColor"/></svg>Feed</span>
-    <span class="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="10" r="3"/><path d="M6.5 18.5c1.2-2.3 3.1-3.5 5.5-3.5s4.3 1.2 5.5 3.5"/></svg>Profile</span>
+    <span class="tab"><svg viewBox="0 0 24 24"><rect x="6" y="8" width="12" height="12" rx="2.5" /><path d="M8 5h8M9.5 2.5h5" /></svg>Feed</span>
+    <span class="tab on"><svg viewBox="0 0 24 24"><path d="M3.5 6.5A2.5 2.5 0 0 1 6 4h8a2.5 2.5 0 0 1 2.5 2.5v4.5A2.5 2.5 0 0 1 14 13.5H9l-3.5 3v-3A2.5 2.5 0 0 1 3.5 11z" /><path d="M16.5 8.5H18a2.5 2.5 0 0 1 2.5 2.5v4.5A2.5 2.5 0 0 1 18 18h-.5v2.5L14.5 18h-3a2.5 2.5 0 0 1-2-1" /></svg>Messages</span>
+    <span class="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><circle cx="12" cy="10" r="3" /><path d="M6.5 18.5c1.2-2.3 3.1-3.5 5.5-3.5s4.3 1.2 5.5 3.5" /></svg>Profile</span>
   </div>
 </div>
 
-<!-- 2 · Feed: edge-to-edge photo, counter, square page dots, caption, comment count -->
+<!-- 2 · A feed that ends: logo bar, story rail, one edge-to-edge post -->
 <div class="screen" data-screen="2">
   <div class="status"><span>9:41</span><span class="flex gap-1"><i class="sig"></i><i class="bat"></i></span></div>
-  <div class="nav">
-    <span class="title">Feed</span>
-    <span class="pill">
-      <svg viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 3.5V17H6.5A2.5 2.5 0 0 1 4 14.5z"/></svg>
-      <svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15zM10 20a2 2 0 0 0 4 0"/></svg>
-      <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-    </span>
-  </div>
-  <div class="feed">
+  <div class="feed-wrap">
+    <div class="feed-bar">
+      <span class="mark" aria-hidden="true"><i></i><i></i></span>
+      <span class="feed-word">Near</span>
+      <span class="new-post"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="12" height="12" rx="2.5" /><path d="M8 4h9.5A2.5 2.5 0 0 1 20 6.5V16" /><path d="M10 10.5v5M7.5 13h5" /></svg></span>
+    </div>
+    <div class="rail">
+      {rail.map((r) => (
+        <div class="story" style={`--tilt:${r.tilt}deg`}>
+          <span class:list={["story-tile", !r.own && "new"]}>
+            <Image src={pic(r.p)} alt="" width={96} height={96} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" />
+            {r.own && <i class="story-add">+</i>}
+          </span>
+          <small>{r.n}</small>
+        </div>
+      ))}
+    </div>
     <article class="post">
       <div class="post-head">
-        <div class="ava"><Image src={pic("p11")} alt="" width={80} height={80} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></div>
-        <div class="who"><b>Maya</b><span>23 h ago</span></div>
+        <span class="ava sm"><Image src={pic("p11")} alt="" width={80} height={80} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></span>
+        <div class="who"><b>Maya</b><span>30 min ago</span></div>
+        <span class="loc">📍 Big Sur</span>
+        <span class="more">•••</span>
+      </div>
+      <div class="photo">
+        <Image src={photo("s5")} alt="" width={360} height={450} format="webp" quality={72} loading="lazy" decoding="async" draggable="false" />
+      </div>
+    </article>
+  </div>
+  <div class="tabbar">
+    <span class="tab on"><svg viewBox="0 0 24 24"><rect x="6" y="8" width="12" height="12" rx="2.5" /><path d="M8 5h8M9.5 2.5h5" /></svg>Feed</span>
+    <span class="tab"><svg viewBox="0 0 24 24"><path d="M3.5 6.5A2.5 2.5 0 0 1 6 4h8a2.5 2.5 0 0 1 2.5 2.5v4.5A2.5 2.5 0 0 1 14 13.5H9l-3.5 3v-3A2.5 2.5 0 0 1 3.5 11z" /><path d="M16.5 8.5H18a2.5 2.5 0 0 1 2.5 2.5v4.5A2.5 2.5 0 0 1 18 18h-.5v2.5L14.5 18h-3a2.5 2.5 0 0 1-2-1" /></svg>Messages</span>
+    <span class="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><circle cx="12" cy="10" r="3" /><path d="M6.5 18.5c1.2-2.3 3.1-3.5 5.5-3.5s4.3 1.2 5.5 3.5" /></svg>Profile</span>
+  </div>
+</div>
+
+<!-- 3 · Words, not hearts: the comments sheet over the same post, no like button anywhere -->
+<div class="screen" data-screen="3">
+  <div class="status"><span>9:41</span><span class="flex gap-1"><i class="sig"></i><i class="bat"></i></span></div>
+  <div class="feed-wrap dimmed" aria-hidden="true">
+    <div class="feed-bar">
+      <span class="mark"><i></i><i></i></span>
+      <span class="feed-word">Near</span>
+      <span class="new-post"></span>
+    </div>
+    <article class="post">
+      <div class="post-head">
+        <span class="ava sm"><Image src={pic("p11")} alt="" width={80} height={80} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></span>
+        <div class="who"><b>Maya</b><span>30 min ago</span></div>
         <span class="loc">📍 Big Sur</span>
       </div>
       <div class="photo">
-        <Image src={photo("s5")} alt="" width={320} height={320} format="webp" quality={72} loading="lazy" decoding="async" draggable="false" />
-        <span class="counter">1/5</span>
-        <span class="dots"><i class="on"></i><i></i><i></i><i></i><i></i></span>
-      </div>
-      <p>road trip dump 🚙</p>
-      <span class="meta">3 comments</span>
-    </article>
-    <article class="post">
-      <div class="post-head">
-        <div class="ava"><Image src={pic("p1")} alt="" width={80} height={80} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></div>
-        <div class="who"><b>Sofia</b><span>1 day ago</span></div>
-        <span class="loc">📍 Sintra</span>
-      </div>
-      <div class="photo pair">
-        <Image src={photo("s2")} alt="" width={160} height={160} format="webp" quality={72} loading="lazy" decoding="async" draggable="false" />
-        <Image src={photo("s3")} alt="" width={160} height={160} format="webp" quality={72} loading="lazy" decoding="async" draggable="false" />
+        <Image src={photo("s5")} alt="" width={360} height={450} format="webp" quality={60} loading="lazy" decoding="async" draggable="false" />
       </div>
     </article>
   </div>
-  <div class="tabbar">
-    <span class="tab"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 5l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1z"/></svg>Home</span>
-    <span class="tab on"><svg viewBox="0 0 24 24"><path d="M9 7h11M9 12h11M9 17h11"/><circle cx="4.5" cy="7" r="1" fill="currentColor"/><circle cx="4.5" cy="12" r="1" fill="currentColor"/><circle cx="4.5" cy="17" r="1" fill="currentColor"/></svg>Feed</span>
-    <span class="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="10" r="3"/><path d="M6.5 18.5c1.2-2.3 3.1-3.5 5.5-3.5s4.3 1.2 5.5 3.5"/></svg>Profile</span>
-  </div>
-</div>
-
-<!-- 3 · Post: same card, comments below, composer at the bottom -->
-<div class="screen" data-screen="3">
-  <div class="status"><span>9:41</span><span class="flex gap-1"><i class="sig"></i><i class="bat"></i></span></div>
-  <div class="nav sub">
-    <span class="back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>Feed</span>
-    <span class="title center">Post</span>
-  </div>
-  <div class="feed">
-    <article class="post">
-      <div class="post-head">
-        <div class="ava"><Image src={pic("p11")} alt="" width={80} height={80} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></div>
-        <div class="who"><b>Maya</b><span>23 h ago</span></div>
-        <span class="loc">📍 Big Sur</span>
-      </div>
-      <div class="photo short">
-        <Image src={photo("s5")} alt="" width={320} height={180} format="webp" quality={72} loading="lazy" decoding="async" draggable="false" />
-      </div>
-      <p>road trip dump 🚙</p>
-      <span class="meta">3 comments</span>
-    </article>
-    <div class="comments">
-      <div class="comment">
-        <div class="ava xs"><Image src={pic("p2")} alt="" width={64} height={64} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></div>
-        <div><b>Kai</b><p>which one is the pier photo</p></div>
-      </div>
-      <div class="comment">
-        <div class="ava xs"><Image src={pic("p12")} alt="" width={64} height={64} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></div>
-        <div><b>Noah</b><p>next time you're driving us all</p></div>
-      </div>
-      <div class="comment">
-        <div class="ava xs"><Image src={pic("p11")} alt="" width={64} height={64} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></div>
-        <div><b>Maya</b><p>deal. sunday?</p></div>
-      </div>
+  <div class="sheet">
+    <span class="grabber"></span>
+    <b class="sheet-title">4 Comments</b>
+    <ul class="comments">
+      {comments.map((c) => (
+        <li class="comment">
+          <span class="ava sm"><Image src={pic(c.p)} alt="" width={64} height={64} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></span>
+          <div><b>{c.n}{c.plus && <i class="badge" aria-hidden="true"></i>}</b><p>{c.t}</p></div>
+        </li>
+      ))}
+    </ul>
+    <div class="composer">
+      <span class="ava sm"><Image src={pic(me)} alt="" width={64} height={64} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></span>
+      <span class="field">Add a comment</span>
+      <span class="round"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2.5" /><circle cx="9" cy="10" r="1.5" /><path d="m5 17 4.5-4 3 2.5 3-3 4 4" /></svg></span>
+      <span class="round"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" /><path d="M8.5 14.5c.9 1.2 2.1 1.8 3.5 1.8s2.6-.6 3.5-1.8" /><circle cx="9.5" cy="10" r=".9" fill="#1a1a1a" stroke="none" /><circle cx="14.5" cy="10" r=".9" fill="#1a1a1a" stroke="none" /></svg></span>
     </div>
   </div>
-  <div class="composer"><span class="field">Add a comment</span><span class="send">Post</span></div>
 </div>
 
 <style>
-  .screen { font-family: var(--font-sans); color: #1a1a1a; background: #fff; --ios-blue: #007aff; --surface: #f4f4f5; --muted: #6b6b70; }
-  .status { display: flex; justify-content: space-between; padding: 14px 22px 0; font-size: 11px; font-weight: 600; }
+  .screen { font-family: var(--font-sans); color: #1a1a1a; background: #fff; --surface: #f2f2f4; --muted: #6b6b70; --line: #e4e4e7; }
+  .status { position: relative; z-index: 3; display: flex; justify-content: space-between; padding: 14px 22px 0; font-size: 11px; font-weight: 600; }
   .status .sig, .status .bat { display: inline-block; height: 8px; border-radius: 2px; background: #1a1a1a; }
   .status .sig { width: 12px; }
   .status .bat { width: 18px; opacity: 0.9; }
 
-  /* nav: inline title left, floating actions pill right */
-  .nav { position: relative; display: flex; align-items: center; justify-content: space-between; padding: 14px 10px 4px 12px; }
-  .nav .title { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
-  .nav .pill { display: flex; align-items: center; gap: 10px; height: 26px; padding: 0 10px; border-radius: 999px; background: #fff; box-shadow: 0 1px 1px rgb(0 0 0 / 0.04), 0 4px 14px -2px rgb(0 0 0 / 0.12); }
-  .nav .pill svg { width: 13px; height: 13px; fill: none; stroke: #1a1a1a; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-  .nav.sub { justify-content: center; }
-  .nav .back { position: absolute; left: 10px; display: inline-flex; align-items: center; gap: 1px; font-size: 11px; color: var(--ios-blue); }
-  .nav .back svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-  .nav .title.center { font-size: 12px; }
+  .ava { display: block; flex: none; border-radius: 999px; overflow: hidden; background: var(--surface); }
+  .ava img, .photo img, .story-tile img, .peer-ava img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .ava.sm { width: 20px; height: 20px; }
+  .ava.md { width: 28px; height: 28px; }
+  /* Near Spark badge: the hand-drawn spark, orange, after the name */
+  .badge { display: inline-block; width: 11px; height: 9px; margin-left: 3px; vertical-align: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 20'%3E%3Cg fill='none' stroke='%23FF9300' stroke-width='2.4' stroke-linejoin='round'%3E%3Cpath d='M8 4Q9 10 15 11Q9 12 8 18Q7 12 1 11Q7 10 8 4Z'/%3E%3Cpath d='M18 1Q18.6 4.4 22 5Q18.6 5.6 18 9Q17.4 5.6 14 5Q17.4 4.4 18 1Z'/%3E%3C/g%3E%3C/svg%3E") no-repeat center / contain; }
 
-  /* home: nearby row + 3-column grid, vertically centred like the app */
-  .home { position: absolute; inset: 60px 0 58px; display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 0 9px; }
-  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 9px; row-gap: 5px; }
-  .cell { display: flex; flex-direction: column; align-items: center; gap: 3px; position: relative; }
-  .tile { width: 100%; aspect-ratio: 1; border-radius: 8px; overflow: hidden; background: var(--surface); }
-  .tile img, .ava img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .name { font-size: 8.5px; font-weight: 500; line-height: 1.1; text-align: center; color: #1a1a1a; }
-  .cell.dragging { z-index: 2; }
-  .cell.dragging .tile { transform: rotate(-3deg) scale(1.1); box-shadow: 0 12px 22px -8px rgb(0 0 0 / 0.4); animation: wiggle 0.8s ease-in-out infinite; }
-  .cell.dragging .name { opacity: 0; }
-  @keyframes wiggle { 0%,100% { transform: rotate(-3deg) scale(1.1); } 50% { transform: rotate(-0.5deg) scale(1.1); } }
+  /* 0 · discovery: dot-and-plus pattern, centred row of tiles, close button */
+  .discover {
+    background-color: #fff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Ccircle cx='6.5' cy='6.5' r='1.6' fill='%23e3e3e6'/%3E%3Cpath d='M19.5 16.5v6M16.5 19.5h6' stroke='%23e3e3e6' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-size: 26px 26px;
+  }
+  .around { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding-bottom: 30px; }
+  .around-label { font-size: 9.5px; font-weight: 500; color: var(--muted); }
+  .around-row { display: flex; gap: 10px; }
+  .peer { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .peer-tile { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 15px; background: #f6f6f7; border: 1px solid #dcdce0; box-shadow: 0 4px 10px -6px rgb(0 0 0 / 0.25); }
+  .peer-ava { display: block; width: 38px; height: 38px; border-radius: 999px; overflow: hidden; }
+  .peer-name { font-size: 8px; font-weight: 500; color: #1a1a1a; }
+  .peer.tapped .peer-tile { border-color: var(--color-accent); outline: 1.5px solid var(--color-accent); outline-offset: 1px; }
+  .phone[data-active="0"] .peer.tapped .peer-tile { animation: tapped 1.6s ease-in-out infinite; }
+  @keyframes tapped { 0%, 100% { outline-offset: 1px; } 50% { outline-offset: 3px; } }
+  .close { position: absolute; left: 50%; bottom: 34px; transform: translateX(-50%); display: grid; place-items: center; width: 32px; height: 32px; border-radius: 999px; background: #1a1a1a; }
+  .close svg { width: 14px; height: 14px; fill: none; stroke: #fff; stroke-width: 2.2; stroke-linecap: round; }
 
-  .nearby { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 9px; row-gap: 5px; padding-bottom: 4px; }
-  .cell.incoming .tile { outline: 2px solid var(--color-accent); outline-offset: 2px; }
-  .phone[data-active="0"] .cell.incoming .tile { animation: tapped 1.6s ease-in-out infinite; }
-  @keyframes tapped { 0%, 100% { outline-offset: 2px; } 50% { outline-offset: 4px; } }
+  /* 1 · messages: search, rows, Add New Friend, tab bar */
+  .search { display: flex; align-items: center; gap: 5px; margin: 14px 9px 4px; height: 24px; padding: 0 9px; border-radius: 999px; background: var(--surface); font-size: 9px; color: #8e8e93; }
+  .search svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+  .chats { display: flex; flex-direction: column; padding: 2px 9px 0; }
+  .chat { display: flex; align-items: center; gap: 8px; padding: 5.5px 0; }
+  .chat-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+  .chat-text b { font-size: 10px; font-weight: 600; line-height: 1.2; }
+  .chat-text span { font-size: 8px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .chat-text span.unread { color: #1a1a1a; font-weight: 600; }
+  .chat-meta { align-self: flex-start; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; padding-top: 2px; font-size: 7.5px; color: var(--muted); }
+  .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--color-accent); }
+  .add-friend { position: absolute; left: 9px; right: 9px; bottom: 54px; display: flex; align-items: center; justify-content: center; gap: 5px; height: 30px; border-radius: 999px; background: #1a1a1a; color: #fff; font-size: 10px; font-weight: 600; }
+  .add-friend svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 
-  /* floating glass tab bar */
-  .tabbar { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); display: flex; align-items: center; padding: 3px; border-radius: 999px; background: rgb(255 255 255 / 0.82); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 1px 1px rgb(0 0 0 / 0.04), 0 6px 18px -4px rgb(0 0 0 / 0.16); }
+  /* floating glass tab bar, selected tab tinted in the accent */
+  .tabbar { position: absolute; left: 50%; bottom: 12px; z-index: 2; transform: translateX(-50%); display: flex; align-items: center; padding: 3px; border-radius: 999px; background: rgb(255 255 255 / 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 1px 1px rgb(0 0 0 / 0.04), 0 6px 18px -4px rgb(0 0 0 / 0.18); }
   .tab { display: flex; flex-direction: column; align-items: center; gap: 1px; width: 52px; padding: 5px 0 4px; border-radius: 999px; font-size: 7px; font-weight: 500; color: #1a1a1a; }
-  .tab svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-  .tab.on { color: var(--ios-blue); background: rgb(0 0 0 / 0.06); }
+  .tab svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .tab.on { color: var(--color-accent); background: rgb(0 0 0 / 0.06); }
 
-  /* feed */
-  .feed { position: absolute; inset: 80px 0 0; overflow: hidden; display: flex; flex-direction: column; gap: 6px; }
+  /* 2 · feed: logo + wordmark + new-post button, story rail, edge-to-edge post */
+  .feed-wrap { position: absolute; inset: 30px 0 0; overflow: hidden; }
+  .feed-bar { display: flex; align-items: center; justify-content: space-between; padding: 6px 10px 2px; }
+  .mark { position: relative; width: 20px; height: 18px; }
+  .mark i { position: absolute; width: 12px; height: 12px; border-radius: 999px; background: var(--color-mark); mix-blend-mode: multiply; }
+  .mark i:first-child { left: 0; top: 0; }
+  .mark i:last-child { right: 0; bottom: 0; }
+  .feed-word { font-size: 12px; font-weight: 600; color: #c7c7cc; }
+  .new-post { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 7px; background: var(--color-mark); }
+  .new-post svg { width: 13px; height: 13px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .rail { display: flex; gap: 9px; padding: 10px 10px 6px; overflow: hidden; }
+  .story { flex: none; display: flex; flex-direction: column; align-items: center; gap: 4px; transform: rotate(var(--tilt)); }
+  .story-tile { position: relative; display: block; width: 46px; height: 46px; border-radius: 13px; }
+  .story-tile img { border-radius: 13px; }
+  .story-tile.new { outline: 1.5px solid var(--color-mark); outline-offset: 2px; }
+  .story-add { position: absolute; right: -3px; bottom: -3px; display: grid; place-items: center; width: 14px; height: 14px; border-radius: 999px; background: var(--color-mark); border: 1.5px solid #fff; color: #fff; font-size: 10px; font-style: normal; font-weight: 600; line-height: 1; }
+  .story small { font-size: 7px; font-weight: 500; color: #1a1a1a; }
   .post { display: flex; flex-direction: column; }
-  .post-head { display: flex; align-items: flex-start; gap: 5px; padding: 6px 9px 5px; }
-  .ava { width: 23px; height: 23px; border-radius: 999px; display: grid; place-items: center; flex: none; overflow: hidden; }
-  .ava.xs { width: 17px; height: 17px; }
+  .post-head { display: flex; align-items: center; gap: 6px; padding: 8px 9px 7px; }
   .who { display: flex; flex-direction: column; flex: 1; min-width: 0; }
-  .who b { font-size: 10.5px; font-weight: 600; line-height: 1.15; }
-  .who span { font-size: 8px; color: var(--muted); }
-  .loc { font-size: 8px; font-weight: 500; color: var(--muted); padding-top: 1px; }
-  .photo { position: relative; width: 100%; aspect-ratio: 1; background: var(--surface); overflow: hidden; }
-  .photo > img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .photo.short { aspect-ratio: 16 / 9; }
-  .photo.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #fff; }
-  .counter { position: absolute; top: 8px; right: 8px; padding: 2px 6px; border-radius: 999px; background: rgb(0 0 0 / 0.55); color: #fff; font-size: 8px; font-weight: 600; }
-  .dots { position: absolute; left: 50%; bottom: 6px; transform: translateX(-50%); display: flex; gap: 2px; }
-  .dots i { width: 4px; height: 4px; border-radius: 1px; background: rgb(255 255 255 / 0.45); }
-  .dots i.on { background: #fff; }
-  .post p { padding: 5px 9px 0; font-size: 10.5px; line-height: 1.25; }
-  .post .meta { padding: 2px 9px 6px; font-size: 8px; color: var(--muted); }
+  .who b { font-size: 10px; font-weight: 600; line-height: 1.15; }
+  .who span { font-size: 7.5px; color: var(--muted); }
+  .loc { font-size: 7.5px; font-weight: 500; color: var(--muted); }
+  .more { font-size: 8px; letter-spacing: -1px; color: #3a3a3c; padding-left: 4px; }
+  .photo { width: 100%; aspect-ratio: 4 / 5; background: var(--surface); overflow: hidden; }
 
-  /* comments + composer */
-  .comments { display: flex; flex-direction: column; gap: 6px; padding: 2px 9px; }
-  .comment { display: flex; align-items: flex-start; gap: 5px; }
-  .comment b { display: block; font-size: 8.5px; font-weight: 600; line-height: 1.2; }
-  .comment p { font-size: 9.5px; line-height: 1.25; padding: 0; }
-  .composer { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 6px; padding: 6px 9px 18px; background: var(--surface); }
-  .composer .field { flex: 1; padding: 6px 8px; border-radius: 5px; background: #fff; border: 1px solid #d9d9dc; font-size: 9.5px; color: #9a9aa0; }
-  .composer .send { font-size: 10px; font-weight: 600; color: #a5a5aa; }
+  /* 3 · comments sheet */
+  .dimmed::after { content: ""; position: absolute; inset: -30px 0 0; background: rgb(0 0 0 / 0.28); }
+  .sheet { position: absolute; left: 4px; right: 4px; bottom: 0; top: 46%; z-index: 2; display: flex; flex-direction: column; padding: 6px 10px 0; border-radius: 18px 18px 0 0; background: #fff; box-shadow: 0 -8px 24px -12px rgb(0 0 0 / 0.3); }
+  .grabber { align-self: center; width: 26px; height: 3px; border-radius: 999px; background: #d1d1d6; }
+  .sheet-title { align-self: center; margin-top: 7px; font-size: 10px; font-weight: 600; }
+  .comments { display: flex; flex-direction: column; gap: 9px; margin-top: 10px; }
+  .comment { display: flex; align-items: flex-start; gap: 7px; }
+  .comment b { display: block; font-size: 8px; font-weight: 600; line-height: 1.2; }
+  .comment p { font-size: 9px; line-height: 1.25; }
+  .composer { position: absolute; left: 10px; right: 10px; bottom: 16px; display: flex; align-items: center; gap: 5px; }
+  .composer .field { flex: 1; height: 22px; display: flex; align-items: center; padding: 0 9px; border-radius: 999px; background: #fff; border: 1px solid var(--line); font-size: 8.5px; color: #9a9aa0; }
+  .composer .round { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 999px; border: 1px solid var(--line); }
+  .composer .round svg { width: 12px; height: 12px; fill: none; stroke: #1a1a1a; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 
-  @media (prefers-reduced-motion: reduce) { .cell.dragging .tile, .cell.incoming .tile { animation: none !important; } }
+  @media (prefers-reduced-motion: reduce) { .peer.tapped .peer-tile { animation: none !important; } }
 </style>

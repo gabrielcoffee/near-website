@@ -82,7 +82,7 @@ const phones = [
               <input class="sr-only" type="radio" name="platform" value={p.key} />
               <span class="choice-pill">
                 <svg class="choice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={ICONS[p.key]} />
-                {p.label}
+                <span class="min-w-0">{p.label}</span>
               </span>
             </label>
           ))
@@ -99,7 +99,7 @@ const phones = [
               <input class="sr-only" type="radio" name="reason" value={r.key} />
               <span class="choice-pill">
                 <svg class="choice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={ICONS[r.key]} />
-                {r.label}
+                <span class="min-w-0">{r.label}</span>
               </span>
             </label>
           ))
@@ -131,7 +131,7 @@ const phones = [
       <span class="contact-send-label">{t.button}</span>
       <span class="contact-dots" aria-hidden="true"><i></i><i></i><i></i></span>
     </button>
-    <p class="contact-status min-h-5 text-center text-sm text-muted" role="status" aria-live="polite" data-contact-status></p>
+    <p class="contact-status min-h-5 text-center text-small text-muted" role="status" aria-live="polite" data-contact-status></p>
   </div>
 
   <p class="contact-done h-section" role="status" aria-live="polite" data-contact-done></p>

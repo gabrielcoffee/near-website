@@ -15,6 +15,17 @@
   --color-mark: #ff9300;
   --color-mark-overlap: #ff5500;
 
+  /* The only four text sizes on the site (page text; the app mock screens keep their own tiny sizes).
+     Fluid from a 390px phone to the 1024px container: display 36→48, title 24→30, body 16→18, small 14. */
+  --text-display: clamp(2.25rem, 1.789rem + 1.893vw, 3rem);
+  --text-display--line-height: 1.08;
+  --text-title: clamp(1.5rem, 1.269rem + 0.946vw, 1.875rem);
+  --text-title--line-height: 1.15;
+  --text-body: clamp(1rem, 0.923rem + 0.315vw, 1.125rem);
+  --text-body--line-height: 1.5;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.45;
+
   --radius-card: 24px;
   --radius-pill: 999px;
 
@@ -117,13 +128,13 @@ body {
   background: var(--color-ink);
 }
 .btn-md {
-  @apply h-11 px-5 text-[15px];
+  @apply h-11 px-5 text-small;
 }
 .btn-sm {
-  @apply h-9 px-4 text-sm;
+  @apply h-9 px-4 text-small;
 }
 .btn-lg {
-  @apply h-13 px-7 text-base;
+  @apply h-13 px-7 text-body;
 }
 .btn-primary {
   @apply bg-ink text-white;
@@ -161,7 +172,7 @@ body {
 /* ---------- Fields (waitlist input) ----------
    Same pill and height as .btn-lg, so the row reads as one control. */
 .field {
-  @apply h-13 w-full rounded-pill border bg-surface px-5 text-base text-ink;
+  @apply h-13 w-full rounded-pill border bg-surface px-5 text-body text-ink;
   border-color: var(--color-line);
   transition:
     border-color var(--btn-speed) ease,
@@ -189,7 +200,7 @@ body {
 
 /* Contact form: labels, textarea, pill choices, status. */
 .field-label {
-  @apply text-sm font-medium text-ink;
+  @apply text-small font-medium text-ink;
 }
 .field-area {
   @apply h-auto min-h-36 rounded-card py-4 leading-relaxed;
@@ -199,7 +210,8 @@ body {
   @apply flex cursor-pointer items-stretch;
 }
 .choice-pill {
-  @apply flex min-h-11 w-full items-center gap-2.5 rounded-xl border border-line bg-surface px-4 py-2 text-[15px] leading-snug text-ink select-none;
+  /* The label may wrap ("Something else" in a third of a phone); it never spills past the pill. */
+  @apply flex min-h-11 w-full items-center gap-2.5 rounded-xl border border-line bg-surface px-3 py-2 text-small text-ink select-none sm:px-4;
   transition:
     background-color var(--btn-speed) ease,
     color var(--btn-speed) ease,
@@ -414,7 +426,7 @@ fieldset[aria-invalid="true"] .choice-pill {
   display: none;
 }
 .waitlist[data-state="done"] .waitlist-status {
-  @apply mt-0 text-center text-base text-ink;
+  @apply mt-0 text-center text-body text-ink;
 }
 
 /* ---------- Nav links (header): quiet pill background on hover ---------- */
@@ -619,14 +631,11 @@ html.js [data-reveal].is-visible {
 }
 
 /* ---------- Misc helpers ---------- */
-.eyebrow {
-  @apply text-sm font-medium tracking-wide text-accent;
-}
 .h-section {
-  @apply text-3xl md:text-4xl font-medium tracking-tight text-balance;
+  @apply text-display font-medium tracking-tight text-balance;
 }
 .lede {
-  @apply text-base md:text-lg text-muted text-pretty;
+  @apply text-body text-muted text-pretty;
 }
 /* Legal pages: quiet bullets with an orange dot, no browser disc. */
 .legal-list li {

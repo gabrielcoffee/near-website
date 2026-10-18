@@ -185,5 +185,14 @@ export function initContact() {
     };
     form.addEventListener("input", onEdit);
     form.addEventListener("change", onEdit);
+
+    // The app's Send Feedback arrives with `?name=…&email=…`: the person is signed in there, so fill them in.
+    const params = new URLSearchParams(location.search);
+    for (const key of ["name", "email"] as const) {
+      const value = params.get(key)?.trim();
+      const field = input(form, key);
+      if (value && field && !field.value) field.value = value.slice(0, key === "name" ? 80 : 254);
+    }
+    onEdit();
   });
 }

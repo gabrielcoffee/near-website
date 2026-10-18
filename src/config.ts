@@ -16,8 +16,28 @@ export const WAITLIST_ENABLED = Boolean(SUPABASE_URL && SUPABASE_PUBLISHABLE_KEY
  *  ever disappear, mail to this address bounces silently at the sender. */
 export const CONTACT_EMAIL = "hello@nearapp.social";
 
+/** Who legally operates Near: company name, CNPJ and registered address, as the legal pages must state
+ *  (Apple's EULA minimum terms ask for the developer's name and address). Rendered wherever a dictionary
+ *  string says {entity}. Street address left out on purpose (it is a family home); add a business address
+ *  here if one is ever needed. */
+export const LEGAL_ENTITY = "Gabriel Fernandes Pereira (CNPJ 54.909.636/0001-80), Brasil";
+
 /** Date shown at the top of /privacy/ and /terms/. Bump it whenever either page changes. */
-export const LEGAL_UPDATED = "2026-09-23";
+export const LEGAL_UPDATED = "2026-10-16";
+
+/** Near Spark prices per language's main storefront, as App Store Connect will show them. US and Brazil are
+ *  decided (monthly $2.99 / R$ 9,90, yearly $24.99 / R$ 99,90); euro and rouble values are placeholders.
+ *  `yearlyPerMonth` and `saving` are the yearly plan's per-month equivalent and its discount vs 12 months. */
+export type PlusPrice = { monthly: string; yearly: string; yearlyPerMonth: string; saving: string };
+export const NEAR_PLUS_PRICE: Record<Locale, PlusPrice> = {
+  en: { monthly: "$2.99", yearly: "$24.99", yearlyPerMonth: "$2.08", saving: "30%" },
+  pt: { monthly: "R$ 9,90", yearly: "R$ 99,90", yearlyPerMonth: "R$ 8,33", saving: "16%" },
+  es: { monthly: "2,99 €", yearly: "24,99 €", yearlyPerMonth: "2,08 €", saving: "30%" },
+  fr: { monthly: "2,99 €", yearly: "24,99 €", yearlyPerMonth: "2,08 €", saving: "30%" },
+  de: { monthly: "2,99 €", yearly: "24,99 €", yearlyPerMonth: "2,08 €", saving: "30%" },
+  it: { monthly: "2,99 €", yearly: "24,99 €", yearlyPerMonth: "2,08 €", saving: "30%" },
+  ru: { monthly: "$2.99", yearly: "$24.99", yearlyPerMonth: "$2.08", saving: "30%" },
+};
 
 /** Barely-there smooth scrolling (Lenis). Set false to use native scroll. */
 export const SMOOTH_SCROLL = true;

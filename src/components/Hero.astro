@@ -25,17 +25,17 @@ const { dict } = Astro.props;
 
   <!-- pointer-events-none so edge characters under this full-width box stay hoverable/draggable -->
   <div class="container-x pointer-events-none relative flex flex-col items-center pb-[18vh] text-center">
-    <h1 class="hero-title swipe pointer-events-auto text-4xl font-medium tracking-tight md:text-5xl">
+    <h1 class="hero-title swipe pointer-events-auto text-display font-medium tracking-tight">
       <span class="swipe-inner"><Wordmark text={dict.hero.title} /></span>
     </h1>
-    <p class="hero-tag swipe pointer-events-auto mt-3 max-w-xs text-lg text-muted md:text-xl">
+    <p class="hero-tag swipe pointer-events-auto mt-3 max-w-xs text-body text-muted">
       <span class="swipe-inner">{dict.hero.tagline}</span>
     </p>
   </div>
 
   <a
     href="#how-it-works"
-    class="scroll-hint absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 text-xs text-muted"
+    class="scroll-hint absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 text-small text-muted"
     data-scroll-hint
     aria-label={dict.hero.scroll}
   >

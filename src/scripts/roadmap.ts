@@ -1,4 +1,4 @@
-// "Coming next": three app screens stacked like photos. Next sends the front card to the back
+// "Also in Near": app screens stacked like photos. Next sends the front card to the back
 // (it lifts out, then settles behind); Previous brings the back card to the front the same way.
 export function initRoadmap() {
   document.querySelectorAll<HTMLElement>("[data-roadmap]").forEach((root) => {

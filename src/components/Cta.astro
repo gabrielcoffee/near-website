@@ -32,7 +32,7 @@ const waitlist = !live && WAITLIST_ENABLED;
         waitlist ? (
           <div class="mt-8" data-reveal>
             <Waitlist dict={dict} locale={locale} />
-            <p class="mt-4 text-sm text-muted">{dict.cta.soon}</p>
+            <p class="mt-4 text-small text-muted">{dict.cta.soon}</p>
           </div>
         ) : (
           <div class="mt-8 flex justify-center" data-reveal>

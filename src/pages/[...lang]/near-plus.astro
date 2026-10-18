@@ -1,0 +1,17 @@
+---
+import Base from "../../layouts/Base.astro";
+import Plus from "../../components/Plus.astro";
+import { getDict, localeStaticPaths } from "../../i18n";
+import type { Locale } from "../../config";
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+
+const { locale } = Astro.props as { locale: Locale };
+const dict = getDict(locale);
+---
+
+<Base locale={locale} dict={dict} path="/near-plus/" title={`${dict.nav.plus} | Near`} description={dict.plus.intro}>
+  <Plus dict={dict} locale={locale} />
+</Base>

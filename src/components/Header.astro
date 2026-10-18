@@ -18,6 +18,8 @@ const home = localePath(locale, "/");
 // On the home page keep hrefs as bare hashes: Lenis only smooth-scrolls (with the header offset) for those.
 const anchor = (id: string) => (path === "/" ? `#${id}` : `${home}#${id}`);
 const ctaHref = APP_STORE_URL || anchor("get-the-app");
+// "Near Spark" in every language; "Spark" is drawn in the accent colour.
+const [plusFirst, plusLast] = [dict.nav.plus.replace(/\s*\S+$/, ""), dict.nav.plus.split(" ").pop()];
 ---
 
 <div
@@ -32,15 +34,20 @@ const ctaHref = APP_STORE_URL || anchor("get-the-app");
     class="site-header relative flex w-full items-center justify-between gap-3 border border-line/80 px-3 py-2 md:px-4"
     data-header
   >
-    <Wordmark href={home} class="px-2 text-xl" ariaLabel="Near" />
+    <Wordmark href={home} class="px-2 text-body" ariaLabel="Near" />
 
     <nav
-      class="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-7 lg:flex"
+      class="absolute left-1/2 top-1/2 hidden w-max -translate-x-1/2 -translate-y-1/2 items-center gap-4 whitespace-nowrap lg:flex"
       aria-label="Main"
     >
-      <a href={anchor("how-it-works")} class="nav-link text-[15px]">{dict.nav.how}</a>
-      <a href={anchor("coming-next")} class="nav-link text-[15px]">{dict.nav.next}</a>
-      <a href={anchor("what-we-believe")} class="nav-link text-[15px]">{dict.nav.believe}</a>
+      <!-- Section links in the order of pages/[...lang]/index.astro, then the Near Spark page. Four links is the ceiling: the header caps
+           at 1024px and the nav is centred, so it may be at most ~490px wide in es/fr before it runs into the
+           lang switch + CTA (measured 2026-09-30). `w-max`: an absolutely positioned box at left 50% only gets half the header
+           as available width, so without it the labels wrap. -->
+      <a href={anchor("how-it-works")} class="nav-link text-small">{dict.nav.how}</a>
+      <a href={anchor("also-in-near")} class="nav-link text-small">{dict.nav.also}</a>
+      <a href={anchor("what-we-believe")} class="nav-link text-small">{dict.nav.believe}</a>
+      <a href={localePath(locale, "/near-plus/")} class="nav-link text-small" aria-current={path === "/near-plus/" ? "true" : undefined}>{plusFirst} <span class="text-accent">{plusLast}</span></a>
     </nav>
 
     <div class="flex items-center gap-1.5">

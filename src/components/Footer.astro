@@ -21,15 +21,16 @@ const year = new Date().getFullYear();
     {/* Brand on the left, links on the right, the character exactly between them and centred on both. */}
     <div class="flex items-center justify-between gap-6 md:justify-start">
       <div>
-        <Wordmark href={localePath(locale, "/")} class="text-lg" />
-        <p class="mt-1 text-sm text-muted">{dict.footer.tagline}</p>
+        <Wordmark href={localePath(locale, "/")} class="text-body" />
+        <p class="mt-1 text-small text-muted">{dict.footer.tagline}</p>
       </div>
       <div class="md:hidden" data-reveal="pop"><Drawing name="happy" size={72} class="w-16 mr-4 shrink-0" /></div>
     </div>
 
     <div class="hidden md:block" data-reveal="pop"><Drawing name="happy" size={64} class="w-16 shrink-0" /></div>
 
-    <div class="-mx-3 flex flex-wrap items-center gap-x-1 gap-y-3 text-sm md:mx-0 md:justify-end">
+    <div class="-mx-3 flex flex-wrap items-center gap-x-1 gap-y-3 text-small md:mx-0 md:justify-end">
+      <a href={localePath(locale, "/near-plus/")} class="nav-link">{dict.nav.plus.replace(/\s*\S+$/, "")} <span class="text-accent">{dict.nav.plus.split(" ").pop()}</span></a>
       <a href={localePath(locale, "/privacy/")} class="nav-link">{dict.footer.privacy}</a>
       <a href={localePath(locale, "/terms/")} class="nav-link">{dict.footer.terms}</a>
       <a href={localePath(locale, "/contact/")} class="nav-link">{dict.footer.contact}</a>

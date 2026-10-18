@@ -1,29 +1,33 @@
 ---
-// "Coming next": three upcoming features. Left: their app screens stacked like photos, tap to flip.
-// Right: title + body of the feature in front. roadmap.ts drives the order.
-import type { Dictionary } from "../i18n/en";
-import RoadmapScreens from "./RoadmapScreens.astro";
-
-interface Props {
-  dict: Dictionary;
+// A stack of app screens, tap to flip, with the front screen's title + body beside it. Used for "Also in
+// Near" (AlsoScreens) on the home page. Pass the screens as children: each must be a `.rs-card` with `data-card` and `data-pos`. roadmap.ts drives the order.
+interface Feature {
+  title: string;
+  body: string;
 }
-const { dict } = Astro.props;
-const features = dict.next.features;
+interface Props {
+  id: string;
+  heading: string;
+  intro: string;
+  features: Feature[];
+  labels: { prev: string; next: string };
+}
+const { id, heading, intro, features, labels } = Astro.props;
 ---
 
-<section id="coming-next" class="section relative scroll-mt-[-4rem] md:scroll-mt-[-7rem]" data-roadmap>
+<section id={id} class="section relative scroll-mt-[-4rem] md:scroll-mt-[-7rem]" data-roadmap>
   <div class="container-x">
     <div class="max-w-xl" data-reveal-group>
-      <h2 class="h-section" data-reveal>{dict.nav.next}</h2>
-      <p class="lede mt-4" data-reveal>{dict.next.intro}</p>
+      <h2 class="h-section" data-reveal>{heading}</h2>
+      <p class="lede mt-4" data-reveal>{intro}</p>
     </div>
 
     <div class="mt-12 grid items-center gap-12 md:mt-16 lg:grid-cols-2 lg:gap-16">
       <!-- Stack -->
       <div class="flex justify-center lg:justify-end" data-reveal>
         <div class="stack-pad">
-          <div class="stack" data-stack tabindex="0" role="button" aria-label={dict.next.next}>
-            <RoadmapScreens />
+          <div class="stack" data-stack tabindex="0" role="button" aria-label={labels.next}>
+            <slot />
           </div>
         </div>
       </div>
@@ -33,21 +37,19 @@ const features = dict.next.features;
         <div class="features">
           {features.map((f, i) => (
             <div class="feature" data-feature aria-hidden={i === 0 ? "false" : "true"}>
-              <span class="feature-num">{String(i + 1).padStart(2, "0")}</span>
-              <h3 class="mt-3 text-2xl font-medium tracking-tight md:text-3xl">{f.title}</h3>
-              <p class="lede mt-3">{f.body}</p>
+              <h3 class="text-title font-medium tracking-tight text-balance">{f.title}</h3>
+              <p class="mt-3 text-body text-muted text-pretty">{f.body}</p>
             </div>
           ))}
         </div>
 
         <div class="mt-8 flex items-center gap-2">
-          <button type="button" class="ctrl" data-prev aria-label={dict.next.prev}>
+          <button type="button" class="ctrl" data-prev aria-label={labels.prev}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
           </button>
-          <button type="button" class="ctrl" data-next aria-label={dict.next.next}>
+          <button type="button" class="ctrl" data-next aria-label={labels.next}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
           </button>
-          <span class="ml-2 text-sm tabular-nums text-muted" data-counter aria-live="polite">1 / {features.length}</span>
         </div>
       </div>
     </div>
@@ -111,13 +113,6 @@ const features = dict.next.features;
     transform: none;
     pointer-events: auto;
   }
-  .feature-num {
-    display: inline-block;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--color-accent);
-  }
-
   .ctrl {
     display: inline-flex;
     align-items: center;

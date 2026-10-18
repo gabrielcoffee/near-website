@@ -17,7 +17,7 @@ const { drawing, title, body, class: cls = "" } = Astro.props;
     <Drawing name={drawing} size={220} class="w-[150px] md:w-[200px] lg:w-[220px]" />
   </div>
   <div class="max-w-xl" data-reveal>
-    <h3 class="text-3xl font-medium tracking-tight text-balance md:text-4xl">{title}</h3>
+    <h3 class="text-title font-medium tracking-tight text-balance">{title}</h3>
     <p class="lede mt-3">{body}</p>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import type { Dictionary } from "./en";
+import type { Dictionary, LegalSection, PlusRow } from "./en";
 
 const fr: Dictionary = {
   meta: {
@@ -8,14 +8,15 @@ const fr: Dictionary = {
   },
   nav: {
     how: "Comment ça marche",
+    also: "Aussi dans Near",
+    plus: "Near Spark",
     believe: "Ce qu'on défend",
-    next: "À venir",
-    cta: "Télécharger l'app",
+    cta: "Obtenir l'app",
   },
   hero: {
     title: "Near",
     tagline: "Les amis que tu vois vraiment.",
-    scroll: "défiler",
+    scroll: "la suite",
   },
   how: {
     steps: [
@@ -24,8 +25,8 @@ const fr: Dictionary = {
         body: "Tu ne peux ajouter que quelqu'un qui est à côté de toi. Tu croises un ami ? Vous vous ajoutez dans l'app, sur le moment.",
       },
       {
-        title: "Ta grille",
-        body: "Tous les gens que tu as vus en vrai, dans une seule grille. Range-les comme tu veux. C'est tout ton réseau.",
+        title: "Tes amis",
+        body: "Tous les gens que tu as vus en vrai, dans une seule liste. C'est tout ton réseau.",
       },
       {
         title: "Un fil qui a une fin",
@@ -37,26 +38,46 @@ const fr: Dictionary = {
       },
     ],
   },
-  next: {
-    intro: "Trois nouveautés arrivent. Touche les écrans pour les faire défiler.",
-    prev: "Précédent",
-    next: "Suivant",
+  also: {
+    intro: "Touche les écrans pour les faire défiler.",
     features: [
-      { title: "Plans", body: "Choisis un lieu, choisis les amis, envoie. Tout le monde reçoit une notif et répond : partant ou pas. Pas de groupe WhatsApp, pas de sondage, pas quarante messages pour caler un vendredi." },
-      { title: "Posts à deux", body: "Quand tu es au même endroit qu'un ami, vous pouvez publier ensemble. Une photo, vos deux noms dessus. La preuve que vous y étiez vraiment." },
-      { title: "Récaps", body: "À la fin de chaque mois et de chaque année : qui tu as vu, combien de fois, où. Pas du temps d'écran. Du vrai temps." },
+      { title: "Stories", body: "Tu choisis combien de temps elle reste, de 1 à 48 heures. Et qui la voit." },
+      { title: "Messages", body: "Réponds à une story et la conversation commence là. Avec Near Spark." },
+      { title: "Qualité maximale", body: "Photos et vidéos restent comme tu les as faites. Pour tout le monde." },
     ],
   },
+  plus: {
+    intro: "Near est gratuit. Near Spark est pour l'ami qui en veut plus.",
+    free: "Gratuit",
+    features: [
+      { title: "Parle à ceux que tu as vraiment rencontrés.", body: "Des messages entre amis seulement." },
+      { title: "Plus net qu'Instagram.", body: "Des photos en 4032 px, presque 4 fois Instagram. Des vidéos à 60 fps." },
+      { title: "Tes stories ne disparaissent pas.", body: "Tout ce que tu as publié reste dans une archive rien qu'à toi." },
+      { title: "Une icône à toi.", body: "Des icônes alternatives dessinées à la main." },
+    ],
+    labels: { instagram: "Instagram · 1080 px", near: "Near Spark · 4032 px", video: "1080p · 60 fps", highlights: "À la une", archive: "Archive", reply: "A répondu à ta story", soon: "Bientôt", you: "Toi" },
+    plans: { title: "Formules", monthly: "Mensuelle", yearly: "Annuelle", perMonth: "/ mois", perYear: "/ an", equals: "{price} par mois", save: "Économise {pct}", trial: "Première semaine gratuite, dans les deux cas.", soon: "Bientôt sur l'App Store." },
+    more: {
+      title: "Et le reste",
+      rows: [
+      { label: "Réponses aux posts et aux stories", free: false, plus: true },
+      { label: "Photos", free: "2048 px", plus: "4032 px" },
+      { label: "Vidéo", free: "30 fps", plus: "60 fps" },
+      { label: "Amis, fil et stories", free: true, plus: true },
+      { label: "Jamais de pub", free: true, plus: true },
+      { label: "La même qualité pour tout le monde", free: true, plus: true },
+      ] as PlusRow[],
+    },
+  },
+  stack: { prev: "Précédent", next: "Suivant" },
   believe: {
     paragraphs: [
-      "Toutes les grandes applis sociales sont faites pour te garder dedans. La pub veut tes yeux, l'algorithme ton temps, les likes ton anxiété. Et ça marche. C'est bien ça le problème.",
-      "Near est petite exprès. Seulement les gens que tu as rencontrés, seulement ce qu'ils publient, dans l'ordre où c'est arrivé. Quand tes amis n'ont plus rien posté, c'est fini. Si ça ressemble à un Instagram en moins bien, tant mieux. C'en est un.",
+      "Toutes les grandes applis sociales sont faites pour te garder dedans. Near est petite exprès.",
     ],
-    downgrades: "Ce qu'on a enlevé :",
     items: [
-      { title: "Pas d'algorithme, pas de pub, pas de bouillie d'IA", body: "Ton fil, c'est tes amis, du plus récent au plus ancien. Personne n'a payé pour y être, et rien n'a été généré par une IA." },
-      { title: "Pas de scroll infini", body: "TikTok est fait pour ne jamais s'arrêter. Le fil de Near s'arrête quand tes amis arrêtent de publier. Et là, tu sors." },
-      { title: "Pas de FOMO", body: "Tu ne vois que les gens que tu vois vraiment. Si ce n'est pas sur Near, tu y étais sûrement." },
+      { title: "Pas d'algorithme, pas de pub, pas de bouillie d'IA", body: "Tes amis, du plus récent au plus ancien. Rien d'autre." },
+      { title: "Pas de scroll infini", body: "Le fil s'arrête quand tes amis arrêtent de publier." },
+      { title: "Pas de FOMO", body: "Tu ne vois que les gens que tu vois vraiment." },
     ],
   },
   cta: {
@@ -113,6 +134,7 @@ const fr: Dictionary = {
   },
   legal: {
     updated: "Dernière mise à jour",
+    contents: "Sur cette page",
   },
   privacy: {
     title: "Confidentialité",
@@ -120,13 +142,18 @@ const fr: Dictionary = {
     sections: [
       {
         title: "Ce qu'on garde",
-        body: "Quand tu te connectes avec Apple ou Google, on reçoit un identifiant d'utilisateur de leur part, plus ton nom et ton e-mail si tu choisis de les partager. Ensuite, seulement ce que tu ajoutes toi-même :",
+        body: "Tu te connectes avec Apple, Google ou ton e-mail et un mot de passe, et tu peux en relier plusieurs à ton compte dans les Réglages. D'Apple ou Google, on reçoit un identifiant d'utilisateur, plus ton nom et ton e-mail si tu choisis de les partager ; avec un e-mail, on garde ton adresse et une forme chiffrée de ton mot de passe, jamais le mot de passe lui-même. Ensuite, seulement ce que tu ajoutes toi-même :",
         items: [
           "Ton nom d'affichage, ta photo de profil, et ta date de naissance et ta courte bio si tu les renseignes.",
-          "Tes publications : photos, légendes et, si tu le laisses, le lieu où elles ont été prises.",
-          "Tes commentaires sur les publications de tes amis.",
+          "Tes publications : photos et vidéos, légendes et, si tu le laisses, le lieu où elles ont été prises. Archive une publication et toi seul la vois jusqu'à ce que tu la remettes ; supprime-la et elle disparaît avec ses commentaires.",
+          "Tes stories : la photo ou la vidéo, et quels amis l'ont regardée. Tes amis voient une story pendant 24 heures, puis elle expire et est supprimée. Avec Near Spark, tes stories expirées restent dans une archive visible par toi uniquement, et celles que tu épingles sur ton profil dans À la une restent visibles pour tes amis.",
+          "Tes messages avec tes amis : le texte, les photos, les vidéos, les messages vocaux, les GIF et les stickers, l'heure d'envoi et l'heure de lecture. Si tu en annules l'envoi, il disparaît pour vous deux.",
+          "Tes messages vocaux : tu les enregistres dans l'appli et ils sont stockés sur nos serveurs et chez Cloudflare. Seules les deux personnes de la conversation peuvent les écouter, et si tu en annules l'envoi, il disparaît pour vous deux.",
+          "Tes commentaires sur les publications de tes amis : des mots, une photo, un GIF, un sticker ou, avec Near Spark, un commentaire vocal. Une photo ou un commentaire vocal est stocké sur nos serveurs et chez Cloudflare.",
           "Qui sont tes amis et quand vous vous êtes ajoutés, et qui tu as bloqué.",
-          "Les signalements que tu nous envoies à propos d'une publication, d'un commentaire ou d'une personne.",
+          "Les signalements que tu nous envoies à propos d'une publication, d'une story, d'un commentaire, d'un message ou d'une personne. Une story ou un message signalé (un message vocal aussi) est conservé jusqu'à 7 jours, même après son expiration ou l'annulation de son envoi, pour qu'on puisse l'examiner. Notre équipe de modération l'ouvre, tout comme la photo d'un commentaire signalé, via des liens à durée de vie courte.",
+          "Les retours que tu nous envoies depuis l'app : ce que tu as écrit, avec la version de l'app, celle d'iOS et le modèle de ton téléphone, pour qu'on les lise et qu'on corrige ce qu'il faut. Ils sont supprimés avec ton compte.",
+          "Near Spark : Apple traite le paiement. On reçoit un identifiant de transaction, le produit, les dates et l'état actif ou non de ton abonnement, jamais les détails de ta carte. Tant qu'il est actif, une petite étincelle s'affiche après ton nom partout où il apparaît dans l'appli, donc quiconque voit ton nom sait que tu l'as.",
         ],
       },
       {
@@ -138,21 +165,30 @@ const fr: Dictionary = {
         body: "iOS va te les demander. Chacune fait exactement une chose :",
         items: [
           "Réseau local : trouver l'ami qui est à côté de toi.",
-          "Appareil photo et photos : des images pour tes publications.",
+          "Appareil photo et photothèque : photos et vidéos pour tes publications, tes stories et tes messages, et ta photo de profil. Near n'ajoute à tes photos que lorsque tu lui demandes d'enregistrer une story, ou une photo ou une vidéo d'une discussion.",
+          "Micro : le son des vidéos que tu enregistres, tes messages vocaux et tes commentaires vocaux.",
           "Position, seulement quand tu utilises l'appli : nommer le lieu d'une publication. Tu peux le modifier ou l'enlever avant de publier. Near ne te suit jamais en arrière-plan.",
         ],
       },
       {
+        title: "Sur ton téléphone",
+        body: "Near garde sur ton téléphone une copie des photos et vidéos de tes amis pour qu'elles s'ouvrent tout de suite au lieu d'être téléchargées deux fois. C'est un cache : il reste dans l'appli et disparaît quand tu te déconnectes, supprimes ton compte ou supprimes l'appli. Un post que tu enregistres en brouillon reste lui aussi uniquement sur ton téléphone : il n'est jamais envoyé ni inclus dans ta sauvegarde iCloud, il t'attend si tu te déconnectes et disparaît quand tu supprimes ton compte ou l'appli. Les photos et vidéos que tu publies sont stockées sans données de localisation : les balises EXIF et GPS sont retirées.",
+      },
+      {
+        title: "GIF et stickers",
+        body: "La recherche et la navigation de GIF et de stickers vont directement de l'appli à KLIPY, un service de GIF tiers, sans passer par nos serveurs. KLIPY reçoit les mots que tu cherches, l'adresse IP de ton téléphone et un identifiant pseudonyme dérivé de ton compte, pas ton nom ni ton e-mail. Un GIF ou un sticker envoyé est un lien vers la copie de KLIPY, pas un fichier qu'on stocke : celui qui le voit le charge depuis KLIPY, qui voit donc aussi son adresse IP. Annule l'envoi du message et le lien disparaît pour vous deux. Ce que KLIPY fait de ces données est expliqué dans sa [politique de confidentialité](https://klipy.com/support/privacy-policy).",
+      },
+      {
         title: "Qui voit quoi",
-        body: "Tes publications et commentaires ne sont visibles que par tes amis. Pas de profil public, pas de recherche, pas de page explorer. Ton nom et ta photo de profil sont la seule chose qu'un inconnu peut voir, et seulement quand vous êtes tous les deux dans la même pièce avec l'appli ouverte. Bloque quelqu'un et aucun de vous deux ne reverra l'autre.",
+        body: "Tes publications et tes stories ne sont visibles que par tes amis. Un commentaire, que ce soit des mots, une photo, un GIF, un sticker ou ta voix, est visible par toute personne qui peut voir la publication où il se trouve, y compris les amis de son auteur, qui ne sont pas forcément les tiens ; ils voient ton nom et ta photo de profil avec. Un message, messages vocaux et GIF compris, seulement par les deux personnes concernées. Une story est visible par tes amis pendant 24 heures. Qui l'a regardée n'est montré qu'à la personne qui l'a publiée. Avec Near Spark, tes stories expirées restent dans une archive visible par toi uniquement, et les stories À la une que tu épingles sur ton profil sont visibles par tes amis. Tes amis voient aussi combien de posts et d'amis tu as, et lesquels de tes amis ils connaissent aussi ; les autres restent un nombre. Pas de profil public, pas de recherche, pas de page explorer. À part un commentaire sous une publication qu'il peut voir, ton nom et ta photo de profil sont la seule chose qu'un inconnu peut voir, et seulement quand vous êtes tous les deux dans la même pièce avec l'appli ouverte. Bloque quelqu'un et aucun de vous deux ne reverra l'autre.",
       },
       {
         title: "Où ça vit",
-        body: "Tes données sont stockées chez Supabase, un hébergeur, et arrivent à tes amis par lui. Apple ou Google gère la connexion. Les e-mails de ce site partent via Resend. Aucun d'eux n'a le droit d'utiliser tes données pour autre chose, et personne d'autre ne les reçoit. On ne vend pas de données, on n'affiche pas de pub et on n'utilise aucun SDK de statistiques ou de pistage.",
+        body: "Tes données sont stockées chez Supabase, un hébergeur, et arrivent à tes amis par lui. Les photos, vidéos, messages vocaux et commentaires vocaux sont stockés et diffusés par Cloudflare. Apple ou Google gère la connexion avec eux, et Apple gère les paiements de Near Spark : on reçoit seulement un identifiant de transaction et l'état de ton abonnement, jamais les détails de ta carte. Les e-mails de Near et de ce site partent via Resend. Aucun d'eux n'a le droit d'utiliser tes données pour autre chose, et personne d'autre ne les reçoit. On ne vend pas de données, on n'affiche pas de pub et on n'utilise aucun SDK de statistiques ou de pistage. Les GIF et les stickers font exception : ton téléphone parle directement à KLIPY, un service de GIF tiers, qui a sa propre [politique de confidentialité](https://klipy.com/support/privacy-policy).",
       },
       {
         title: "Tout supprimer",
-        body: "Réglages → Supprimer le compte efface ton compte, tes photos, publications et commentaires, tout de suite et pour de bon. Rien de toi ne reste sur les téléphones de tes amis ni sur le nôtre. Si tu préfères, écris-nous et on le fait pour toi.",
+        body: "Réglages → Confidentialité et sécurité → Supprimer le compte te déconnecte et efface ton compte 30 jours plus tard. D'ici là, personne ne te voit : ton profil, tes publications, tes stories et tes commentaires sont masqués pour tes amis, et personne à côté ne peut te trouver. Tu changes d'avis ? Reconnecte-toi avant la date et tout est comme tu l'as laissé. Ensuite, ton compte, tes photos, vidéos, publications, stories, messages, commentaires et amitiés sont effacés pour de bon et, si tu utilises Apple pour te connecter, Near renonce aussi à son accès à ton compte Apple. Rien de toi ne reste sur les téléphones de tes amis ni sur le nôtre. On t'écrit quand la suppression est programmée, quelques jours avant, puis quand c'est fait. Si tu nous dis pourquoi tu pars, on garde ta réponse sans ton compte, uniquement pour améliorer Near. Si tu préfères, écris-nous et on le fait pour toi.",
       },
       {
         title: "Ce site",
@@ -175,11 +211,11 @@ const fr: Dictionary = {
     sections: [
       {
         title: "Qui peut utiliser Near",
-        body: "Il faut avoir 13 ans ou plus et te connecter avec ton propre compte Apple ou Google. Un compte par personne. Near est fait pour des gens, pas pour des bots ni des entreprises.",
+        body: "Il faut avoir 13 ans ou plus et te connecter avec ton propre compte Apple ou Google ou ton propre e-mail. Un compte par personne. Near est fait pour des gens, pas pour des bots ni des entreprises.",
       },
       {
         title: "Ton contenu",
-        body: "Ce que tu publies est à toi. En le publiant, tu laisses Near le stocker et le montrer à tes amis, c'est tout le principe. Ne publie pas ce que tu n'as pas le droit de partager, et souviens-toi que tes amis peuvent faire des captures, comme partout.",
+        body: "Ce que tu publies, mets dans une story ou envoies dans un message est à toi. En le partageant, tu laisses Near le stocker et le montrer aux amis avec qui tu l'as partagé, c'est tout le principe. Un commentaire est montré à toute personne qui peut voir la publication où il se trouve. Ne publie pas ce que tu n'as pas le droit de partager, et souviens-toi que tes amis peuvent faire des captures, comme partout.",
       },
       {
         title: "Les règles",
@@ -193,11 +229,15 @@ const fr: Dictionary = {
       },
       {
         title: "Signalements et blocage",
-        body: "Chaque publication, commentaire et profil a une option Signaler, et tu peux bloquer n'importe qui depuis son profil : vous ne serez plus amis et aucun de vous deux ne reverra l'autre. On lit chaque signalement en moins de 24 heures. Il n'y a aucune tolérance pour les contenus ou les comportements abusifs : on supprime ce qui enfreint ces règles et, si besoin, le compte derrière.",
+        body: "Chaque publication, story, commentaire, message et profil a une option Signaler, et tu peux bloquer n'importe qui depuis son profil : vous ne serez plus amis et aucun de vous deux ne reverra l'autre. On lit chaque signalement en moins de 24 heures. Il n'y a aucune tolérance pour les contenus ou les comportements abusifs : on supprime ce qui enfreint ces règles et, si besoin, le compte derrière.",
       },
       {
         title: "Si quelqu'un enfreint les règles",
-        body: "Si un compte enfreint ces règles, on peut retirer du contenu, suspendre le compte ou le supprimer, sans préavis quand le contenu est illégal ou fait du mal à quelqu'un. Tu peux partir quand tu veux : Réglages → Supprimer le compte, et tout part avec toi.",
+        body: "Si un compte enfreint ces règles, on peut retirer du contenu, suspendre le compte ou le supprimer, sans préavis quand le contenu est illégal ou fait du mal à quelqu'un. Tu peux partir quand tu veux : Réglages → Confidentialité et sécurité → Supprimer le compte. Tu as 30 jours pour changer d'avis, ensuite tout part avec toi.",
+      },
+      {
+        title: "Near Spark",
+        body: "Near Spark est un abonnement facultatif, mensuel ou annuel, acheté via l'App Store. Il se renouvelle automatiquement à la fin de chaque période, au prix affiché dans l'appli, jusqu'à ce que tu le résilies. Les nouveaux abonnés éligibles ont la première semaine gratuite ; Apple décide qui est éligible, et tu es facturé à la fin de la semaine si tu n'as pas résilié avant. Tu peux résilier à tout moment dans les réglages de ton identifiant Apple, au moins 24 heures avant la date de renouvellement, et tu gardes Near Spark jusqu'à la fin de la période que tu as payée. Apple gère le paiement et tout remboursement selon ses propres conditions : les remboursements se demandent à Apple. Si le prix change, Apple te prévient d'abord et te demande ton accord. Near peut aussi t'offrir des jours de Near Spark : en ce moment, trois jours quand tu es le premier ami de quelqu'un de nouveau sur Near, jusqu'à trois fois. Ces jours sont un avantage promotionnel, ils ne font pas partie de ton abonnement Apple, et on peut les modifier ou les arrêter à tout moment. Une chose à savoir : l'abonnement est géré par Apple, pas par nous, donc supprimer ton compte Near n'y met pas fin. Si tu as Near Spark, résilie-le dans les réglages de ton identifiant Apple avant de partir, et Apple arrête de te facturer. Tout ce qui est en dehors de Near Spark reste gratuit.",
       },
       {
         title: "Le service",

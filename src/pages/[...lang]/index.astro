@@ -2,7 +2,8 @@
 import Base from "../../layouts/Base.astro";
 import Hero from "../../components/Hero.astro";
 import HowItWorks from "../../components/HowItWorks.astro";
-import Roadmap from "../../components/Roadmap.astro";
+import FeatureStack from "../../components/FeatureStack.astro";
+import AlsoScreens from "../../components/AlsoScreens.astro";
 import Beliefs from "../../components/Beliefs.astro";
 import Cta from "../../components/Cta.astro";
 import { getDict, localeStaticPaths } from "../../i18n";
@@ -14,12 +15,15 @@ export function getStaticPaths() {
 
 const { locale } = Astro.props as { locale: Locale };
 const dict = getDict(locale);
+// Section ids are what Header.astro links to; keep the two lists in the same order.
 ---
 
 <Base locale={locale} dict={dict} path="/">
   <Hero dict={dict} />
   <HowItWorks dict={dict} />
-  <Roadmap dict={dict} />
+  <FeatureStack id="also-in-near" heading={dict.nav.also} intro={dict.also.intro} features={dict.also.features} labels={dict.stack}>
+    <AlsoScreens />
+  </FeatureStack>
   <Beliefs dict={dict} />
   <Cta dict={dict} locale={locale} />
 </Base>
