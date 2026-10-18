@@ -148,6 +148,10 @@ const en = {
     intro: "Short version: Near stores only what it needs to show your friends what you post. We don't sell anything, we don't run ads, and there is no analytics or tracking in the app or on this site.",
     sections: [
       {
+        title: "Who's responsible for your data",
+        body: "Near, the iPhone app and this site, is run by {entity}, who decides what happens to your personal data. For anything about privacy, including your rights, write to the address at the bottom of this page. A person answers.",
+      },
+      {
         title: "What we store",
         body: "You sign in with Apple, Google, or your email and a password, and you can connect more than one of them to your account in Settings. From Apple or Google we get a user ID, plus your name and email if you choose to share them; with email we keep your address and a scrambled form of your password, never the password itself. After that, only what you add yourself:",
         items: [
@@ -216,6 +220,10 @@ const en = {
     title: "Terms",
     intro: "Plain rules for using Near. Short, because there isn't much to it: be a real person, be decent to your friends, and the app is yours to use.",
     sections: [
+      {
+        title: "Who we are",
+        body: "Near is an iPhone app made and run by {entity}. In these terms, “Near”, “we” and “us” mean whoever runs the service; “you” means the person using it. For anything about these terms, write to the address at the bottom of this page.",
+      },
       {
         title: "Who can use Near",
         body: "You need to be 13 or older and sign in with your own Apple or Google account or your own email. One account per person. Near is for people, not bots or businesses.",

@@ -23,7 +23,7 @@ export const CONTACT_EMAIL = "hello@nearapp.social";
 export const LEGAL_ENTITY = "Gabriel Fernandes Pereira (CNPJ 54.909.636/0001-80), Brasil";
 
 /** Date shown at the top of /privacy/ and /terms/. Bump it whenever either page changes. */
-export const LEGAL_UPDATED = "2026-10-16";
+export const LEGAL_UPDATED = "2026-10-17";
 
 /** Near Spark prices per language's main storefront, as the app's StoreKit configuration has them. US and Brazil
  *  are decided (monthly $3.99 / R$ 9,90, yearly $29.99 / R$ 99,90); euro and rouble values are placeholders that
