@@ -149,7 +149,7 @@ const es: Dictionary = {
       },
       {
         title: "Qué guardamos",
-        body: "Entras con Apple, con Google o con tu correo y una contraseña, y en Ajustes puedes conectar más de una a tu cuenta. De Apple o Google recibimos un ID de usuario, y tu nombre y correo si decides compartirlos; con correo guardamos tu dirección y una forma cifrada de tu contraseña, nunca la contraseña en sí. Después, solo lo que añades tú:",
+        body: "Entras con Apple o con tu correo y una contraseña, y en Ajustes puedes conectar las dos a tu cuenta. De Apple recibimos un ID de usuario, y tu nombre y correo si decides compartirlos; con correo guardamos tu dirección y una forma cifrada de tu contraseña, nunca la contraseña en sí. Después, solo lo que añades tú:",
         items: [
           "Tu nombre, tu foto de perfil, y el cumpleaños y la bio corta si los rellenas.",
           "Tus publicaciones: fotos y vídeos, textos y, si lo dejas puesto, el sitio donde se hicieron. Si archivas una, solo la ves tú hasta que la recuperes; si la borras, desaparece con sus comentarios.",
@@ -160,6 +160,7 @@ const es: Dictionary = {
           "Quiénes son tus amigos y cuándo os añadisteis, y a quién has bloqueado.",
           "Los reportes que nos envías sobre una publicación, una historia, un comentario, un mensaje o una persona. Una historia o un mensaje reportados (también una nota de voz) se guardan hasta 7 días, incluso después de caducar o de anular el envío, para poder revisarlos. Nuestro equipo de moderación los abre, y también la foto de un comentario reportado, mediante enlaces de corta duración.",
           "Los comentarios que nos envías desde la app: lo que escribiste, con la versión de la app, la de iOS y el modelo de tu móvil, para leerlos y arreglar lo que haga falta. Se borran con tu cuenta.",
+          "Notificaciones: una lista corta de lo que han hecho tus amigos (una amistad, un comentario en tu publicación, un cumpleaños, una publicación nueva), guardada 60 días. Si permites las notificaciones push, el token de tu móvil, para poder avisarte. Tu zona horaria, para que el cumpleaños llegue por la mañana. Cada tipo tiene su propio interruptor en Ajustes.",
           "Near Spark: Apple procesa el pago. Recibimos un identificador de transacción, el producto, las fechas y si tu suscripción está activa, nunca los datos de tu tarjeta. Mientras está activa, aparece una pequeña chispa después de tu nombre en todos los sitios de la app donde se ve, así que quien vea tu nombre sabrá que la tienes.",
         ],
       },
@@ -174,6 +175,7 @@ const es: Dictionary = {
           "Red local: encontrar al amigo que tienes al lado.",
           "Cámara y fotos: fotos y vídeos para tus publicaciones, historias y mensajes, y tu foto de perfil. Near solo añade a tus fotos cuando le pides guardar una historia, o una foto o un vídeo de un chat.",
           "Micrófono: el sonido de los vídeos que grabas, tus notas de voz y tus comentarios de voz.",
+          "Notificaciones: un amigo nuevo, un comentario en tu publicación, el cumpleaños de un amigo, una publicación nueva de un amigo. Nada más, nunca. Solo lo pedimos cuando ya tienes un amigo.",
           "Ubicación, solo mientras usas la app: ponerle nombre al sitio de una publicación. Puedes editarlo o quitarlo antes de publicar. Near nunca te sigue en segundo plano.",
         ],
       },
@@ -191,7 +193,7 @@ const es: Dictionary = {
       },
       {
         title: "Dónde está",
-        body: "Tus datos se guardan en Supabase, un proveedor de alojamiento, y llegan a tus amigos a través de él. Las fotos, los vídeos, las notas de voz y los comentarios de voz los guarda y los entrega Cloudflare. Apple o Google gestionan el inicio de sesión con ellos, y Apple los pagos de Near Spark: solo recibimos un identificador de transacción y el estado de tu suscripción, nunca los datos de tu tarjeta. Los correos de Near y de esta web salen por Resend. Ninguno puede usar tus datos para otra cosa, y nadie más los recibe. No vendemos datos, no ponemos anuncios y no usamos ningún SDK de analítica ni rastreo. Los GIF y los stickers son la excepción: tu móvil habla directamente con KLIPY, un servicio de GIF de terceros, que tiene su propia [política de privacidad](https://klipy.com/support/privacy-policy).",
+        body: "Tus datos se guardan en Supabase, un proveedor de alojamiento, y llegan a tus amigos a través de él. Las fotos, los vídeos, las notas de voz y los comentarios de voz los guarda y los entrega Cloudflare. Apple gestiona el inicio de sesión con Apple y los pagos de Near Spark: solo recibimos un identificador de transacción y el estado de tu suscripción, nunca los datos de tu tarjeta. Los correos de Near y de esta web salen por Resend. Ninguno puede usar tus datos para otra cosa, y nadie más los recibe. No vendemos datos, no ponemos anuncios y no usamos ningún SDK de analítica ni rastreo. Los GIF y los stickers son la excepción: tu móvil habla directamente con KLIPY, un servicio de GIF de terceros, que tiene su propia [política de privacidad](https://klipy.com/support/privacy-policy).",
       },
       {
         title: "Borrarlo todo",
@@ -222,7 +224,7 @@ const es: Dictionary = {
       },
       {
         title: "Quién puede usar Near",
-        body: "Tienes que tener 13 años o más y entrar con tu propia cuenta de Apple o Google o con tu propio correo. Una cuenta por persona. Near es para personas, no para bots ni empresas.",
+        body: "Tienes que tener 13 años o más y entrar con tu propia cuenta de Apple o con tu propio correo. Una cuenta por persona. Near es para personas, no para bots ni empresas.",
       },
       {
         title: "Tu contenido",

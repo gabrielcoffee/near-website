@@ -149,7 +149,7 @@ const fr: Dictionary = {
       },
       {
         title: "Ce qu'on garde",
-        body: "Tu te connectes avec Apple, Google ou ton e-mail et un mot de passe, et tu peux en relier plusieurs à ton compte dans les Réglages. D'Apple ou Google, on reçoit un identifiant d'utilisateur, plus ton nom et ton e-mail si tu choisis de les partager ; avec un e-mail, on garde ton adresse et une forme chiffrée de ton mot de passe, jamais le mot de passe lui-même. Ensuite, seulement ce que tu ajoutes toi-même :",
+        body: "Tu te connectes avec Apple ou ton e-mail et un mot de passe, et tu peux relier les deux à ton compte dans les Réglages. D'Apple, on reçoit un identifiant d'utilisateur, plus ton nom et ton e-mail si tu choisis de les partager ; avec un e-mail, on garde ton adresse et une forme chiffrée de ton mot de passe, jamais le mot de passe lui-même. Ensuite, seulement ce que tu ajoutes toi-même :",
         items: [
           "Ton nom d'affichage, ta photo de profil, et ta date de naissance et ta courte bio si tu les renseignes.",
           "Tes publications : photos et vidéos, légendes et, si tu le laisses, le lieu où elles ont été prises. Archive une publication et toi seul la vois jusqu'à ce que tu la remettes ; supprime-la et elle disparaît avec ses commentaires.",
@@ -160,6 +160,7 @@ const fr: Dictionary = {
           "Qui sont tes amis et quand vous vous êtes ajoutés, et qui tu as bloqué.",
           "Les signalements que tu nous envoies à propos d'une publication, d'une story, d'un commentaire, d'un message ou d'une personne. Une story ou un message signalé (un message vocal aussi) est conservé jusqu'à 7 jours, même après son expiration ou l'annulation de son envoi, pour qu'on puisse l'examiner. Notre équipe de modération l'ouvre, tout comme la photo d'un commentaire signalé, via des liens à durée de vie courte.",
           "Les retours que tu nous envoies depuis l'app : ce que tu as écrit, avec la version de l'app, celle d'iOS et le modèle de ton téléphone, pour qu'on les lise et qu'on corrige ce qu'il faut. Ils sont supprimés avec ton compte.",
+          "Notifications : une courte liste de ce que tes amis ont fait (une amitié, un commentaire sur ton post, un anniversaire, un nouveau post), gardée 60 jours. Si tu autorises les notifications push, le jeton de ton téléphone, pour pouvoir te prévenir. Ton fuseau horaire, pour que l'anniversaire arrive le matin. Chaque type a son propre interrupteur dans les Réglages.",
           "Near Spark : Apple traite le paiement. On reçoit un identifiant de transaction, le produit, les dates et l'état actif ou non de ton abonnement, jamais les détails de ta carte. Tant qu'il est actif, une petite étincelle s'affiche après ton nom partout où il apparaît dans l'appli, donc quiconque voit ton nom sait que tu l'as.",
         ],
       },
@@ -174,6 +175,7 @@ const fr: Dictionary = {
           "Réseau local : trouver l'ami qui est à côté de toi.",
           "Appareil photo et photothèque : photos et vidéos pour tes publications, tes stories et tes messages, et ta photo de profil. Near n'ajoute à tes photos que lorsque tu lui demandes d'enregistrer une story, ou une photo ou une vidéo d'une discussion.",
           "Micro : le son des vidéos que tu enregistres, tes messages vocaux et tes commentaires vocaux.",
+          "Notifications : un nouvel ami, un commentaire sur ton post, l'anniversaire d'un ami, un nouveau post d'un ami. Rien d'autre, jamais. Demandé seulement une fois que tu as un ami.",
           "Position, seulement quand tu utilises l'appli : nommer le lieu d'une publication. Tu peux le modifier ou l'enlever avant de publier. Near ne te suit jamais en arrière-plan.",
         ],
       },
@@ -191,7 +193,7 @@ const fr: Dictionary = {
       },
       {
         title: "Où ça vit",
-        body: "Tes données sont stockées chez Supabase, un hébergeur, et arrivent à tes amis par lui. Les photos, vidéos, messages vocaux et commentaires vocaux sont stockés et diffusés par Cloudflare. Apple ou Google gère la connexion avec eux, et Apple gère les paiements de Near Spark : on reçoit seulement un identifiant de transaction et l'état de ton abonnement, jamais les détails de ta carte. Les e-mails de Near et de ce site partent via Resend. Aucun d'eux n'a le droit d'utiliser tes données pour autre chose, et personne d'autre ne les reçoit. On ne vend pas de données, on n'affiche pas de pub et on n'utilise aucun SDK de statistiques ou de pistage. Les GIF et les stickers font exception : ton téléphone parle directement à KLIPY, un service de GIF tiers, qui a sa propre [politique de confidentialité](https://klipy.com/support/privacy-policy).",
+        body: "Tes données sont stockées chez Supabase, un hébergeur, et arrivent à tes amis par lui. Les photos, vidéos, messages vocaux et commentaires vocaux sont stockés et diffusés par Cloudflare. Apple gère la connexion avec Apple et les paiements de Near Spark : on reçoit seulement un identifiant de transaction et l'état de ton abonnement, jamais les détails de ta carte. Les e-mails de Near et de ce site partent via Resend. Aucun d'eux n'a le droit d'utiliser tes données pour autre chose, et personne d'autre ne les reçoit. On ne vend pas de données, on n'affiche pas de pub et on n'utilise aucun SDK de statistiques ou de pistage. Les GIF et les stickers font exception : ton téléphone parle directement à KLIPY, un service de GIF tiers, qui a sa propre [politique de confidentialité](https://klipy.com/support/privacy-policy).",
       },
       {
         title: "Tout supprimer",
@@ -222,7 +224,7 @@ const fr: Dictionary = {
       },
       {
         title: "Qui peut utiliser Near",
-        body: "Il faut avoir 13 ans ou plus et te connecter avec ton propre compte Apple ou Google ou ton propre e-mail. Un compte par personne. Near est fait pour des gens, pas pour des bots ni des entreprises.",
+        body: "Il faut avoir 13 ans ou plus et te connecter avec ton propre compte Apple ou ton propre e-mail. Un compte par personne. Near est fait pour des gens, pas pour des bots ni des entreprises.",
       },
       {
         title: "Ton contenu",

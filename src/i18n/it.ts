@@ -149,7 +149,7 @@ const it: Dictionary = {
       },
       {
         title: "Cosa conserviamo",
-        body: "Accedi con Apple, con Google o con la tua email e una password, e nelle Impostazioni puoi collegarne più di uno al tuo account. Da Apple o Google riceviamo un ID utente, più il tuo nome e la tua email se scegli di condividerli; con l'email conserviamo il tuo indirizzo e una forma cifrata della password, mai la password in sé. Dopo, solo quello che aggiungi tu:",
+        body: "Accedi con Apple o con la tua email e una password, e nelle Impostazioni puoi collegarli entrambi al tuo account. Da Apple riceviamo un ID utente, più il tuo nome e la tua email se scegli di condividerli; con l'email conserviamo il tuo indirizzo e una forma cifrata della password, mai la password in sé. Dopo, solo quello che aggiungi tu:",
         items: [
           "Il tuo nome, la foto profilo e, se li compili, la data di nascita e una breve bio.",
           "I tuoi post: foto e video, didascalie e, se lo lasci, il posto in cui sono stati scattati. Se archivi un post lo vedi solo tu finché non lo riporti indietro; se lo elimini sparisce, con i suoi commenti.",
@@ -160,6 +160,7 @@ const it: Dictionary = {
           "Chi sono i tuoi amici, quando vi siete aggiunti e chi hai bloccato.",
           "Le segnalazioni che ci mandi su un post, una storia, un commento, un messaggio o una persona. Una storia o un messaggio segnalato (anche un messaggio vocale) viene conservato fino a 7 giorni, anche dopo che è scaduto o è stato annullato, così possiamo esaminarlo. Il nostro team di moderazione lo apre, come la foto di un commento segnalato, tramite link di breve durata.",
           "Il feedback che ci mandi dall'app: quello che hai scritto, con la versione dell'app, quella di iOS e il modello del telefono, così possiamo leggerlo e sistemare le cose. Viene cancellato insieme al tuo account.",
+          "Notifiche: un breve elenco di cosa hanno fatto i tuoi amici (un'amicizia, un commento al tuo post, un compleanno, un nuovo post), conservato 60 giorni. Se consenti le notifiche push, il token del tuo telefono, per poterti avvisare. Il tuo fuso orario, perché un compleanno arrivi di mattina. Ogni tipo ha il suo interruttore nelle Impostazioni.",
           "Near Spark: Apple gestisce il pagamento. Riceviamo un ID di transazione, il prodotto, le date e se il tuo abbonamento è attivo, mai i dati della tua carta. Finché è attivo, una piccola scintilla compare dopo il tuo nome ovunque appaia nell'app, quindi chi vede il tuo nome può capire che ce l'hai.",
         ],
       },
@@ -174,6 +175,7 @@ const it: Dictionary = {
           "Rete locale: trovare l'amico che hai accanto.",
           "Fotocamera e libreria foto: foto e video per i tuoi post, le tue storie e i tuoi messaggi, e la tua foto profilo. Near aggiunge qualcosa alle tue foto solo quando gli chiedi di salvare una storia, o una foto o un video di una chat.",
           "Microfono: l'audio dei video che registri, i tuoi messaggi vocali e i tuoi commenti vocali.",
+          "Notifiche: un nuovo amico, un commento al tuo post, il compleanno di un amico, un nuovo post di un amico. Nient'altro, mai. Te lo chiediamo solo quando hai già un amico.",
           "Posizione, solo mentre usi l'app: dare un nome al posto di un post. Puoi modificarlo o toglierlo prima di pubblicare. Near non ti segue mai in background.",
         ],
       },
@@ -191,7 +193,7 @@ const it: Dictionary = {
       },
       {
         title: "Dove stanno",
-        body: "I tuoi dati stanno su Supabase, un fornitore di hosting, e arrivano ai tuoi amici tramite lui. Foto, video, messaggi vocali e commenti vocali sono conservati e consegnati da Cloudflare. Apple o Google gestisce l'accesso con loro, e Apple gestisce i pagamenti di Near Spark: noi riceviamo solo un ID di transazione e lo stato del tuo abbonamento, mai i dati della tua carta. Le email di Near e di questo sito partono tramite Resend. Nessuno di loro può usare i tuoi dati per altro, e nessun altro li riceve. Non vendiamo dati, non mettiamo pubblicità e non usiamo nessun SDK di analitica o tracciamento. Per GIF e sticker è diverso: il tuo telefono parla direttamente con KLIPY, un servizio di GIF di terze parti, che ha una sua [informativa sulla privacy](https://klipy.com/support/privacy-policy).",
+        body: "I tuoi dati stanno su Supabase, un fornitore di hosting, e arrivano ai tuoi amici tramite lui. Foto, video, messaggi vocali e commenti vocali sono conservati e consegnati da Cloudflare. Apple gestisce l'accesso con Apple e i pagamenti di Near Spark: noi riceviamo solo un ID di transazione e lo stato del tuo abbonamento, mai i dati della tua carta. Le email di Near e di questo sito partono tramite Resend. Nessuno di loro può usare i tuoi dati per altro, e nessun altro li riceve. Non vendiamo dati, non mettiamo pubblicità e non usiamo nessun SDK di analitica o tracciamento. Per GIF e sticker è diverso: il tuo telefono parla direttamente con KLIPY, un servizio di GIF di terze parti, che ha una sua [informativa sulla privacy](https://klipy.com/support/privacy-policy).",
       },
       {
         title: "Cancellare tutto",
@@ -222,7 +224,7 @@ const it: Dictionary = {
       },
       {
         title: "Chi può usare Near",
-        body: "Devi avere almeno 13 anni e accedere con il tuo account Apple o Google o con la tua email. Un account a persona. Near è per le persone, non per bot o aziende.",
+        body: "Devi avere almeno 13 anni e accedere con il tuo account Apple o con la tua email. Un account a persona. Near è per le persone, non per bot o aziende.",
       },
       {
         title: "I tuoi contenuti",

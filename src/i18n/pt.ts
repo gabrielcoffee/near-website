@@ -151,7 +151,7 @@ const pt: Dictionary = {
         title: "Quais dados coletamos",
         body: "Coletamos apenas o que você nos dá ou o que é gerado pelo uso do app:",
         items: [
-          "Conta: quando você entra com a Apple ou o Google, recebemos um identificador de usuário e, se você autorizar, seu nome e e-mail. Se você cria a conta com e-mail e senha, guardamos o e-mail e a senha em formato protegido (hash), nunca em texto legível. Você pode conectar mais de uma dessas formas de entrar à mesma conta, e trocar o e-mail ou a senha, em Ajustes.",
+          "Conta: quando você entra com a Apple, recebemos um identificador de usuário e, se você autorizar, seu nome e e-mail. Se você cria a conta com e-mail e senha, guardamos o e-mail e a senha em formato protegido (hash), nunca em texto legível. Você pode conectar mais de uma dessas formas de entrar à mesma conta, e trocar o e-mail ou a senha, em Ajustes.",
           "Perfil: nome de exibição, foto de perfil e, se você preencher, data de nascimento e uma bio curta.",
           "Posts: fotos e vídeos, legendas e, se você mantiver, o nome do lugar onde foram feitos. Se você arquivar um post, só você o vê até trazê-lo de volta; se apagar, ele some junto com os comentários.",
           "Stories: a foto ou o vídeo e a lista de amigos que assistiram. Seus amigos veem um story por 24 horas; depois ele expira e é apagado. Com o Near Spark, seus stories expirados ficam num arquivo que só você vê, e os que você fixa no perfil como Destaques continuam visíveis para seus amigos.",
@@ -161,6 +161,7 @@ const pt: Dictionary = {
           "Sua rede: quem são seus amigos, quando vocês se adicionaram e quem você bloqueou.",
           "Denúncias que você envia sobre um post, story, comentário, mensagem ou pessoa, e o que decidimos sobre elas. Um story ou uma mensagem denunciados (inclusive de voz) são guardados por até 7 dias, mesmo depois de expirar ou de serem apagados, para podermos analisá-los, e a equipe de moderação os abre, assim como a foto de um comentário denunciado, por links de curta duração.",
           "O feedback que você manda pelo app: o que você escreveu, com a versão do app, a versão do iOS e o modelo do celular, para a gente ler e consertar o que precisar. Ele é apagado junto com a sua conta.",
+          "Notificações: uma lista curta do que seus amigos fizeram (uma amizade, um comentário no seu post, um aniversário, um post novo), guardada por 60 dias. Se você permitir notificações push, o token do seu aparelho, para a gente conseguir avisar. Seu fuso horário, para o aniversário chegar de manhã. Cada tipo tem seu próprio interruptor nos Ajustes.",
           "Near Spark: a Apple processa o pagamento. Recebemos um identificador de transação, o produto, as datas e se a sua assinatura está ativa, nunca os dados do seu cartão. Enquanto ela estiver ativa, uma pequena faísca aparece depois do seu nome em todo lugar do app onde ele aparece, então quem vê seu nome sabe que você tem.",
           "Dados técnicos mínimos: a versão do app e os registros de acesso (endereço IP, data e hora) que o provedor de hospedagem mantém por um curto período, por segurança.",
         ],
@@ -201,6 +202,7 @@ const pt: Dictionary = {
           "Rede local: encontrar o amigo que está ao seu lado.",
           "Câmera e fotos: fotos e vídeos para seus posts, stories e mensagens, e sua foto de perfil. O Near só adiciona às suas fotos quando você pede para salvar um story, ou uma foto ou vídeo de uma conversa.",
           "Microfone: o áudio dos vídeos que você grava, das suas mensagens de voz e dos seus comentários de voz.",
+          "Notificações: um amigo novo, um comentário no seu post, o aniversário de um amigo, um post novo de um amigo. Nada além disso, nunca. Só pedimos depois do seu primeiro amigo.",
           "Localização, apenas enquanto usa o app: sugerir o nome do lugar de um post. Você pode editar ou remover antes de publicar, e não guardamos coordenadas sem um post. O Near nunca acessa sua localização em segundo plano.",
         ],
       },
@@ -219,7 +221,6 @@ const pt: Dictionary = {
           "Supabase: banco de dados, autenticação e infraestrutura do app. Os dados ficam em servidores em São Paulo, Brasil.",
           "Cloudflare: armazenamento e entrega das fotos, dos vídeos, das mensagens de voz e dos comentários de voz, por uma rede global de servidores.",
           "Apple: login com a Apple e pagamentos do Near Spark. O que acontece do lado da Apple segue a política de privacidade dela.",
-          "Google: login com o Google, se você escolher essa opção.",
           "Resend: envio dos e-mails do Near e deste site.",
           "KLIPY: serviço de GIFs de terceiros, a exceção ao que está acima. O app fala direto com ela para buscar GIFs e figurinhas, sem passar pelos nossos servidores, e vale a [política de privacidade da KLIPY](https://klipy.com/support/privacy-policy).",
         ],
@@ -227,7 +228,7 @@ const pt: Dictionary = {
       },
       {
         title: "Transferência internacional",
-        body: "Seus dados principais ficam no Brasil. Fotos e vídeos são distribuídos pela rede da Cloudflare, e e-mails, login e pagamentos passam pela infraestrutura da Resend, da Apple e do Google, que pode estar fora do seu país. Nesses casos, a transferência se apoia em contratos de proteção de dados com cada provedor, incluindo cláusulas-padrão reconhecidas pela LGPD e pelo GDPR.",
+        body: "Seus dados principais ficam no Brasil. Fotos e vídeos são distribuídos pela rede da Cloudflare, e e-mails, login e pagamentos passam pela infraestrutura da Resend e da Apple, que pode estar fora do seu país. Nesses casos, a transferência se apoia em contratos de proteção de dados com cada provedor, incluindo cláusulas-padrão reconhecidas pela LGPD e pelo GDPR.",
       },
       {
         title: "No seu iPhone",
@@ -293,7 +294,7 @@ const pt: Dictionary = {
       {
         title: "Quem pode usar o Near",
         body: [
-          "Você precisa ter pelo menos 13 anos, ou a idade mínima exigida no seu país para um serviço como este, e criar a conta com a sua própria conta Apple, conta Google ou e-mail. Uma conta por pessoa, e a conta é sua: você é responsável pelo que acontece nela e por manter o acesso seguro.",
+          "Você precisa ter pelo menos 13 anos, ou a idade mínima exigida no seu país para um serviço como este, e criar a conta com a sua própria conta Apple ou e-mail. Uma conta por pessoa, e a conta é sua: você é responsável pelo que acontece nela e por manter o acesso seguro.",
           "O Near é para pessoas. Não é permitido criar contas para empresas, marcas, bots ou personagens, nem usar o Near se uma conta sua anterior foi encerrada por violar estes termos.",
         ],
       },

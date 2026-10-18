@@ -153,7 +153,7 @@ const en = {
       },
       {
         title: "What we store",
-        body: "You sign in with Apple, Google, or your email and a password, and you can connect more than one of them to your account in Settings. From Apple or Google we get a user ID, plus your name and email if you choose to share them; with email we keep your address and a scrambled form of your password, never the password itself. After that, only what you add yourself:",
+        body: "You sign in with Apple or your email and a password, and you can connect both to your account in Settings. From Apple we get a user ID, plus your name and email if you choose to share them; with email we keep your address and a scrambled form of your password, never the password itself. After that, only what you add yourself:",
         items: [
           "Your display name, profile photo, and the birthday and short bio if you fill them in.",
           "Your posts: photos and videos, captions and, if you keep it on, the place they were taken. Archive a post and only you can see it until you bring it back; delete it and it's gone, with its comments.",
@@ -164,6 +164,7 @@ const en = {
           "Who your friends are and when you added each other, and anyone you've blocked.",
           "Reports you send us about a post, a story, a comment, a message or a person. A reported story or message (a voice message too) is kept for up to 7 days, even after it expires or is unsent, so we can review it. Our moderation team opens it, and the photo of a reported comment, through short-lived links.",
           "Feedback you send from the app: what you typed, with the app version, iOS version and phone model, so we can read it and fix things. It is deleted with your account.",
+          "Notifications: a short list of what your friends did (a friendship, a comment on your post, a birthday, a new post), kept 60 days. If you allow push notifications, your phone's device token, so we can reach it. Your time zone, so a birthday arrives in the morning. Each kind has its own switch in Settings.",
           "Near Spark: Apple is the payment processor. We receive a transaction ID, the product, the dates and whether your subscription is active, never your card details. While it's active, a small spark shows after your name wherever it appears in the app, so anyone who sees your name can tell you have it.",
         ],
       },
@@ -178,6 +179,7 @@ const en = {
           "Local network: finding the friend next to you.",
           "Camera and photo library: photos and videos for your posts, stories and messages, and your profile picture. Near only adds to your photos when you ask it to save a story, or a photo or video from a chat.",
           "Microphone: the sound in the videos you record, your voice messages and your voice comments.",
+          "Notifications: a new friend, a comment on your post, a friend's birthday, a friend's new post. Nothing else, ever. Asked only once you have a friend.",
           "Location, only while using the app: naming the place of a post. You can edit or remove it before posting. Near never tracks you in the background.",
         ],
       },
@@ -195,7 +197,7 @@ const en = {
       },
       {
         title: "Where it lives",
-        body: "Your data is stored with Supabase, a hosting provider, and reaches your friends through them. Photos, videos, voice messages and voice comments are stored and delivered by Cloudflare. Apple or Google handles signing in with them, and Apple handles Near Spark payments: we only receive a transaction ID and the status of your subscription, never your card details. Emails from Near and from this site go out through Resend. None of them may use your data for anything else, and nobody else gets it. We don't sell data, don't show ads, and don't run any analytics or tracking SDK. GIFs and stickers are the exception: your phone talks to KLIPY, a third-party GIF service, directly, under its own [privacy policy](https://klipy.com/support/privacy-policy).",
+        body: "Your data is stored with Supabase, a hosting provider, and reaches your friends through them. Photos, videos, voice messages and voice comments are stored and delivered by Cloudflare. Apple handles signing in with Apple and Near Spark payments: we only receive a transaction ID and the status of your subscription, never your card details. Emails from Near and from this site go out through Resend. None of them may use your data for anything else, and nobody else gets it. We don't sell data, don't show ads, and don't run any analytics or tracking SDK. GIFs and stickers are the exception: your phone talks to KLIPY, a third-party GIF service, directly, under its own [privacy policy](https://klipy.com/support/privacy-policy).",
       },
       {
         title: "Deleting everything",
@@ -226,7 +228,7 @@ const en = {
       },
       {
         title: "Who can use Near",
-        body: "You need to be 13 or older and sign in with your own Apple or Google account or your own email. One account per person. Near is for people, not bots or businesses.",
+        body: "You need to be 13 or older and sign in with your own Apple account or your own email. One account per person. Near is for people, not bots or businesses.",
       },
       {
         title: "Your content",
