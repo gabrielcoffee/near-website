@@ -55,7 +55,7 @@ const pt: Dictionary = {
       { title: "Seus stories não somem.", body: "Tudo que você postou fica num arquivo só seu." },
       { title: "Um ícone só seu.", body: "Ícones alternativos desenhados à mão." },
     ],
-    labels: { instagram: "Instagram · 1080 px", near: "Near Spark · 4032 px", video: "1080p · 60 fps", highlights: "Destaques", archive: "Arquivo", reply: "Respondeu seu story", soon: "Em breve", you: "Você" },
+    labels: { instagram: "Instagram · 1080 px", near: "Near Spark · 4032 px", video: "1080p · 60 fps", highlights: "Destaques", archive: "Arquivo", reply: "Respondeu seu story", voice: "Voice comment", you: "Você" },
     plans: { title: "Planos", monthly: "Mensal", yearly: "Anual", perMonth: "/ mês", perYear: "/ ano", equals: "{price} por mês", save: "Economize {pct}", trial: "Primeira semana grátis, nos dois.", soon: "Em breve na App Store." },
     more: {
       title: "E o resto",

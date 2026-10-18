@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/near-plus/", "destination": "/near-spark/", "permanent": true },
+    { "source": "/:lang(pt|es|fr|de|it|ru)/near-plus/", "destination": "/:lang/near-spark/", "permanent": true }
+  ]
+}

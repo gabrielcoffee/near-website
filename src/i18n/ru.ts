@@ -55,7 +55,7 @@ const ru: Dictionary = {
       { title: "Твои истории не исчезают.", body: "Все твои истории остаются в архиве только для тебя." },
       { title: "Своя иконка.", body: "Нарисованные от руки альтернативные иконки." },
     ],
-    labels: { instagram: "Instagram · 1080 px", near: "Near Spark · 4032 px", video: "1080p · 60 к/с", highlights: "Актуальное", archive: "Архив", reply: "Ответ на твою историю", soon: "Скоро", you: "Ты" },
+    labels: { instagram: "Instagram · 1080 px", near: "Near Spark · 4032 px", video: "1080p · 60 к/с", highlights: "Актуальное", archive: "Архив", reply: "Ответ на твою историю", voice: "Voice comment", you: "Ты" },
     plans: { title: "Тарифы", monthly: "Месяц", yearly: "Год", perMonth: "/ месяц", perYear: "/ год", equals: "{price} в месяц", save: "Выгода {pct}", trial: "Первая неделя бесплатно в обоих.", soon: "Скоро в App Store." },
     more: {
       title: "И остальное",

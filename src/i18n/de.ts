@@ -55,7 +55,7 @@ const de: Dictionary = {
       { title: "Deine Stories verschwinden nicht.", body: "Alles, was du gepostet hast, bleibt in einem Archiv nur für dich." },
       { title: "Ein Symbol, das deins ist.", body: "Handgezeichnete alternative App-Symbole." },
     ],
-    labels: { instagram: "Instagram · 1080 px", near: "Near Spark · 4032 px", video: "1080p · 60 fps", highlights: "Highlights", archive: "Archiv", reply: "Hat auf deine Story geantwortet", soon: "Bald", you: "Du" },
+    labels: { instagram: "Instagram · 1080 px", near: "Near Spark · 4032 px", video: "1080p · 60 fps", highlights: "Highlights", archive: "Archiv", reply: "Hat auf deine Story geantwortet", voice: "Voice comment", you: "Du" },
     plans: { title: "Tarife", monthly: "Monatlich", yearly: "Jährlich", perMonth: "/ Monat", perYear: "/ Jahr", equals: "{price} im Monat", save: "Spar {pct}", trial: "Die erste Woche ist bei beiden gratis.", soon: "Bald im App Store." },
     more: {
       title: "Und der Rest",

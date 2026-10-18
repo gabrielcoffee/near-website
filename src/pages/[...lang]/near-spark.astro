@@ -12,6 +12,6 @@ const { locale } = Astro.props as { locale: Locale };
 const dict = getDict(locale);
 ---
 
-<Base locale={locale} dict={dict} path="/near-plus/" title={`${dict.nav.plus} | Near`} description={dict.plus.intro}>
+<Base locale={locale} dict={dict} path="/near-spark/" title={`${dict.nav.plus} — Near`} description={dict.plus.intro}>
   <Plus dict={dict} locale={locale} />
 </Base>

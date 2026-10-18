@@ -1,12 +1,11 @@
 ---
-// The Near Spark page. Four things that matter (chat, photos and video, archive and highlights, icons) in a
+// The Near Spark page. Four things that matter (chat, photos and video, archive and highlights, voice comments) in a
 // borderless 2x2 grid: a hand-built visual on top, a short title and one line under it. Then the two
 // plans, then a compact "and the rest" table. No buy button until the app is live. Prices: config.ts.
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
-import { NEAR_PLUS_PRICE, type Locale } from "../config";
+import { NEAR_SPARK_PRICE, type Locale } from "../config";
 import type { Dictionary } from "../i18n/en";
-import Drawing from "./Drawing.astro";
 
 interface Props {
   dict: Dictionary;
@@ -14,7 +13,7 @@ interface Props {
 }
 const { dict, locale } = Astro.props;
 const { plus } = dict;
-const price = NEAR_PLUS_PRICE[locale];
+const price = NEAR_SPARK_PRICE[locale];
 const name = dict.nav.plus.replace(/\s*\S+$/, "");
 const accentName = dict.nav.plus.split(" ").pop();
 
@@ -30,9 +29,9 @@ const highlights = [
   { p: "s3", t: "Casa" },
 ];
 const archive = ["s4", "s5", "s3"];
-// Placeholders for the icons Gabriel will draw: four of the site's characters as app icons.
-const icons = ["happy", "cool", "wohoo", "hey"];
-const [chat, media, memory, icon] = plus.features;
+// A voice comment as the app draws it: a play disc, the note's bars (played ones dark) and its length.
+const wave = [4, 9, 14, 7, 12, 18, 10, 6, 13, 16, 8, 5, 11, 15, 9, 4, 7, 12, 6, 10, 14, 8];
+const [chat, media, memory, voice] = plus.features;
 ---
 
 <section class="container-x relative pb-16 pt-36 md:pb-24 md:pt-44">
@@ -122,19 +121,43 @@ const [chat, media, memory, icon] = plus.features;
 
     <div class="feature">
       <div class="feature-visual" data-reveal>
-        <div class="icons">
-          {icons.map((d, i) => (
-            <div class:list={["app-icon", i === 1 && "on"]}>
-              <Drawing name={d} size={120} class="w-[58%]" />
-              {i === 1 && <i aria-hidden="true">✓</i>}
+        <div class="shot voice">
+          <b class="sheet-title">3 comments</b>
+          <div class="row">
+            <span class="ava"><Image src={pic("p2")} alt="" width={96} height={96} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></span>
+            <div><b>Kai</b><p>That light is unreal, where is this?</p></div>
+          </div>
+          <div class="row">
+            <span class="ava"><Image src={pic("p1")} alt="" width={96} height={96} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></span>
+            <div>
+              <b>Sofia</b>
+              <span class="clip" role="img" aria-label={plus.labels.voice}>
+                <i class="play"></i>
+                <span class="wave">{wave.map((h, n) => <i class:list={[n < 9 && "on"]} style={`--h:${h}px`}></i>)}</span>
+                <small>0:08</small>
+              </span>
             </div>
-          ))}
+          </div>
+          <div class="row">
+            <span class="ava"><Image src={pic("p3")} alt="" width={96} height={96} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></span>
+            <div>
+              <b>{plus.labels.you}</b>
+              <span class="clip">
+                <i class="play"></i>
+                <span class="wave">{wave.slice().reverse().map((h) => <i style={`--h:${h}px`}></i>)}</span>
+                <small>0:14</small>
+              </span>
+            </div>
+          </div>
+          <div class="composer">
+            <span></span>
+            <i class="mic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" /><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" /></svg></i>
+          </div>
         </div>
-        <p class="soon">{plus.labels.soon}</p>
       </div>
       <div class="feature-text" data-reveal-group>
-        <h2 class="feature-title" data-reveal>{icon.title}</h2>
-        <p class="feature-body" data-reveal>{icon.body}</p>
+        <h2 class="feature-title" data-reveal>{voice.title}</h2>
+        <p class="feature-body" data-reveal>{voice.body}</p>
       </div>
     </div>
   </div>
@@ -166,7 +189,7 @@ const [chat, media, memory, icon] = plus.features;
       <tr>
         <td></td>
         <th scope="col">{plus.free}</th>
-        <th scope="col" class="is-plus">{name}<span class="text-accent">+</span></th>
+        <th scope="col" class="is-plus">{name} <span class="text-accent">{accentName}</span></th>
       </tr>
     </thead>
     <tbody>
@@ -310,38 +333,23 @@ const [chat, media, memory, icon] = plus.features;
   .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 10px; }
   .cell { display: block; aspect-ratio: 4 / 5; border-radius: 8px; overflow: hidden; }
 
-  /* icons */
-  .icons { display: grid; grid-template-columns: repeat(2, 120px); gap: 22px; }
-  @media (min-width: 640px) { .icons { grid-template-columns: repeat(4, 104px); gap: 18px; } }
-  @media (min-width: 768px) { .icons { grid-template-columns: repeat(2, 120px); gap: 22px; } }
-  .app-icon {
-    position: relative;
-    display: grid;
-    place-items: center;
-    aspect-ratio: 1;
-    border-radius: 24%;
-    background: #fff;
-    border: 1px solid var(--color-line);
-    box-shadow: 0 18px 36px -24px rgb(0 0 0 / 0.4);
-  }
-  .app-icon.on { outline: 2.5px solid var(--color-accent); outline-offset: 5px; }
-  .app-icon i {
-    position: absolute;
-    right: -8px;
-    top: -8px;
-    display: grid;
-    place-items: center;
-    width: 26px;
-    height: 26px;
-    border-radius: 999px;
-    background: var(--color-accent);
-    color: #fff;
-    font-style: normal;
-    font-size: 13px;
-    font-weight: 700;
-    border: 2px solid var(--color-paper);
-  }
-  .soon { margin-top: 1.25rem; font-size: var(--text-small); font-weight: 500; color: var(--color-muted); }
+  /* voice comments: rows like the comments sheet, each clip a pill with a play disc and bars */
+  .voice { display: flex; flex-direction: column; gap: 14px; }
+  .voice .sheet-title { align-self: center; font-size: 13px; font-weight: 600; }
+  .voice .row { display: flex; align-items: flex-start; gap: 10px; }
+  .voice .row b { display: block; font-size: 12px; font-weight: 600; }
+  .voice .row p { font-size: 14px; line-height: 1.3; }
+  .clip { display: inline-flex; align-items: center; gap: 8px; margin-top: 4px; padding: 5px 12px 5px 5px; border-radius: 20px; background: var(--surface); }
+  .clip .play { position: relative; width: 26px; height: 26px; border-radius: 999px; background: #1c1c1e; flex: none; }
+  .clip .play::after { content: ""; position: absolute; left: 10px; top: 8px; border-left: 8px solid #fff; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
+  .wave { display: flex; align-items: center; gap: 2px; height: 20px; }
+  .wave i { width: 2px; height: var(--h); border-radius: 1px; background: rgb(28 28 30 / 0.45); }
+  .wave i.on { background: #1c1c1e; }
+  .clip small { font-size: 11px; font-variant-numeric: tabular-nums; color: var(--muted); }
+  .voice .composer { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+  .voice .composer span { flex: 1; height: 36px; border-radius: 999px; background: var(--surface); }
+  .voice .composer .mic { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 999px; background: var(--surface); }
+  .voice .composer .mic svg { width: 17px; height: 17px; fill: none; stroke: #1c1c1e; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 
   /* ---- Plans ---- */
   .plans { display: grid; gap: 1rem; max-width: 42rem; }

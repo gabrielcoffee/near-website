@@ -55,7 +55,7 @@ const es: Dictionary = {
       { title: "Tus historias no desaparecen.", body: "Todo lo que publicaste se guarda en un archivo solo tuyo." },
       { title: "Un icono que es tuyo.", body: "Iconos alternativos dibujados a mano." },
     ],
-    labels: { instagram: "Instagram · 1080 px", near: "Near Spark · 4032 px", video: "1080p · 60 fps", highlights: "Destacados", archive: "Archivo", reply: "Respondió a tu historia", soon: "Próximamente", you: "Tú" },
+    labels: { instagram: "Instagram · 1080 px", near: "Near Spark · 4032 px", video: "1080p · 60 fps", highlights: "Destacados", archive: "Archivo", reply: "Respondió a tu historia", voice: "Voice comment", you: "Tú" },
     plans: { title: "Planes", monthly: "Mensual", yearly: "Anual", perMonth: "/ mes", perYear: "/ año", equals: "{price} al mes", save: "Ahorra {pct}", trial: "Primera semana gratis, en los dos.", soon: "Pronto en el App Store." },
     more: {
       title: "Y el resto",
