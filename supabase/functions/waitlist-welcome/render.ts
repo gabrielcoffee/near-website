@@ -8,7 +8,7 @@
 import type { Email } from "./emails.ts";
 
 export const ICON_URL =
-  "https://mrejurldemanuvbrfutf.supabase.co/storage/v1/object/public/brand/near-icon-128.png";
+  "https://mrejurldemanuvbrfutf.supabase.co/storage/v1/object/public/brand/near-mark-128.png";
 export const SITE_URL = "https://nearapp.social";
 export const X_URL = "https://x.com/gabrielfp101";
 
@@ -45,7 +45,7 @@ export function renderHtml(email: Email, unsubscribe: string): string {
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px">
   <tr><td style="background:#ffffff;border:1px solid #e8e8e6;border-radius:20px;padding:36px 32px">
     <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-      <td style="padding-right:12px"><a href="${SITE_URL}" style="display:block;text-decoration:none"><img src="${ICON_URL}" width="40" height="40" alt="Near" style="display:block;width:40px;height:40px;border-radius:10px;border:0"></a></td>
+      <td style="padding-right:12px"><a href="${SITE_URL}" style="display:block;text-decoration:none"><img src="${ICON_URL}" width="40" height="40" alt="Near" style="display:block;width:40px;height:40px;border:0"></a></td>
       <td><a href="${SITE_URL}" style="font-family:${FONT};font-size:20px;font-weight:600;letter-spacing:-0.01em;color:#111111;text-decoration:none">Near</a></td>
     </tr></table>
     <p style="margin:32px 0 20px;font-family:${FONT};font-size:28px;font-weight:600;line-height:1.15;letter-spacing:-0.02em;color:#111111">${escapeHtml(email.heading)}</p>
@@ -78,7 +78,7 @@ export function renderPage(message: string, lang: string): string {
 </head>
 <body style="margin:0;padding:40px 16px;background:#fafafa;font-family:${FONT}">
 <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e8e8e6;border-radius:20px;padding:36px 32px">
-  <img src="${ICON_URL}" width="40" height="40" alt="Near" style="display:block;border-radius:10px">
+  <img src="${ICON_URL}" width="40" height="40" alt="Near" style="display:block">
   <p style="margin:28px 0 0;font-size:22px;font-weight:600;line-height:1.25;letter-spacing:-0.02em;color:#111111">${escapeHtml(message)}</p>
   <p style="margin:20px 0 0;font-size:14px;color:#6b6b6b"><a href="${SITE_URL}" style="color:#6b6b6b">nearapp.social</a></p>
 </div>
