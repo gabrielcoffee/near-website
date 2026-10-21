@@ -11,9 +11,8 @@
   --color-line: #e8e8e6;
   --color-accent: #ff6a2b;
   --color-accent-soft: #fff1ea;
-  /* Logo mark only (matches the app icon): the two circles, and their overlap (= multiply). */
+  /* The logo's orange: every orange fill in the phone mocks. */
   --color-mark: #ff9300;
-  --color-mark-overlap: #ff5500;
 
   /* The only four text sizes on the site (page text; the app mock screens keep their own tiny sizes).
      Fluid from a 390px phone to the 1024px container: display 36→48, title 24→30, body 16→18, small 14. */
@@ -444,7 +443,7 @@ fieldset[aria-invalid="true"] .choice-pill {
   transition-duration: 0s;
 }
 
-/* ---------- Wordmark (logo): two orange circles + Near. Header, hero, footer all use this. ---------- */
+/* ---------- Wordmark (logo): the hand-drawn mark + Near. Header, hero, footer all use this. ---------- */
 .wordmark {
   display: inline-flex;
   align-items: center;
@@ -458,14 +457,8 @@ fieldset[aria-invalid="true"] .choice-pill {
   flex: none;
   width: 0.85em;
   height: 0.85em;
-  overflow: visible;
+  object-fit: contain;
   transition: transform 0.3s var(--ease-spring);
-}
-.wordmark-mark .mark-circle {
-  fill: var(--color-mark);
-}
-.wordmark-mark .mark-overlap {
-  fill: var(--color-mark-overlap);
 }
 .wordmark:hover .wordmark-mark {
   transform: scale(1.15);
