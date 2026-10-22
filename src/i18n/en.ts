@@ -170,13 +170,13 @@ const en = {
       },
       {
         title: "How “nearby” works",
-        body: "Near doesn't use your location to find friends. While the app is open, your phone shares a random code with phones in the same room over the local network. The code changes every ten minutes, expires after fifteen, and is never kept beyond that. Someone next to you sees your name and photo. Nobody further away sees anything.",
+        body: "Near doesn't use your location to find friends. While Add New Friend is open, your phone shares a random code over Bluetooth with phones right next to you. The code changes every ten minutes, expires after fifteen, and is never kept beyond that. Someone next to you sees your name and photo. Nobody further away sees anything.",
       },
       {
         title: "Permissions and what they're for",
         body: "iOS will ask you for these. Each one does exactly one thing:",
         items: [
-          "Local network: finding the friend next to you.",
+          "Bluetooth: finding the friend next to you, only while Add New Friend is open.",
           "Camera and photo library: photos and videos for your posts, stories and messages, and your profile picture. Near only adds to your photos when you ask it to save a story, or a photo or video from a chat.",
           "Microphone: the sound in the videos you record, your voice messages and your voice comments.",
           "Notifications: a new friend, a comment on your post, a friend's birthday, a friend's new post. Nothing else, ever. Asked only once you have a friend.",
@@ -185,7 +185,7 @@ const en = {
       },
       {
         title: "On your phone",
-        body: "Near keeps a copy of your friends' photos and videos on your phone so they open instantly instead of downloading twice. It's a cache: it stays inside the app and goes when you sign out, delete your account or delete the app. A post you save as a draft stays only on your phone too: it's never uploaded or included in your iCloud backup, it waits for you if you sign out, and it goes when you delete your account or the app. The photos and videos you post are stored without location data: the EXIF and GPS tags are stripped.",
+        body: "Near keeps a copy of your friends list, your own profile and your friends' photos and videos on your phone so they open instantly instead of downloading twice. It's a cache: it stays inside the app and goes when you sign out, delete your account or delete the app. A post you save as a draft stays only on your phone too: it's never uploaded or included in your iCloud backup, it waits for you if you sign out, and it goes when you delete your account or the app. The photos and videos you post are stored without location data: the EXIF and GPS tags are stripped.",
       },
       {
         title: "GIFs and stickers",

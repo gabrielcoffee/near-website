@@ -166,13 +166,13 @@ const fr: Dictionary = {
       },
       {
         title: "Comment marche « à côté »",
-        body: "Near n'utilise pas ta position pour trouver tes amis. Quand l'appli est ouverte, ton téléphone partage un code aléatoire avec les téléphones de la même pièce via le réseau local. Le code change toutes les dix minutes, expire au bout de quinze et n'est jamais gardé plus longtemps. Quelqu'un à côté de toi voit ton nom et ta photo. Plus loin, personne ne voit rien.",
+        body: "Near n'utilise pas ta position pour trouver tes amis. Quand Ajouter un ami est ouvert, ton téléphone partage un code aléatoire en Bluetooth avec les téléphones juste à côté de toi. Le code change toutes les dix minutes, expire au bout de quinze et n'est jamais gardé plus longtemps. Quelqu'un à côté de toi voit ton nom et ta photo. Plus loin, personne ne voit rien.",
       },
       {
         title: "Les autorisations et à quoi elles servent",
         body: "iOS va te les demander. Chacune fait exactement une chose :",
         items: [
-          "Réseau local : trouver l'ami qui est à côté de toi.",
+          "Bluetooth : trouver l'ami qui est à côté de toi, seulement quand Ajouter un ami est ouvert.",
           "Appareil photo et photothèque : photos et vidéos pour tes publications, tes stories et tes messages, et ta photo de profil. Near n'ajoute à tes photos que lorsque tu lui demandes d'enregistrer une story, ou une photo ou une vidéo d'une discussion.",
           "Micro : le son des vidéos que tu enregistres, tes messages vocaux et tes commentaires vocaux.",
           "Notifications : un nouvel ami, un commentaire sur ton post, l'anniversaire d'un ami, un nouveau post d'un ami. Rien d'autre, jamais. Demandé seulement une fois que tu as un ami.",
@@ -181,7 +181,7 @@ const fr: Dictionary = {
       },
       {
         title: "Sur ton téléphone",
-        body: "Near garde sur ton téléphone une copie des photos et vidéos de tes amis pour qu'elles s'ouvrent tout de suite au lieu d'être téléchargées deux fois. C'est un cache : il reste dans l'appli et disparaît quand tu te déconnectes, supprimes ton compte ou supprimes l'appli. Un post que tu enregistres en brouillon reste lui aussi uniquement sur ton téléphone : il n'est jamais envoyé ni inclus dans ta sauvegarde iCloud, il t'attend si tu te déconnectes et disparaît quand tu supprimes ton compte ou l'appli. Les photos et vidéos que tu publies sont stockées sans données de localisation : les balises EXIF et GPS sont retirées.",
+        body: "Near garde sur ton téléphone une copie de ta liste d'amis, de ton profil et des photos et vidéos de tes amis pour qu'ils s'ouvrent tout de suite au lieu d'être téléchargés deux fois. C'est un cache : il reste dans l'appli et disparaît quand tu te déconnectes, supprimes ton compte ou supprimes l'appli. Un post que tu enregistres en brouillon reste lui aussi uniquement sur ton téléphone : il n'est jamais envoyé ni inclus dans ta sauvegarde iCloud, il t'attend si tu te déconnectes et disparaît quand tu supprimes ton compte ou l'appli. Les photos et vidéos que tu publies sont stockées sans données de localisation : les balises EXIF et GPS sont retirées.",
       },
       {
         title: "GIF et stickers",

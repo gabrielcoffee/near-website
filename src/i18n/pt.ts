@@ -169,7 +169,7 @@ const pt: Dictionary = {
       },
       {
         title: "Como funciona o “por perto”",
-        body: "O Near não usa GPS nem sua localização para encontrar amigos. Quando você abre a tela Adicionar amigo, seu iPhone fica visível para os iPhones próximos por uma conexão direta entre aparelhos, a mesma tecnologia do AirDrop, sem precisar estar na mesma rede Wi‑Fi. O que ele transmite é só um código aleatório, que não diz quem você é: o código muda a cada 10 minutos e expira em 15. Um iPhone por perto com o Near aberto pergunta aos nossos servidores de quem é aquele código, e só então mostra seu nome e sua foto de perfil. A amizade só é criada quando os dois tocam um no outro em até 30 segundos. Fechou a tela, seu iPhone deixa de ser visível. Não sabemos nem guardamos onde vocês se encontraram.",
+        body: "O Near não usa GPS nem sua localização para encontrar amigos. Quando você abre a tela Adicionar amigo, seu iPhone fica visível por Bluetooth para os iPhones que estão bem do seu lado, sem precisar de Wi‑Fi nem de internet entre os aparelhos. O que ele transmite é só um código aleatório, que não diz quem você é: o código muda a cada 10 minutos e expira em 15. Um iPhone por perto com o Near aberto pergunta aos nossos servidores de quem é aquele código, e só então mostra seu nome e sua foto de perfil. A amizade só é criada quando os dois seguram o card um do outro ao mesmo tempo por um segundo. Fechou a tela, seu iPhone deixa de ser visível. Não sabemos nem guardamos onde vocês se encontraram.",
 
       },
       {
@@ -199,7 +199,7 @@ const pt: Dictionary = {
         title: "Permissões do iOS",
         body: "O iOS pede estas permissões. Cada uma serve para uma coisa só:",
         items: [
-          "Rede local: encontrar o amigo que está ao seu lado.",
+          "Bluetooth: encontrar o amigo que está ao seu lado, só enquanto a tela Adicionar amigo está aberta.",
           "Câmera e fotos: fotos e vídeos para seus posts, stories e mensagens, e sua foto de perfil. O Near só adiciona às suas fotos quando você pede para salvar um story, ou uma foto ou vídeo de uma conversa.",
           "Microfone: o áudio dos vídeos que você grava, das suas mensagens de voz e dos seus comentários de voz.",
           "Notificações: um amigo novo, um comentário no seu post, o aniversário de um amigo, um post novo de um amigo. Nada além disso, nunca. Só pedimos depois do seu primeiro amigo.",
@@ -232,7 +232,7 @@ const pt: Dictionary = {
       },
       {
         title: "No seu iPhone",
-        body: "O app guarda no seu iPhone uma cópia das fotos e vídeos dos seus amigos, para abrirem na hora sem baixar de novo. É um cache local: fica dentro do app, não é acessível a outros apps e desaparece quando você sai da conta, exclui a conta ou apaga o Near. Um post que você salva como rascunho também fica só no seu celular: nunca é enviado nem entra no backup do iCloud, continua lá se você sair da conta e desaparece quando você exclui a conta ou apaga o Near. As fotos e os vídeos que você publica são guardados sem dados de localização: as informações EXIF e de GPS são removidas. Suas próprias fotos e vídeos continuam na sua biblioteca normalmente; o Near só lê o que você escolhe publicar.",
+        body: "O app guarda no seu iPhone uma cópia da sua lista de amigos, do seu perfil e das fotos e vídeos dos seus amigos, para abrirem na hora sem baixar de novo. É um cache local: fica dentro do app, não é acessível a outros apps e desaparece quando você sai da conta, exclui a conta ou apaga o Near. Um post que você salva como rascunho também fica só no seu celular: nunca é enviado nem entra no backup do iCloud, continua lá se você sair da conta e desaparece quando você exclui a conta ou apaga o Near. As fotos e os vídeos que você publica são guardados sem dados de localização: as informações EXIF e de GPS são removidas. Suas próprias fotos e vídeos continuam na sua biblioteca normalmente; o Near só lê o que você escolhe publicar.",
       },
       {
         title: "Por quanto tempo guardamos",

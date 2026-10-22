@@ -166,13 +166,13 @@ const es: Dictionary = {
       },
       {
         title: "Cómo funciona lo de “cerca”",
-        body: "Near no usa tu ubicación para encontrar amigos. Con la app abierta, tu móvil comparte un código aleatorio con los móviles de la misma sala por la red local. El código cambia cada diez minutos, caduca a los quince y no se guarda más allá. Quien está a tu lado ve tu nombre y tu foto. Quien está más lejos no ve nada.",
+        body: "Near no usa tu ubicación para encontrar amigos. Con Añadir amigo abierto, tu móvil comparte un código aleatorio por Bluetooth con los móviles que tienes justo al lado. El código cambia cada diez minutos, caduca a los quince y no se guarda más allá. Quien está a tu lado ve tu nombre y tu foto. Quien está más lejos no ve nada.",
       },
       {
         title: "Permisos y para qué sirven",
         body: "iOS te pedirá estos permisos. Cada uno hace exactamente una cosa:",
         items: [
-          "Red local: encontrar al amigo que tienes al lado.",
+          "Bluetooth: encontrar al amigo que tienes al lado, solo con Añadir amigo abierto.",
           "Cámara y fotos: fotos y vídeos para tus publicaciones, historias y mensajes, y tu foto de perfil. Near solo añade a tus fotos cuando le pides guardar una historia, o una foto o un vídeo de un chat.",
           "Micrófono: el sonido de los vídeos que grabas, tus notas de voz y tus comentarios de voz.",
           "Notificaciones: un amigo nuevo, un comentario en tu publicación, el cumpleaños de un amigo, una publicación nueva de un amigo. Nada más, nunca. Solo lo pedimos cuando ya tienes un amigo.",
@@ -181,7 +181,7 @@ const es: Dictionary = {
       },
       {
         title: "En tu móvil",
-        body: "Near guarda en tu móvil una copia de las fotos y los vídeos de tus amigos para que se abran al instante y no se descarguen dos veces. Es una caché: se queda dentro de la app y desaparece cuando cierras sesión, eliminas tu cuenta o borras la app. Un post que guardas como borrador también se queda solo en tu móvil: nunca se sube ni entra en tu copia de iCloud, te espera si cierras sesión y desaparece cuando eliminas tu cuenta o borras la app. Las fotos y los vídeos que publicas se guardan sin datos de ubicación: se eliminan las etiquetas EXIF y GPS.",
+        body: "Near guarda en tu móvil una copia de tu lista de amigos, de tu perfil y de las fotos y los vídeos de tus amigos para que se abran al instante y no se descarguen dos veces. Es una caché: se queda dentro de la app y desaparece cuando cierras sesión, eliminas tu cuenta o borras la app. Un post que guardas como borrador también se queda solo en tu móvil: nunca se sube ni entra en tu copia de iCloud, te espera si cierras sesión y desaparece cuando eliminas tu cuenta o borras la app. Las fotos y los vídeos que publicas se guardan sin datos de ubicación: se eliminan las etiquetas EXIF y GPS.",
       },
       {
         title: "GIF y stickers",

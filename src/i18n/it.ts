@@ -166,13 +166,13 @@ const it: Dictionary = {
       },
       {
         title: "Come funziona il “vicino”",
-        body: "Near non usa la tua posizione per trovare gli amici. Con l'app aperta, il tuo telefono condivide un codice casuale con i telefoni nella stessa stanza tramite la rete locale. Il codice cambia ogni dieci minuti, scade dopo quindici e non viene mai conservato oltre. Chi ti sta accanto vede il tuo nome e la tua foto. Chi è più lontano non vede niente.",
+        body: "Near non usa la tua posizione per trovare gli amici. Con Aggiungi amico aperto, il tuo telefono condivide un codice casuale via Bluetooth con i telefoni che hai proprio accanto. Il codice cambia ogni dieci minuti, scade dopo quindici e non viene mai conservato oltre. Chi ti sta accanto vede il tuo nome e la tua foto. Chi è più lontano non vede niente.",
       },
       {
         title: "I permessi e a cosa servono",
         body: "iOS te li chiederà. Ognuno fa esattamente una cosa:",
         items: [
-          "Rete locale: trovare l'amico che hai accanto.",
+          "Bluetooth: trovare l'amico che hai accanto, solo con Aggiungi amico aperto.",
           "Fotocamera e libreria foto: foto e video per i tuoi post, le tue storie e i tuoi messaggi, e la tua foto profilo. Near aggiunge qualcosa alle tue foto solo quando gli chiedi di salvare una storia, o una foto o un video di una chat.",
           "Microfono: l'audio dei video che registri, i tuoi messaggi vocali e i tuoi commenti vocali.",
           "Notifiche: un nuovo amico, un commento al tuo post, il compleanno di un amico, un nuovo post di un amico. Nient'altro, mai. Te lo chiediamo solo quando hai già un amico.",
@@ -181,7 +181,7 @@ const it: Dictionary = {
       },
       {
         title: "Sul tuo telefono",
-        body: "Near tiene sul tuo telefono una copia delle foto e dei video dei tuoi amici, così si aprono subito senza scaricarli due volte. È una cache: resta dentro l'app e sparisce quando esci dall'account, elimini l'account o elimini l'app. Anche un post che salvi come bozza resta solo sul tuo telefono: non viene mai caricato né incluso nel backup di iCloud, ti aspetta se esci dall'account e sparisce quando elimini l'account o l'app. Le foto e i video che pubblichi vengono conservati senza dati di posizione: i tag EXIF e GPS vengono rimossi.",
+        body: "Near tiene sul tuo telefono una copia della tua lista di amici, del tuo profilo e delle foto e dei video dei tuoi amici, così si aprono subito senza scaricarli due volte. È una cache: resta dentro l'app e sparisce quando esci dall'account, elimini l'account o elimini l'app. Anche un post che salvi come bozza resta solo sul tuo telefono: non viene mai caricato né incluso nel backup di iCloud, ti aspetta se esci dall'account e sparisce quando elimini l'account o l'app. Le foto e i video che pubblichi vengono conservati senza dati di posizione: i tag EXIF e GPS vengono rimossi.",
       },
       {
         title: "GIF e sticker",

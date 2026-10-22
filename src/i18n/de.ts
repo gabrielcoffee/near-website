@@ -166,13 +166,13 @@ const de: Dictionary = {
       },
       {
         title: "Wie „in der Nähe“ funktioniert",
-        body: "Near nutzt nicht deinen Standort, um Freunde zu finden. Solange die App offen ist, teilt dein Handy über das lokale Netzwerk einen zufälligen Code mit den Handys im selben Raum. Der Code wechselt alle zehn Minuten, läuft nach fünfzehn ab und wird darüber hinaus nie gespeichert. Wer neben dir steht, sieht deinen Namen und dein Foto. Wer weiter weg ist, sieht nichts.",
+        body: "Near nutzt nicht deinen Standort, um Freunde zu finden. Solange „Freund hinzufügen“ offen ist, teilt dein Handy per Bluetooth einen zufälligen Code mit den Handys direkt neben dir. Der Code wechselt alle zehn Minuten, läuft nach fünfzehn ab und wird darüber hinaus nie gespeichert. Wer neben dir steht, sieht deinen Namen und dein Foto. Wer weiter weg ist, sieht nichts.",
       },
       {
         title: "Berechtigungen und wofür sie da sind",
         body: "iOS wird dich danach fragen. Jede macht genau eine Sache:",
         items: [
-          "Lokales Netzwerk: den Freund finden, der neben dir steht.",
+          "Bluetooth: den Freund finden, der neben dir steht, nur solange „Freund hinzufügen“ offen ist.",
           "Kamera und Fotos: Fotos und Videos für deine Posts, Stories und Nachrichten und dein Profilbild. Near fügt deinen Fotos nur etwas hinzu, wenn du es bittest, eine Story oder ein Foto oder Video aus einem Chat zu speichern.",
           "Mikrofon: der Ton in den Videos, die du aufnimmst, deine Sprachnachrichten und deine Sprachkommentare.",
           "Mitteilungen: ein neuer Freund, ein Kommentar zu deinem Post, der Geburtstag eines Freundes, ein neuer Post eines Freundes. Sonst nichts, nie. Gefragt wird erst, wenn du einen Freund hast.",
@@ -181,7 +181,7 @@ const de: Dictionary = {
       },
       {
         title: "Auf deinem Handy",
-        body: "Near legt eine Kopie der Fotos und Videos deiner Freunde auf deinem Handy ab, damit sie sofort aufgehen und nicht zweimal geladen werden. Das ist ein Cache: Er bleibt in der App und verschwindet, wenn du dich abmeldest, dein Konto löschst oder die App löschst. Auch ein Post, den du als Entwurf speicherst, bleibt nur auf deinem Handy: Er wird nie hochgeladen und landet nicht in deinem iCloud-Backup, wartet auf dich, wenn du dich abmeldest, und verschwindet, wenn du dein Konto oder die App löschst. Fotos und Videos, die du postest, werden ohne Standortdaten gespeichert: Die EXIF- und GPS-Angaben werden entfernt.",
+        body: "Near legt eine Kopie deiner Freundesliste, deines Profils und der Fotos und Videos deiner Freunde auf deinem Handy ab, damit sie sofort aufgehen und nicht zweimal geladen werden. Das ist ein Cache: Er bleibt in der App und verschwindet, wenn du dich abmeldest, dein Konto löschst oder die App löschst. Auch ein Post, den du als Entwurf speicherst, bleibt nur auf deinem Handy: Er wird nie hochgeladen und landet nicht in deinem iCloud-Backup, wartet auf dich, wenn du dich abmeldest, und verschwindet, wenn du dein Konto oder die App löschst. Fotos und Videos, die du postest, werden ohne Standortdaten gespeichert: Die EXIF- und GPS-Angaben werden entfernt.",
       },
       {
         title: "GIFs und Sticker",
