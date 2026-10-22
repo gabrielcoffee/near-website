@@ -26,13 +26,13 @@ export const LEGAL_ENTITY = "Gabriel Fernandes Pereira (CNPJ 54.909.636/0001-80)
 export const LEGAL_UPDATED = "2026-10-22";
 
 /** Near Spark prices per language's main storefront, as the app's StoreKit configuration has them. US and Brazil
- *  are decided (monthly $3.99 / R$ 9,90, yearly $29.99 / R$ 99,90); euro and rouble values are placeholders that
+ *  are decided (monthly $3.99 / R$ 9,90, yearly $29.99 / R$ 79,90); euro and rouble values are placeholders that
  *  mirror the US numbers. `yearlyPerMonth` and `saving` are the yearly plan's per-month equivalent and its
  *  discount vs 12 months. */
 export type SparkPrice = { monthly: string; yearly: string; yearlyPerMonth: string; saving: string };
 export const NEAR_SPARK_PRICE: Record<Locale, SparkPrice> = {
   en: { monthly: "$3.99", yearly: "$29.99", yearlyPerMonth: "$2.50", saving: "37%" },
-  pt: { monthly: "R$ 9,90", yearly: "R$ 99,90", yearlyPerMonth: "R$ 8,33", saving: "16%" },
+  pt: { monthly: "R$ 9,90", yearly: "R$ 79,90", yearlyPerMonth: "R$ 6,66", saving: "33%" },
   es: { monthly: "3,99 €", yearly: "29,99 €", yearlyPerMonth: "2,50 €", saving: "37%" },
   fr: { monthly: "3,99 €", yearly: "29,99 €", yearlyPerMonth: "2,50 €", saving: "37%" },
   de: { monthly: "3,99 €", yearly: "29,99 €", yearlyPerMonth: "2,50 €", saving: "37%" },
