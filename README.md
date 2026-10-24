@@ -1,8 +1,31 @@
-# Near — website
+# Near website
 
-Landing page for Near, the social app for friends you actually see.
+The landing page for **Near**, an iOS social network for the friends you actually see. You can only add someone on Near while you're physically together, phone next to phone.
 
-## Run
+**Live:** [nearapp.social](https://nearapp.social) · The app is in TestFlight, App Store soon.
+
+![Near landing page](.github/assets/hero.jpg)
+
+## What I built
+
+- **A static Astro site in seven languages.** English, Portuguese, Spanish, French, German, Italian and Russian, each with its own URL, `hreflang` tags and a language switcher.
+- **Hand-drawn art that "boils".** Every drawing wobbles like a hand-animated cartoon, using SVG turbulence filters swapped on a timer, with a separate set for hover. No video, no canvas.
+- **A waitlist and contact form on Supabase.** Postgres tables with insert-only row-level security, plus Edge Functions that send the welcome email, handle signed unsubscribe links, and notify me of new messages.
+- **Tiny vanilla scripts instead of a framework.** Reveal-on-scroll, the phone mockup, the roadmap and smooth scrolling are each a few dozen lines of TypeScript.
+- **Legal pages** (privacy, terms) and the NearSpark subscription page, all localized.
+
+Near's Bluetooth proximity engine is open source as [copresence-bluetooth-kit](https://github.com/gabrielcoffee/copresence-bluetooth-kit).
+
+## Stack
+
+| | |
+|---|---|
+| Site | Astro 7, Tailwind CSS 4, TypeScript |
+| Scrolling | Lenis |
+| Backend | Supabase (Postgres, Edge Functions) |
+| Hosting | Vercel |
+
+## Run locally
 
 ```bash
 npm install
@@ -11,26 +34,20 @@ npm run build     # static output in dist/
 npm run preview
 ```
 
-## Where things live
+## Project layout
 
-- `src/config.ts` — App Store URL, Supabase waitlist keys, contact email, locales, smooth-scroll switch.
-- `src/styles/global.css` — design tokens (`@theme`), buttons, cards, drawing boil, reveal.
-- `src/i18n/*.ts` — one dictionary per language. Add a language: copy `en.ts`, add it to `LOCALES` in `config.ts` and `astro.config.mjs`, register it in `src/i18n/index.ts`.
-- `src/components/` — page sections (`Hero`, `HowItWorks`, `Beliefs`, `Cta`) and UI (`Header`, `Footer`, `Button`, `Waitlist`, `ContactForm`, `Legal`, `Drawing`, `LangSwitch`, `PhoneMock`, `PhoneScreens`).
-- `src/scripts/` — tiny vanilla modules: `boil` (wobble), `reveal`, `header`, `phone`, `roadmap`, `lang`, `smooth`, `waitlist`, `contact`.
-- `supabase/migrations/` — the `waitlist` and `contact_messages` tables. `supabase/functions/` — the mail-sending Edge Functions. See Waitlist and Contact page in `AGENTS.md`.
-- `drawings-src/` — original PNG drawings. `src/assets/drawings/` — normalized versions used by the site.
+- `src/config.ts` holds the App Store URL, Supabase keys, contact email and the list of locales.
+- `src/i18n/*.ts` has one dictionary per language. To add one, copy `en.ts`, then register it in `config.ts`, `astro.config.mjs` and `src/i18n/index.ts`.
+- `src/components/` has the page sections (`Hero`, `HowItWorks`, `Beliefs`, `Cta`) and UI pieces (`Header`, `Waitlist`, `ContactForm`, `PhoneMock`, `Drawing`).
+- `src/scripts/` has the small client modules: `boil`, `reveal`, `header`, `phone`, `roadmap`, `lang`, `smooth`, `waitlist`, `contact`.
+- `supabase/migrations/` defines the `waitlist` and `contact_messages` tables. `supabase/functions/` has the email Edge Functions.
 
-## Drawings
+### Drawings
 
-Drop new PNGs (transparent background) into `drawings-src/` and run:
+Put new transparent PNGs in `drawings-src/` and normalize them:
 
 ```bash
 node scripts/normalize-drawings.mjs
 ```
 
-Then use them anywhere with `<Drawing name="file-name" size={160} class="w-[120px]" />`.
-
-## Wobble tuning
-
-Filters are defined in `src/layouts/Base.astro` (`boil-s-*` idle, `boil-h-*` hover). Frame rate lives in `src/scripts/boil.ts` (`INTERVAL_MS`).
+Then use one anywhere with `<Drawing name="file-name" size={160} />`. The boil filters live in `src/layouts/Base.astro`, and the frame rate in `src/scripts/boil.ts`.
