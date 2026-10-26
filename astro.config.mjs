@@ -8,16 +8,14 @@ export default defineConfig({
   site: "https://nearapp.social",
   output: "static",
   trailingSlash: "always",
-  // The Near Spark page was /near-plus/ until 2026-10-18 (vercel.json answers these with a real 308 too).
-  redirects: {
-    "/near-plus/": "/near-spark/",
-    "/pt/near-plus/": "/pt/near-spark/",
-    "/es/near-plus/": "/es/near-spark/",
-    "/fr/near-plus/": "/fr/near-spark/",
-    "/de/near-plus/": "/de/near-spark/",
-    "/it/near-plus/": "/it/near-spark/",
-    "/ru/near-plus/": "/ru/near-spark/",
-  },
+  // Near Spark had its own page (/near-plus/ until 2026-10-18, /near-spark/ until 2026-10-22); the site no longer
+  // mentions it outside the legal pages, so old links land on the home page (vercel.json answers with a real 308 too).
+  redirects: Object.fromEntries(
+    ["", "/pt", "/es", "/fr", "/de", "/it", "/ru"].flatMap((p) => [
+      [`${p}/near-plus/`, `${p}/`],
+      [`${p}/near-spark/`, `${p}/`],
+    ]),
+  ),
   i18n: {
     defaultLocale: "en",
     locales: ["en", "pt", "es", "fr", "de", "it", "ru"],

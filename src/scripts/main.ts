@@ -9,7 +9,6 @@ import { initLangSwitch } from "./lang";
 import { initLogoScrollTop } from "./logo";
 import { initPhone } from "./phone";
 import { initRoadmap } from "./roadmap";
-import { initWaitlist } from "./waitlist";
 
 initHeader();
 initReveal();
@@ -17,7 +16,6 @@ initBoil();
 initIntro(() => {});
 initPhone();
 initRoadmap();
-initWaitlist();
 initContact();
 initLangSwitch(LANG_STORAGE_KEY);
 initLogoScrollTop();

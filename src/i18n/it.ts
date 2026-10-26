@@ -1,4 +1,4 @@
-import type { Dictionary, LegalSection, PlusRow } from "./en";
+import type { Dictionary, LegalSection } from "./en";
 
 const it: Dictionary = {
   meta: {
@@ -8,8 +8,6 @@ const it: Dictionary = {
   },
   nav: {
     how: "Come funziona",
-    also: "Anche in Near",
-    plus: "Near Spark",
     believe: "In cosa crediamo",
     cta: "Scarica l'app",
   },
@@ -18,86 +16,46 @@ const it: Dictionary = {
     tagline: "Gli amici che vedi davvero.",
     scroll: "c'è altro",
   },
+  // TODO translate: English until the new copy is approved (2026-10-22).
   how: {
     steps: [
       {
-        title: "Solo di persona",
-        body: "Puoi aggiungere solo chi ti sta accanto. Hai incontrato un amico? Vi aggiungete dall'app, lì sul momento.",
+        title: "Only in person",
+        body: "On Near you can only add your friends face to face!",
       },
       {
-        title: "I tuoi amici",
-        body: "Tutte le persone che hai visto dal vivo, in un'unica lista. Questa è tutta la tua rete.",
+        title: "Relax without losing time",
+        body: "5 to 10 minutes is all it takes to see and catch up with all your friends. Then the feed ends.",
       },
       {
-        title: "Un feed che finisce",
-        body: "Foto e post dei tuoi amici, dal più recente al più vecchio. Niente classifiche, niente “consigliati per te”.",
-      },
-      {
-        title: "Parole, non cuori",
-        body: "Non ci sono like. Se qualcosa ti sta a cuore, dillo.",
+        title: "Show your day to day",
+        body: "A safe place to share whatever you want, knowing only people you know will see it.",
       },
     ],
   },
-  also: {
-    intro: "Tocca gli schermi per sfogliarle.",
-    features: [
-      { title: "Storie", body: "Foto e video per i tuoi amici, che spariscono dopo 24 ore. Vedi esattamente chi li ha guardati." },
-      { title: "Messaggi", body: "Rispondi a una storia e la conversazione inizia lì. Con Near Spark." },
-      { title: "Nitido per tutti", body: "Nessun limite di 1080 px e nessun calo di qualità sui post che vedono in pochi. Ogni post resta come l'hai fatto." },
-    ],
-  },
-  plus: {
-    intro: "Near è gratis. Near Spark è per chi ne vuole di più.",
-    free: "Gratis",
-    features: [
-      { title: "Parla con chi hai davvero incontrato.", body: "Messaggi solo tra amici." },
-      { title: "Più nitido di Instagram.", body: "Foto a 4032 px, quasi 4 volte Instagram. Video a 60 fps, fino a 3 minuti." },
-      { title: "Le tue storie non spariscono.", body: "Restano in un archivio privato, e le migliori puoi fissarle sul tuo profilo." },
-      { title: "Dillo a voce alta.", body: "Commenti vocali sui post dei tuoi amici. Tutti possono ascoltarli; per pubblicarne uno serve Near Spark." },
-    ],
-    labels: { instagram: "Instagram · 1080 px", near: "Near Spark · 4032 px", video: "1080p · 60 fps · 3 min", highlights: "In evidenza", archive: "Archivio", reply: "Ha risposto alla tua storia", voice: "Commento vocale", you: "Tu" },
-    plans: { title: "Piani", monthly: "Mensile", yearly: "Annuale", perMonth: "/ mese", perYear: "/ anno", equals: "{price} al mese", save: "Risparmi il {pct}", trial: "Prima settimana gratis, in entrambi.", soon: "Presto sull'App Store." },
-    more: {
-      title: "E il resto",
-      rows: [
-      { label: "Messaggi", free: "Lettura", plus: true },
-      { label: "Commenti vocali", free: "Ascolto", plus: true },
-      { label: "Foto", free: "2048 px", plus: "4032 px" },
-      { label: "Video", free: "30 fps · 1 min", plus: "60 fps · 3 min" },
-      { label: "Archivio delle storie e In evidenza", free: false, plus: true },
-      { label: "Archivio dei post", free: true, plus: true },
-      { label: "Amici, feed e storie", free: true, plus: true },
-      { label: "Mai pubblicità", free: true, plus: true },
-      { label: "Nessun calo di qualità sui post che vedono in pochi", free: true, plus: true },
-      ] as PlusRow[],
-    },
-  },
-  stack: { prev: "Precedente", next: "Successivo" },
+  // TODO translate: English until the new copy is approved (2026-10-22).
   believe: {
     paragraphs: [
-      "Ogni grande social è fatto per tenerti incollato. Near è piccola apposta.",
+      "On average, people spend 2 hours and 21 minutes a day on social media. That's 36 days a year looking at a screen, and it doesn't just take time: it takes sleep, focus and self-esteem.",
+      "Near is made to be the opposite. Everyone here is someone you've actually met, so there's no reason to keep scrolling: you see your friends and get on with your day.",
+      "We hope most of your life happens away from a screen. And when something feels worth sharing, what better place than one where you know everyone?",
     ],
+  },
+  without: {
+    title: "What you won't find on Near",
     items: [
-      { title: "Niente algoritmo, niente pubblicità, niente robaccia IA", body: "I tuoi amici, dal più recente. Nient'altro." },
-      { title: "Niente scroll infinito", body: "Il feed finisce quando i tuoi amici smettono di postare." },
-      { title: "Niente FOMO", body: "Vedi solo le persone che vedi davvero." },
+      { title: "Ads", body: "Nothing shows up because someone paid for it." },
+      { title: "An algorithm", body: "Your friends, newest first." },
+      { title: "Endless scroll", body: "The feed ends when your friends stop posting." },
+      { title: "Strangers", body: "Only people you've met in person." },
     ],
   },
   cta: {
     title: "Vai a trovare i tuoi amici.",
     body: "Near è pensata per iPhone.",
     button: "Scarica dall'App Store",
-    soon: "Presto sull'App Store",
-    waitlist: {
-      label: "Email",
-      placeholder: "nome@email.it",
-      button: "Mettimi in lista",
-      sending: "Invio…",
-      done: "Sei in lista. Controlla la posta.",
-      already: "Sei già in lista.",
-      invalid: "Questa email non sembra valida.",
-      error: "Non ha funzionato. Riprova tra poco.",
-    },
+    beta: "Prova la beta",
+    betaNote: "Gratis su TestFlight. Presto sull'App Store.",
   },
   footer: {
     tagline: "Gli amici che vedi davvero.",

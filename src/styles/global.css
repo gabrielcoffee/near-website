@@ -168,7 +168,7 @@ body {
   background: var(--color-line);
 }
 
-/* ---------- Fields (waitlist input) ----------
+/* ---------- Fields (contact form inputs) ----------
    Same pill and height as .btn-lg, so the row reads as one control. */
 .field {
   @apply h-13 w-full rounded-pill border bg-surface px-5 text-body text-ink;
@@ -405,27 +405,6 @@ fieldset[aria-invalid="true"] .choice-pill {
     filter: none;
     transform: none;
   }
-}
-
-/* Waitlist status line: quiet by default, accent when something needs a look. */
-.waitlist-status[data-state="error"],
-.waitlist-status[data-state="invalid"] {
-  color: var(--color-accent);
-}
-.waitlist-status[data-state="done"],
-.waitlist-status[data-state="already"] {
-  color: var(--color-ink);
-}
-/* Reserve the row's height so the card doesn't jump when the form collapses. */
-.waitlist {
-  @apply flex flex-col justify-center;
-  min-height: 5.25rem;
-}
-.waitlist[data-state="done"] .waitlist-row {
-  display: none;
-}
-.waitlist[data-state="done"] .waitlist-status {
-  @apply mt-0 text-center text-body text-ink;
 }
 
 /* ---------- Nav links (header): quiet pill background on hover ---------- */

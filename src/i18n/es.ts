@@ -1,4 +1,4 @@
-import type { Dictionary, LegalSection, PlusRow } from "./en";
+import type { Dictionary, LegalSection } from "./en";
 
 const es: Dictionary = {
   meta: {
@@ -8,8 +8,6 @@ const es: Dictionary = {
   },
   nav: {
     how: "Cómo funciona",
-    also: "También en Near",
-    plus: "Near Spark",
     believe: "En qué creemos",
     cta: "Descargar la app",
   },
@@ -18,86 +16,46 @@ const es: Dictionary = {
     tagline: "Amigos que ves de verdad.",
     scroll: "hay más",
   },
+  // TODO translate: English until the new copy is approved (2026-10-22).
   how: {
     steps: [
       {
-        title: "Solo en persona",
-        body: "Solo puedes añadir a quien tienes al lado. ¿Te has encontrado con un amigo? Os añadís desde la app, ahí mismo.",
+        title: "Only in person",
+        body: "On Near you can only add your friends face to face!",
       },
       {
-        title: "Tus amigos",
-        body: "Toda la gente que has visto en persona, en una sola lista. Esa es toda tu red.",
+        title: "Relax without losing time",
+        body: "5 to 10 minutes is all it takes to see and catch up with all your friends. Then the feed ends.",
       },
       {
-        title: "Un feed que se acaba",
-        body: "Fotos y textos de tus amigos, de lo más nuevo a lo más antiguo. Sin ranking, sin “sugerencias para ti”.",
-      },
-      {
-        title: "Palabras, no corazones",
-        body: "No hay likes. Si algo te importa, dilo.",
+        title: "Show your day to day",
+        body: "A safe place to share whatever you want, knowing only people you know will see it.",
       },
     ],
   },
-  also: {
-    intro: "Toca las pantallas para pasarlas.",
-    features: [
-      { title: "Historias", body: "Fotos y vídeos para tus amigos, que desaparecen a las 24 horas. Ves exactamente quién los ha visto." },
-      { title: "Mensajes", body: "Responde a una historia y la conversación empieza ahí. Con Near Spark." },
-      { title: "Nítido para todos", body: "Sin límite de 1080 px y sin bajar la calidad en posts que ven pocos. Cada post se ve como lo hiciste." },
-    ],
-  },
-  plus: {
-    intro: "Near es gratis. Near Spark es para el amigo que quiere más.",
-    free: "Gratis",
-    features: [
-      { title: "Habla con quien ya has visto en persona.", body: "Mensajes solo entre amigos." },
-      { title: "Más nítido que Instagram.", body: "Fotos a 4032 px, casi 4 veces Instagram. Vídeos a 60 fps, de hasta 3 minutos." },
-      { title: "Tus historias no desaparecen.", body: "Se quedan en un archivo privado, y las mejores puedes fijarlas en tu perfil." },
-      { title: "Dilo en voz alta.", body: "Comentarios de voz en los posts de tus amigos. Todos pueden escucharlos; para publicar uno hace falta Near Spark." },
-    ],
-    labels: { instagram: "Instagram · 1080 px", near: "Near Spark · 4032 px", video: "1080p · 60 fps · 3 min", highlights: "Destacados", archive: "Archivo", reply: "Respondió a tu historia", voice: "Comentario de voz", you: "Tú" },
-    plans: { title: "Planes", monthly: "Mensual", yearly: "Anual", perMonth: "/ mes", perYear: "/ año", equals: "{price} al mes", save: "Ahorra {pct}", trial: "Primera semana gratis, en los dos.", soon: "Pronto en el App Store." },
-    more: {
-      title: "Y el resto",
-      rows: [
-      { label: "Mensajes", free: "Leer", plus: true },
-      { label: "Comentarios de voz", free: "Escuchar", plus: true },
-      { label: "Fotos", free: "2048 px", plus: "4032 px" },
-      { label: "Vídeo", free: "30 fps · 1 min", plus: "60 fps · 3 min" },
-      { label: "Archivo de historias y Destacados", free: false, plus: true },
-      { label: "Archivo de posts", free: true, plus: true },
-      { label: "Amigos, feed e historias", free: true, plus: true },
-      { label: "Sin anuncios, nunca", free: true, plus: true },
-      { label: "Sin bajar la calidad en posts que ven pocos", free: true, plus: true },
-      ] as PlusRow[],
-    },
-  },
-  stack: { prev: "Anterior", next: "Siguiente" },
+  // TODO translate: English until the new copy is approved (2026-10-22).
   believe: {
     paragraphs: [
-      "Toda gran red social está hecha para que no salgas de ella. Near es pequeña a propósito.",
+      "On average, people spend 2 hours and 21 minutes a day on social media. That's 36 days a year looking at a screen, and it doesn't just take time: it takes sleep, focus and self-esteem.",
+      "Near is made to be the opposite. Everyone here is someone you've actually met, so there's no reason to keep scrolling: you see your friends and get on with your day.",
+      "We hope most of your life happens away from a screen. And when something feels worth sharing, what better place than one where you know everyone?",
     ],
+  },
+  without: {
+    title: "What you won't find on Near",
     items: [
-      { title: "Sin algoritmo, sin anuncios, sin basura de IA", body: "Tus amigos, lo más nuevo primero. Nada más." },
-      { title: "Sin scroll infinito", body: "El feed se acaba cuando tus amigos dejan de publicar." },
-      { title: "Sin FOMO", body: "Solo ves a la gente que ves de verdad." },
+      { title: "Ads", body: "Nothing shows up because someone paid for it." },
+      { title: "An algorithm", body: "Your friends, newest first." },
+      { title: "Endless scroll", body: "The feed ends when your friends stop posting." },
+      { title: "Strangers", body: "Only people you've met in person." },
     ],
   },
   cta: {
     title: "Sal a ver a tus amigos.",
     body: "Near está hecha para iPhone.",
     button: "Descargar en el App Store",
-    soon: "Muy pronto en el App Store",
-    waitlist: {
-      label: "Correo electrónico",
-      placeholder: "tu@email.com",
-      button: "Apuntarme a la lista",
-      sending: "Enviando…",
-      done: "Ya estás en la lista. Mira tu correo.",
-      already: "Ya estabas en la lista.",
-      invalid: "Ese correo no parece correcto.",
-      error: "Algo ha fallado. Vuelve a intentarlo en un rato.",
-    },
+    beta: "Probar la beta",
+    betaNote: "Gratis en TestFlight. Pronto en el App Store.",
   },
   footer: {
     tagline: "Amigos que ves de verdad.",

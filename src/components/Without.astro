@@ -1,0 +1,35 @@
+---
+// What you won't find on Near: the things other apps have that Near leaves out, one short row each.
+import type { Dictionary } from "../i18n/en";
+import BeliefItem from "./BeliefItem.astro";
+
+interface Props {
+  dict: Dictionary;
+}
+const { dict } = Astro.props;
+// Order matches dict.without.items: ads, algorithm, endless scroll, strangers. The last drawing is a touch smaller.
+const itemDrawings = ["ew", "hearing", "old", "random"];
+const small = new Set(["random"]);
+---
+
+<section id="without" class="section relative scroll-mt-[-4rem] md:scroll-mt-[-7rem]">
+  <div class="container-x">
+    <!-- Not centred text, but a centred column: the block sits in the middle of the page like the rows above. -->
+    <div class="mx-auto max-w-3xl">
+      <div class="max-w-xl" data-reveal-group>
+        <h2 class="h-section" data-reveal>{dict.without.title}</h2>
+      </div>
+
+      <div class="mt-12 flex flex-col gap-12 md:mt-16 md:gap-16">
+        {dict.without.items.map((c, i) => (
+          <BeliefItem
+            drawing={itemDrawings[i]}
+            title={c.title}
+            body={c.body}
+            drawingClass={small.has(itemDrawings[i]) ? "w-[110px] md:w-[140px] lg:w-[150px]" : undefined}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

@@ -30,7 +30,6 @@ const year = new Date().getFullYear();
     <div class="hidden md:block" data-reveal="pop"><Drawing name="happy" size={64} class="w-16 shrink-0" /></div>
 
     <div class="-mx-3 flex flex-wrap items-center gap-x-1 gap-y-3 text-small md:mx-0 md:justify-end">
-      <a href={localePath(locale, "/near-spark/")} class="nav-link">{dict.nav.plus.replace(/\s*\S+$/, "")} <span class="text-accent">{dict.nav.plus.split(" ").pop()}</span></a>
       <a href={localePath(locale, "/privacy/")} class="nav-link">{dict.footer.privacy}</a>
       <a href={localePath(locale, "/terms/")} class="nav-link">{dict.footer.terms}</a>
       <a href={localePath(locale, "/contact/")} class="nav-link">{dict.footer.contact}</a>

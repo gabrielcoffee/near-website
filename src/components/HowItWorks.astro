@@ -1,13 +1,15 @@
 ---
+// Three rows, show don't tell: adding a friend face to face, the feed that ends, posting. Screenshots in
+// `src/assets/shots/` (`add-friend`, `feed`, `post`); until they exist, Shot draws a placeholder.
 import type { Dictionary } from "../i18n/en";
-import PhoneMock from "./PhoneMock.astro";
 import Drawing from "./Drawing.astro";
-import Step from "./Step.astro";
+import HowStep from "./HowStep.astro";
 
 interface Props {
   dict: Dictionary;
 }
 const { dict } = Astro.props;
+const shots = ["add-friend", "feed", "post"];
 ---
 
 <section id="how-it-works" class="section relative scroll-mt-[-4rem] md:scroll-mt-[-7rem]">
@@ -16,55 +18,12 @@ const { dict } = Astro.props;
       <h2 class="h-section" data-reveal>{dict.nav.how}</h2>
     </div>
 
-    <div class="grid gap-10 lg:grid-cols-2 lg:gap-24">
-      <div class="phone-sticky sticky top-0 z-10 self-start pt-[84px] lg:top-28 lg:pt-0" data-reveal>
-        <div class="phone-stage origin-top scale-[0.72] sm:scale-[0.85] lg:scale-100">
-          <PhoneMock />
-        </div>
-      </div>
-
-      <ol class="steps flex flex-col">
-        {dict.how.steps.map((s, i) => <Step index={i} title={s.title} body={s.body} />)}
-      </ol>
-    </div>
+    <ol class="flex flex-col gap-20 md:gap-28">
+      {dict.how.steps.map((s, i) => <HowStep shot={shots[i]} title={s.title} body={s.body} flip={i % 2 === 1} />)}
+    </ol>
   </div>
 
   <div class="pointer-events-none absolute -left-4 top-[30%] hidden xl:block" aria-hidden="true" data-reveal="pop">
     <Drawing name="hearing" size={140} class="w-[140px] pointer-events-auto" />
   </div>
 </section>
-
-<style>
-  /* Phone is 250px wide below lg (height = 250 * 19.4 / 9 ≈ 539px). Scaled visually, so reserve the scaled height. */
-  .phone-stage {
-    height: calc(539px * 0.72);
-  }
-  @media (min-width: 640px) {
-    .phone-stage { height: calc(539px * 0.85); }
-  }
-  @media (min-width: 1024px) {
-    .phone-stage { height: auto; }
-  }
-  /* Below lg the phone is pinned at the top and the steps scroll underneath it. The stage stays
-     see-through: a frosted layer (blurred backdrop + light paper tint) sits behind the phone and
-     fades out at its bottom edge, so the text is still there, just soft. */
-  .phone-sticky {
-    padding-bottom: 12px;
-  }
-  .phone-sticky::before {
-    content: "";
-    position: absolute;
-    inset: 0 -1.25rem -36px;
-    z-index: -1;
-    background: color-mix(in srgb, var(--color-paper) 55%, transparent);
-    -webkit-backdrop-filter: blur(14px);
-    backdrop-filter: blur(14px);
-    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 64px), transparent);
-    mask-image: linear-gradient(to bottom, #000 calc(100% - 64px), transparent);
-    pointer-events: none;
-  }
-  @media (min-width: 1024px) {
-    .phone-sticky { padding-bottom: 0; }
-    .phone-sticky::before { display: none; }
-  }
-</style>

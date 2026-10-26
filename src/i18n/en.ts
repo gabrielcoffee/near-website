@@ -1,7 +1,5 @@
 /** One block of a legal page. `body` may be several paragraphs; `items` render as a bullet list after the
  *  body, and `after` is an optional closing paragraph under the list. */
-/** One line of the Free vs Near Spark table. `true` renders a check mark, a string renders as text. */
-export type PlusRow = { label: string; free: string | boolean; plus: string | boolean };
 export type LegalSection = { title: string; body: string | string[]; items?: string[]; after?: string };
 
 const en = {
@@ -12,8 +10,6 @@ const en = {
   },
   nav: {
     how: "How it works",
-    also: "Also in Near",
-    plus: "Near Spark",
     believe: "What we believe",
     cta: "Get the app",
   },
@@ -25,83 +21,41 @@ const en = {
   how: {
     steps: [
       {
-        title: "Meet in person",
-        body: "You can only add someone who's right next to you. Ran into a friend? You add each other in the app, right there.",
+        title: "Only in person",
+        body: "On Near you can only add your friends face to face!",
       },
       {
-        title: "Your friends",
-        body: "Everyone you've actually met, in one list. That's your whole network.",
+        title: "Relax without losing time",
+        body: "5 to 10 minutes is all it takes to see and catch up with all your friends. Then the feed ends.",
       },
       {
-        title: "A feed that ends",
-        body: "Photos and words from your friends, newest first. No ranking, no “suggested for you”.",
-      },
-      {
-        title: "Words, not hearts",
-        body: "There are no likes. If you care about something, you say it.",
+        title: "Show your day to day",
+        body: "A safe place to share whatever you want, knowing only people you know will see it.",
       },
     ],
   },
-  also: {
-    intro: "Tap the screens to flip through.",
-    features: [
-      { title: "Stories", body: "Photos and videos for your friends, gone after 24 hours. You see exactly who watched." },
-      { title: "Messages", body: "Reply to a story and the chat starts right there. With Near Spark." },
-      { title: "Sharp for everyone", body: "No 1080 px cap, and no quality drop on posts few people see. Every post looks the way you shot it." },
-    ],
-  },
-  plus: {
-    intro: "Near is free. Near Spark is for the friend who wants more of it.",
-    free: "Free",
-    features: [
-      { title: "Talk to the people you've actually met.", body: "Messages only between friends." },
-      { title: "Sharper than Instagram.", body: "Photos at 4032 px, nearly 4× Instagram. Video at 60 fps, up to 3 minutes." },
-      { title: "Your stories don't disappear.", body: "They stay in a private archive, and the best ones can be pinned to your profile." },
-      { title: "Say it out loud.", body: "Voice comments on your friends' posts. Everyone can listen; posting one is Near Spark." },
-    ],
-    labels: { instagram: "Instagram · 1080 px", near: "Near Spark · 4032 px", video: "1080p · 60 fps · 3 min", highlights: "Highlights", archive: "Archive", reply: "Replied to your story", voice: "Voice comment", you: "You" },
-    plans: { title: "Plans", monthly: "Monthly", yearly: "Yearly", perMonth: "/ month", perYear: "/ year", equals: "{price} a month", save: "Save {pct}", trial: "First week free, on both.", soon: "Coming soon to the App Store." },
-    more: {
-      title: "And the rest",
-      rows: [
-      { label: "Messages", free: "Reading", plus: true },
-      { label: "Voice comments", free: "Listening", plus: true },
-      { label: "Photos", free: "2048 px", plus: "4032 px" },
-      { label: "Video", free: "30 fps · 1 min", plus: "60 fps · 3 min" },
-      { label: "Story archive and Highlights", free: false, plus: true },
-      { label: "Posts archive", free: true, plus: true },
-      { label: "Friends, feed and stories", free: true, plus: true },
-      { label: "No ads, ever", free: true, plus: true },
-      { label: "No quality drop on posts few people see", free: true, plus: true },
-      ] as PlusRow[],
-    },
-  },
-  stack: { prev: "Previous", next: "Next" },
   believe: {
     paragraphs: [
-      "Every big social app is built to keep you inside it. Near is small on purpose.",
+      "On average, people spend 2 hours and 21 minutes a day on social media. That's 36 days a year looking at a screen, and it doesn't just take time: it takes sleep, focus and self-esteem.",
+      "Near is made to be the opposite. Everyone here is someone you've actually met, so there's no reason to keep scrolling: you see your friends and get on with your day.",
+      "We hope most of your life happens away from a screen. And when something feels worth sharing, what better place than one where you know everyone?",
     ],
+  },
+  without: {
+    title: "What you won't find on Near",
     items: [
-      { title: "No algorithm, no ads, no AI slop", body: "Your friends, newest first. Nothing else." },
-      { title: "No endless scroll", body: "The feed ends when your friends stop posting." },
-      { title: "No FOMO", body: "You only see people you actually see." },
+      { title: "Ads", body: "Nothing shows up because someone paid for it." },
+      { title: "An algorithm", body: "Your friends, newest first." },
+      { title: "Endless scroll", body: "The feed ends when your friends stop posting." },
+      { title: "Strangers", body: "Only people you've met in person." },
     ],
   },
   cta: {
     title: "Go see your friends.",
     body: "Near is made for iPhone.",
     button: "Download on the App Store",
-    soon: "Coming soon to the App Store",
-    waitlist: {
-      label: "Email address",
-      placeholder: "your@email.com",
-      button: "Join the waitlist",
-      sending: "Sending…",
-      done: "You're on the list. Check your inbox.",
-      already: "You're already on the list.",
-      invalid: "That email doesn't look right.",
-      error: "Didn't work. Try again in a moment.",
-    },
+    beta: "Try the beta",
+    betaNote: "Free on TestFlight. App Store soon.",
   },
   footer: {
     tagline: "Friends you actually see.",

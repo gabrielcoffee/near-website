@@ -1,0 +1,37 @@
+---
+// One screenshot of the app in a phone-shaped frame. Drop `src/assets/shots/<name>.png` in and it shows; until
+// then a quiet placeholder of the same shape holds the spot, so the layout is final before the pictures are.
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+const shots = import.meta.glob<{ default: ImageMetadata }>("../assets/shots/*.png", { eager: true });
+
+interface Props {
+  name: string;
+  alt?: string;
+  class?: string;
+}
+const { name, alt = "", class: cls = "" } = Astro.props;
+const img = shots[`../assets/shots/${name}.png`]?.default;
+---
+
+<div class:list={["shot", cls]} data-shot={name}>
+  {img ? <Image src={img} alt={alt} widths={[200, 400, 600]} sizes="200px" class="h-full w-full object-cover" /> : <span class="shot-empty">{name}</span>}
+</div>
+
+<style>
+  .shot {
+    aspect-ratio: 9 / 19.4;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 1.8rem;
+    border: 1px solid var(--color-line);
+    background: var(--color-paper-2, var(--color-line));
+    display: grid;
+    place-items: center;
+  }
+  .shot-empty {
+    font-size: var(--text-small);
+    color: var(--color-muted);
+  }
+</style>

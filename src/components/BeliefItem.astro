@@ -8,13 +8,15 @@ interface Props {
   title: string;
   body: string;
   class?: string;
+  /** Overrides the drawing's width classes (a smaller character). */
+  drawingClass?: string;
 }
-const { drawing, title, body, class: cls = "" } = Astro.props;
+const { drawing, title, body, class: cls = "", drawingClass = "w-[150px] md:w-[200px] lg:w-[220px]" } = Astro.props;
 ---
 
 <div class:list={["flex flex-col gap-6 md:flex-row md:items-center md:gap-12", cls]} data-reveal-group>
   <div class="flex shrink-0 justify-start md:w-[220px] md:justify-center" data-reveal="pop">
-    <Drawing name={drawing} size={220} class="w-[150px] md:w-[200px] lg:w-[220px]" />
+    <Drawing name={drawing} size={220} class={drawingClass} />
   </div>
   <div class="max-w-xl" data-reveal>
     <h3 class="text-title font-medium tracking-tight text-balance">{title}</h3>

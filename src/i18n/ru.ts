@@ -1,4 +1,4 @@
-import type { Dictionary, LegalSection, PlusRow } from "./en";
+import type { Dictionary, LegalSection } from "./en";
 
 const ru: Dictionary = {
   meta: {
@@ -8,8 +8,6 @@ const ru: Dictionary = {
   },
   nav: {
     how: "Как это работает",
-    also: "Ещё в Near",
-    plus: "Near Spark",
     believe: "Во что мы верим",
     cta: "Скачать",
   },
@@ -18,86 +16,46 @@ const ru: Dictionary = {
     tagline: "Друзья из реальной жизни.",
     scroll: "есть ещё",
   },
+  // TODO translate: English until the new copy is approved (2026-10-22).
   how: {
     steps: [
       {
-        title: "Только вживую",
-        body: "Добавить можно только того, кто рядом с тобой. Увиделись с другом? Добавьте друг друга в приложении прямо на месте.",
+        title: "Only in person",
+        body: "On Near you can only add your friends face to face!",
       },
       {
-        title: "Твои друзья",
-        body: "Все, с кем ты видишься вживую, в одном списке. Это и есть вся твоя сеть.",
+        title: "Relax without losing time",
+        body: "5 to 10 minutes is all it takes to see and catch up with all your friends. Then the feed ends.",
       },
       {
-        title: "Лента, у которой есть конец",
-        body: "Фото и посты твоих друзей, сначала новые. Без рейтинга, без «рекомендаций для тебя».",
-      },
-      {
-        title: "Слова, а не сердечки",
-        body: "Лайков нет. Если что-то важно, просто скажи.",
+        title: "Show your day to day",
+        body: "A safe place to share whatever you want, knowing only people you know will see it.",
       },
     ],
   },
-  also: {
-    intro: "Нажимай на экраны, чтобы листать.",
-    features: [
-      { title: "Истории", body: "Фото и видео для друзей, которые исчезают через 24 часа. Ты точно видишь, кто посмотрел." },
-      { title: "Сообщения", body: "Ответь на историю, и чат начнётся прямо там. С Near Spark." },
-      { title: "Чётко для всех", body: "Без лимита в 1080 px и без потери качества у постов, которые видят немногие. Каждый пост выглядит так, как был снят." },
-    ],
-  },
-  plus: {
-    intro: "Near бесплатный. Near Spark для тех, кому нужно больше.",
-    free: "Бесплатно",
-    features: [
-      { title: "Общайся с теми, кого знаешь вживую.", body: "Сообщения только между друзьями." },
-      { title: "Чётче, чем в Instagram.", body: "Фото в 4032 px, почти в 4 раза больше, чем в Instagram. Видео 60 к/с, до 3 минут." },
-      { title: "Твои истории не исчезают.", body: "Они остаются в личном архиве, а лучшие можно закрепить в профиле." },
-      { title: "Скажи это вслух.", body: "Голосовые комментарии к постам друзей. Слушать может любой, а оставить свой можно с Near Spark." },
-    ],
-    labels: { instagram: "Instagram · 1080 px", near: "Near Spark · 4032 px", video: "1080p · 60 к/с · 3 мин", highlights: "Актуальное", archive: "Архив", reply: "Ответ на твою историю", voice: "Голосовой комментарий", you: "Ты" },
-    plans: { title: "Тарифы", monthly: "Месяц", yearly: "Год", perMonth: "/ месяц", perYear: "/ год", equals: "{price} в месяц", save: "Выгода {pct}", trial: "Первая неделя бесплатно в обоих.", soon: "Скоро в App Store." },
-    more: {
-      title: "И остальное",
-      rows: [
-      { label: "Сообщения", free: "Чтение", plus: true },
-      { label: "Голосовые комментарии", free: "Прослушивание", plus: true },
-      { label: "Фото", free: "2048 px", plus: "4032 px" },
-      { label: "Видео", free: "30 к/с · 1 мин", plus: "60 к/с · 3 мин" },
-      { label: "Архив историй и Актуальное", free: false, plus: true },
-      { label: "Архив постов", free: true, plus: true },
-      { label: "Друзья, лента и истории", free: true, plus: true },
-      { label: "Никакой рекламы, никогда", free: true, plus: true },
-      { label: "Без потери качества у постов, которые видят немногие", free: true, plus: true },
-      ] as PlusRow[],
-    },
-  },
-  stack: { prev: "Назад", next: "Дальше" },
+  // TODO translate: English until the new copy is approved (2026-10-22).
   believe: {
     paragraphs: [
-      "Любая большая соцсеть сделана так, чтобы удержать тебя внутри. Near специально сделан маленьким.",
+      "On average, people spend 2 hours and 21 minutes a day on social media. That's 36 days a year looking at a screen, and it doesn't just take time: it takes sleep, focus and self-esteem.",
+      "Near is made to be the opposite. Everyone here is someone you've actually met, so there's no reason to keep scrolling: you see your friends and get on with your day.",
+      "We hope most of your life happens away from a screen. And when something feels worth sharing, what better place than one where you know everyone?",
     ],
+  },
+  without: {
+    title: "What you won't find on Near",
     items: [
-      { title: "Без алгоритма, рекламы и ИИ-мусора", body: "Только твои друзья, сначала новые. Больше ничего." },
-      { title: "Без бесконечной ленты", body: "Лента заканчивается, когда друзья перестают постить." },
-      { title: "Без FOMO", body: "Ты видишь только тех, с кем правда видишься." },
+      { title: "Ads", body: "Nothing shows up because someone paid for it." },
+      { title: "An algorithm", body: "Your friends, newest first." },
+      { title: "Endless scroll", body: "The feed ends when your friends stop posting." },
+      { title: "Strangers", body: "Only people you've met in person." },
     ],
   },
   cta: {
     title: "Встреться с друзьями.",
     body: "Near сделан для iPhone.",
     button: "Скачать в App Store",
-    soon: "Скоро в App Store",
-    waitlist: {
-      label: "Эл. почта",
-      placeholder: "name@email.com",
-      button: "Записаться",
-      sending: "Отправляем…",
-      done: "Ты в списке. Загляни в почту.",
-      already: "Ты уже в списке.",
-      invalid: "Похоже, в адресе ошибка.",
-      error: "Не получилось. Попробуй ещё раз чуть позже.",
-    },
+    beta: "Попробовать бету",
+    betaNote: "Бесплатно в TestFlight. Скоро в App Store.",
   },
   footer: {
     tagline: "Друзья из реальной жизни.",

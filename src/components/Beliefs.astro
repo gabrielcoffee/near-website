@@ -1,30 +1,24 @@
 ---
+// What we believe: a drawing beside a few short paragraphs on what social media costs and why Near is small.
 import type { Dictionary } from "../i18n/en";
-import BeliefItem from "./BeliefItem.astro";
 import Drawing from "./Drawing.astro";
 
 interface Props {
   dict: Dictionary;
 }
 const { dict } = Astro.props;
-
-// Order matches dict.believe.items
-const itemDrawings = ["ew", "old", "fomo"];
 ---
 
 <section id="what-we-believe" class="section relative scroll-mt-[-4rem] md:scroll-mt-[-7rem]">
   <div class="container-x">
-    <div class="max-w-xl" data-reveal-group>
-      <h2 class="h-section" data-reveal>{dict.nav.believe}</h2>
-      {dict.believe.paragraphs.map((t) => <p class="lede mt-4" data-reveal>{t}</p>)}
+    <div class="grid items-center gap-10 md:grid-cols-[220px_1fr] md:gap-16">
+      <div class="flex justify-start md:justify-center" data-reveal="pop">
+        <Drawing name="actually" size={220} class="w-[150px] md:w-[200px] lg:w-[220px]" />
+      </div>
+      <div class="max-w-xl" data-reveal-group>
+        <h2 class="h-section" data-reveal>{dict.nav.believe}</h2>
+        {dict.believe.paragraphs.map((t) => <p class="lede mt-4" data-reveal>{t}</p>)}
+      </div>
     </div>
-
-    <div class="mt-16 flex flex-col gap-20 md:mt-24 md:gap-28">
-      {dict.believe.items.map((c, i) => <BeliefItem drawing={itemDrawings[i]} title={c.title} body={c.body} />)}
-    </div>
-  </div>
-
-  <div class="pointer-events-none absolute right-0 top-[8%] hidden xl:block" aria-hidden="true" data-reveal="pop">
-    <Drawing name="random" size={110} class="w-[110px] pointer-events-auto" />
   </div>
 </section>

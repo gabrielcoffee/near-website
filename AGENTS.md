@@ -18,10 +18,12 @@ Single landing page (Astro 7, Tailwind v4, static, 7 languages) for Near, an iOS
 **New section**
 1. Component in `src/components/`, rendered from `src/pages/[...lang]/index.astro` in page order.
 2. `<section id="…" class="section relative scroll-mt-[-4rem] md:scroll-mt-[-7rem]">` (see Anchors below).
-3. Header nav: link in `Header.astro` via `anchor("id")` **and** a `nav.*` label in all seven dictionaries. Nav links must sit in page order — that has been wrong before. **Four links is the ceiling**: the header caps at 1024px and the nav is centred between the wordmark and the lang switch + CTA, so it has ~490px in es/fr (measured 2026-09-30; five links were 600–650px and wrapped). Today: How it works · Also in Near · What we believe · Near Spark (its own page). Adding a link means dropping one.
+3. Header nav: link in `Header.astro` via `anchor("id")` **and** a `nav.*` label in all seven dictionaries. Nav links must sit in page order — that has been wrong before. **Four links is the ceiling**: the header caps at 1024px and the nav is centred between the wordmark and the lang switch + CTA, so it has ~490px in es/fr (measured 2026-09-30; five links were 600–650px and wrapped). Today: How it works · What we believe. "What you won't find on Near" has no link (it has its own `without.title` since it isn't in the nav). Adding a link means dropping one.
 4. `.h-section` + `.lede mt-4` at the top inside `max-w-xl`, `data-reveal` on text, `data-reveal="pop"` on drawings. The `.h-section` renders `dict.nav.*`, not a title of its own. No eyebrows, no "01/02" numbers above titles (Gabriel: "none of this"; removed 2026-10-12).
 5. Any new client behaviour: module in `src/scripts/`, registered in `src/scripts/main.ts`.
 6. Optional: a `GallerySection` in `src/pages/web.astro` (dev gallery, also deployed at `/web/`).
+
+**Home page order (2026-10-22):** Hero · How it works (`HowItWorks`: three `HowStep` rows, a screenshot beside a title and one line, sides alternating; screenshots are `src/assets/shots/add-friend|feed|post.png`, `Shot.astro` draws a placeholder until a file exists) · What we believe (`Beliefs`: the `actually` drawing beside three paragraphs) · What you won't find on Near (`Without`: four `BeliefItem` rows — ads, algorithm, endless scroll, strangers; the column centred, `max-w-3xl`) · the download card (TestFlight button). The old "Also in Near" stack, the `/near-spark/` page and the Spark block are gone; `/near-plus/` and `/near-spark/` redirect to the home page (astro.config + vercel.json). The other five dictionaries carry the English copy of the new blocks behind a `TODO translate` comment until Gabriel approves the words.
 
 **Copy change**
 - Every string lives in `src/i18n/{en,pt,es,fr,de,it,ru}.ts`. `Dictionary` is the type of `en.ts`, so a shape change must land in all seven or the build fails.
@@ -34,10 +36,7 @@ Single landing page (Astro 7, Tailwind v4, static, 7 languages) for Near, an iOS
 - Drop the PNG in `drawings-src/`, run `node scripts/normalize-drawings.mjs`, use `<Drawing name="file" size={…} class="w-[…px]" />`.
 - Hero never uses `actually`, `confused`, `old`. Hero characters are positioned by hand in `Hero.astro` (percent of the hero); when Gabriel sends new positions, replace the lines verbatim.
 
-**Stacked screens** (`FeatureStack.astro`)
-- One generic component: heading, intro, features, prev/next labels, and the screens as children (`.rs-card` with `data-card` / `data-pos`). Used for "Also in Near" (`AlsoScreens.astro`); `roadmap.ts` drives every `[data-roadmap]` on the page. Arrow labels are `dict.stack.prev/next`. The "Coming next" roadmap section was removed 2026-10-12.
-
-**Phone mock screens** (`PhoneScreens.astro`, `AlsoScreens.astro`, the cards in `Plus.astro`)
+**Phone mock screens** (`PhoneScreens.astro` / `PhoneMock.astro`, now only in the `/web/` gallery; the home page shows real screenshots)
 - Mirror the real iOS app as it is today: three tabs (Feed, Messages, Profile; there is no friends grid any more), the discovery space ("There's people here!" over the nearby cards), the Messages list as your friends list with "Add New Friend", the Feed with logo bar + story rail + edge-to-edge square posts (name with the place under it, "…"; under the photo name + caption, "3 comments", time), comments in a sheet whose composer has photo, sticker and mic. When the app changes, change the mock and the step copy with it. Reference: launch the simulator build with `-near.previewFlow tabs -near.sampleFeed YES -near.openScreen feed|messages|comments|profile` or `-near.previewFlow firstFriend -near.discoveryDemo auto` (bundle id `com.nearsocial.app`); its sample data has gradient placeholders, so screenshots can't go on the site as they are. Friends are real people, never drawings: portraits in `src/assets/people/`, post photos in `src/assets/photos/` (Unsplash, licensed for commercial use). Grid cells are square tiles, not circles.
 
 ## Design rules (Gabriel's calls, don't relitigate)
@@ -60,7 +59,7 @@ One source of header clearance: `html { scroll-padding-top: 6rem }`. Sections pu
 ## Verification
 
 ```bash
-npm run build                 # must print "36 page(s) built" (the seven /near-plus/ redirect pages aren't counted)
+npm run build                 # must print "29 page(s) built" (the fourteen redirect pages aren't counted)
 # Never start a server on :4321 — Gabriel runs `npm run dev` there himself (Astro 7 dev is a background
 # daemon: `npx astro dev status|stop`). A preview on that port once shadowed his dev server on :4322 and he
 # edited for an hour seeing no change. If you need a server, use another port and stop it when done.
@@ -75,19 +74,13 @@ Don't screenshot. If you must inspect the DOM headlessly, elements with `data-re
 - Astro dev HMR sometimes serves stale scoped CSS; restart with `astro dev stop && astro dev --background`.
 - `src/pages/web.astro` imports most components with literal props; deleting or renaming a component breaks it.
 
-## Waitlist
+## Download card: TestFlight, no waitlist (2026-10-26)
 
-While `APP_STORE_URL` is empty the CTA card shows an email form instead of the store button, with the "coming soon" line kept underneath. Set `APP_STORE_URL` and the form is replaced by the real download button — no other change needed.
-
-- Storage: Supabase project `near` (`mrejurldemanuvbrfutf`), table `public.waitlist`, migration in `supabase/migrations/`.
-- The browser posts straight to PostgREST with the publishable key in `src/config.ts`. That key is public on purpose: the table has an insert-only RLS policy for `anon`, so it can add a row and can never read one back. Read the list in the dashboard (or with the service key), never from the site.
-- Duplicates hit a unique index on `lower(email)` and come back as 409 — the form says "you're already on the list" rather than erroring.
-- A hidden `company` honeypot field silently drops bot submissions.
+Gabriel's call (2026-10-24): the waitlist form is gone; the card's button opens the public TestFlight beta (`TESTFLIGHT_URL` in `src/config.ts`, `cta.beta` + `cta.betaNote` "Free on TestFlight. App Store soon."). Set `APP_STORE_URL` and the button becomes "Download on the App Store" with no note. The header CTA still scrolls to the card. The `public.waitlist` table, its welcome mail and the unsubscribe function stay on Supabase for the people already on it; nothing on the site writes to it any more.
 
 ## Open items
 
-- App Store URL empty in `src/config.ts` (CTA shows the waitlist form + "coming soon"). Signups get the welcome mail; the launch mail is still to be written.
-- `NEAR_SPARK_PRICE` in `src/config.ts`: US and Brazil match the app's StoreKit file; euro and rouble mirror the US numbers as placeholders. Replace with App Store Connect's per-storefront prices before launch.
+- App Store URL empty in `src/config.ts` (CTA links to TestFlight). The launch mail to the old waitlist is still to be written.
 - `/terms/` exists now (2026-09-12); the iOS app's Settings row that links to it no longer 404s.
 - Contact form (`contact_messages` table, `contact-notify` function) is written but not deployed: migration not pushed, function not deployed, Vault secrets not set. Until then the form fails with a 404 from PostgREST and shows the error line.
 - Welcome mail is live (2026-09-17): Resend domain verified, `waitlist-welcome` + `waitlist-unsubscribe` deployed, secrets and Vault set. The 57 people who signed up before it existed have not all been mailed yet; the one-off sender lives in the session scratchpad, not the repo.
@@ -126,13 +119,13 @@ Gabriel's rule (2026-09-30): never guess what the app does or looks like. Look i
 
 **What exists today**
 - Sign in with Apple, Google, or email and a password (an 8-digit code confirms a new address). Settings → Privacy & security → Sign-in methods connects or removes Apple/Google and changes the email or password. Profile steps: name, photo, bio, birthday (13+), then a gate until the first friend. Tabs: Feed, Messages, Profile.
-- Add a friend: Messages → "Add New Friend" opens the discovery space; nearby people appear as cards (Bonjour/AWDL, a random token rotated every 10 min, server-side 15 min expiry, no GPS), both tap within 30 s, friendship.
+- Add a friend: Messages → "Add New Friend" opens the discovery space; people right next to you appear as cards (Bluetooth, only while the space is open; a random token rotated every 10 min, server-side 15 min expiry, no GPS); both hold each other's card for a second, friendship. The first friend gets its own moment ("Congratulations!") before the app opens.
 - Posts: camera, gallery, editor (crop, filters, text), composer; up to 15 photos or videos, tag up to 10 friends, optional place name; drafts kept on the phone; your own post can be archived (only you see it, free) or deleted. Comments (text, photo, GIF/sticker via KLIPY, voice), no likes. Report and block everywhere (reviewed within 24 h). Delete account: hidden at once, purged after 30 days, sign back in to cancel.
 - Stories: 24 hours, every friend sees them, "Seen by N" shows who watched, a reply opens the chat. Up to 10 items.
 - Messages: text, photos, videos, voice messages (up to 60 s), GIFs and stickers, story replies, unsend for both. Sending needs Near Spark; reading is free.
 - Profile: name, posts and friends counts (the count opens the list: all your friends, or only the ones in common on a friend's profile), bio, highlights, a three-column square grid. Your own profile has a gear and a spark circle top-right; the Archive (Posts | Stories) opens from Settings.
 - Media on Cloudflare R2: HEIC in `t` 400 px, `d` 2048 px, `f` 4032 px (Near Spark), a blurred ThumbHash preview, a disk cache on the phone (800 MB), short-lived signed URLs only for friends. Pinch-to-zoom on posts.
-- **Not built:** custom app icons, push notifications (the bell shows samples), editing a post, deleting your own comment, read receipts, choosing a story's length or audience. Never claim these.
+- **Not built:** custom app icons, editing a post, deleting your own comment, read receipts, choosing a story's length or audience. Never claim these.
 
 **Look and feel** (for mock screens; full rules in the app's `docs/design.md`)
 - Outfit for titles and buttons, SF Pro for body. Near-black text `#1C1C1E` (nothing is pure black), secondary gray `#8E8E93`, orange `#FF9300` (the logo's, every orange fill), dark mode is dark gray not black. Liquid Glass circle controls. Profile pictures are plain circles, never rings or rims (the Feed's story rail is the one exception: rounded squares with a rim).
@@ -140,21 +133,14 @@ Gabriel's rule (2026-09-30): never guess what the app does or looks like. Look i
 - Buttons: exactly three (dark capsule, quiet gray capsule, plain link). Copy: sentence case, short, no "no this, no that" lists. A small orange hand-drawn spark follows the name of anyone with Near Spark.
 
 **Near Spark** (the subscription; called Near+ until 2026-10-14, product ids unchanged)
-- Two plans, `com.nearsocial.app.plus.monthly` / `.yearly`: US $3.99 a month or $29.99 a year; Brazil R$ 9,90 / R$ 99,90; one week free on both for new subscribers; Apple Small Business Program (15%).
+- Two plans, `com.nearsocial.app.plus.monthly` / `.yearly`: US $3.99 a month or $29.99 a year; Brazil R$ 9,90 / R$ 79,90; one week free on both for new subscribers; Apple Small Business Program (15%).
 - Perks, in the app's order (`SparkPerksListView.swift`): **messages** (texts, photos, videos, voice messages, GIFs, story replies and voice comments; reading and listening are always free), **video** 60 fps and up to 3 min in posts and stories, 1 min in messages (free: 30 fps, 1 min posts, 15 s stories and messages), **photos** up to 4032 px (free: 2048 px), **story archive and Highlights**. The archive of posts is free.
 - Free days: being the first friend of someone new to Near gives 3 Spark days, up to 3 times (both get them when both are new). Stated in the Terms only; App Store guideline 3.1.1 is still being weighed, so don't headline it.
 - "Same quality for everyone" means: no 1080 px cap and no quality drop on posts few people see (Instagram does both). The 2048 vs 4032 px difference is real, so never say "full quality for everyone".
 
-## Near Spark page (`/near-spark/`, `Plus.astro`, redone 2026-10-02, reworked 2026-10-18)
+## Near Spark on the site: none (2026-10-26)
 
-Gabriel's brief: "quatro coisas que importam de verdade", short and simple, beautiful, no boring table up top. Structure, top to bottom:
-1. Title "Near Spark" ("Spark" in accent) and one line (`plus.intro`).
-2. The four features in a borderless 2x2 grid (one column on phones): visual on top in a stage of one height so the titles line up, then title + one line (`plus.features[4]`, fixed order: chat, photos and video, archive and highlights, voice comments). No eyebrow labels. Visuals are hand-built in the component with the Unsplash people/photos: a chat card (a reply to a story), the photo comparison (Instagram's 1080 px frame drawn inside the 4032 px one, at scale, 27% wide), a profile card with highlight rings + archive grid, and a comments card with two voice clips drawn like the app's pill (dark play disc, bars, length) and a composer with the mic. Labels inside the visuals are `plus.labels`.
-3. Plans (`plus.plans`): monthly and yearly side by side, yearly tinted with the saving pill and its per-month equivalent; then `trial` ("first week free, on both") and `soon` ("coming soon to the App Store"). **No buy button** until `APP_STORE_URL` is set.
-4. "And the rest" (`plus.more`): compact Free vs Near Spark table (`PlusRow`: `true` check, `false` dash, string text), same nine rows in the same order in all seven dictionaries. Photos are stated as resolution (2048 vs 4032 px), video as fps and length.
-
-Prices: `NEAR_SPARK_PRICE` in `src/config.ts` is `{ monthly, yearly, yearlyPerMonth, saving }` per locale.
-"Spark" is drawn in the accent colour everywhere (header, footer, title, table head): the last word of `dict.nav.plus`. The link is last in the header nav and in the footer. `/near-plus/` (and its six locale copies) redirect here: Astro `redirects` in `astro.config.mjs` (meta refresh pages) plus a real 308 in `vercel.json`.
+Gabriel's call (2026-10-24): "remove Near Spark completely from the website". No block, no nav link, no prices (they live in the app's `StoreKit/Near.storekit`). It stays only where the law needs it: the Near Spark sections of `/privacy/` and `/terms/`.
 
 ## Legal pages (`/privacy/`, `/terms/`)
 
