@@ -1,15 +1,17 @@
 ---
-// Three rows, show don't tell: adding a friend face to face, the feed that ends, posting. Screenshots in
-// `src/assets/shots/` (`add-friend`, `feed`, `post`); until they exist, Shot draws a placeholder.
+// Three rows, show don't tell: adding a friend face to face, the feed that ends, your profile. Screenshots in
+// `src/assets/shots/<locale>/` (`add-friend`, `feed`, `profile`; en and pt today, the rest fall back to en).
+import type { Locale } from "../config";
 import type { Dictionary } from "../i18n/en";
 import Drawing from "./Drawing.astro";
 import HowStep from "./HowStep.astro";
 
 interface Props {
   dict: Dictionary;
+  locale: Locale;
 }
-const { dict } = Astro.props;
-const shots = ["add-friend", "feed", "post"];
+const { dict, locale } = Astro.props;
+const shots = ["add-friend", "feed", "profile"];
 ---
 
 <section id="how-it-works" class="section relative scroll-mt-[-4rem] md:scroll-mt-[-7rem]">
@@ -19,7 +21,7 @@ const shots = ["add-friend", "feed", "post"];
     </div>
 
     <ol class="flex flex-col gap-20 md:gap-28">
-      {dict.how.steps.map((s, i) => <HowStep shot={shots[i]} title={s.title} body={s.body} flip={i % 2 === 1} />)}
+      {dict.how.steps.map((s, i) => <HowStep shot={shots[i]} locale={locale} title={s.title} body={s.body} flip={i % 2 === 1} />)}
     </ol>
   </div>
 
