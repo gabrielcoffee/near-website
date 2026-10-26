@@ -1,22 +1,33 @@
 ---
-// One "how it works" row: a screenshot and, beside it, the title and one line. The picture comes first on a phone;
-// on wider screens the rows alternate sides (`flip`).
+// One "how it works" row: one or two screenshots and, beside them, the title and one line. The pictures come first on
+// a phone; on wider screens the rows alternate sides (`flip`). Two phones sit side by side, aligned, and each is a bit
+// narrower so the pair fits a 390px screen.
 import Shot from "./Shot.astro";
 import type { Locale } from "../config";
 
 interface Props {
-  shot: string;
+  shots: string[];
   locale: Locale;
   title: string;
   body: string;
   flip?: boolean;
 }
-const { shot, locale, title, body, flip = false } = Astro.props;
+const { shots, locale, title, body, flip = false } = Astro.props;
+const pair = shots.length > 1;
 ---
 
 <li class="grid items-center gap-8 md:grid-cols-2 md:gap-16" data-reveal-group>
-  <div class:list={["flex justify-center", flip && "md:order-2"]} data-reveal="pop">
-    <Shot name={shot} locale={locale} alt={title} class="w-[92px] md:w-[100px] lg:w-[108px]" />
+  <div class:list={["flex items-start justify-center gap-4 lg:gap-6", flip && "md:order-2"]} data-reveal="pop">
+    {
+      shots.map((name, i) => (
+        <Shot
+          name={name}
+          locale={locale}
+          alt={i === 0 ? title : ""}
+          class:list={[pair ? "w-[150px] md:w-[180px] lg:w-[210px]" : "w-[180px] md:w-[200px] lg:w-[220px]"]}
+        />
+      ))
+    }
   </div>
   <div class:list={["max-w-md", flip ? "md:justify-self-end" : ""]} data-reveal>
     <h3 class="text-title font-medium tracking-tight text-balance">{title}</h3>

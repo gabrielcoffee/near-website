@@ -42,10 +42,10 @@ const pt: Dictionary = {
   without: {
     title: "O que não tem no Near",
     items: [
-      { title: "Anúncios", body: "Nada aparece porque alguém pagou." },
-      { title: "Algoritmo", body: "Seus amigos, do mais recente ao mais antigo." },
+      { title: "Marcas e anúncios", body: "Você está aqui pra ver seus amigos, não pra comprar produtos." },
+      { title: "Algoritmo", body: "Seus amigos, do mais recente ao mais antigo. Só isso." },
       { title: "Rolagem infinita", body: "O feed acaba quando seus amigos param de postar." },
-      { title: "Desconhecidos", body: "Só quem você já encontrou pessoalmente." },
+      { title: "Desconhecidos", body: "Nada disso, só seus amigos de verdade, que você conheceu pessoalmente." },
     ],
   },
   cta: {

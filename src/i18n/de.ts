@@ -44,10 +44,10 @@ const de: Dictionary = {
   without: {
     title: "What you won't find on Near",
     items: [
-      { title: "Ads", body: "Nothing shows up because someone paid for it." },
-      { title: "An algorithm", body: "Your friends, newest first." },
+      { title: "Brands and ads", body: "You're here to see your friends, not to buy products." },
+      { title: "An algorithm", body: "Your friends, newest first. That's it." },
       { title: "Endless scroll", body: "The feed ends when your friends stop posting." },
-      { title: "Strangers", body: "Only people you've met in person." },
+      { title: "Strangers", body: "Nope, only your real friends, people you've met in person." },
     ],
   },
   cta: {

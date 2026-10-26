@@ -30,7 +30,7 @@ const img = (shots[`../assets/shots/${locale}/${name}.png`] ?? shots[`../assets/
       <div class="screen">
         {
           img ? (
-            <Image src={img} alt={alt} widths={[120, 220, 330]} sizes="(min-width: 1024px) 108px, (min-width: 768px) 100px, 92px" class="h-full w-full object-cover" />
+            <Image src={img} alt={alt} widths={[400, 800]} sizes="400px" quality={90} class="h-full w-full object-cover" />
           ) : (
             <span class="shot-empty">{name}</span>
           )
@@ -41,9 +41,9 @@ const img = (shots[`../assets/shots/${locale}/${name}.png`] ?? shots[`../assets/
 </div>
 
 <style>
+  /* No width here: the caller's width class sets it (a scoped width would beat the utility). */
   .device {
     container-type: inline-size;
-    width: 100%;
     filter: drop-shadow(0 30px 40px rgb(28 28 30 / 0.22)) drop-shadow(0 8px 12px rgb(28 28 30 / 0.12));
   }
   /* The aluminium band: a lit edge on the left, a darker one on the right. */
