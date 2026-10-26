@@ -9,9 +9,13 @@ interface Props {
   dict: Dictionary;
 }
 const { dict } = Astro.props;
-// Order matches dict.without.items: ads, algorithm, endless scroll, strangers. The last drawing is a touch smaller.
+// Order matches dict.without.items: ads, algorithm, endless scroll, strangers. Ads and strangers draw bigger
+// characters, so they get smaller widths to look the same size as the other two.
 const itemDrawings = ["ew", "hearing", "old", "random"];
-const small = new Set(["random"]);
+const width: Record<string, string> = {
+  ew: "w-[80px] md:w-[115px] lg:w-[130px]",
+  random: "w-[70px] md:w-[100px] lg:w-[115px]",
+};
 ---
 
 <section id="without" class="section relative scroll-mt-[-4rem] md:scroll-mt-[-7rem]">
@@ -28,7 +32,7 @@ const small = new Set(["random"]);
               <Drawing
                 name={itemDrawings[i]}
                 size={160}
-                class={small.has(itemDrawings[i]) ? "w-[80px] md:w-[115px] lg:w-[130px]" : "w-[96px] md:w-[140px] lg:w-[160px]"}
+                class={width[itemDrawings[i]] ?? "w-[96px] md:w-[140px] lg:w-[160px]"}
               />
             </div>
             <div class="min-w-0 flex-1" data-reveal>
