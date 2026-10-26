@@ -1,7 +1,9 @@
 ---
-// What you won't find on Near: the things other apps have that Near leaves out, one short row each.
+// What you won't find on Near: the things other apps have that Near leaves out, as a 2×2 grid. Each drawing sits on
+// the outer edge of its cell (left column on the left, right column on the right), so the four characters frame the
+// block; on a phone the cells stack and every drawing goes back to the left.
 import type { Dictionary } from "../i18n/en";
-import BeliefItem from "./BeliefItem.astro";
+import Drawing from "./Drawing.astro";
 
 interface Props {
   dict: Dictionary;
@@ -14,22 +16,28 @@ const small = new Set(["random"]);
 
 <section id="without" class="section relative scroll-mt-[-4rem] md:scroll-mt-[-7rem]">
   <div class="container-x">
-    <!-- Not centred text, but a centred column: the block sits in the middle of the page like the rows above. -->
-    <div class="mx-auto max-w-3xl">
+    <div class="mx-auto max-w-5xl">
       <div class="max-w-xl" data-reveal-group>
         <h2 class="h-section" data-reveal>{dict.without.title}</h2>
       </div>
 
-      <div class="mt-12 flex flex-col gap-12 md:mt-16 md:gap-16">
+      <ul class="mt-12 grid gap-x-12 gap-y-12 md:mt-16 md:grid-cols-2 md:gap-y-16">
         {dict.without.items.map((c, i) => (
-          <BeliefItem
-            drawing={itemDrawings[i]}
-            title={c.title}
-            body={c.body}
-            drawingClass={small.has(itemDrawings[i]) ? "w-[110px] md:w-[140px] lg:w-[150px]" : undefined}
-          />
+          <li class:list={["flex items-center gap-5 md:gap-6", i % 2 === 1 && "md:flex-row-reverse"]} data-reveal-group>
+            <div class="flex w-[96px] shrink-0 justify-center md:w-[140px] lg:w-[160px]" data-reveal="pop">
+              <Drawing
+                name={itemDrawings[i]}
+                size={160}
+                class={small.has(itemDrawings[i]) ? "w-[80px] md:w-[115px] lg:w-[130px]" : "w-[96px] md:w-[140px] lg:w-[160px]"}
+              />
+            </div>
+            <div class="min-w-0 flex-1" data-reveal>
+              <h3 class="text-title font-medium tracking-tight text-balance">{c.title}</h3>
+              <p class="lede mt-2">{c.body}</p>
+            </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   </div>
 </section>

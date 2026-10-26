@@ -30,7 +30,7 @@ const img = (shots[`../assets/shots/${locale}/${name}.png`] ?? shots[`../assets/
       <div class="screen">
         {
           img ? (
-            <Image src={img} alt={alt} widths={[320, 560, 840]} sizes="(min-width: 1024px) 270px, (min-width: 768px) 250px, 230px" class="h-full w-full object-cover" />
+            <Image src={img} alt={alt} widths={[200, 340, 500]} sizes="(min-width: 1024px) 162px, (min-width: 768px) 150px, 138px" class="h-full w-full object-cover" />
           ) : (
             <span class="shot-empty">{name}</span>
           )
