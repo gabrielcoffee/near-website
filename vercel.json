@@ -1,8 +1,34 @@
 {
   "redirects": [
-    { "source": "/near-plus/", "destination": "/", "permanent": true },
-    { "source": "/near-spark/", "destination": "/", "permanent": true },
-    { "source": "/:lang(pt|es|fr|de|it|ru)/near-plus/", "destination": "/:lang/", "permanent": true },
-    { "source": "/:lang(pt|es|fr|de|it|ru)/near-spark/", "destination": "/:lang/", "permanent": true }
+    {
+      "source": "/get/",
+      "destination": "https://testflight.apple.com/join/m2BJcaRG",
+      "permanent": false
+    },
+    {
+      "source": "/get",
+      "destination": "https://testflight.apple.com/join/m2BJcaRG",
+      "permanent": false
+    },
+    {
+      "source": "/near-plus/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/near-spark/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(pt|es|fr|de|it|ru)/near-plus/",
+      "destination": "/:lang/",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(pt|es|fr|de|it|ru)/near-spark/",
+      "destination": "/:lang/",
+      "permanent": true
+    }
   ]
 }

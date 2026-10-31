@@ -21,7 +21,10 @@ interface Props {
 const { locale, dict, path, title = dict.meta.title, description = dict.meta.description } = Astro.props;
 const site = Astro.site ?? new URL("http://localhost:4321");
 const canonical = new URL(localePath(locale, path), site).toString();
-const ogImage = new URL("/og.png", site).toString();
+// One share image per language (scripts/og.mjs renders them). Absolute URL on the canonical host: WhatsApp and
+// LinkedIn fetch it themselves and some scrapers give up on relative paths or redirects.
+const ogImage = new URL(`/og/${locale}.png`, site).toString();
+const ogLocale = { en: "en_US", pt: "pt_BR", es: "es_ES", fr: "fr_FR", de: "de_DE", it: "it_IT", ru: "ru_RU" }[locale];
 const nonDefault = LOCALES.filter((l) => l.code !== DEFAULT_LOCALE).map((l) => l.code);
 const isDefaultLocale = locale === DEFAULT_LOCALE;
 ---
@@ -39,18 +42,26 @@ const isDefaultLocale = locale === DEFAULT_LOCALE;
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     {LOCALES.map((l) => <link rel="alternate" hreflang={l.code} href={new URL(localePath(l.code, path), site).toString()} />)}
     <link rel="alternate" hreflang="x-default" href={new URL(localePath(DEFAULT_LOCALE, path), site).toString()} />
+    <!-- Link previews (WhatsApp, iMessage, LinkedIn, Slack, Telegram read Open Graph; X reads twitter:* first). -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Near" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:locale" content={locale} />
+    <meta property="og:locale" content={ogLocale} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:secure_url" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:alt" content="Near" />
+    <meta property="og:image:alt" content={`Near. ${dict.hero.tagline}`} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@gabrielfp101" />
+    <meta name="twitter:creator" content="@gabrielfp101" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={`Near. ${dict.hero.tagline}`} />
 
     <script is:inline define:vars={{ intro: path === "/" }}>
       document.documentElement.classList.add("js");
