@@ -12,7 +12,7 @@ The landing page for **Near**, an iOS social network for the friends you actuall
 - **Hand-drawn art that "boils".** Every drawing wobbles like a hand-animated cartoon, using SVG turbulence filters swapped on a timer, with a separate set for hover. No video, no canvas.
 - **A waitlist and contact form on Supabase.** Postgres tables with insert-only row-level security, plus Edge Functions that send the welcome email, handle signed unsubscribe links, and notify me of new messages.
 - **Tiny vanilla scripts instead of a framework.** Reveal-on-scroll, the phone mockup, the roadmap and smooth scrolling are each a few dozen lines of TypeScript.
-- **Legal pages** (privacy, terms) and the NearSpark subscription page, all localized.
+- **Legal pages** (privacy, terms), all localized.
 
 Near's Bluetooth proximity engine is open source as [copresence-bluetooth-kit](https://github.com/gabrielcoffee/copresence-bluetooth-kit).
 

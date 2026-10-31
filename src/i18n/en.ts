@@ -4,7 +4,7 @@ export type LegalSection = { title: string; body: string | string[]; items?: str
 
 const en = {
   meta: {
-    title: "Near — friends you actually see",
+    title: "Near: friends you actually see",
     description:
       "Near is a social app for the friends you actually see. Add people only in person. No ads, no algorithm, no likes.",
   },
@@ -111,15 +111,14 @@ const en = {
         items: [
           "Your display name, profile photo, and the birthday and short bio if you fill them in.",
           "Your posts: photos and videos, captions and, if you keep it on, the place they were taken. Archive a post and only you can see it until you bring it back; delete it and it's gone, with its comments.",
-          "Your stories: the photo or video, and which friends have watched it. Your friends can see a story for 24 hours, then it expires and is deleted. With Near Spark, your expired stories stay in an archive only you can see, and the ones you pin to your profile as Highlights stay visible to your friends.",
+          "Your stories: the photo or video, and which friends have watched it. Your friends can see a story for 24 hours. After that it stays in an archive only you can see, until you delete it, and the ones you pin to your profile as Highlights stay visible to your friends.",
           "Your messages with friends: the text, photos, videos, voice messages, GIFs and stickers, when you sent it and when it was read. Unsend a message and it disappears for both of you.",
           "Your voice messages: recorded in the app and stored on our servers and Cloudflare. Only the two people in the conversation can hear one, and if you unsend it, it disappears for both of you.",
-          "Your comments on your friends' posts: words, a photo, a GIF, a sticker or, with Near Spark, a voice comment. A photo or a voice comment is stored on our servers and Cloudflare.",
+          "Your comments on your friends' posts: words, a photo, a GIF, a sticker or a voice comment. A photo or a voice comment is stored on our servers and Cloudflare.",
           "Who your friends are and when you added each other, and anyone you've blocked.",
           "Reports you send us about a post, a story, a comment, a message or a person. A reported story or message (a voice message too) is kept for up to 7 days, even after it expires or is unsent, so we can review it. Our moderation team opens it, and the photo of a reported comment, through short-lived links.",
           "Feedback you send from the app: what you typed, with the app version, iOS version and phone model, so we can read it and fix things. It is deleted with your account.",
           "Notifications: a short list of what your friends did (a friendship, a comment on your post, a birthday, a new post), kept 60 days. If you allow push notifications, your phone's device token, so we can reach it. Your time zone, so a birthday arrives in the morning. Each kind has its own switch in Settings.",
-          "Near Spark: Apple is the payment processor. We receive a transaction ID, the product, the dates and whether your subscription is active, never your card details. While it's active, a small spark shows after your name wherever it appears in the app, so anyone who sees your name can tell you have it.",
         ],
       },
       {
@@ -147,11 +146,11 @@ const en = {
       },
       {
         title: "Who sees what",
-        body: "Your posts and stories are visible to your friends only. A comment, whether words, a photo, a GIF, a sticker or a voice comment, is visible to anyone who can see the post it's on, which includes the post author's friends, who may not be your friends; they see your name and profile photo with it. A message, voice messages and GIFs included, is visible only to the two people in it. A story is visible to your friends for 24 hours. Who watched a story is shown only to the person who posted it. With Near Spark, your expired stories stay in an archive only you can see, and the Highlights you pin to your profile are visible to your friends. Your friends also see how many posts and friends you have, and which of your friends they know too; the rest stay a number. There is no public profile, no search and no explore page. Apart from a comment on a post they can see, your name and profile photo are the only things a stranger can see, and only while you're both in the same room with the app open. Block someone and neither of you sees the other again.",
+        body: "Your posts and stories are visible to your friends only. A comment, whether words, a photo, a GIF, a sticker or a voice comment, is visible to anyone who can see the post it's on, which includes the post author's friends, who may not be your friends; they see your name and profile photo with it. A message, voice messages and GIFs included, is visible only to the two people in it. A story is visible to your friends for 24 hours. Who watched a story is shown only to the person who posted it. Your expired stories stay in an archive only you can see, and the Highlights you pin to your profile are visible to your friends. Your friends also see how many posts and friends you have, and which of your friends they know too; the rest stay a number. There is no public profile, no search and no explore page. Apart from a comment on a post they can see, your name and profile photo are the only things a stranger can see, and only while you're both in the same room with the app open. Block someone and neither of you sees the other again.",
       },
       {
         title: "Where it lives",
-        body: "Your data is stored with Supabase, a hosting provider, and reaches your friends through them. Photos, videos, voice messages and voice comments are stored and delivered by Cloudflare. Apple handles signing in with Apple and Near Spark payments: we only receive a transaction ID and the status of your subscription, never your card details. Emails from Near and from this site go out through Resend. None of them may use your data for anything else, and nobody else gets it. We don't sell data, don't show ads, and don't run any analytics or tracking SDK. GIFs and stickers are the exception: your phone talks to KLIPY, a third-party GIF service, directly, under its own [privacy policy](https://klipy.com/support/privacy-policy).",
+        body: "Your data is stored with Supabase, a hosting provider, and reaches your friends through them. Photos, videos, voice messages and voice comments are stored and delivered by Cloudflare. Apple handles signing in with Apple. Emails from Near and from this site go out through Resend. None of them may use your data for anything else, and nobody else gets it. We don't sell data, don't show ads, and don't run any analytics or tracking SDK. GIFs and stickers are the exception: your phone talks to KLIPY, a third-party GIF service, directly, under its own [privacy policy](https://klipy.com/support/privacy-policy).",
       },
       {
         title: "Deleting everything",
@@ -205,10 +204,6 @@ const en = {
       {
         title: "Enforcement",
         body: "If an account breaks these rules we can remove content, suspend the account or delete it, without notice when the content is illegal or hurts someone. You can leave any time: Settings → Privacy & security → Delete account. You have 30 days to change your mind, then everything goes with you.",
-      },
-      {
-        title: "Near Spark",
-        body: "Near Spark is an optional subscription bought through the App Store, monthly or yearly. It renews automatically at the end of each period, at the price shown in the app, until you cancel. New subscribers who are eligible get the first week free; Apple decides who is eligible, and you are charged when the week ends unless you cancel first. You can cancel any time in your Apple ID settings, at least 24 hours before the renewal date, and you keep Near Spark until the end of the period you've paid for. Apple handles the payment and any refund under its own terms, so refunds are requested from Apple. If the price changes, Apple tells you first and asks you to agree. Near may also give you free days of Near Spark: today, three days when you're the first friend of someone new to Near, up to three times. Those days are a promotional benefit, not part of your Apple subscription, and we can change or stop them at any time. One thing to know: the subscription lives with Apple, not with us, so deleting your Near account doesn't end it. If you have Near Spark, cancel it in your Apple ID settings before you go, and Apple stops charging you. Everything outside Near Spark stays free.",
       },
       {
         title: "The service",

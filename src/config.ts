@@ -23,7 +23,7 @@ export const CONTACT_EMAIL = "hello@nearapp.social";
 export const LEGAL_ENTITY = "Gabriel Fernandes Pereira (CNPJ 54.909.636/0001-80), Brasil";
 
 /** Date shown at the top of /privacy/ and /terms/. Bump it whenever either page changes. */
-export const LEGAL_UPDATED = "2026-10-22";
+export const LEGAL_UPDATED = "2026-10-29";
 
 /** Barely-there smooth scrolling (Lenis). Set false to use native scroll. */
 export const SMOOTH_SCROLL = true;

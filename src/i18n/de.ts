@@ -2,7 +2,7 @@ import type { Dictionary, LegalSection } from "./en";
 
 const de: Dictionary = {
   meta: {
-    title: "Near — Freunde, die du wirklich siehst",
+    title: "Near: Freunde, die du wirklich siehst",
     description:
       "Near ist eine Social-App für die Freunde, die du wirklich siehst. Hinzufügen geht nur persönlich. Keine Werbung, kein Algorithmus, keine Likes.",
   },
@@ -111,15 +111,14 @@ const de: Dictionary = {
         items: [
           "Deinen Anzeigenamen, dein Profilfoto, und dein Geburtsdatum und deine kurze Bio, falls du sie ausfüllst.",
           "Deine Posts: Fotos und Videos, Bildunterschriften und, wenn du es dranlässt, den Ort, an dem sie entstanden sind. Archivierst du einen Post, siehst nur du ihn, bis du ihn zurückholst; löschst du ihn, ist er samt Kommentaren weg.",
-          "Deine Stories: das Foto oder Video und welche Freunde es gesehen haben. Deine Freunde sehen eine Story 24 Stunden lang, danach läuft sie ab und wird gelöscht. Mit Near Spark bleiben deine abgelaufenen Stories in einem Archiv, das nur du siehst, und die, die du als Highlights an dein Profil pinnst, bleiben für deine Freunde sichtbar.",
+          "Deine Stories: das Foto oder Video und welche Freunde es gesehen haben. Deine Freunde sehen eine Story 24 Stunden lang. Danach bleibt sie in einem Archiv, das nur du siehst, bis du sie löschst, und die, die du als Highlights an dein Profil pinnst, bleiben für deine Freunde sichtbar.",
           "Deine Nachrichten mit Freunden: der Text, Fotos, Videos, Sprachnachrichten, GIFs und Sticker, wann du sie gesendet hast und wann sie gelesen wurden. Ziehst du eine Nachricht zurück, verschwindet sie für euch beide.",
           "Deine Sprachnachrichten: Du nimmst sie in der App auf, und sie liegen auf unseren Servern und bei Cloudflare. Nur die zwei in der Unterhaltung können sie hören, und ziehst du eine zurück, verschwindet sie für euch beide.",
-          "Deine Kommentare zu den Posts deiner Freunde: Text, ein Foto, ein GIF, ein Sticker oder, mit Near Spark, ein Sprachkommentar. Ein Foto oder ein Sprachkommentar liegt auf unseren Servern und bei Cloudflare.",
+          "Deine Kommentare zu den Posts deiner Freunde: Text, ein Foto, ein GIF, ein Sticker oder ein Sprachkommentar. Ein Foto oder ein Sprachkommentar liegt auf unseren Servern und bei Cloudflare.",
           "Wer deine Freunde sind und wann ihr euch hinzugefügt habt, und wen du blockiert hast.",
           "Meldungen, die du uns zu einem Post, einer Story, einem Kommentar, einer Nachricht oder einer Person schickst. Eine gemeldete Story oder Nachricht (auch eine Sprachnachricht) wird bis zu 7 Tage aufbewahrt, auch nachdem sie abgelaufen ist oder zurückgezogen wurde, damit wir sie prüfen können. Unser Moderationsteam öffnet sie, ebenso das Foto eines gemeldeten Kommentars, über kurzlebige Links.",
           "Feedback, das du uns aus der App schickst: was du geschrieben hast, mit App-Version, iOS-Version und Handymodell, damit wir es lesen und Dinge verbessern können. Es wird mit deinem Konto gelöscht.",
           "Mitteilungen: eine kurze Liste dessen, was deine Freunde gemacht haben (eine Freundschaft, ein Kommentar zu deinem Post, ein Geburtstag, ein neuer Post), 60 Tage aufbewahrt. Wenn du Push-Mitteilungen erlaubst, das Geräte-Token deines Handys, damit wir es erreichen. Deine Zeitzone, damit ein Geburtstag morgens ankommt. Jede Art hat ihren eigenen Schalter in den Einstellungen.",
-          "Near Spark: Apple wickelt die Zahlung ab. Wir erhalten eine Transaktions-ID, das Produkt, die Daten und ob dein Abo aktiv ist, nie deine Kartendaten. Solange es aktiv ist, steht ein kleiner Funke hinter deinem Namen, überall in der App, wo er erscheint, also sieht jeder, der deinen Namen sieht, dass du es hast.",
         ],
       },
       {
@@ -147,11 +146,11 @@ const de: Dictionary = {
       },
       {
         title: "Wer was sieht",
-        body: "Deine Posts und Stories sehen nur deine Freunde. Einen Kommentar, ob Text, Foto, GIF, Sticker oder Stimme, sieht jeder, der den Post sehen kann, unter dem er steht, auch die Freunde der Person, die ihn gepostet hat, und die müssen nicht deine Freunde sein; sie sehen dazu deinen Namen und dein Profilfoto. Eine Nachricht, auch eine Sprachnachricht oder ein GIF, sehen nur die zwei, die darin schreiben. Eine Story sehen deine Freunde 24 Stunden lang. Wer eine Story gesehen hat, sieht nur die Person, die sie gepostet hat. Mit Near Spark bleiben deine abgelaufenen Stories in einem Archiv, das nur du siehst, und die Highlights, die du an dein Profil pinnst, sehen deine Freunde. Deine Freunde sehen auch, wie viele Posts und Freunde du hast, und welche deiner Freunde sie auch kennen; der Rest bleibt eine Zahl. Es gibt kein öffentliches Profil, keine Suche und keine Entdecken-Seite. Abgesehen von einem Kommentar unter einem Post, den er sehen kann, sind dein Name und dein Profilfoto das Einzige, was ein Fremder sehen kann, und nur, solange ihr beide im selben Raum seid und die App offen habt. Blockierst du jemanden, seht ihr euch beide nie wieder.",
+        body: "Deine Posts und Stories sehen nur deine Freunde. Einen Kommentar, ob Text, Foto, GIF, Sticker oder Stimme, sieht jeder, der den Post sehen kann, unter dem er steht, auch die Freunde der Person, die ihn gepostet hat, und die müssen nicht deine Freunde sein; sie sehen dazu deinen Namen und dein Profilfoto. Eine Nachricht, auch eine Sprachnachricht oder ein GIF, sehen nur die zwei, die darin schreiben. Eine Story sehen deine Freunde 24 Stunden lang. Wer eine Story gesehen hat, sieht nur die Person, die sie gepostet hat. Deine abgelaufenen Stories bleiben in einem Archiv, das nur du siehst, und die Highlights, die du an dein Profil pinnst, sehen deine Freunde. Deine Freunde sehen auch, wie viele Posts und Freunde du hast, und welche deiner Freunde sie auch kennen; der Rest bleibt eine Zahl. Es gibt kein öffentliches Profil, keine Suche und keine Entdecken-Seite. Abgesehen von einem Kommentar unter einem Post, den er sehen kann, sind dein Name und dein Profilfoto das Einzige, was ein Fremder sehen kann, und nur, solange ihr beide im selben Raum seid und die App offen habt. Blockierst du jemanden, seht ihr euch beide nie wieder.",
       },
       {
         title: "Wo es liegt",
-        body: "Deine Daten liegen bei Supabase, einem Hosting-Anbieter, und kommen über ihn zu deinen Freunden. Fotos, Videos, Sprachnachrichten und Sprachkommentare speichert und liefert Cloudflare aus. Apple übernimmt die Anmeldung mit Apple und wickelt die Zahlungen für Near Spark ab: Wir erhalten nur eine Transaktions-ID und den Status deines Abos, nie deine Kartendaten. E-Mails von Near und von dieser Seite gehen über Resend raus. Keiner von ihnen darf deine Daten für etwas anderes nutzen, und sonst bekommt sie niemand. Wir verkaufen keine Daten, zeigen keine Werbung und nutzen kein Analytics- oder Tracking-SDK. Bei GIFs und Stickern ist es anders: Dein Handy spricht direkt mit KLIPY, einem GIF-Dienst eines Drittanbieters, und dafür gilt dessen eigene [Datenschutzerklärung](https://klipy.com/support/privacy-policy).",
+        body: "Deine Daten liegen bei Supabase, einem Hosting-Anbieter, und kommen über ihn zu deinen Freunden. Fotos, Videos, Sprachnachrichten und Sprachkommentare speichert und liefert Cloudflare aus. Apple übernimmt die Anmeldung mit Apple. E-Mails von Near und von dieser Seite gehen über Resend raus. Keiner von ihnen darf deine Daten für etwas anderes nutzen, und sonst bekommt sie niemand. Wir verkaufen keine Daten, zeigen keine Werbung und nutzen kein Analytics- oder Tracking-SDK. Bei GIFs und Stickern ist es anders: Dein Handy spricht direkt mit KLIPY, einem GIF-Dienst eines Drittanbieters, und dafür gilt dessen eigene [Datenschutzerklärung](https://klipy.com/support/privacy-policy).",
       },
       {
         title: "Alles löschen",
@@ -205,10 +204,6 @@ const de: Dictionary = {
       {
         title: "Wenn jemand die Regeln bricht",
         body: "Bricht ein Account diese Regeln, können wir Inhalte entfernen, den Account sperren oder löschen, ohne Vorwarnung, wenn der Inhalt illegal ist oder jemandem schadet. Du kannst jederzeit gehen: Einstellungen → Datenschutz & Sicherheit → Account löschen. Du hast 30 Tage, um es dir anders zu überlegen, danach geht alles mit dir.",
-      },
-      {
-        title: "Near Spark",
-        body: "Near Spark ist ein optionales Abo, monatlich oder jährlich, das du über den App Store abschließt. Es verlängert sich am Ende jedes Zeitraums automatisch, zu dem Preis, der in der App steht, bis du kündigst. Neue Abonnenten, die dafür infrage kommen, bekommen die erste Woche gratis; Apple entscheidet, wer infrage kommt, und nach der Woche wird abgebucht, wenn du nicht vorher kündigst. Du kannst jederzeit in deinen Apple-ID-Einstellungen kündigen, spätestens 24 Stunden vor dem Verlängerungsdatum, und behältst Near Spark bis zum Ende des Zeitraums, den du bezahlt hast. Apple wickelt die Zahlung und jede Erstattung nach eigenen Bedingungen ab, Erstattungen beantragst du also bei Apple. Ändert sich der Preis, sagt Apple es dir vorher und fragt nach deiner Zustimmung. Near kann dir auch kostenlose Near Spark-Tage schenken: derzeit drei Tage, wenn du der erste Freund von jemandem bist, der neu bei Near ist, bis zu dreimal. Diese Tage sind ein Werbevorteil und gehören nicht zu deinem Apple-Abo, und wir können sie jederzeit ändern oder beenden. Gut zu wissen: Das Abo liegt bei Apple, nicht bei uns. Wenn du dein Near-Konto löschst, läuft es deshalb weiter. Hast du Near Spark, kündige es vorher in deinen Apple-ID-Einstellungen, dann stellt Apple die Abbuchung ein. Alles außerhalb von Near Spark bleibt kostenlos.",
       },
       {
         title: "Der Dienst",

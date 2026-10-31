@@ -27,18 +27,18 @@ const nearby = [
   { n: "Ana", p: "p4" },
   { n: "Zoe", p: "p6" },
 ];
-// Messages: the friends list. `plus` = the small spark after a Near Spark name, `unread` = bold line + accent dot.
+// Messages: the friends list. `unread` = bold line + accent dot.
 const chats = [
-  { n: "Sofia", p: "p1", last: "Running late, 5 min", time: "12:05", unread: false, plus: false },
-  { n: "Kai", p: "p2", last: "Photo", time: "12:04", unread: true, plus: true },
-  { n: "Maya", p: "p11", last: "Replied to your story", time: "11:25", unread: true, plus: false },
-  { n: "Noah", p: "p12", last: "Saturday again? I'm in.", time: "10:50", unread: false, plus: false },
-  { n: "Inês", p: "p13", last: "Sticker", time: "Yesterday", unread: false, plus: true },
-  { n: "Lucas", p: "p8", last: "Video", time: "Sat", unread: false, plus: false },
-  { n: "Amara", p: "p14", last: "Added in person, Sep 19", time: "Fri", unread: false, plus: false },
-  { n: "Leo", p: "p15", last: "haha yes", time: "Thu", unread: false, plus: false },
-  { n: "Clara", p: "p9", last: "See you there!", time: "Wed", unread: false, plus: true },
-  { n: "Rui", p: "p10", last: "Voice message", time: "Mon", unread: false, plus: false },
+  { n: "Sofia", p: "p1", last: "Running late, 5 min", time: "12:05", unread: false },
+  { n: "Kai", p: "p2", last: "Photo", time: "12:04", unread: true },
+  { n: "Maya", p: "p11", last: "Replied to your story", time: "11:25", unread: true },
+  { n: "Noah", p: "p12", last: "Saturday again? I'm in.", time: "10:50", unread: false },
+  { n: "Inês", p: "p13", last: "Sticker", time: "Yesterday", unread: false },
+  { n: "Lucas", p: "p8", last: "Video", time: "Sat", unread: false },
+  { n: "Amara", p: "p14", last: "Added in person, Sep 19", time: "Fri", unread: false },
+  { n: "Leo", p: "p15", last: "haha yes", time: "Thu", unread: false },
+  { n: "Clara", p: "p9", last: "See you there!", time: "Wed", unread: false },
+  { n: "Rui", p: "p10", last: "Voice message", time: "Mon", unread: false },
 ];
 // The story rail on the Feed: your own tile, then friends with a new story (accent ring).
 const rail = [
@@ -48,10 +48,10 @@ const rail = [
   { n: "Kai", p: "p2", own: false, tilt: -4 },
 ];
 const comments = [
-  { n: "Kai", p: "p2", t: "That light is unreal, where is this?", plus: true },
+  { n: "Kai", p: "p2", t: "That light is unreal, where is this?" },
   { n: "Sofia", p: "p1", t: "Okay but who took it, the framing is perfect" },
   { n: "Noah", p: "p12", t: "Saturday again? I'm in." },
-  { n: "Inês", p: "p13", t: "Bring the film camera this time", plus: true },
+  { n: "Inês", p: "p13", t: "Bring the film camera this time" },
 ];
 ---
 
@@ -83,7 +83,7 @@ const comments = [
       <li class="chat">
         <span class="ava md"><Image src={pic(c.p)} alt="" width={80} height={80} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></span>
         <div class="chat-text">
-          <b>{c.n}{c.plus && <i class="badge" aria-hidden="true"></i>}</b>
+          <b>{c.n}</b>
           <span class:list={[c.unread && "unread"]}>{c.last}</span>
         </div>
         <div class="chat-meta">
@@ -171,7 +171,7 @@ const comments = [
       {comments.map((c) => (
         <li class="comment">
           <span class="ava sm"><Image src={pic(c.p)} alt="" width={64} height={64} format="webp" quality={80} loading="lazy" decoding="async" draggable="false" /></span>
-          <div><b>{c.n}{c.plus && <i class="badge" aria-hidden="true"></i>}</b><p>{c.t}</p></div>
+          <div><b>{c.n}</b><p>{c.t}</p></div>
         </li>
       ))}
     </ul>
@@ -196,8 +196,6 @@ const comments = [
   .ava img, .photo img, .story-tile img, .peer-ava img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .ava.sm { width: 20px; height: 20px; }
   .ava.md { width: 28px; height: 28px; }
-  /* Near Spark badge: the hand-drawn spark, orange, after the name */
-  .badge { display: inline-block; width: 11px; height: 9px; margin-left: 3px; vertical-align: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 20'%3E%3Cg fill='none' stroke='%23FF9300' stroke-width='2.4' stroke-linejoin='round'%3E%3Cpath d='M8 4Q9 10 15 11Q9 12 8 18Q7 12 1 11Q7 10 8 4Z'/%3E%3Cpath d='M18 1Q18.6 4.4 22 5Q18.6 5.6 18 9Q17.4 5.6 14 5Q17.4 4.4 18 1Z'/%3E%3C/g%3E%3C/svg%3E") no-repeat center / contain; }
 
   /* 0 · discovery: dot-and-plus pattern, centred row of tiles, close button */
   .discover {
