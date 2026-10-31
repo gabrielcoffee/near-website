@@ -116,6 +116,7 @@ const en = {
           "Your voice messages: recorded in the app and stored on our servers and Cloudflare. Only the two people in the conversation can hear one, and if you unsend it, it disappears for both of you.",
           "Your comments on your friends' posts: words, a photo, a GIF, a sticker or a voice comment. A photo or a voice comment is stored on our servers and Cloudflare.",
           "Who your friends are and when you added each other, and anyone you've blocked.",
+          "The nickname and badge you give a friend, and any badges you draw. Only you ever see a nickname; the friend you give a badge to sees that badge. Unfriend or block them and both are deleted.",
           "Reports you send us about a post, a story, a comment, a message or a person. A reported story or message (a voice message too) is kept for up to 7 days, even after it expires or is unsent, so we can review it. Our moderation team opens it, and the photo of a reported comment, through short-lived links.",
           "Feedback you send from the app: what you typed, with the app version, iOS version and phone model, so we can read it and fix things. It is deleted with your account.",
           "Notifications: a short list of what your friends did (a friendship, a comment on your post, a birthday, a new post), kept 60 days. If you allow push notifications, your phone's device token, so we can reach it. Your time zone, so a birthday arrives in the morning. Each kind has its own switch in Settings.",
