@@ -425,3 +425,7 @@ verify_jwt = false
 [functions.waitlist-unsubscribe]
 # Public link from the welcome email; the query string carries its own HMAC (see _shared/waitlist-token.ts).
 verify_jwt = false
+
+[functions.waitlist-launch]
+# Called hourly by pg_cron until the whole list has the launch email; checks WAITLIST_WEBHOOK_SECRET itself.
+verify_jwt = false

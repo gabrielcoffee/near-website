@@ -97,7 +97,7 @@ Gabriel's call (2026-10-24): the waitlist form is gone; the card's button opens 
 
 ## Open items
 
-- App Store URL empty in `src/config.ts` (CTA links to TestFlight). The launch mail to the old waitlist is still to be written.
+- App Store URL empty in `src/config.ts` (CTA links to TestFlight). The launch mail to the waitlist is built (`waitlist-launch`, deployed 2026-11-04): an hourly cron job calls it, it checks Apple's lookup and mails every row once the app is live, stamping `waitlist.launch_mailed_at` (90 a run, under Resend's 100 a day). `{"test":"<address>"}` sends one copy.
 - `/terms/` exists now (2026-09-12); the iOS app's Settings row that links to it no longer 404s.
 - Contact form (`contact_messages` table, `contact-notify` function) is written but not deployed: migration not pushed, function not deployed, Vault secrets not set. Until then the form fails with a 404 from PostgREST and shows the error line.
 - Welcome mail is live (2026-09-17): Resend domain verified, `waitlist-welcome` + `waitlist-unsubscribe` deployed, secrets and Vault set. The 57 people who signed up before it existed have not all been mailed yet; the one-off sender lives in the session scratchpad, not the repo.
