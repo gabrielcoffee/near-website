@@ -93,6 +93,15 @@ const en = {
       error: "Didn't work. Try again in a moment.",
     },
   },
+  invite: {
+    metaTitle: "You're invited to Near",
+    metaDescription: "A friend wants to add you on Near, the app for the friends you actually see.",
+    title: "{handle} invited you to Near",
+    titleNoHandle: "You're invited to Near",
+    body: "Near is for the friends you actually see. Get it, and their invite will be waiting for you.",
+    get: "Get Near on the App Store",
+    open: "Already have Near? Open the invite",
+  },
   legal: {
     updated: "Last updated",
     contents: "On this page",
@@ -120,11 +129,13 @@ const en = {
           "Reports you send us about a post, a story, a comment, a message or a person. A reported story or message (a voice message too) is kept for up to 7 days, even after it expires or is unsent, so we can review it. Our moderation team opens it, and the photo of a reported comment, through short-lived links.",
           "Feedback you send from the app: what you typed, with the app version, iOS version and phone model, so we can read it and fix things. It is deleted with your account.",
           "Notifications: a short list of what your friends did (a friendship, a comment on your post, a birthday, a new post), kept 60 days. If you allow push notifications, your phone's device token, so we can reach it. Your time zone, so a birthday arrives in the morning. Each kind has its own switch in Settings.",
+          "Your @handle, and the invites you send and receive: who, when, and whether they were accepted. An accepted invite makes you standby friends: you see each other's name, profile photo, handle and bio and can send messages, nothing else, until you add each other in person.",
+          "If you turn on Nearby: the last location your phone sent, overwritten each time and deleted two hours after it was sent, kept only while you have standby friends and Nearby is on. It is never shown to anyone, not even your standby friends: it is only compared with theirs to tell you both when you're together. Invites and Nearby send notifications too, under their own switch in Settings.",
         ],
       },
       {
         title: "How “nearby” works",
-        body: "Near doesn't use your location to find friends. While Add New Friend is open, your phone shares a random code over Bluetooth with phones right next to you. The code changes every ten minutes, expires after fifteen, and is never kept beyond that. Someone next to you sees your name and photo. Nobody further away sees anything.",
+        body: "While Add New Friend is open, your phone shares a random code over Bluetooth with phones right next to you. The code changes every ten minutes, expires after fifteen, and is never kept beyond that. Someone next to you sees your name and photo. Nobody further away sees anything. Nearby is a separate switch, off until you turn it on: with it, your phone tells Near roughly where it is when it moves a good distance, and once precisely when a standby friend is close, so Near can tell you both when you're together. Nobody ever sees where you are.",
       },
       {
         title: "Permissions and what they're for",
@@ -134,7 +145,7 @@ const en = {
           "Camera and photo library: photos and videos for your posts, stories and messages, and your profile picture. Near only adds to your photos when you ask it to save a story, or a photo or video from a chat.",
           "Microphone: the sound in the videos you record, your voice messages and your voice comments.",
           "Notifications: a new friend, a comment on your post, a friend's birthday, a friend's new post. Nothing else, ever. Asked only once you have a friend.",
-          "Location, only while using the app: naming the place of a post. You can edit or remove it before posting. Near never tracks you in the background.",
+          "Location: naming the place of a post (while you're making it; you can edit or remove it), and, only if you turn on Nearby, telling you and a standby friend when you're together, which needs Always. Nearby is off by default and does nothing without a standby friend.",
         ],
       },
       {
@@ -147,7 +158,7 @@ const en = {
       },
       {
         title: "Who sees what",
-        body: "Your posts and stories are visible to your friends only. A comment, whether words, a photo, a GIF or a voice comment, is visible to anyone who can see the post it's on, which includes the post author's friends, who may not be your friends; they see your name and profile photo with it. A message, voice messages and GIFs included, is visible only to the two people in it. A story is visible to your friends for 24 hours. Who watched a story is shown only to the person who posted it. Your expired stories stay in an archive only you can see, and the Highlights you pin to your profile are visible to your friends. Your friends also see how many posts and friends you have, and which of your friends they know too; the rest stay a number. There is no public profile, no search and no explore page. Apart from a comment on a post they can see, your name and profile photo are the only things a stranger can see, and only while you're both in the same room with the app open. Block someone and neither of you sees the other again.",
+        body: "Your posts and stories are visible to your friends only. A comment, whether words, a photo, a GIF or a voice comment, is visible to anyone who can see the post it's on, which includes the post author's friends, who may not be your friends; they see your name and profile photo with it. A message, voice messages and GIFs included, is visible only to the two people in it. A story is visible to your friends for 24 hours. Who watched a story is shown only to the person who posted it. Your expired stories stay in an archive only you can see, and the Highlights you pin to your profile are visible to your friends. Your friends also see how many posts and friends you have, and which of your friends they know too; the rest stay a number. There is no public profile, no search and no explore page. Apart from a comment on a post they can see, your name and profile photo are the only things a stranger can see, and only while you're both in the same room with the app open. Block someone and neither of you sees the other again. A standby friend sees your name, profile photo, handle and bio, and your messages with them; nothing else.",
       },
       {
         title: "Where it lives",
@@ -197,6 +208,10 @@ const en = {
           "Don't pretend to be someone else.",
           "Don't fake being nearby, automate the app, scrape it or try to break into it.",
         ],
+      },
+      {
+        title: "Handles and invites",
+        body: "Pick a handle that is yours to use: not someone else's name or brand, nothing offensive. We may take back a handle that impersonates someone or breaks the rules. Invite only people who'd want to hear from you; sending invites to strangers in bulk breaks the rules.",
       },
       {
         title: "Reporting and blocking",

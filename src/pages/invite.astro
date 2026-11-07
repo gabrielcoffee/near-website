@@ -1,0 +1,73 @@
+---
+// The invite link's page: nearapp.social/@handle is rewritten here (vercel.json), the URL staying /@handle, which
+// is also the app's universal link (public/.well-known/apple-app-site-association): with Near installed the link
+// opens "Invite your friend" filled in, never this page. The words follow the browser's language here (the page stays on
+// its URL); the link preview is the two-circles video (public/og/invite.mp4, scripts/render-invite-video.py) with
+// its last frame as the still. Nothing about the person is looked up: the handle comes from the address itself.
+import Base from "../layouts/Base.astro";
+import { getDict } from "../i18n";
+import { APP_STORE_URL, LANG_STORAGE_KEY, LOCALES } from "../config";
+
+const dict = getDict("en");
+const words = Object.fromEntries(LOCALES.map((l) => [l.code, getDict(l.code).invite]));
+---
+
+<Base
+  locale="en"
+  dict={dict}
+  path="/invite/"
+  title={dict.invite.metaTitle}
+  description={dict.invite.metaDescription}
+  ogImagePath="/og/invite.png"
+  ogVideoPath="/og/invite.mp4"
+  redirectLanguage={false}
+>
+  <section class="container-x pb-16 pt-36 md:pt-44">
+    <div class="mx-auto max-w-xl text-center">
+      <video
+        class="mx-auto aspect-[1200/630] w-full max-w-md rounded-3xl"
+        src="/og/invite.mp4"
+        poster="/og/invite.png"
+        autoplay
+        muted
+        playsinline
+        aria-hidden="true"
+      ></video>
+      <h1 class="h-section mt-10" data-invite="title">{dict.invite.titleNoHandle}</h1>
+      <p class="lede mt-4" data-invite="body">{dict.invite.body}</p>
+      <div class="mt-8 flex flex-col items-center gap-4">
+        <a class="btn-primary" href={APP_STORE_URL} data-invite="get">{dict.invite.get}</a>
+        <a class="link text-small" href="com.nearsocial.app://invite" data-invite="open">{dict.invite.open}</a>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline define:vars={{ words, key: LANG_STORAGE_KEY }}>
+    (function () {
+      var match = location.pathname.match(/^\/@([a-z0-9._]{3,20})\/?$/i);
+      var handle = match ? match[1].toLowerCase() : null;
+      var lang = "en";
+      try {
+        var saved = localStorage.getItem(key);
+        var wanted = (saved ? [saved] : (navigator.languages || [navigator.language || ""])).map(function (l) {
+          return String(l).slice(0, 2).toLowerCase();
+        });
+        lang = wanted.find(function (l) { return words[l]; }) || "en";
+      } catch (e) {}
+      var w = words[lang];
+      document.documentElement.lang = lang;
+      var set = function (name, text) {
+        var el = document.querySelector('[data-invite="' + name + '"]');
+        if (el) el.textContent = text;
+      };
+      set("title", handle ? w.title.replace("{handle}", "@" + handle) : w.titleNoHandle);
+      set("body", w.body);
+      set("get", w.get);
+      set("open", w.open);
+      var open = document.querySelector('[data-invite="open"]');
+      if (open && handle) open.setAttribute("href", "com.nearsocial.app://invite/" + handle);
+      if (open && !handle) open.remove();
+      if (handle) document.title = w.title.replace("{handle}", "@" + handle);
+    })();
+  </script>
+</Base>

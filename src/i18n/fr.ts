@@ -93,6 +93,15 @@ const fr: Dictionary = {
       error: "Ça n'a pas marché. Réessaie dans un instant.",
     },
   },
+  invite: {
+    metaTitle: "Une invitation sur Near",
+    metaDescription: "Quelqu'un veut t'ajouter sur Near, l'app des amis que tu vois vraiment.",
+    title: "{handle} t'invite sur Near",
+    titleNoHandle: "Une invitation sur Near",
+    body: "Near, c'est pour les amis que tu vois vraiment. Télécharge-la, l'invitation t'attendra.",
+    get: "Télécharger dans l'App Store",
+    open: "Tu as déjà Near ? Ouvre l'invitation",
+  },
   legal: {
     updated: "Dernière mise à jour",
     contents: "Sur cette page",
@@ -120,11 +129,13 @@ const fr: Dictionary = {
           "Les signalements que tu nous envoies à propos d'une publication, d'une story, d'un commentaire, d'un message ou d'une personne. Une story ou un message signalé (un message vocal aussi) est conservé jusqu'à 7 jours, même après son expiration ou l'annulation de son envoi, pour qu'on puisse l'examiner. Notre équipe de modération l'ouvre, tout comme la photo d'un commentaire signalé, via des liens à durée de vie courte.",
           "Les retours que tu nous envoies depuis l'app : ce que tu as écrit, avec la version de l'app, celle d'iOS et le modèle de ton téléphone, pour qu'on les lise et qu'on corrige ce qu'il faut. Ils sont supprimés avec ton compte.",
           "Notifications : une courte liste de ce que tes amis ont fait (une amitié, un commentaire sur ton post, un anniversaire, un nouveau post), gardée 60 jours. Si tu autorises les notifications push, le jeton de ton téléphone, pour pouvoir te prévenir. Ton fuseau horaire, pour que l'anniversaire arrive le matin. Chaque type a son propre interrupteur dans les Réglages.",
+          "Ton @ (nom d'utilisateur) et les invitations que tu envoies et reçois : de qui, quand et si elles ont été acceptées. Une invitation acceptée fait de vous des amis en attente : vous voyez le nom, la photo de profil, le @ et la bio de l'autre et pouvez vous écrire, rien de plus, jusqu'à ce que vous vous ajoutiez en personne.",
+          "Si tu actives « À côté » : la dernière position envoyée par ton téléphone, remplacée à chaque fois et supprimée deux heures après son envoi, gardée seulement tant que tu as des amis en attente et que « À côté » est activé. Elle n'est jamais montrée à personne, pas même à tes amis en attente : elle est seulement comparée à la leur pour vous prévenir tous les deux quand vous êtes ensemble. Les invitations et « À côté » envoient aussi des notifications, avec leur propre bouton dans Réglages.",
         ],
       },
       {
         title: "Comment marche « à côté »",
-        body: "Near n'utilise pas ta position pour trouver tes amis. Quand Ajouter un ami est ouvert, ton téléphone partage un code aléatoire en Bluetooth avec les téléphones juste à côté de toi. Le code change toutes les dix minutes, expire au bout de quinze et n'est jamais gardé plus longtemps. Quelqu'un à côté de toi voit ton nom et ta photo. Plus loin, personne ne voit rien.",
+        body: "Quand Ajouter un ami est ouvert, ton téléphone partage un code aléatoire en Bluetooth avec les téléphones juste à côté de toi. Le code change toutes les dix minutes, expire au bout de quinze et n'est jamais gardé plus longtemps. Quelqu'un à côté de toi voit ton nom et ta photo. Plus loin, personne ne voit rien. « À côté » est un réglage à part, désactivé tant que tu ne l'actives pas : avec lui, ton téléphone indique à Near à peu près où il est quand il se déplace d'une bonne distance, et une fois précisément quand un ami en attente est proche, pour que Near vous prévienne tous les deux quand vous êtes ensemble. Personne ne voit jamais où tu es.",
       },
       {
         title: "Les autorisations et à quoi elles servent",
@@ -134,7 +145,7 @@ const fr: Dictionary = {
           "Appareil photo et photothèque : photos et vidéos pour tes publications, tes stories et tes messages, et ta photo de profil. Near n'ajoute à tes photos que lorsque tu lui demandes d'enregistrer une story, ou une photo ou une vidéo d'une discussion.",
           "Micro : le son des vidéos que tu enregistres, tes messages vocaux et tes commentaires vocaux.",
           "Notifications : un nouvel ami, un commentaire sur ton post, l'anniversaire d'un ami, un nouveau post d'un ami. Rien d'autre, jamais. Demandé seulement une fois que tu as un ami.",
-          "Position, seulement quand tu utilises l'appli : nommer le lieu d'une publication. Tu peux le modifier ou l'enlever avant de publier. Near ne te suit jamais en arrière-plan.",
+          "Position : nommer le lieu d'une publication (pendant que tu la crées ; tu peux le modifier ou l'enlever) et, seulement si tu actives « À côté », vous prévenir, toi et un ami en attente, quand vous êtes ensemble, ce qui demande l'autorisation Toujours. « À côté » est désactivé par défaut et ne fait rien sans ami en attente.",
         ],
       },
       {
@@ -147,7 +158,7 @@ const fr: Dictionary = {
       },
       {
         title: "Qui voit quoi",
-        body: "Tes publications et tes stories ne sont visibles que par tes amis. Un commentaire, que ce soit des mots, une photo, un GIF ou ta voix, est visible par toute personne qui peut voir la publication où il se trouve, y compris les amis de son auteur, qui ne sont pas forcément les tiens ; ils voient ton nom et ta photo de profil avec. Un message, messages vocaux et GIF compris, seulement par les deux personnes concernées. Une story est visible par tes amis pendant 24 heures. Qui l'a regardée n'est montré qu'à la personne qui l'a publiée. Tes stories expirées restent dans une archive visible par toi uniquement, et les stories À la une que tu épingles sur ton profil sont visibles par tes amis. Tes amis voient aussi combien de posts et d'amis tu as, et lesquels de tes amis ils connaissent aussi ; les autres restent un nombre. Pas de profil public, pas de recherche, pas de page explorer. À part un commentaire sous une publication qu'il peut voir, ton nom et ta photo de profil sont la seule chose qu'un inconnu peut voir, et seulement quand vous êtes tous les deux dans la même pièce avec l'appli ouverte. Bloque quelqu'un et aucun de vous deux ne reverra l'autre.",
+        body: "Tes publications et tes stories ne sont visibles que par tes amis. Un commentaire, que ce soit des mots, une photo, un GIF ou ta voix, est visible par toute personne qui peut voir la publication où il se trouve, y compris les amis de son auteur, qui ne sont pas forcément les tiens ; ils voient ton nom et ta photo de profil avec. Un message, messages vocaux et GIF compris, seulement par les deux personnes concernées. Une story est visible par tes amis pendant 24 heures. Qui l'a regardée n'est montré qu'à la personne qui l'a publiée. Tes stories expirées restent dans une archive visible par toi uniquement, et les stories À la une que tu épingles sur ton profil sont visibles par tes amis. Tes amis voient aussi combien de posts et d'amis tu as, et lesquels de tes amis ils connaissent aussi ; les autres restent un nombre. Pas de profil public, pas de recherche, pas de page explorer. À part un commentaire sous une publication qu'il peut voir, ton nom et ta photo de profil sont la seule chose qu'un inconnu peut voir, et seulement quand vous êtes tous les deux dans la même pièce avec l'appli ouverte. Bloque quelqu'un et aucun de vous deux ne reverra l'autre. Un ami en attente voit ton nom, ta photo de profil, ton @ et ta bio, et vos messages ; rien d'autre.",
       },
       {
         title: "Où ça vit",
@@ -197,6 +208,10 @@ const fr: Dictionary = {
           "Ne te fais pas passer pour quelqu'un d'autre.",
           "N'essaie pas de simuler la proximité, d'automatiser l'appli, d'en extraire les données ou de t'y introduire.",
         ],
+      },
+      {
+        title: "@ et invitations",
+        body: "Choisis un @ que tu as le droit d'utiliser : pas le nom ou la marque de quelqu'un d'autre, rien d'offensant. Nous pouvons reprendre un @ qui se fait passer pour quelqu'un ou enfreint les règles. N'invite que des gens qui voudraient avoir de tes nouvelles ; envoyer des invitations en masse à des inconnus enfreint les règles.",
       },
       {
         title: "Signalements et blocage",

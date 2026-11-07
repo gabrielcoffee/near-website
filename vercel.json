@@ -30,5 +30,26 @@
       "destination": "/:lang/",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/@:handle",
+      "destination": "/invite/"
+    },
+    {
+      "source": "/@:handle/",
+      "destination": "/invite/"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/.well-known/apple-app-site-association",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    }
   ]
 }

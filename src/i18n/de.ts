@@ -93,6 +93,15 @@ const de: Dictionary = {
       error: "Hat nicht geklappt. Versuch es gleich noch mal.",
     },
   },
+  invite: {
+    metaTitle: "Eine Einladung zu Near",
+    metaDescription: "Jemand will dich auf Near hinzufügen, der App für die Freunde, die du wirklich siehst.",
+    title: "{handle} hat dich zu Near eingeladen",
+    titleNoHandle: "Eine Einladung zu Near",
+    body: "Near ist für die Freunde, die du wirklich siehst. Lad sie dir, dann wartet die Einladung auf dich.",
+    get: "Im App Store laden",
+    open: "Du hast Near schon? Einladung öffnen",
+  },
   legal: {
     updated: "Zuletzt aktualisiert",
     contents: "Auf dieser Seite",
@@ -120,11 +129,13 @@ const de: Dictionary = {
           "Meldungen, die du uns zu einem Post, einer Story, einem Kommentar, einer Nachricht oder einer Person schickst. Eine gemeldete Story oder Nachricht (auch eine Sprachnachricht) wird bis zu 7 Tage aufbewahrt, auch nachdem sie abgelaufen ist oder zurückgezogen wurde, damit wir sie prüfen können. Unser Moderationsteam öffnet sie, ebenso das Foto eines gemeldeten Kommentars, über kurzlebige Links.",
           "Feedback, das du uns aus der App schickst: was du geschrieben hast, mit App-Version, iOS-Version und Handymodell, damit wir es lesen und Dinge verbessern können. Es wird mit deinem Konto gelöscht.",
           "Mitteilungen: eine kurze Liste dessen, was deine Freunde gemacht haben (eine Freundschaft, ein Kommentar zu deinem Post, ein Geburtstag, ein neuer Post), 60 Tage aufbewahrt. Wenn du Push-Mitteilungen erlaubst, das Geräte-Token deines Handys, damit wir es erreichen. Deine Zeitzone, damit ein Geburtstag morgens ankommt. Jede Art hat ihren eigenen Schalter in den Einstellungen.",
+          "Dein @ (Benutzername) und die Einladungen, die du schickst und bekommst: von wem, wann und ob sie angenommen wurden. Eine angenommene Einladung macht euch zu wartenden Freunden: Ihr seht Namen, Profilbild, @ und Bio des anderen und könnt euch schreiben, mehr nicht, bis ihr euch persönlich hinzufügt.",
+          "Wenn du „In der Nähe“ einschaltest: der letzte Standort, den dein Handy geschickt hat, jedes Mal überschrieben und zwei Stunden nach dem Senden gelöscht, nur gespeichert, solange du wartende Freunde hast und „In der Nähe“ an ist. Er wird niemandem gezeigt, auch deinen wartenden Freunden nicht: Er wird nur mit ihrem verglichen, um euch beiden Bescheid zu geben, wenn ihr zusammen seid. Einladungen und „In der Nähe“ schicken auch Mitteilungen, mit eigenem Schalter in den Einstellungen.",
         ],
       },
       {
         title: "Wie „in der Nähe“ funktioniert",
-        body: "Near nutzt nicht deinen Standort, um Freunde zu finden. Solange „Freund hinzufügen“ offen ist, teilt dein Handy per Bluetooth einen zufälligen Code mit den Handys direkt neben dir. Der Code wechselt alle zehn Minuten, läuft nach fünfzehn ab und wird darüber hinaus nie gespeichert. Wer neben dir steht, sieht deinen Namen und dein Foto. Wer weiter weg ist, sieht nichts.",
+        body: "Solange „Freund hinzufügen“ offen ist, teilt dein Handy per Bluetooth einen zufälligen Code mit den Handys direkt neben dir. Der Code wechselt alle zehn Minuten, läuft nach fünfzehn ab und wird darüber hinaus nie gespeichert. Wer neben dir steht, sieht deinen Namen und dein Foto. Wer weiter weg ist, sieht nichts. „In der Nähe“ ist ein eigener Schalter, aus, bis du ihn einschaltest: Damit sagt dein Handy Near ungefähr, wo es ist, wenn es sich ein gutes Stück bewegt, und einmal genau, wenn ein wartender Freund in der Nähe ist, damit Near euch beiden Bescheid gibt, wenn ihr zusammen seid. Niemand sieht je, wo du bist.",
       },
       {
         title: "Berechtigungen und wofür sie da sind",
@@ -134,7 +145,7 @@ const de: Dictionary = {
           "Kamera und Fotos: Fotos und Videos für deine Posts, Stories und Nachrichten und dein Profilbild. Near fügt deinen Fotos nur etwas hinzu, wenn du es bittest, eine Story oder ein Foto oder Video aus einem Chat zu speichern.",
           "Mikrofon: der Ton in den Videos, die du aufnimmst, deine Sprachnachrichten und deine Sprachkommentare.",
           "Mitteilungen: ein neuer Freund, ein Kommentar zu deinem Post, der Geburtstag eines Freundes, ein neuer Post eines Freundes. Sonst nichts, nie. Gefragt wird erst, wenn du einen Freund hast.",
-          "Standort, nur während du die App nutzt: den Ort eines Posts benennen. Du kannst ihn vor dem Posten ändern oder entfernen. Near verfolgt dich nie im Hintergrund.",
+          "Standort: den Ort eines Posts benennen (während du ihn erstellst; du kannst ihn ändern oder entfernen) und, nur wenn du „In der Nähe“ einschaltest, dir und einem wartenden Freund Bescheid geben, wenn ihr zusammen seid, wofür die Erlaubnis „Immer“ nötig ist. „In der Nähe“ ist standardmäßig aus und tut nichts ohne wartenden Freund.",
         ],
       },
       {
@@ -147,7 +158,7 @@ const de: Dictionary = {
       },
       {
         title: "Wer was sieht",
-        body: "Deine Posts und Stories sehen nur deine Freunde. Einen Kommentar, ob Text, Foto, GIF oder Stimme, sieht jeder, der den Post sehen kann, unter dem er steht, auch die Freunde der Person, die ihn gepostet hat, und die müssen nicht deine Freunde sein; sie sehen dazu deinen Namen und dein Profilfoto. Eine Nachricht, auch eine Sprachnachricht oder ein GIF, sehen nur die zwei, die darin schreiben. Eine Story sehen deine Freunde 24 Stunden lang. Wer eine Story gesehen hat, sieht nur die Person, die sie gepostet hat. Deine abgelaufenen Stories bleiben in einem Archiv, das nur du siehst, und die Highlights, die du an dein Profil pinnst, sehen deine Freunde. Deine Freunde sehen auch, wie viele Posts und Freunde du hast, und welche deiner Freunde sie auch kennen; der Rest bleibt eine Zahl. Es gibt kein öffentliches Profil, keine Suche und keine Entdecken-Seite. Abgesehen von einem Kommentar unter einem Post, den er sehen kann, sind dein Name und dein Profilfoto das Einzige, was ein Fremder sehen kann, und nur, solange ihr beide im selben Raum seid und die App offen habt. Blockierst du jemanden, seht ihr euch beide nie wieder.",
+        body: "Deine Posts und Stories sehen nur deine Freunde. Einen Kommentar, ob Text, Foto, GIF oder Stimme, sieht jeder, der den Post sehen kann, unter dem er steht, auch die Freunde der Person, die ihn gepostet hat, und die müssen nicht deine Freunde sein; sie sehen dazu deinen Namen und dein Profilfoto. Eine Nachricht, auch eine Sprachnachricht oder ein GIF, sehen nur die zwei, die darin schreiben. Eine Story sehen deine Freunde 24 Stunden lang. Wer eine Story gesehen hat, sieht nur die Person, die sie gepostet hat. Deine abgelaufenen Stories bleiben in einem Archiv, das nur du siehst, und die Highlights, die du an dein Profil pinnst, sehen deine Freunde. Deine Freunde sehen auch, wie viele Posts und Freunde du hast, und welche deiner Freunde sie auch kennen; der Rest bleibt eine Zahl. Es gibt kein öffentliches Profil, keine Suche und keine Entdecken-Seite. Abgesehen von einem Kommentar unter einem Post, den er sehen kann, sind dein Name und dein Profilfoto das Einzige, was ein Fremder sehen kann, und nur, solange ihr beide im selben Raum seid und die App offen habt. Blockierst du jemanden, seht ihr euch beide nie wieder. Ein wartender Freund sieht deinen Namen, dein Profilbild, dein @ und deine Bio und eure Nachrichten, sonst nichts.",
       },
       {
         title: "Wo es liegt",
@@ -197,6 +208,10 @@ const de: Dictionary = {
           "Gib dich nicht als jemand anderes aus.",
           "Täusche keine Nähe vor, automatisiere die App nicht, lies sie nicht aus und versuch nicht, einzubrechen.",
         ],
+      },
+      {
+        title: "@ und Einladungen",
+        body: "Wähl ein @, das du nutzen darfst: nicht den Namen oder die Marke von jemand anderem, nichts Beleidigendes. Wir können ein @ zurücknehmen, das sich als jemand anderes ausgibt oder gegen die Regeln verstößt. Lade nur Leute ein, die von dir hören wollen; massenhaft Einladungen an Fremde zu schicken verstößt gegen die Regeln.",
       },
       {
         title: "Melden und Blockieren",

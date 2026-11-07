@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["5D4P5UGPLQ.com.nearsocial.app"],
+        "components": [
+          { "/": "/@*", "comment": "Invite links: nearapp.social/@handle opens Send invite in the app." }
+        ]
+      }
+    ]
+  }
+}

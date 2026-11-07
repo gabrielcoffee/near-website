@@ -59,7 +59,7 @@ One source of header clearance: `html { scroll-padding-top: 6rem }`. Sections pu
 ## Verification
 
 ```bash
-npm run build                 # must print "29 page(s) built" (the fourteen redirect pages aren't counted)
+npm run build                 # must print "30 page(s) built" (the fourteen redirect pages aren't counted)
 # Never start a server on :4321 — Gabriel runs `npm run dev` there himself (Astro 7 dev is a background
 # daemon: `npx astro dev status|stop`). A preview on that port once shadowed his dev server on :4322 and he
 # edited for an hour seeing no change. If you need a server, use another port and stop it when done.
@@ -81,6 +81,17 @@ Apple's own card (icon cropped into a banner, "From testflight.apple.com"); shar
 Vercel serves the site on `www.nearapp.social` and 308-redirects the apex to it (checked 2026-10-27), while `site` in
 `astro.config` and every canonical/og URL say the apex. Some scrapers won't follow the image redirect. Fix in Vercel
 (project → Settings → Domains: make `nearapp.social` the primary and redirect `www` to it); no code change needed.
+
+## Invite links (`/@handle`)
+
+`nearapp.social/@handle` is the app's invite link. `vercel.json` rewrites it to `src/pages/invite.astro` (the URL stays
+`/@handle`), which reads the handle from the address and its words from the browser's language (the `invite` block in
+every dictionary; the page never redirects by language). Its link preview is `public/og/invite.mp4` with
+`public/og/invite.png` as the still (two orange circles meet, the ground floods orange; iMessage plays the video,
+WhatsApp and Telegram show the still). Regenerate both with `python3 scripts/render-invite-video.py` (Pillow, ffmpeg).
+With Near installed the link never reaches the page: `public/.well-known/apple-app-site-association` (served as JSON by
+`vercel.json`) makes `/@*` a universal link for `5D4P5UGPLQ.com.nearsocial.app`. "Already have Near?" opens
+`com.nearsocial.app://invite/<handle>`. Nothing about the person is looked up server-side.
 
 ## Gotchas
 

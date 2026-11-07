@@ -93,6 +93,15 @@ const es: Dictionary = {
       error: "No ha funcionado. Prueba otra vez en un momento.",
     },
   },
+  invite: {
+    metaTitle: "Tienes una invitación a Near",
+    metaDescription: "Alguien quiere añadirte en Near, la app de los amigos que ves de verdad.",
+    title: "{handle} te ha invitado a Near",
+    titleNoHandle: "Tienes una invitación a Near",
+    body: "Near es para los amigos que ves de verdad. Descárgala y la invitación te estará esperando.",
+    get: "Descargar en el App Store",
+    open: "¿Ya tienes Near? Abre la invitación",
+  },
   legal: {
     updated: "Última actualización",
     contents: "En esta página",
@@ -120,11 +129,13 @@ const es: Dictionary = {
           "Los reportes que nos envías sobre una publicación, una historia, un comentario, un mensaje o una persona. Una historia o un mensaje reportados (también una nota de voz) se guardan hasta 7 días, incluso después de caducar o de anular el envío, para poder revisarlos. Nuestro equipo de moderación los abre, y también la foto de un comentario reportado, mediante enlaces de corta duración.",
           "Los comentarios que nos envías desde la app: lo que escribiste, con la versión de la app, la de iOS y el modelo de tu móvil, para leerlos y arreglar lo que haga falta. Se borran con tu cuenta.",
           "Notificaciones: una lista corta de lo que han hecho tus amigos (una amistad, un comentario en tu publicación, un cumpleaños, una publicación nueva), guardada 60 días. Si permites las notificaciones push, el token de tu móvil, para poder avisarte. Tu zona horaria, para que el cumpleaños llegue por la mañana. Cada tipo tiene su propio interruptor en Ajustes.",
+          "Tu @ (nombre de usuario) y las invitaciones que envías y recibes: de quién, cuándo y si se aceptaron. Una invitación aceptada os convierte en amigos en espera: veis el nombre, la foto de perfil, el @ y la bio del otro y podéis enviaros mensajes, nada más, hasta que os añadáis en persona.",
+          "Si activas Cerca: la última ubicación que envió tu móvil, sustituida cada vez y borrada dos horas después de enviarse, guardada solo mientras tengas amigos en espera y Cerca esté activado. Nunca se muestra a nadie, ni siquiera a tus amigos en espera: solo se compara con la suya para avisaros a los dos cuando estéis juntos. Las invitaciones y Cerca también envían notificaciones, con su propio interruptor en Ajustes.",
         ],
       },
       {
         title: "Cómo funciona lo de “cerca”",
-        body: "Near no usa tu ubicación para encontrar amigos. Con Añadir amigo abierto, tu móvil comparte un código aleatorio por Bluetooth con los móviles que tienes justo al lado. El código cambia cada diez minutos, caduca a los quince y no se guarda más allá. Quien está a tu lado ve tu nombre y tu foto. Quien está más lejos no ve nada.",
+        body: "Con Añadir amigo abierto, tu móvil comparte un código aleatorio por Bluetooth con los móviles que tienes justo al lado. El código cambia cada diez minutos, caduca a los quince y no se guarda más allá. Quien está a tu lado ve tu nombre y tu foto. Quien está más lejos no ve nada. Cerca es un interruptor aparte, apagado hasta que lo actives: con él, tu móvil le dice a Near más o menos dónde está cuando se mueve una buena distancia, y una vez con precisión cuando un amigo en espera está cerca, para que Near os avise a los dos cuando estéis juntos. Nadie ve nunca dónde estás.",
       },
       {
         title: "Permisos y para qué sirven",
@@ -134,7 +145,7 @@ const es: Dictionary = {
           "Cámara y fotos: fotos y vídeos para tus publicaciones, historias y mensajes, y tu foto de perfil. Near solo añade a tus fotos cuando le pides guardar una historia, o una foto o un vídeo de un chat.",
           "Micrófono: el sonido de los vídeos que grabas, tus notas de voz y tus comentarios de voz.",
           "Notificaciones: un amigo nuevo, un comentario en tu publicación, el cumpleaños de un amigo, una publicación nueva de un amigo. Nada más, nunca. Solo lo pedimos cuando ya tienes un amigo.",
-          "Ubicación, solo mientras usas la app: ponerle nombre al sitio de una publicación. Puedes editarlo o quitarlo antes de publicar. Near nunca te sigue en segundo plano.",
+          "Ubicación: ponerle nombre al sitio de una publicación (mientras la haces; puedes editarlo o quitarlo) y, solo si activas Cerca, avisaros a ti y a un amigo en espera cuando estéis juntos, para lo que hace falta el permiso Siempre. Cerca viene apagado y no hace nada sin un amigo en espera.",
         ],
       },
       {
@@ -147,7 +158,7 @@ const es: Dictionary = {
       },
       {
         title: "Quién ve qué",
-        body: "Tus publicaciones e historias solo las ven tus amigos. Un comentario, sea con palabras, una foto, un GIF o tu voz, lo ve cualquiera que pueda ver la publicación en la que está, incluidos los amigos de quien la publicó, que pueden no ser amigos tuyos; con él ven tu nombre y tu foto de perfil. Un mensaje, notas de voz y GIF incluidos, solo lo ven las dos personas que participan en él. Una historia es visible para tus amigos durante 24 horas. Quién ha visto una historia solo lo ve la persona que la publicó. Tus historias caducadas se quedan en un archivo que solo ves tú, y los Destacados que fijas en tu perfil los ven tus amigos. Tus amigos también ven cuántos posts y amigos tienes, y cuáles de tus amigos conocen también; el resto se queda en un número. No hay perfil público, ni buscador, ni página de explorar. Aparte de un comentario en una publicación que puede ver, tu nombre y tu foto de perfil son lo único que puede ver un desconocido, y solo mientras estáis los dos en la misma sala con la app abierta. Bloquea a alguien y ninguno de los dos vuelve a ver al otro.",
+        body: "Tus publicaciones e historias solo las ven tus amigos. Un comentario, sea con palabras, una foto, un GIF o tu voz, lo ve cualquiera que pueda ver la publicación en la que está, incluidos los amigos de quien la publicó, que pueden no ser amigos tuyos; con él ven tu nombre y tu foto de perfil. Un mensaje, notas de voz y GIF incluidos, solo lo ven las dos personas que participan en él. Una historia es visible para tus amigos durante 24 horas. Quién ha visto una historia solo lo ve la persona que la publicó. Tus historias caducadas se quedan en un archivo que solo ves tú, y los Destacados que fijas en tu perfil los ven tus amigos. Tus amigos también ven cuántos posts y amigos tienes, y cuáles de tus amigos conocen también; el resto se queda en un número. No hay perfil público, ni buscador, ni página de explorar. Aparte de un comentario en una publicación que puede ver, tu nombre y tu foto de perfil son lo único que puede ver un desconocido, y solo mientras estáis los dos en la misma sala con la app abierta. Bloquea a alguien y ninguno de los dos vuelve a ver al otro. Un amigo en espera ve tu nombre, tu foto de perfil, tu @ y tu bio, y los mensajes con él; nada más.",
       },
       {
         title: "Dónde está",
@@ -197,6 +208,10 @@ const es: Dictionary = {
           "No te hagas pasar por otra persona.",
           "No intentes fingir que estás cerca, automatizar la app, extraer datos ni colarte.",
         ],
+      },
+      {
+        title: "@ e invitaciones",
+        body: "Elige un @ que puedas usar: no el nombre ni la marca de otra persona, nada ofensivo. Podemos retirar un @ que suplante a alguien o rompa las reglas. Invita solo a quien querría saber de ti; enviar invitaciones en masa a desconocidos rompe las reglas.",
       },
       {
         title: "Reportes y bloqueos",

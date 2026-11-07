@@ -91,6 +91,15 @@ const pt: Dictionary = {
       error: "Não deu certo. Tenta de novo daqui a pouco.",
     },
   },
+  invite: {
+    metaTitle: "Tem um convite do Near para você",
+    metaDescription: "Alguém quer te adicionar no Near, o app dos amigos que você vê de verdade.",
+    title: "{handle} te convidou para o Near",
+    titleNoHandle: "Tem um convite do Near para você",
+    body: "O Near é para os amigos que você vê de verdade. Baixe, e o convite vai estar te esperando.",
+    get: "Baixar na App Store",
+    open: "Já tem o Near? Abrir o convite",
+  },
   legal: {
     updated: "Última atualização",
     contents: "Nesta página",
@@ -120,12 +129,14 @@ const pt: Dictionary = {
           "O feedback que você manda pelo app: o que você escreveu, com a versão do app, a versão do iOS e o modelo do celular, para a gente ler e consertar o que precisar. Ele é apagado junto com a sua conta.",
           "Notificações: uma lista curta do que seus amigos fizeram (uma amizade, um comentário no seu post, um aniversário, um post novo), guardada por 60 dias. Se você permitir notificações push, o token do seu aparelho, para a gente conseguir avisar. Seu fuso horário, para o aniversário chegar de manhã. Cada tipo tem seu próprio interruptor nos Ajustes.",
           "Dados técnicos mínimos: a versão do app e os registros de acesso (endereço IP, data e hora) que o provedor de hospedagem mantém por um curto período, por segurança.",
+          "Seu @ (nome de usuário) e os convites que você envia e recebe: de quem, quando e se foram aceitos. Um convite aceito deixa vocês como amigos em espera: vocês veem o nome, a foto de perfil, o @ e a bio um do outro e trocam mensagens, nada mais, até se adicionarem pessoalmente.",
+          "Se você ativar o Por perto: a última localização que seu celular enviou, substituída a cada vez e apagada duas horas depois de enviada, guardada só enquanto você tiver amigos em espera e o Por perto estiver ativado. Ela nunca é mostrada a ninguém, nem aos seus amigos em espera: só é comparada com a deles para avisar vocês dois quando estiverem juntos. Convites e o Por perto também mandam notificações, com um botão próprio nos Ajustes.",
         ],
         after: "Não coletamos sua lista de contatos, seu histórico de localização, dados de outros apps nem qualquer identificador de publicidade.",
       },
       {
         title: "Como funciona o “por perto”",
-        body: "O Near não usa GPS nem sua localização para encontrar amigos. Quando você abre a tela Adicionar amigo, seu iPhone fica visível por Bluetooth para os iPhones que estão bem do seu lado, sem precisar de Wi‑Fi nem de internet entre os aparelhos. O que ele transmite é só um código aleatório, que não diz quem você é: o código muda a cada 10 minutos e expira em 15. Um iPhone por perto com o Near aberto pergunta aos nossos servidores de quem é aquele código, e só então mostra seu nome e sua foto de perfil. A amizade só é criada quando os dois seguram o card um do outro ao mesmo tempo por um segundo. Fechou a tela, seu iPhone deixa de ser visível. Não sabemos nem guardamos onde vocês se encontraram.",
+        body: "Quando você abre a tela Adicionar amigo, seu iPhone fica visível por Bluetooth para os iPhones que estão bem do seu lado, sem precisar de Wi‑Fi nem de internet entre os aparelhos. O que ele transmite é só um código aleatório, que não diz quem você é: o código muda a cada 10 minutos e expira em 15. Um iPhone por perto com o Near aberto pergunta aos nossos servidores de quem é aquele código, e só então mostra seu nome e sua foto de perfil. A amizade só é criada quando os dois seguram o card um do outro ao mesmo tempo por um segundo. Fechou a tela, seu iPhone deixa de ser visível. Não sabemos nem guardamos onde vocês se encontraram. O Por perto é um botão separado, desligado até você ativar: com ele, seu celular conta ao Near mais ou menos onde está quando se desloca uma boa distância, e uma vez com precisão quando um amigo em espera está perto, para o Near avisar vocês dois quando estiverem juntos. Ninguém nunca vê onde você está.",
 
       },
       {
@@ -158,7 +169,7 @@ const pt: Dictionary = {
           "Câmera e fotos: fotos e vídeos para seus posts, stories e mensagens, e sua foto de perfil. O Near só adiciona às suas fotos quando você pede para salvar um story, ou uma foto ou vídeo de uma conversa.",
           "Microfone: o áudio dos vídeos que você grava, das suas mensagens de voz e dos seus comentários de voz.",
           "Notificações: um amigo novo, um comentário no seu post, o aniversário de um amigo, um post novo de um amigo. Nada além disso, nunca. Só pedimos depois do seu primeiro amigo.",
-          "Localização, apenas enquanto usa o app: sugerir o nome do lugar de um post. Você pode editar ou remover antes de publicar, e não guardamos coordenadas sem um post. O Near nunca acessa sua localização em segundo plano.",
+          "Localização: dar nome ao lugar de um post (enquanto você faz o post; dá para editar ou tirar) e, só se você ativar o Por perto, avisar você e um amigo em espera quando estiverem juntos, o que precisa da permissão Sempre. O Por perto vem desligado e não faz nada sem um amigo em espera.",
         ],
       },
       {
@@ -167,7 +178,7 @@ const pt: Dictionary = {
       },
       {
         title: "Quem vê o quê",
-        body: "Seus posts e stories são visíveis apenas para seus amigos no Near. Um comentário, seja de palavras, foto, GIF ou voz, é visível para qualquer pessoa que possa ver o post em que ele está, inclusive os amigos de quem publicou o post, que podem não ser seus amigos; junto com ele aparecem seu nome e sua foto de perfil. Uma mensagem, inclusive de voz ou com GIF, é visível apenas para as duas pessoas da conversa. Um story fica visível para seus amigos por 24 horas. Quem assistiu a um story só aparece para quem o publicou. Seus stories expirados ficam num arquivo que só você vê, e os Destaques que você fixa no perfil são visíveis para seus amigos. Seus amigos também veem quantos posts e amigos você tem, e quais dos seus amigos eles também conhecem; os outros ficam só no número. Não existe perfil público, busca, página de explorar nem compartilhamento para fora do app. Fora um comentário em um post que ela possa ver, a única coisa que uma pessoa desconhecida pode ver é seu nome e sua foto de perfil, e apenas enquanto ela está perto de você e você está com a tela Adicionar amigo aberta. Se você bloquear alguém, nenhum dos dois volta a ver o outro.",
+        body: "Seus posts e stories são visíveis apenas para seus amigos no Near. Um comentário, seja de palavras, foto, GIF ou voz, é visível para qualquer pessoa que possa ver o post em que ele está, inclusive os amigos de quem publicou o post, que podem não ser seus amigos; junto com ele aparecem seu nome e sua foto de perfil. Uma mensagem, inclusive de voz ou com GIF, é visível apenas para as duas pessoas da conversa. Um story fica visível para seus amigos por 24 horas. Quem assistiu a um story só aparece para quem o publicou. Seus stories expirados ficam num arquivo que só você vê, e os Destaques que você fixa no perfil são visíveis para seus amigos. Seus amigos também veem quantos posts e amigos você tem, e quais dos seus amigos eles também conhecem; os outros ficam só no número. Não existe perfil público, busca, página de explorar nem compartilhamento para fora do app. Fora um comentário em um post que ela possa ver, a única coisa que uma pessoa desconhecida pode ver é seu nome e sua foto de perfil, e apenas enquanto ela está perto de você e você está com a tela Adicionar amigo aberta. Se você bloquear alguém, nenhum dos dois volta a ver o outro. Um amigo em espera vê seu nome, sua foto de perfil, seu @ e sua bio, e as mensagens com ele; nada mais.",
       },
       {
         title: "Com quem compartilhamos",
@@ -276,6 +287,10 @@ const pt: Dictionary = {
           "Simular proximidade, automatizar o app, coletar dados de outros usuários, tentar acessar contas ou sistemas sem autorização ou interferir no funcionamento do serviço.",
           "Usar o Near para fins comerciais, enviar spam ou vender, comprar ou transferir contas.",
         ],
+      },
+      {
+        title: "@ e convites",
+        body: "Escolha um @ que seja seu para usar: não o nome ou a marca de outra pessoa, nada ofensivo. Podemos tirar um @ que se passe por alguém ou quebre as regras. Convide só quem gostaria de ter notícias suas; mandar convites em massa para desconhecidos quebra as regras.",
       },
       {
         title: "Denúncias, bloqueios e moderação",
