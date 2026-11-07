@@ -2,12 +2,12 @@
   "redirects": [
     {
       "source": "/get/",
-      "destination": "https://testflight.apple.com/join/m2BJcaRG",
+      "destination": "https://apps.apple.com/app/id6815301550",
       "permanent": false
     },
     {
       "source": "/get",
-      "destination": "https://testflight.apple.com/join/m2BJcaRG",
+      "destination": "https://apps.apple.com/app/id6815301550",
       "permanent": false
     },
     {

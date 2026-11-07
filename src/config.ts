@@ -1,7 +1,7 @@
 // Site-wide knobs. Everything a human is likely to change lives here.
 
 /** App Store link. Leave empty until the app is live: the CTA links to the TestFlight beta instead. */
-export const APP_STORE_URL = "";
+export const APP_STORE_URL = "https://apps.apple.com/app/id6815301550";
 
 /** Public TestFlight link (anyone with an iPhone can join, up to 10,000 testers). Shown while APP_STORE_URL is empty. */
 export const TESTFLIGHT_URL = "https://testflight.apple.com/join/m2BJcaRG";
