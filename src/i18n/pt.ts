@@ -55,6 +55,15 @@ const pt: Dictionary = {
     beta: "Testar o beta",
     betaNote: "Grátis no TestFlight. Em breve na App Store.",
   },
+  signup: {
+    label: "E-mail",
+    placeholder: "seu@email.com",
+    sending: "Enviando…",
+    invalid: "Esse e-mail parece estar errado.",
+    error: "Não deu certo. Tenta de novo daqui a pouco.",
+    android: { lead: "Não tem iPhone? Deixa seu e-mail que a gente avisa quando o Near chegar no Android.", button: "Me avisa", done: "Você está na lista. Dá uma olhada no e-mail.", already: "Você já está na lista." },
+    news: { lead: "As novidades do Near no seu e-mail. Um recado a cada atualização.", button: "Assinar", done: "Pronto. Dá uma olhada no e-mail.", already: "Você já está na lista." },
+  },
   footer: {
     tagline: "Amigos que você vê de verdade.",
     privacy: "Privacidade",
@@ -240,7 +249,7 @@ const pt: Dictionary = {
       },
       {
         title: "Este site",
-        body: "A lista de espera guarda seu e-mail e seu idioma para enviarmos uma mensagem de boas-vindas e um único aviso quando o Near for lançado; cada e-mail tem um link para sair da lista. O formulário de contato guarda o que você escreveu para podermos responder. O site não usa cookies nem analytics e lembra apenas o idioma que você escolheu, no seu próprio navegador.",
+        body: "As listas de e-mail do site guardam seu e-mail e seu idioma: a lista do Android escreve uma vez só, no dia que o Near chegar no Android; a de novidades escreve quando sai uma versão nova. Cada uma começa com uma mensagem de boas-vindas, e todo e-mail tem um link para sair da lista. A antiga lista de espera recebeu um único aviso quando o Near foi lançado. O formulário de contato guarda o que você escreveu para podermos responder. O site não usa cookies nem analytics e lembra apenas o idioma que você escolheu, no seu próprio navegador.",
       },
       {
         title: "Alterações desta política",

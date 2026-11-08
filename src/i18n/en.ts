@@ -57,6 +57,15 @@ const en = {
     beta: "Try the beta",
     betaNote: "Free on TestFlight. App Store soon.",
   },
+  signup: {
+    label: "Email address",
+    placeholder: "your@email.com",
+    sending: "Sending…",
+    invalid: "That email doesn't look right.",
+    error: "Didn't work. Try again in a moment.",
+    android: { lead: "No iPhone? Leave your email and we'll write when Near comes to Android.", button: "Let me know", done: "You're on the list. Check your inbox.", already: "You're already on the list." },
+    news: { lead: "What's new in Near, by email. One note per update.", button: "Subscribe", done: "Done. Check your inbox.", already: "You're already on the list." },
+  },
   footer: {
     tagline: "Friends you actually see.",
     privacy: "Privacy",
@@ -170,7 +179,7 @@ const en = {
       },
       {
         title: "This website",
-        body: "The waitlist keeps your email and language so we can write once when Near launches, plus a short welcome. The contact form keeps what you typed so we can reply. The site sets no cookies and runs no analytics. It remembers your language in your browser, nothing more.",
+        body: "The site's email lists keep your email and language: the Android list writes once, the day Near comes to Android; the updates list writes when a new version is out. Each starts with a short welcome, and every email has a link to leave the list. The old waitlist got one email when Near launched. The contact form keeps what you typed so we can reply. The site sets no cookies and runs no analytics. It remembers your language in your browser, nothing more.",
       },
       {
         title: "Your rights",

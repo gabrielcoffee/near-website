@@ -50,8 +50,11 @@ export async function unsubscribeUrl(
   secret: string,
   email: string,
   locale: string,
+  list?: string,
 ): Promise<string> {
   const e = toBase64url(email.trim().toLowerCase());
   const t = await signEmail(secret, email);
-  return `${base}?e=${e}&t=${t}&l=${encodeURIComponent(locale)}`;
+  // `k` names the list the mail came from; without it (old links) the address leaves every list.
+  const k = list ? `&k=${encodeURIComponent(list)}` : "";
+  return `${base}?e=${e}&t=${t}&l=${encodeURIComponent(locale)}${k}`;
 }

@@ -1,13 +1,15 @@
 ---
-import { APP_STORE_URL, TESTFLIGHT_URL } from "../config";
+import { APP_STORE_URL, TESTFLIGHT_URL, type Locale } from "../config";
 import type { Dictionary } from "../i18n/en";
 import Button from "./Button.astro";
 import Drawing from "./Drawing.astro";
+import Signup from "./Signup.astro";
 
 interface Props {
   dict: Dictionary;
+  locale?: Locale;
 }
-const { dict } = Astro.props;
+const { dict, locale = "en" } = Astro.props;
 const live = Boolean(APP_STORE_URL);
 // Until the app is on the App Store, the button opens the public TestFlight beta.
 const href = live ? APP_STORE_URL : TESTFLIGHT_URL;
@@ -35,6 +37,12 @@ const href = live ? APP_STORE_URL : TESTFLIGHT_URL;
         </Button>
       </div>
       {!live && <p class="mt-4 text-small text-muted" data-reveal>{dict.cta.betaNote}</p>}
+
+      {/* For the people the button can't help: one email the day Near is on Android. */}
+      <div class="mx-auto mt-12 max-w-md" data-reveal>
+        <p class="text-small text-muted">{dict.signup.android.lead}</p>
+        <Signup dict={dict} list="android" locale={locale} class="mt-3" />
+      </div>
     </div>
   </div>
 </section>

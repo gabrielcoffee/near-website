@@ -30,7 +30,7 @@ const WEBHOOK_SECRET = Deno.env.get("WAITLIST_WEBHOOK_SECRET");
 interface WebhookPayload {
   type?: string;
   table?: string;
-  record?: { email?: string; locale?: string | null } | null;
+  record?: { email?: string; locale?: string | null; list?: string | null } | null;
 }
 
 Deno.serve(async (req) => {
@@ -62,8 +62,9 @@ Deno.serve(async (req) => {
   }
 
   const locale = payload.record?.locale ?? "en";
-  const email = emailFor(locale);
-  const unsubscribe = await unsubscribeUrl(UNSUBSCRIBE_BASE, WEBHOOK_SECRET, address, locale);
+  const list = payload.record?.list ?? "launch";
+  const email = emailFor(locale, list);
+  const unsubscribe = await unsubscribeUrl(UNSUBSCRIBE_BASE, WEBHOOK_SECRET, address, locale, list);
 
   const res = await fetch(RESEND_ENDPOINT, {
     method: "POST",

@@ -1,7 +1,8 @@
 /**
  * Removes a waitlist row when someone follows the unsubscribe link from the welcome email.
  *
- * GET  ?e=<base64url email>&t=<hmac>&l=<locale>   → deletes the row, shows a one-line page
+ * GET  ?e=<base64url email>&t=<hmac>&l=<locale>[&k=<list>] → deletes the row (that list's, or every list's
+ *      without `k`), shows a one-line page
  * POST (same query string)                        → RFC 8058 one-click, used by mail clients
  *
  * The token is an HMAC over the email with WAITLIST_WEBHOOK_SECRET, so a link only works for the
@@ -50,8 +51,12 @@ Deno.serve(async (req) => {
     return invalid();
   }
 
+  // ilike for case; `_` and `%` in an address are literal characters, not wildcards.
+  const pattern = email.replace(/[\\%_]/g, "\\$&");
+  const list = url.searchParams.get("k");
+  const only = list && /^[a-z]+$/.test(list) ? `&list=eq.${list}` : "";
   const res = await fetch(
-    `${SUPABASE_URL}/rest/v1/waitlist?email=ilike.${encodeURIComponent(email)}`,
+    `${SUPABASE_URL}/rest/v1/waitlist?email=ilike.${encodeURIComponent(pattern)}${only}`,
     {
       method: "DELETE",
       headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}` },

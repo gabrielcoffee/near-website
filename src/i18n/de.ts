@@ -57,6 +57,15 @@ const de: Dictionary = {
     beta: "Beta testen",
     betaNote: "Kostenlos über TestFlight. Bald im App Store.",
   },
+  signup: {
+    label: "E-Mail",
+    placeholder: "deine@email.de",
+    sending: "Wird gesendet…",
+    invalid: "Diese E-Mail-Adresse stimmt wohl nicht.",
+    error: "Hat nicht geklappt. Versuch es gleich noch mal.",
+    android: { lead: "Kein iPhone? Lass deine E-Mail da, wir schreiben dir, wenn Near für Android kommt.", button: "Sag mir Bescheid", done: "Du stehst auf der Liste. Schau in dein Postfach.", already: "Du stehst schon auf der Liste." },
+    news: { lead: "Neues von Near per E-Mail. Eine Nachricht pro Update.", button: "Abonnieren", done: "Erledigt. Schau in dein Postfach.", already: "Du stehst schon auf der Liste." },
+  },
   footer: {
     tagline: "Freunde, die du wirklich siehst.",
     privacy: "Datenschutz",
@@ -170,7 +179,7 @@ const de: Dictionary = {
       },
       {
         title: "Diese Website",
-        body: "Die Warteliste speichert deine E-Mail und deine Sprache, damit wir dir einmal schreiben können, wenn Near erscheint, plus ein kurzes Willkommen. Das Kontaktformular speichert, was du geschrieben hast, damit wir antworten können. Die Seite setzt keine Cookies und hat kein Analytics. Sie merkt sich deine Sprache in deinem Browser, mehr nicht.",
+        body: "Die E-Mail-Listen der Website speichern deine E-Mail und deine Sprache: die Android-Liste schreibt dir ein einziges Mal, wenn Near für Android erscheint; die Update-Liste, wenn eine neue Version draußen ist. Jede beginnt mit einem kurzen Willkommen, und jede Mail hat einen Link, um die Liste zu verlassen. Die alte Warteliste hat zum Start von Near eine einzige Mail bekommen. Das Kontaktformular speichert, was du geschrieben hast, damit wir antworten können. Die Seite setzt keine Cookies und hat kein Analytics. Sie merkt sich deine Sprache in deinem Browser, mehr nicht.",
       },
       {
         title: "Deine Rechte",

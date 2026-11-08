@@ -1,0 +1,65 @@
+---
+/**
+ * One-field email signup for a mailing list: `android` (the download card) or `news` (the footer).
+ * Posts a row to the Supabase `waitlist` table with its list; a trigger sends that list's welcome mail.
+ */
+import { SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL, type Locale } from "../config";
+import type { Dictionary } from "../i18n/en";
+
+interface Props {
+  dict: Dictionary;
+  list: "android" | "news";
+  locale?: Locale;
+  /** `sm` for the footer: 44pt field and button, small type. */
+  size?: "md" | "sm";
+  class?: string;
+}
+const { dict, list, locale = "en", size = "md", class: cls = "" } = Astro.props;
+const s = dict.signup;
+const t = s[list];
+const id = `signup-${list}`;
+const small = size === "sm";
+---
+
+<form
+  class:list={["signup w-full text-left", small && "signup-sm", cls]}
+  novalidate
+  data-signup
+  data-endpoint={`${SUPABASE_URL}/rest/v1/waitlist`}
+  data-key={SUPABASE_PUBLISHABLE_KEY}
+  data-locale={locale}
+  data-list={list}
+  data-msg-sending={s.sending}
+  data-msg-done={t.done}
+  data-msg-already={t.already}
+  data-msg-invalid={s.invalid}
+  data-msg-error={s.error}
+>
+  <div class="signup-row flex gap-2">
+    <label class="sr-only" for={id}>{s.label}</label>
+    <input
+      id={id}
+      class:list={["field min-w-0 flex-1", small && "field-sm"]}
+      type="email"
+      name="email"
+      inputmode="email"
+      autocomplete="email"
+      spellcheck="false"
+      maxlength="254"
+      placeholder={s.placeholder}
+      required
+      data-signup-input
+    />
+    {/* Bots fill every field they find; people never see this one. */}
+    <input class="sr-only" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" data-signup-trap />
+    <button
+      class:list={["btn shrink-0", small ? "btn-primary btn-md" : "btn-secondary btn-lg"]}
+      type="submit"
+      data-signup-submit
+      data-label={t.button}
+    >
+      {t.button}
+    </button>
+  </div>
+  <p class="signup-status mt-2 min-h-5 text-small text-muted" role="status" aria-live="polite" data-signup-status></p>
+</form>

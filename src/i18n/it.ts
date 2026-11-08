@@ -57,6 +57,15 @@ const it: Dictionary = {
     beta: "Prova la beta",
     betaNote: "Gratis su TestFlight. Presto sull'App Store.",
   },
+  signup: {
+    label: "Email",
+    placeholder: "nome@email.it",
+    sending: "Invio…",
+    invalid: "Questa email non sembra valida.",
+    error: "Non ha funzionato. Riprova tra poco.",
+    android: { lead: "Niente iPhone? Lasciaci la tua email e ti scriviamo quando Near arriva su Android.", button: "Avvisami", done: "Sei in lista. Controlla la posta.", already: "Sei già in lista." },
+    news: { lead: "Le novità di Near via email. Due righe a ogni aggiornamento.", button: "Iscriviti", done: "Fatto. Controlla la posta.", already: "Sei già in lista." },
+  },
   footer: {
     tagline: "Gli amici che vedi davvero.",
     privacy: "Privacy",
@@ -170,7 +179,7 @@ const it: Dictionary = {
       },
       {
         title: "Questo sito",
-        body: "La lista d'attesa conserva la tua email e la tua lingua per scriverti una volta quando Near esce, più un breve benvenuto. Il modulo di contatto conserva quello che hai scritto per poterti rispondere. Il sito non usa cookie né analitiche. Ricorda la tua lingua nel tuo browser, niente di più.",
+        body: "Le liste email del sito conservano la tua email e la tua lingua: la lista Android ti scrive una volta sola, il giorno che Near arriva su Android; quella delle novità, quando esce una nuova versione. Ognuna inizia con un breve benvenuto, e ogni email ha un link per uscire dalla lista. La vecchia lista d'attesa ha ricevuto una sola email all'uscita di Near. Il modulo di contatto conserva quello che hai scritto per poterti rispondere. Il sito non usa cookie né analitiche. Ricorda la tua lingua nel tuo browser, niente di più.",
       },
       {
         title: "I tuoi diritti",

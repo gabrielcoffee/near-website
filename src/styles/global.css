@@ -192,6 +192,9 @@ body {
 .field[aria-invalid="true"] {
   border-color: var(--color-accent);
 }
+.field-sm {
+  @apply h-11 px-4 text-small;
+}
 .field:disabled {
   @apply text-muted;
   background: var(--color-paper);
@@ -405,6 +408,26 @@ fieldset[aria-invalid="true"] .choice-pill {
     filter: none;
     transform: none;
   }
+}
+
+/* Signup forms (download card, footer): status quiet by default, accent when something needs a look.
+   Once it worked the row goes and the confirmation takes its place, in the same height. */
+.signup-status[data-state="error"],
+.signup-status[data-state="invalid"] {
+  color: var(--color-accent);
+}
+.signup-status[data-state="done"],
+.signup-status[data-state="already"] {
+  color: var(--color-ink);
+}
+.signup[data-state="done"] .signup-row {
+  display: none;
+}
+.signup[data-state="done"] .signup-status {
+  @apply mt-0 flex h-13 items-center;
+}
+.signup-sm[data-state="done"] .signup-status {
+  @apply h-11;
 }
 
 /* ---------- Nav links (header): quiet pill background on hover ---------- */

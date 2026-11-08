@@ -9,6 +9,7 @@ import { initLangSwitch } from "./lang";
 import { initLogoScrollTop } from "./logo";
 import { initPhone } from "./phone";
 import { initRoadmap } from "./roadmap";
+import { initSignup } from "./signup";
 
 initHeader();
 initReveal();
@@ -17,6 +18,7 @@ initIntro(() => {});
 initPhone();
 initRoadmap();
 initContact();
+initSignup();
 initLangSwitch(LANG_STORAGE_KEY);
 initLogoScrollTop();
 initSmoothScroll(SMOOTH_SCROLL);
