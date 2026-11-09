@@ -11,6 +11,11 @@
       "permanent": false
     },
     {
+      "source": "/how",
+      "destination": "/how/",
+      "permanent": true
+    },
+    {
       "source": "/near-plus/",
       "destination": "/",
       "permanent": true
@@ -39,6 +44,14 @@
     {
       "source": "/@:handle/",
       "destination": "/invite/"
+    },
+    {
+      "source": "/how/",
+      "destination": "https://near-how.vercel.app/"
+    },
+    {
+      "source": "/how/:path*",
+      "destination": "https://near-how.vercel.app/:path*"
     }
   ],
   "headers": [
